@@ -1,19 +1,20 @@
 package com.simple.board.vo;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class BoardVO {
-	private int idx;
+	private Integer idx;
 	private String title;
 	private String content;
 	private String id;
 	private int hit;
-	private Timestamp date;
+	private Date insert_date;
+	private Date modify_date;
 	
-	public int getIdx() {
+	public Integer getIdx() {
 		return idx;
 	}
-	public void setIdx(int idx) {
+	public void setIdx(Integer idx) {
 		this.idx = idx;
 	}
 	public String getTitle() {
@@ -40,11 +41,18 @@ public class BoardVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	public Timestamp getDate() {
-		return date;
+	public Date getInsert_date() {
+		return insert_date;
 	}
-	public void setDate(Timestamp date) {
-		this.date = date;
+	public void setInsert_date(Date insert_date) {
+		this.insert_date = insert_date;
 	}
+	public Date getModify_date() {
+		return modify_date;
+	}
+	public void setModify_date(Date modify_date) {
+		this.modify_date = modify_date;
+	}
+	
 
 }

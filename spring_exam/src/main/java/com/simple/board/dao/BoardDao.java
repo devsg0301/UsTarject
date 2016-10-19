@@ -19,7 +19,7 @@ public class BoardDao {
     public BoardVO getSelectOne(int idx) {
         return this.boardMapper.selectOne(idx);
     }
-
+    
     public void insert(BoardVO boardVO) {
          this.boardMapper.insert(boardVO);
     }

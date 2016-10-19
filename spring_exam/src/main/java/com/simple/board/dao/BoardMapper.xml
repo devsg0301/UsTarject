@@ -3,12 +3,13 @@
 <mapper namespace="com.simple.board.dao.BoardMapper">
 
     <resultMap id="boardMap" type="com.simple.board.vo.BoardVO">
-        <id     property="idx"    	column="idx" />
-        <result property="title"	column="title" />
-        <result property="content"  column="content" />
-        <result property="id"		column="id" />
-        <result property="hit"		column="hit" />
-        <result property="date"		column="date" />
+        <id     property="idx"    		column="idx" />
+        <result property="title"		column="title" />
+        <result property="content"  	column="content" />
+        <result property="id"			column="id" />
+        <result property="hit"			column="hit" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
     </resultMap>
 
     <select id="select" resultMap="boardMap">
@@ -20,20 +21,19 @@
     </select>
 
     <insert id="insert">
-         INSERT INTO TBOARD ( title, id, content, date ) VALUES (
-                #{user_name}
-              , #{subject}
+         INSERT INTO TBOARD ( title, id, content ) VALUES (
+                #{title}
+              , #{id}
               , #{content}
-              , #{date}
          )
     </insert>
 
     <update id="update">
          UPDATE TBOARD SET
-              user_name = #{user_name},
-              subject = #{subject},
+              title = #{title},
               content = #{content},
-              reg_datetime = #{reg_datetime}
+              id = #{id},
+              modify_date = SYSDATE()
          WHERE idx = #{idx} LIMIT 1
     </update>
 

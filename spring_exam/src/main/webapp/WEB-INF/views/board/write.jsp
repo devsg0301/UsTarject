@@ -27,7 +27,7 @@
 
 
 		<div>
-			<input type="submit" value="save" /> <a href="./">저장</a>
+			<input type="submit" value="save" /> <a href="./">목록</a>
 		</div>
 	</form>
 </body>

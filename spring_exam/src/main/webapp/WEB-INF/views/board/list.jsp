@@ -35,7 +35,7 @@
 					-->
                     <td class="title"><a href="./${list.idx }">${list.title }</a></td>
                     <td class="name">${list.id }</td>
-                    <td class="date">${list.date }</td>
+                    <td class="date">${list.insert_date }</td>
                     <td class="hit">${list.hit }</td>
                 </tr>
             </c:forEach>

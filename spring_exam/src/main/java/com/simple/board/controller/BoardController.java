@@ -86,12 +86,13 @@ public class BoardController {
         } else {
             this.boardDao.update(boardVO);
             redirectAttributes.addFlashAttribute("message", "수정되었습니다.");
-            return "redirect:/write?idx=" + idx;
+            return "redirect:/";
         }
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public String procBbsDelete(@RequestParam(value = "idx", required = false) int idx) {
+    	logger.info("delete Board");
         this.boardDao.delete(idx);
         return "redirect:/";
     }
