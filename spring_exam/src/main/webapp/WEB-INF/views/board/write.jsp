@@ -10,7 +10,7 @@
 </head>
 </head>
 <body>
-	<form id="form" method="post" action="./write_ok">
+	<form id="form" method="post" action="./write_ok.do">
 		<input type="hidden" name="idx" id="idx" value="${object.idx}" />
 		<div>
 			<span>제목</span> <input type="text" id="title" name="title"
@@ -27,7 +27,7 @@
 
 
 		<div>
-			<input type="submit" value="save" /> <a href="./">목록</a>
+			<input type="submit" value="save" /> <a href="./board.do">목록</a>
 		</div>
 	</form>
 </body>

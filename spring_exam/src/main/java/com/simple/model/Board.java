@@ -1,8 +1,8 @@
-package com.simple.board.vo;
+package com.simple.model;
 
 import java.util.Date;
 
-public class BoardVO {
+public class Board {
 	private Integer idx;
 	private String title;
 	private String content;

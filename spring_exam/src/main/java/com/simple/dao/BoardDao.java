@@ -1,31 +1,31 @@
-package com.simple.board.dao;
+package com.simple.dao;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import com.simple.board.vo.BoardVO;
+import com.simple.model.Board;
 
 @Service(value = "boardDao")
 public class BoardDao {
     @Resource(name = "boardMapper")
     private BoardMapper boardMapper;
 
-    public List<BoardVO> getSelect() {
-        return this.boardMapper.select();
+    public List<Board> getBoardList() {
+        return this.boardMapper.boardList();
     }
 
-    public BoardVO getSelectOne(int idx) {
+    public Board getSelectOne(int idx) {
         return this.boardMapper.selectOne(idx);
     }
     
-    public void insert(BoardVO boardVO) {
-         this.boardMapper.insert(boardVO);
+    public void insert(Board board) {
+         this.boardMapper.insert(board);
     }
 
-    public void update(BoardVO boardVO) {
-         this.boardMapper.update(boardVO);
+    public void update(Board board) {
+         this.boardMapper.update(board);
     }
 
     public void delete(int idx) {

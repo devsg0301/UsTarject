@@ -13,13 +13,13 @@
 	}
 	
 	function modify(){
-		if(confirm("수정 하시겠습니까?")) location.href = "./write?idx=${object.idx}";
+		if(confirm("수정 하시겠습니까?")) location.href = "./write.do?idx=${object.idx}";
 	}
 	
 </script>
 </head>
 <body>
-	<form id="form" name="form" method="post" action="./delete">
+	<form id="form" name="form" method="post" action="./delete.do">
 		<input type="hidden" name="idx" id="idx" value="${object.idx}" />
 	</form>
 	<div>
@@ -39,7 +39,7 @@
 	<div>
 		<button type="button" onclick="del();">삭제</button>
 		<button type="button" onclick="modify();">수정</button>
-		<a href="./">목록</a>
+		<a href="./board.do">목록</a>
 	</div>
 </body>
 </html>

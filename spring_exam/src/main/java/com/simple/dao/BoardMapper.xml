@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.simple.board.dao.BoardMapper">
+<mapper namespace="com.simple.dao.BoardMapper">
 
-    <resultMap id="boardMap" type="com.simple.board.vo.BoardVO">
+    <resultMap id="boardMap" type="com.simple.model.Board">
         <id     property="idx"    		column="idx" />
         <result property="title"		column="title" />
         <result property="content"  	column="content" />
@@ -12,7 +12,7 @@
         <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
     </resultMap>
 
-    <select id="select" resultMap="boardMap">
+    <select id="boardList" resultMap="boardMap">
         SELECT  * FROM TBOARD
     </select>
 

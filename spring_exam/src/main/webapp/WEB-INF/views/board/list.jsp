@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<link rel="stylesheet" href="resources/css/style.css"/>
 <html>
 <head>
+<link rel="stylesheet" href="resources/css/style.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>스프링 프레임워크 게시판</title>
 </head>
@@ -33,7 +33,7 @@
 					<!-- 
 						<td class="title"><a href="getBoardView.do?idx=${list.idx }">${list.title }</a></td> 
 					-->
-                    <td class="title"><a href="./${list.idx }">${list.title }</a></td>
+                    <td class="title"><a href="./${list.idx }.do">${list.title }</a></td>
                     <td class="name">${list.id }</td>
                     <td class="date">${list.insert_date }</td>
                     <td class="hit">${list.hit }</td>
@@ -41,6 +41,6 @@
             </c:forEach>
         </tbody>
     </table>
-    <div><a href="./write">작성하기</a></div>
+    <div><a href="./write.do">작성하기</a></div>
 </body>
 </html>
