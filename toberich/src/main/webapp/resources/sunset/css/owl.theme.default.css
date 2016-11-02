@@ -1,0 +1,68 @@
+/* 
+ * 	Default theme - Owl Carousel CSS File
+ */
+.slider-owl {position: relative;}
+.slider-owl.owl-theme .owl-nav {
+	position: absolute;top: 50%;left:0;right:0;
+	margin-top: -55px;text-align: center;
+	-webkit-tap-highlight-color: transparent; 
+	-webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.slider-owl.owl-theme .owl-nav div {position: absolute;top:0;bottom: 0;}
+.slider-owl.owl-theme .owl-nav .owl-prev {left: 0;}
+.slider-owl.owl-theme .owl-nav .owl-next {right: 0;}
+.slider-owl.owl-theme .owl-nav [class*='owl-'] {
+	display: inline-block;
+	margin: 0;padding: 0;
+	width: 30px;height: 110px;
+	font-size: 14px;line-height: 110px;
+	color: #999;background-color: rgba(0,0,0,.25);
+	cursor: pointer;
+	-webkit-transition: all 400ms ease;
+	-moz-transition: all 400ms ease;
+	-ms-transition: all 400ms ease;
+	-o-transition: all 400ms ease;
+	transition: all 400ms ease;
+}
+.slider-owl.owl-theme .owl-nav [class*='owl-']:hover {width: 110px;color: #FFF;}
+.slider-owl.owl-theme .owl-nav .disabled {opacity: 0.5;cursor: default; }
+.slider-owl.owl-theme .owl-nav.disabled + .owl-dots {margin-top: 10px; }
+.slider-owl.owl-theme .owl-dots {position:absolute;bottom:10px;width:100%;text-align: center;-webkit-tap-highlight-color: transparent; }
+.slider-owl.owl-theme .owl-dots .owl-dot {display: inline-block;zoom: 1;*display: inline; }
+.slider-owl.owl-theme .owl-dots .owl-dot span {
+display: block;margin: 5px 4px;width: 20px;height: 3px;
+background: #fff;
+-webkit-backface-visibility: visible;
+-webkit-transition: opacity 200ms ease;
+-moz-transition: opacity 200ms ease;
+-ms-transition: opacity 200ms ease;
+-o-transition: opacity 200ms ease;
+transition: opacity 200ms ease;
+}
+#carousel-text.slider-owl.owl-theme .owl-dots {bottom: auto;}
+#carousel-text.slider-owl.owl-theme .owl-dots .owl-dot span {background: #d6d6d6;}
+.slider-owl.owl-theme .owl-dots .owl-dot.active span, 
+.slider-owl.owl-theme .owl-dots .owl-dot:hover span {background: #fa568b;}
+
+/* add */
+#slider_owl .owl-nav {opacity: 0;}
+#slider_owl:hover .owl-nav {opacity: .8;}
+
+#slider_owl .item-caption {position:absolute;top:40%;width: 100%;color: #fff;z-index: 10;}
+#slider_owl .item-caption h1 {margin-top: 0;font-weight: normal;color: #fff;}
+#slider_owl .item-caption .container>div {font-size: 18px;}
+
+@media (max-width: 991px) {
+	#slider_owl .item-caption h1 {font-size: 40px !important;}
+}
+@media (max-width: 767px) {
+	#slider_owl .item-caption h1 {font-size: 30px !important;}
+}
+@media (max-width: 480px) {
+	#slider_owl .item-caption {top: 35%;}
+	#slider_owl .item-caption h1 {font-size: 20px !important;}
+	#slider_owl .item-caption .container>div {font-size: 14px;}
+}

@@ -1,0 +1,695 @@
+@charset "utf-8"; 
+
+@import
+	url(http://cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css)
+	;
+
+#login-alert, .btn-ss, .scroll-top, .skip>a {
+	text-align: center
+}
+
+@font-face {
+	font-family: ng;
+	font-style: normal;
+	font-weight: 400;
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);
+	src: local(※),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix)
+		format('embedded-opentype'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff2)
+		format('x-woff2'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff)
+		format('woff'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.ttf)
+		format('truetype')
+}
+
+@font-face {
+	font-family: ng;
+	font-style: normal;
+	font-weight: 700;
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot);
+	src: local(※),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.eot?#iefix)
+		format('embedded-opentype'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff2)
+		format('x-woff2'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.woff)
+		format('woff'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Bold.ttf)
+		format('truetype')
+}
+
+@font-face {
+	font-family: ng;
+	font-style: normal;
+	font-weight: 800;
+	src:
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot);
+	src: local(※),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.eot?#iefix)
+		format('embedded-opentype'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff2)
+		format('x-woff2'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.woff)
+		format('woff'),
+		url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-ExtraBold.ttf)
+		format('truetype')
+}
+
+body, button, dd, dl, dt, fieldset, form, hr, input, legend, li, ol, p,
+	select, table, td, textarea, th, ul {
+	font-family: Nanum Barun Gothic, 'Apple SD 산돌고딕 Neo',
+		'Apple SD Gothic Neo', '나눔고딕', NanumGothic, ng, '맑은 고딕',
+		'Malgun Gothic', sans-serif !important;
+	color: #7e8082;
+	font-weight: 400
+}
+
+.btn-ss, h1, h2, h3, h4, h5, h6 {
+	font-weight: 700
+}
+
+body, html {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: auto
+}
+
+body {
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #7e8082
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	margin-top: 0
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, a, h1, h2, h3, h4, h5, h6 {
+	color: #4b4e53;
+	line-height: 1.6;
+	font-family: Open Sans, Nanum Barun Gothic, "Apple SD 산돌고딕 Neo",
+		Apple SD Gothic Neo, "나눔고딕", NanumGothic, ng, "맑은 고딕", Malgun Gothic,
+		sans-serif !important
+}
+
+.h1 {
+	font-size: 26px
+}
+
+.h2 {
+	font-size: 22px
+}
+
+.h3 {
+	font-size: 18px
+}
+
+.h4 {
+	font-size: 16px
+}
+
+.h5 {
+	font-size: 14px
+}
+
+.btn-ss, .h6 {
+	font-size: 13px
+}
+
+.mt-20 {
+	margin-top: 20px
+}
+
+.mt-30 {
+	margin-top: 30px
+}
+
+.mb-10 {
+	margin-bottom: 10px
+}
+
+.mb-20 {
+	margin-bottom: 20px
+}
+
+.mb-30 {
+	margin-bottom: 30px
+}
+
+.mb-40 {
+	margin-bottom: 40px
+}
+
+.mb-50 {
+	margin-bottom: 50px
+}
+
+.mb-60 {
+	margin-bottom: 60px
+}
+
+.mb-70 {
+	margin-bottom: 70px
+}
+
+.mb-80 {
+	margin-bottom: 80px
+}
+
+a, a:active, a:focus, a:hover {
+	text-decoration: none;
+	outline: 0;
+	-webkit-transition: all .2s ease 0s;
+	-moz-transition: all .2s ease 0s;
+	-o-transition: all .2s ease 0s;
+	-ms-transition: all .2s ease 0s;
+	transition: all .2s ease 0s
+}
+
+a {
+	color: #4b4e53
+}
+
+::-moz-selection {
+	background: #44B39E;
+	color: #fff
+}
+
+::selection {
+	background: #44B39E;
+	color: #fff
+}
+
+.display-table {
+	display: table;
+	width: 100%
+}
+
+.table-cell {
+	display: table-cell;
+	vertical-align: middle
+}
+
+.radius-none {
+	border-radius: 0
+}
+
+.line-point-top {
+	position: relative;
+	padding-top: 10px
+}
+
+.line-point-bottom {
+	position: relative;
+	padding-bottom: 20px
+}
+
+.line-point-bottom:after, .line-point-top:before {
+	display: block;
+	content: '';
+	position: absolute;
+	left: 0;
+	background-color: #ddd;
+	-webkit-transition: all .5s cubic-bezier(.3, .61, .355, 1);
+	-moz-transition: all .5s cubic-bezier(.3, .61, .355, 1);
+	-o-transition: all .5s cubic-bezier(.3, .61, .355, 1);
+	transition: all .3s cubic-bezier(.3, .61, .355, 1)
+}
+
+.line-point-top:before {
+	top: 0;
+	width: 1em;
+	height: 2px
+}
+
+.line-point-bottom:after {
+	bottom: 0;
+	width: 2em;
+	height: 1px
+}
+
+.line-bottom {
+	position: relative;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ddd
+}
+
+.line-span span {
+	display: inline-block;
+	padding-bottom: 10px;
+	margin-bottom: -1px;
+	border-bottom: 1px solid #666
+}
+
+#login-alert .alert, .skip {
+	margin: 0
+}
+
+.line-bottom.line-span {
+	padding-bottom: 0
+}
+
+.line-circle span {
+	display: inline-block;
+	position: relative;
+	bottom: -1px
+}
+
+.line-circle span:after {
+	content: "";
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: -13px;
+	width: 8px;
+	height: 8px;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%
+}
+
+.line-bottom.line-middle {
+	border-bottom: 0
+}
+
+.line-middle:after {
+	display: block;
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 10px;
+	width: 100%;
+	border-bottom: 1px solid #ddd
+}
+
+.line-middle span {
+	position: relative;
+	padding-right: 10px;
+	background-color: #fff;
+	z-index: 1
+}
+
+.line-middle span.text-right {
+	padding-left: 10px
+}
+
+.line-middle.text-center span {
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+.btn-ss {
+	display: inline-block;
+	padding: 11px 23px;
+	color: #fff;
+	background-color: #34495e;
+	border: 0;
+	border-radius: 2px
+}
+
+.btn-ss:hover {
+	color: #fff;
+	background-color: #273645
+}
+
+.btn-small {
+	padding: 8px 18px;
+	font-size: 12px
+}
+
+.btn-large {
+	padding: 13px 28px;
+	font-size: 14px
+}
+
+.btn-xlarge {
+	padding: 15px 40px;
+	font-size: 16px
+}
+
+.btn-radius-0 {
+	border-radius: 0
+}
+
+.btn-line {
+	background: 0 0;
+	color: #273645;
+	border: 1px solid #273645;
+	border-radius: 0
+}
+
+.btn-color-b {
+	background-color: #3498db
+}
+
+.btn-color-r {
+	background-color: #e64c66
+}
+
+.btn-color-g {
+	background-color: #1abc9c
+}
+
+.btn-color-s {
+	background-color: #bdc3c7
+}
+
+.skip>a:focus {
+	height: auto
+}
+
+.ss-enigma, .skip>a {
+	height: 0;
+	overflow: hidden
+}
+
+.skip>a {
+	display: block;
+	line-height: 28px
+}
+
+#login-alert {
+	position: fixed;
+	left: 0;
+	padding: 0;
+	width: 100%;
+	background-color: rgba(59, 61, 66, .61);
+	z-index: 100
+}
+
+#login-alert .alert>p, #login-alert .alert>ul {
+	color: #fff
+}
+
+#login-alert .close {
+	top: 1px;
+	float: none
+}
+
+.fixed-content {
+	position: relative;
+	margin-left: auto;
+	margin-right: auto
+}
+
+.fixed-row {
+	margin-right: 0;
+	margin-left: 0
+}
+
+.ss-enigma {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	padding: 0;
+	font-size: 0;
+	line-height: 0
+}
+
+.scroll-top {
+	display: none;
+	position: fixed;
+	right: 20px;
+	bottom: 200px;
+	z-index: 999;
+	width: 40px;
+	height: 40px;
+	font-size: 18px;
+	color: #666;
+	background-color: #eee;
+	border-radius: 3px
+}
+
+.scroll-top:hover {
+	background-color: #2c3e50;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 50%
+}
+
+.scroll-top i {
+	line-height: 40px
+}
+
+@media ( max-width :767px) {
+	.scroll-top {
+		right: 50%;
+		bottom: 20px;
+		margin-right: -20px;
+		line-height: 30px;
+		color: #fff;
+		background: 0 0
+	}
+	.scroll-top i {
+		border-radius: 40px
+	}
+}
+
+#ss-container.header-space {
+	padding-top: 56px
+}
+
+#loader-overflow {
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: #fff;
+	z-index: 99999
+}
+
+#loader, #loader>span {
+	position: absolute;
+	width: 80px;
+	height: 80px
+}
+
+#loader {
+	top: 50%;
+	left: 50%;
+	margin: -40px;
+	animation: rotate 1s infinite linear;
+	border: 4px solid rgba(0, 0, 0, .05);
+	border-radius: 999px
+}
+
+#loader>span {
+	border: 4px solid transparent;
+	border-top: 4px solid #4abfe6;
+	top: -4px;
+	left: -4px;
+	border-radius: 999px
+}
+
+.ss-promotion, .parallaxer {
+	position: relative
+}
+
+@
+keyframes rotate { 0%{
+	transform: rotate(0)
+}
+
+100%{
+transform
+:rotate(360deg)
+}
+}
+.ss-player {
+	background-color: #181818;
+	background-image: url(../images/loading.gif);
+	background-repeat: no-repeat;
+	background-position: center center
+}
+
+.parallaxer {
+	display: block;
+	min-height: 100px;
+	width: 100%;
+	background-color: #222;
+	overflow: hidden
+}
+
+.parallaxer img {
+	display: none
+}
+
+.parallaxer img:first-child {
+	display: block;
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	min-width: 100%;
+	min-height: 100%;
+	opacity: 0;
+	-webkit-transition: opacity 250ms ease-out;
+	-moz-transition: opacity 250ms ease-out;
+	-o-transition: opacity 250ms ease-out;
+	transition: opacity 250ms ease-out
+}
+
+.parallaxer-not-supported {
+	display: none
+}
+
+.bg-transparent {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, .25)
+}
+
+.submenu-horizontal {
+	margin-top: -40px
+}
+
+.submenu-md {
+	font-size: 13px
+}
+
+.submenu-xs {
+	padding-top: 30px
+}
+
+.submenu-md .nav-pills>li+li {
+	margin: 0
+}
+
+.submenu-md .nav-pills>li>a {
+	border-radius: 0
+}
+
+.submenu-md .nav-pills>li.active>a, .submenu-md .nav-pills>li.active>a:focus,
+	.submenu-md .nav-pills>li.active>a:hover {
+	color: #444;
+	background-color: #eee
+}
+
+.bread-crumb-submenu a, .bread-crumb-top a {
+	display: inline-block;
+	font-size: 13px
+}
+
+.bread-crumb-submenu a {
+	padding: 10px 0
+}
+
+.aside .side-nav {
+	margin-bottom: 30px
+}
+
+.aside .side-nav .list-group-item {
+	margin-bottom: 0;
+	padding-left: 3px;
+	font-size: 13px;
+	border: 0;
+	border-bottom: 1px solid #f2f2f2
+}
+
+.aside .side-nav .list-group-item:hover {
+	background: 0 0
+}
+
+.aside .side-nav .list-group-item.on {
+	color: #333
+}
+
+.relative {
+	position: relative
+}
+
+#spot input, .ss-wrapper .board .iText, .ss-wrapper .xm input,
+	.localNavigation li a, .localNavigation li.on a, .x input[type=color],
+	.x input[type=date], .x input[type=datetime-local], .x input[type=datetime],
+	.x input[type=email], .x input[type=month], .x input[type=number], .x input[type=password],
+	.x input[type=search], .x input[type=tel], .x input[type=text], .x input[type=time],
+	.x input[type=url], .x input[type=week] {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box
+}
+
+.x .x_input-append a.x_add-on, .x .x_input-prepend a.x_add-on {
+	min-width: 26px !important;
+	height: 26px !important
+}
+
+.localNavigation li a {
+	font-size: 12px
+}
+
+.extraVarsList tr td a span {
+	padding: 0;
+	background: 0 0;
+	border-color: transparent
+}
+
+.extraVarsList tr td a span.cke_button_label {
+	display: none
+}
+
+.cke_combo_open {
+	display: inline-block !important
+}
+
+.cke_combo_arrow {
+	border-left: 3px solid transparent !important;
+	border-right: 3px solid transparent !important;
+	border-top: 3px solid #474747 !important
+}
+
+.xe-widget-wrapper .icon>img {
+	display: inline;
+	width: auto
+}
+
+nav.navbar.bootsnav.no-background {
+	background-color: transparent
+}
+
+@media ( min-width :768px) {
+	.padding-none {
+		padding-left: 0;
+		padding-right: 0
+	}
+}
+
+@media ( min-width :992px) {
+	#ss-container.header-space {
+		padding-top: 80px
+	}
+	.fixed-content {
+		padding-left: 50px;
+		padding-right: 50px
+	}
+}
+
+@media ( max-width :991px) {
+	.mb-sm-20 {
+		margin-bottom: 20px
+	}
+	.mb-sm-30 {
+		margin-bottom: 30px
+	}
+	.mb-sm-40 {
+		margin-bottom: 40px
+	}
+}

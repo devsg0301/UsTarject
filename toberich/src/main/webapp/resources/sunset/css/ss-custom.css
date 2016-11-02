@@ -1,0 +1,72 @@
+@charset "utf-8";
+/*
+ SSDESIGN MULTIPURPOSE XE LAYOUT
+ http://ssdesign.com/
+ 
+ Copyright 2010 SSDESIGN	 
+ Contributing author : KSJade (contact@ssdesign.com)
+--------User Custom CSS---------------------------------*/
+
+/*  메인 탑 메뉴 폰트 스타일링
+--------------------------------------------------------*/
+nav.navbar.bootsnav ul.nav > li > a {
+	font-size: 14px;
+}
+/*  메인 슬라이더 폰트
+--------------------------------------------------------*/
+.item-caption h1 {font-size: 50px;color: #fff;}
+.item-caption>h4 {font-size: 18px;color: #fff;}
+.item-caption .btn-line {color: #fff;border-color: #fff;}
+
+/* 각 섹션 상하 여백
+--------------------------------------------------------*/
+.ss-section-teaser {padding-top: 60px;padding-bottom: 60px} /* 섹션 티져 */
+.ss-section-about {padding-top: 100px;padding-bottom: 120px} /* 섹션 어바웃 */
+.ss-section-block {padding-top: 0px;padding-bottom: 0px;} /* 섹션 블럭 */
+.ss-section-service {padding-top: 100px;padding-bottom: 120px} /* 섹션 서비스 */
+.ss-parallaxer {padding-top: 80px;padding-bottom: 80px} /* 패럴랙스 섹션 */
+.ss-section-info {padding-top: 100px;padding-bottom: 80px} /* 섹션 인포 */
+.ss-section-post {padding-top: 100px;padding-bottom: 80px} /* 섹션 포스트 */
+.footer-content {padding-top: 80px;padding-bottom: 60px}  /* 푸터 섹션 */
+.ss-copyright {padding-top: 15px;padding-bottom: 15px}  /* 푸터 카피라이트 */
+.ss-contents {padding-top: 40px;padding-bottom: 40px} /* 서브 콘텐츠영역 */
+
+/* 각 섹션 제목
+--------------------------------------------------------*/
+.section-header {font-size: 36px;}
+
+/* 패럴랙스
+--------------------------------------------------------*/
+.parallaxer h2,.parallaxer h3,.parallaxer {color: #fff;}
+#video-gallery i {color: #fff;}
+.parallaxer .btn-line {color: #fff;border-color: #fff;}
+
+/* 서브
+--------------------------------------------------------*/
+.sub-header {background-color: #222} /* 서브 헤더 */
+.sub-header .sub-header-caption h1, /* 서브 헤더 폰트 */
+.sub-header .sub-header-caption h1>small,
+.sub-header .bread-crumb-top a {color:#fff}  /* 서브 헤더 현재위치 폰트 */
+
+.section-footer .footer-content {background-color:#f2f2f2;} /* 푸터 배경 컬러 */
+.section-footer .ss-copyright {color: #999;background-color:#FFF;} /* 카피라이트 배경 컬러 */
+
+/* CSS 추가 시
+--------------------------------------------------------*/
+
+
+
+/* 미디어쿼리
+--------------------------------------------------------*/
+@media (min-width: 992px) {
+	nav.navbar.bootsnav li.dropdown ul.dropdown-menu {background-color: #4B4E53;} /* 2차 메뉴 배경 */
+	nav.navbar.bootsnav li.dropdown ul.dropdown-menu > li > a {color: #d3d3d3;}  /* 2차 메뉴 폰트 */
+}
+@media (max-width: 480px) {
+	.ss-section-teaser {padding-top: 30px;padding-bottom: 40px;}
+	.ss-section-about,
+	.ss-section-service,
+	.ss-section-info,
+	.ss-section-post {padding-top: 60px;padding-bottom: 60px;}
+	.footer-content {padding-top: 40px;padding-bottom: 40px;}
+}	

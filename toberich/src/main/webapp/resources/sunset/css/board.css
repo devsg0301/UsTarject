@@ -1,0 +1,56 @@
+/*
+ * Board : sketchbook
+ * ssdesign custom styling
+ * -----------------------------------
+ */
+
+/* board top */
+.bd .bd_hd {display:none !important}
+/*
+.bd .lst_btn {display:none !important} ëª©ë¡ ì•„ì´ì½˜ */
+
+/* board category */
+.bd_cnb,
+.bd_cnb .bg_f_f9 {
+	background:none;border-color:#efefef;
+	border-radius: 0;
+	box-shadow: none;
+}
+.bd_cnb .bg_f_f9 {border: 0}
+
+/* board bottom */
+.bd a.btn_img {padding:4px 10px;height:auto;font-size:13px} /* ë²„íŠ¼ í°íŠ¸ */
+.bd .lst_btn, /* ë¦¬ìŠ¤íŠ¸ ë²„íŠ¼ */ 
+.bd a i[class*=ico_16px] {display:none} /* ë²„íŠ¼ ì•„ì´ì½˜ */ 
+.bd a i.home {display:block} /* ì¹´í…Œê³ ë¦¬ í™ˆ ì•„ì´ì½˜ */
+.btm_mn {padding-left:0;padding-right:0;} /* ëª©ë¡ í•˜ë‹¨ ë²„íŠ¼ íŒ¨ë”© */
+
+/* board font */
+table {font-family:'Open Sans','Apple SD ì‚°ëŒê³ ë”• Neo','Apple SD Gothic Neo','ë‚˜ëˆ”ê³ ë”•',NanumGothic,ng;}
+.bd, .bd input, .bd textarea,
+.bd select, .bd button, .bd table,
+.bd_tb_lst td.title
+{font-size:14px;}
+ 
+.bd_zine.card h3 {letter-spacing: 0 !important;}/* ì›¹ì§„ ì œëª© */
+.bd_zine.card .cnt {font-size:13px;line-height:1.6;color:#888;} /* ì›¹ì§„ ë‚´ìš©í°íŠ¸ */
+.bd_zine.card .info {font-size:12px;} /* ì›¹ì§„ ë‚ ì§œ,ê¸€ì“´ì´... í°íŠ¸ */
+
+/* board body */
+.rd_ft .rd_vote {display: none;}
+
+/* board list */
+.bd .bg_f_f9 {background:none;}
+.bd_tb_lst th, 
+.bd_tb_lst td {padding: 15px 12px;font-size:13px;} /* ëª©ë¡í˜• ìƒí•˜ê°„ê²© */
+.bd_tb_lst th {border-top: 2px solid #444;border-bottom: 1px solid #D0D0D0;}
+
+/* board webzine */
+.bd_zine .cnt {margin-top: 20px;font-size: 14px;color: #777;} /* ì›¹ì§„ ê¸°ë³¸ ì œëª©,ë‚´ìš© ê°„ê²©, í°íŠ¸ */
+
+/* board gallery */
+.bd_tmb_lst .tmb_wrp {border:0} /*  */
+
+@media (min-width: 992px) {
+	.bd_zine h3 {font-size: 18px;}
+}

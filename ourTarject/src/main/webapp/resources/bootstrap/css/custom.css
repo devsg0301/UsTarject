@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+header .navbar .nav li a {
+	font-family: 'NanumGothic', '나눔고딕', ng;
+} /* 탑 1차 메뉴 */
+
+/*** 헤더 탑 컬러 스타일링(로고 위 부분) ***/
+#header-top {
+	background: #2C3E50;
+} /* 배경 컬러 */
+#header-top .navbar-nav>li>a {
+	color: #7393B3;
+} /* 로그인 폰트 컬러 */
+
+/*** 메인 메뉴 폰트 스타일링 ***/
+header .navbar .nav li a {
+	font-size: 13px; /* 폰트사이즈 */
+	color: #333; /* 폰트컬러 */
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.nav-pills>li.active>a, .dropdown-menu>.active>a, header .navbar .nav li a:hover
+	{
+	color: #ffffff !important;
+} /* 마우스 오버시 폰트컬러 */
+
+/*** 메인 왼쪽 스크롤메뉴 스타일링 ***/
+.side-navi li a {
+	color: #fff; /* 폰트컬러 */
+	background: #E64C65; /* 배경컬러 */
+}
+/*** 슬라이드 캡션 스타일링 ***/
+.fluid_container h1 {
+	color: #fff
+} /* 타이틀 폰트 컬러 */
+.fluid_container p {
+	color: #fff
+} /* 요약 폰트 컬러 */
+
+/*** 서브 탑 스타일링 ***/
+.transCover {
+	background-color: rgba(68, 179, 158, 0);
+	/* 서브 탑 배경 커버 컬러(RGB 컬러값, 투명도) */
+}
+
+.sub-promotion, .sub-promotion a {
+	color: #ffffff !important; /* 현재 위치 폰트 컬러 (#ffffff 부분만 수정) */
+}
+
+/*** 하단 푸터 스타일링 ***/
+.section-6 .footer-top h5 {
+	font-size: 16px;
+	font-family: 'ngBold' !important;
+} /* 푸타 타이틀 */
+.section-6 {
+	color: #fff;
+	background-color: #2C3E50; /* 푸터 섹션-타이틀 컬러, 배경 컬러 */
+}
+
+.section-6 .footer-top {
+	padding-top: 60px; /* 푸터 섹션 - 상단 여백 */
+	padding-bottom: 60px; /* 푸터 섹션 - 하단 여백 */
+}
+
+.footer-top p {
+	color: #7D9BB9; /* 섹션 컨텐츠영역 폰트 컬러 */
+}
+
+.footer-top .base-line {
+	background-color: #486684; /* 타이틀 라인 컬러 */
+	border-right-color: #49C9AF; /* 타이틀 우측 라인 컬러 */
+}
+
+.section-6 .footer-bottom {
+	color: #A5AFC9;
+	background-color: #283043; /* 푸터 카피라이트-폰트 컬러, 배경컬러 */
+}
+
+@media ( max-width : 480px) {
+	.xm .form-horizontal .control-label {
+		width: 28%
+	}
+	.xm .form-horizontal .controls {
+		margin-left: 32%
+	}
+	.xm input, .xm textarea {
+		width: 100% !important
+	}
+	.xm input[type="submit"], .xm input[type="checkbox"] {
+		width: auto !important
+	}
+}
