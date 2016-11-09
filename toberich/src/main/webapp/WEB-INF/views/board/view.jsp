@@ -300,138 +300,92 @@ xe.msg_select_menu = "대상 메뉴 선택";
 						<div class="row">
 							<div class="col-md-9">
 								<div></div>
-								<div id="bd_1648_0" class="bd hover_effect small_lst_btn" data-default_style="list" data-bdFilesType="">
-									<div class="bd_lst_wrp">
-										<div class="tl_srch clear">
-											<div class="bd_faq_srch">
-												<form action="#" method="get" onsubmit="return procFilter(this, search)">
-													<input type="hidden" name="act" value="" /> 
-													<input type="hidden" name="vid" value="" /> 
-													<input type="hidden" name="mid" value="sum_list" /> 
-													<input type="hidden" name="category" value="" />
-													<table class="bd_tb">
-														<tr>
-															<td>
-																<span class="select itx"> 
-																	<select name="search_target">
-																		<option value="title_content">제목+내용</option>
-																		<option value="title">제목</option>
-																		<option value="content">내용</option>
-																		<option value="comment">댓글</option>
-																		<option value="user_name">이름</option>
-																		<option value="nick_name">닉네임</option>
-																		<option value="user_id">아이디</option>
-																		<option value="tag">태그</option>
-																	</select>
-																</span>
-															</td>
-															<td class="itx_wrp">
-																<input type="text" name="search_keyword" value="" class="itx srch_itx" />
-															</td>
-															<td>
-																<button type="submit" onclick="jQuery(this).parents('form').submit();return false" class="bd_btn">검색</button>
-															</td>
-														</tr>
-													</table>
-												</form>
-											</div>
-										</div>
-										<table class="bd_lst bd_tb_lst bd_tb">
-											<caption class="blind">List of Articles</caption>
-											<thead class="bg_f_f9">
-												<tr>
-													<th scope="col" class="no">
-														<span>번호</span>
-													</th>
-													<th scope="col" class="title">
-														<span>제목</span>
-													</th>
-													<th scope="col">
-														<span>글쓴이</span>
-													</th>
-													<th scope="col">
-														<span>날짜</span>
-													</th>
-													<th scope="col" class="m_no">
-														<span>조회 수</span>
-													</th>
-												</tr>
-											</thead>
-											<!-- START :: 게시판 목록 불러오는 부분 -->
-											<tbody>
-												<c:forEach var="board_list" items="${board_list}">
-												<tr>
-													<td class="no">${board_list.idx}</td>
-													<td class="title">
-														<a href="/board/${board_list.idx}.do" class="hx">
-															${board_list.title}</a> 
-														<span class="extraimages"></span>
-													</td>
-													<td class="author">
-														<span>${board_list.author}</span>
-													</td>
-													<td class="time"><fmt:formatDate value="${board_list.insert_date}" pattern="yyyy-MM-dd"/> </td>
-													<td class="m_no">${board_list.hit}</td>
-												</tr>
-												</c:forEach>
-											</tbody>
-											<!-- END :: 게시판 목록 불러오는 부분 -->
-										</table>
-										<div class="btm_mn clear">
-											<div class="fl">
-												<form action="#" method="get" onsubmit="return procFilter(this, search)" class="bd_srch_btm on">
-													<input type="hidden" name="act" value=""> 
-													<input type="hidden" name="vid" value=""> 
-													<input type="hidden" name="mid" value="sum_list"> 
-													<input type="hidden" name="category" value=""> 
-													<span class="btn_img itx_wrp" style="width: 300px;">
-														<button type="submit" onclick="jQuery(this).parents('form.bd_srch_btm').submit();return false;" class="ico_16px search">Search</button>
-														<label for="bd_srch_btm_itx_1648" style="visibility: visible;">검색</label> 
-														<input type="text" name="search_keyword" id="bd_srch_btm_itx_1648" class="bd_srch_btm_itx srch_itx" value="">
-													</span>
-													<span class="btn_img select"> 
-														<select name="search_target">
-															<option value="title_content">제목+내용</option>
-															<option value="title">제목</option>
-															<option value="content">내용</option>
-															<option value="comment">댓글</option>
-															<option value="user_name">이름</option>
-															<option value="nick_name">닉네임</option>
-															<option value="user_id">아이디</option>
-															<option value="tag">태그</option>
-														</select>
-													</span>
-												</form>
-											</div>											
-											<div class="fr">
-												<a class="btn_img" href="/board/write.do">
-													<i class="ico_16px write"></i> 쓰기</a>
-											</div>
-										</div>
-										<form action="./" method="get" class="bd_pg clear">
-											<input type="hidden" name="error_return_url" value="/display/sum_list" />
-											<input type="hidden" name="act" value="" />
-											<fieldset>
-												<legend class="blind">Board Pagination</legend>
-												<input type="hidden" name="vid" value="" /> 
-												<input type="hidden" name="mid" value="sum_list" /> 
-												<input type="hidden" name="category" value="" /> 
-												<input type="hidden" name="search_keyword" value="" /> 
-												<input type="hidden" name="search_target" value="" /> 
-												<input type="hidden" name="listStyle" value="list" /> 
-												<strong class="direction"><i class="fa fa-angle-left"></i> Prev</strong> 
-												<a class="frst_last bubble this" href="/display/sum_list" title="첫 페이지">1</a> 
-												<strong class="direction">Next <i class="fa fa-angle-right"></i></strong>
-												<div class="bd_go_page tg_cnt2 wrp">
-													<button type="button" class="tg_blur2"></button>
-													<input type="text" name="page" class="itx" />/ 1
-													<button type="submit" class="bd_btn">GO</button>
-													<span class="edge"></span> 
-													<i class="ie8_only bl"></i><i class="ie8_only br"></i>
-													<button type="button" class="tg_blur2"></button>
+								<div id="bd_${tboard.idx }" class="bd hover_effect small_lst_btn1" data-default_style="list" data-bdfilestype="">
+									<div class="rd rd_nav_style2 clear" style="padding:;" data-docsrl="${tboard.idx }">
+										<div class="rd_hd clear" style="margin: 0 -15px 20px">
+											<div class="board clear " style="">
+												<div class="top_area ngeb" style="">
+													<div class="fr">
+														<span class="date m_no">
+														<fmt:formatDate value="${tboard.insert_date}" pattern="yyyy-MM-dd hh:mm"/></span>
+													</div>
+													<h1 class="np_18px">
+														<a href="/board/${tboard.idx }.do">${tboard.title }</a>
+													</h1>
 												</div>
-											</fieldset>
-										</form>
+												<div class="btm_area clear">
+													<div class="side">
+														<a href="#" class="nick member_4" onclick="return false">${tboard.author }</a>
+													</div>
+													<div class="side fr">
+														<span>조회 수 <b>${tboard.hit }</b></span>
+														<span>댓글<b>0</b></span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="rd_body clear">
+											<article>
+												<!--BeforeDocument(${tboard.idx },)-->
+												<div class="document_${tboard.idx } xe_content">
+													<p>&nbsp;</p>
+													<p>${tboard.content }&nbsp;</p>
+												</div>
+												<!--AfterDocument(${tboard.idx },)-->
+											</article>
+										</div>
+										<div class="rd_ft">
+											<div class="bd_prev_next clear">
+												<!-- 이전 다음 클릭할 수 있는 곳 -->
+												<div>
+													<a class="bd_rd_next bubble no_bubble fr" href="/board/${tboard.idx + 1}.do">
+														<span class="p">인류의 우는 만물은 낙원을 이상의 사막
+															 <em class="link">Next<i class="fa fa-angle-right"></i></em>
+														</span>
+														<i class="fa fa-angle-right"></i> 
+														<span class="wrp prev_next" style="bottom: 100%; display: none;">
+															<span class="speech"> <b>인류의 우는 만물은 낙원을 이상의 사막</b>
+																<span><em>2016.10.06</em><small>by </small>KSODESIGN</span>
+															</span>
+															<i class="edge"></i>
+															<i class="ie8_only bl"></i>
+															<i class="ie8_only br"></i>
+														</span>
+													</a>
+												</div>
+											</div>
+											<div class="rd_ft_nav clear">
+												<a class="btn_img fl" href="/board/board.do">
+													<i class="fa fa-bars"></i>
+												 	목록
+												</a>
+												<c:if test="${tboard.insert_id == sessionScope.userLoginInfo.cust_id}">
+												<a class="btn_img fl" href="/board/write.do?idx=${tboard.idx}">
+													<i class="fa fa-pencil"></i>
+												 	수정
+												</a>
+												</c:if>
+											</div>
+										</div>
+										<div class="fdb_lst_wrp">
+											<div id="${tboard.idx }_comment" class="fdb_lst clear">
+												<div class="cmt_editor">
+													<label for="editor_${tboard.idx }" class="cmt_editor_tl fl"><em>✔</em>
+														<strong>댓글 쓰기</strong>
+													</label>
+													<div class="bd_wrt clear">
+														<div class="simple_wrt">
+															<span class="profile img no_img">?</span>
+															<div class="text">
+																<a class="cmt_disable bd_login" href="#">댓글 쓰기 권한이 없습니다. 로그인 하시겠습니까?</a>
+															</div>
+															<input type="button" value="등록" disabled="disabled" class="bd_btn">
+														</div>
+													</div>
+												</div>
+												<div id="cmtPosition" aria-live="polite"></div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>

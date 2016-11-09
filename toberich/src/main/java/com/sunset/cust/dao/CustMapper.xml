@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunset.main.dao.MainMapper">
+<mapper namespace="com.sunset.cust.dao.CustMapper">
 
     <resultMap id="customerMap" type="com.sunset.model.Tcustomer">
         <id     property="cust_no" 		column="cust_no" />
@@ -22,4 +22,21 @@
            AND PASSWORD = #{param2}
     </select>
     
+    <select id="getMaxCustNo" resultType="Integer">
+    	SELECT COUNT(*)
+    	  FROM TCUSTOMER
+    	 WHERE 1=1
+    	   AND CUST_NO LIKE #{param1}
+    </select>
+    
+    <insert id="insertCust">
+    	INSERT INTO TCUSTOMER (CUST_NO, CUST_ID, PASSWORD, CUST_NAME, EMAIL) VALUES (
+    		#{cust_no},
+    		#{cust_id},
+    		#{password},
+    		#{cust_name},
+    		#{email}    		
+    	)
+    </insert>
+
 </mapper>

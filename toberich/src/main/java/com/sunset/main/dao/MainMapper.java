@@ -7,6 +7,6 @@ import com.sunset.model.Tcustomer;
 @Repository(value="mainMapper")
 public interface MainMapper {
 	
-	Tcustomer getCustomer(String email, String password);
-
+	Tcustomer getCustomer(String cust_id, String password);
+	
 }

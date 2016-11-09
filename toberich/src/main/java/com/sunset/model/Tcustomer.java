@@ -5,9 +5,10 @@ import java.util.Date;
 public class Tcustomer {
 	
 	private String cust_no;
-	private String email;
+	private String cust_id;
 	private String password;
 	private String cust_name;
+	private String email;
 	private String HP;
 	private Date insert_date;
 	private Date modify_date;
@@ -25,6 +26,12 @@ public class Tcustomer {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getCust_id() {
+		return cust_id;
+	}
+	public void setCust_id(String cust_id) {
+		this.cust_id = cust_id;
 	}
 	public String getPassword() {
 		return password;

@@ -26,7 +26,7 @@ public class MainController {
 	
 	// 메인페이지 이동
 	@RequestMapping(value = "/defaults/main.do", method = RequestMethod.GET)
-	public String displayMain(HttpSession session){
+	public String displayMain(HttpSession session, Model model){
 		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
 			logger.info("You don't login.");
 			System.out.println("You don't login.");
@@ -34,6 +34,8 @@ public class MainController {
 		}
 		logger.info("main page start");
 		System.out.println("main page start");
+		model.addAttribute("dropdown", "main");
+		
 		return "defaults/main";
 	}
 	
@@ -44,7 +46,7 @@ public class MainController {
     	System.out.println("login start!");
     	ModelAndView mav = new ModelAndView();
  
-        Tcustomer loginUser = mainService.getCustomer(customer.getEmail(), customer.getPassword());
+        Tcustomer loginUser = mainService.getCustomer(customer.getCust_id(), customer.getPassword());
  
         if (loginUser != null) {
         	logger.info("login sucess!");

@@ -13,8 +13,8 @@ public class MainServiceImpl implements MainService {
 	@Resource(name="mainDao")
 	private MainDao mainDao;
 
-	public Tcustomer getCustomer(String email, String password) {
-		return mainDao.getCustomer(email, password);
+	public Tcustomer getCustomer(String cust_id, String password) {
+		return mainDao.getCustomer(cust_id, password);
 	}
 
 }

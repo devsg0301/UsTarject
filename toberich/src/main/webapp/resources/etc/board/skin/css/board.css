@@ -105,7 +105,7 @@
 	height: 28px;
 	margin: 0;
 	padding: 4px 20px;
-	background: #F3F3F3 url(../img/ie/btn.png) repeat-x;
+	background: #F3F3F3 url(../images/ie/btn.png) repeat-x;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
 		to(#F3F3F3));
 	background: linear-gradient(to bottom, #FFF 0%, #F3F3F3 100%);
@@ -142,7 +142,7 @@
 	text-shadow: 0 1px 0 #000;
 	border-color: #669 !important;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
-	background: #55B url(../img/ie/btn_blue.gif) repeat-x;
+	background: #55B url(../images/ie/btn_blue.gif) repeat-x;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#77C),
 		to(#55B));
 	background: linear-gradient(to bottom, #77C 0%, #55B 100%)
@@ -201,7 +201,7 @@
 }
 /* Bg */
 .bd .bg_f_f9 {
-	background: #F9F9F9 url(../img/ie/bg_f_f9.gif) repeat-x;
+	background: #F9F9F9 url(../images/ie/bg_f_f9.gif) repeat-x;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
 		to(#F9F9F9));
 	background: linear-gradient(to bottom, #FFF 0%, #F9F9F9 100%)
@@ -243,7 +243,7 @@
 }
 
 .bd .ico_16px {
-	background-image: url(../img/white/ico_16px.png);
+	background-image: url(../images/white/ico_16px.png);
 	background-repeat: no-repeat
 }
 
@@ -274,7 +274,7 @@
 .bd .ico_32px {
 	width: 32px;
 	height: 32px;
-	background-image: url(../img/white/ico_32px.png)
+	background-image: url(../images/white/ico_32px.png)
 }
 
 .bd .ico_32px.deco2 {
@@ -283,7 +283,7 @@
 
 .bd .ico_sns16 {
 	border-radius: 3px;
-	background-image: url(../img/sns_16.png);
+	background-image: url(../images/sns_16.png);
 	opacity: .8
 }
 
@@ -303,7 +303,7 @@
 	width: 32px;
 	height: 32px;
 	margin: 2px;
-	background-image: url(../img/sns.png);
+	background-image: url(../images/sns.png);
 	opacity: .9
 }
 
@@ -409,7 +409,7 @@
 	width: 9px;
 	height: 6px;
 	margin-left: -5px;
-	background-image: url(../img/white/edge.png);
+	background-image: url(../images/white/edge.png);
 	background-repeat: no-repeat
 }
 
@@ -758,7 +758,7 @@
 	bottom: 0;
 	right: 0;
 	z-index: 999;
-	background: url(../img/ie/blk_op5.png);
+	background: url(../images/ie/blk_op5.png);
 	background: rgba(0, 0, 0, .5)
 }
 
@@ -952,7 +952,7 @@
 	border: 1px solid #BBB;
 	opacity: .5;
 	filter: alpha(opacity = 50);
-	background-image: url(../img/blank.gif);
+	background-image: url(../images/blank.gif);
 	*text-decoration: none !important
 }
 
@@ -981,7 +981,7 @@
 	width: 11px;
 	height: 0;
 	padding-top: 11px;
-	background: url(../img/white/list_style.png) no-repeat
+	background: url(../images/white/list_style.png) no-repeat
 }
 
 .lst_btn .zine b {
@@ -1201,7 +1201,7 @@
 	bottom: -8px;
 	width: 100%;
 	height: 8px;
-	background: url(../img/white/edge.png) no-repeat 24px 0
+	background: url(../images/white/edge.png) no-repeat 24px 0
 }
 
 .bd_cnb ul.flip .edge {
@@ -1402,7 +1402,7 @@
 }
 
 .on .bd_srch_btm_itx {
-	width: 116px;
+	width: 276px;
 	padding-left: 4px;
 	cursor: auto;
 	line-height: 28px\9
@@ -1910,7 +1910,7 @@ transform
 }
 
 .rd_nav_blk .rd_nav_side .edge {
-	background-image: url(../img/black/edge.png)
+	background-image: url(../images/black/edge.png)
 }
 
 .rd_nav_blk .rd_nav_side .help strong {
@@ -2920,7 +2920,7 @@ transform
 
 .et_vars .bg1 td {
 	background: rgba(255, 255, 255, .7);
-	background: url(../img/ie/wh_op7.png)
+	background: url(../images/ie/wh_op7.png)
 }
 
 .rd_hd .et_vars {
@@ -3031,7 +3031,7 @@ transform
 	display: inline-block;
 	width: 12px;
 	height: 11px;
-	background: url(../../../../document/tpl/icons/image.gif);
+	background: url(../images/icons/image.gif);
 	vertical-align: middle;
 	*display: inline;
 	*zoom: 1
@@ -3108,7 +3108,7 @@ transform
 }
 
 .tmb_wrp .loading {
-	background: url(../img/white/loading.gif) no-repeat 50% 50%
+	background: url(../images/white/loading.gif) no-repeat 50% 50%
 }
 
 .bd_lst.img_load .tmb_wrp {
@@ -3140,7 +3140,7 @@ transform
 	width: 100%;
 	height: 100%;
 	text-decoration: none !important;
-	background-image: url(../img/blank.gif);
+	background-image: url(../images/blank.gif);
 	*cursor: pointer
 }
 
@@ -3157,7 +3157,7 @@ transform
 	height: 100%;
 	font-size: 11px;
 	line-height: 1.5;
-	background: url(../img/ie/blk_op5.png);
+	background: url(../images/ie/blk_op5.png);
 	background: rgba(0, 0, 0, .5)
 }
 
@@ -3222,7 +3222,7 @@ transform
 	left: -1px;
 	width: 60px;
 	height: 60px;
-	background: url(../img/ribbon/default.png);
+	background: url(../images/ribbon/default.png);
 	font-size: 11px;
 	text-align: center;
 	color: #FFF;
@@ -3272,7 +3272,7 @@ transform
 }
 
 .ribbon_v .ribbon.new {
-	background: url(../img/ribbon/new.png)
+	background: url(../images/ribbon/new.png)
 }
 
 .ribbon_v .ribbon.nnu.new i {
@@ -3281,11 +3281,11 @@ transform
 }
 
 .ribbon_v .ribbon.notice {
-	background: url(../img/ribbon/notice.png)
+	background: url(../images/ribbon/notice.png)
 }
 
 .ribbon_v .ribbon.update {
-	background: url(../img/ribbon/update.png)
+	background: url(../images/ribbon/update.png)
 }
 
 .ribbon_v .ribbon i {
@@ -3370,7 +3370,7 @@ transform
 
 .bd_tb_lst .title {
 	padding-right: 6px;
-	width: 100%
+	width: 60%
 }
 
 .bd_tb_lst td.title {
@@ -3462,7 +3462,7 @@ transform
 	left: -1px;
 	right: -1px;
 	border: 2px solid transparent;
-	background-image: url(../img/blank.gif);
+	background-image: url(../images/blank.gif);
 	text-decoration: none
 }
 
@@ -3684,7 +3684,7 @@ transform
 	margin: 7%;
 	padding: 1px 6px;
 	font-size: 10px;
-	background: url(../img/ie/blk_op7.png) \9;
+	background: url(../images/ie/blk_op7.png) \9;
 	background: rgba(0, 0, 0, .7);
 	border: 1px solid #222;
 	border-radius: 2px
@@ -3706,11 +3706,11 @@ transform
 	width: 90px;
 	height: 30px;
 	margin-left: -45px;
-	background: url(../img/deco/tape.png) center no-repeat
+	background: url(../images/deco/tape.png) center no-repeat
 }
 
 .bd_tmb_lst .deco3 {
-	background-image: url(../img/deco/tape.png)
+	background-image: url(../images/deco/tape.png)
 }
 
 .bd_tmb_lst p {
@@ -3782,7 +3782,7 @@ transform
 
 .bd_cloud .ico_32px {
 	position: absolute;
-	background-image: url(../img/white/ico_32px.png) !important
+	background-image: url(../images/white/ico_32px.png) !important
 }
 
 .bd_cloud .deco1 {
@@ -3912,7 +3912,7 @@ transform
 .bd_guest .sum {
 	margin: 0 20px 15px;
 	padding-left: 30px;
-	background: url(../img/footprint.png) 0 50% no-repeat;
+	background: url(../images/footprint.png) 0 50% no-repeat;
 	font: 700 15px Tahoma, sans-serif
 }
 
@@ -4095,7 +4095,7 @@ transform
 	height: 22px;
 	border: 1px solid #DDD;
 	border-radius: 5px;
-	background: #F9F9F9 url(../img/ie/bg_f_f9.gif) repeat-x;
+	background: #F9F9F9 url(../images/ie/bg_f_f9.gif) repeat-x;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF),
 		to(#EEE));
 	background: linear-gradient(to bottom, #FFF 0%, #EEE 100%);
@@ -4461,7 +4461,7 @@ body.viewer_blk {
 	overflow: hidden;
 	display: inline-block;
 	height: 14px;
-	background: transparent url(../img/white/iconStarRating.gif) no-repeat
+	background: transparent url(../images/white/iconStarRating.gif) no-repeat
 }
 
 .bd .starRating {
@@ -4521,7 +4521,7 @@ body.viewer_blk {
 /* ipad2+ */
 @media only screen and (max-width:768px) {
 	.bd .ico_sns {
-		background-image: url(../img/sns_64.png);
+		background-image: url(../images/sns_64.png);
 		background-size: 32px auto;
 		opacity: 1
 	}

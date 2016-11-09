@@ -1,4 +1,28 @@
 @charset "utf-8";
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.spaceLeft {
+	margin-left: 10px;
+}
+
+.spaceRight {
+	margin-right: 10px;
+}
+
+/* custom checkbox */
+.btn span.fa {
+	opacity: 0;
+}
+
+.btn.active span.fa {
+	opacity: 1;
+}
+
 /* NAVER (developers@xpressengine.com) */
 .xe_content{color:#000;font-size:12px;line-height:1.5}
 .xe_content blockquote.q1,

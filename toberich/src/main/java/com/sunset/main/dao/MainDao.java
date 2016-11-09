@@ -12,7 +12,8 @@ public class MainDao {
 	@Resource(name="mainMapper")
 	private MainMapper mainMapper;
 	
-	public Tcustomer getCustomer(String email, String password){
-		return mainMapper.getCustomer(email, password);
+	public Tcustomer getCustomer(String cust_id, String password){
+		return this.mainMapper.getCustomer(cust_id, password);
 	}
+	
 }

@@ -22,8 +22,8 @@
 
 		<form class="form-signin" name="login" method="post" action="/defaults/loginProcess.do">
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="email" class="sr-only">Email address</label>
-			<input type="email" id="email" name="email" class="form-control" placeholder="Email address" required="required" autofocus="autofocus"> 
+			<label for="cust_id" class="sr-only">Email or ID</label>
+			<input type="text" id="cust_id" name="cust_id" class="form-control" placeholder="Email or ID" required="required" autofocus="autofocus"> 
 			<label for="password" class="sr-only">Password</label>
 			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required">
 			<div class="checkbox">

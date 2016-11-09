@@ -46,7 +46,7 @@
 				<div>
 			        <h2>안녕하세요.</h2>
 			        	이름 : ${sessionScope.userLoginInfo.cust_name}<br/>
-			 
+			 			아이디 : ${sessionScope.userLoginInfo.cust_id}<br/>
 			        	이메일 : <c:out value="${sessionScope.userLoginInfo.email}"/> 
 				</div>
 				<div class="clearfix" style="margin-top: 30px;">
@@ -148,7 +148,7 @@
 			<div class="container">
 				<div class="input-group">
 					<span class="input-group-addon"><i class="fa fa-search"></i></span>
-					<form action="http://ssstudio.com/display/" method="get" class="search">
+					<form action="/defaults/main.do" method="get" class="search">
 						<input type="hidden" name="vid" value=""> 
 						<input type="hidden" name="mid" value="sum_home1"> 
 						<input type="hidden" name="act" value="IS"> 
@@ -182,12 +182,12 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar-menu">
 				<ul class="nav navbar-nav navbar-center" data-in="fadeIn" data-out="fadeOut">
-					<li class="dropdown active"><a href="/defaults/main.do" class="point-hover "><span>MAIN DEFAULT</span></a></li>
+					<li class="dropdown <c:if test="${dropdown == 'main'}"> active </c:if>"><a href="/defaults/main.do" class="point-hover"><span>MAIN DEFAULT</span></a></li>
 					<li class="dropdown"><a href="#" class="point-hover "><span>COPORATE</span></a></li>
-					<li class="dropdown"><a href="#" class="point-hover "><span>MUSIC</span></a></li>
+					<li class="dropdown"><a href="#" class="point-hover "><span>${dropdown}</span></a></li>
 					<li class="dropdown"><a href="#" class="point-hover "><span>STUDIO</span></a></li>
 					<li class="dropdown"><a href="#" class="point-hover "><span>PAGE</span></a></li>
-					<li class="dropdown"><a href="/board/board.do" class="point-hover dropdown-toggle" data-toggle="dropdown"><span>BOARD</span></a>
+					<li class="dropdown <c:if test="${dropdown == 'board'}"> active </c:if>"><a href="/board/board.do" class="point-hover"><span>BOARD</span></a>
 						<!-- 하위 메뉴 나타낼 경우 사용!! 
 						<ul class="dropdown-menu ss-animated fadeOut">
 							<li class="dropdown"><a href="/display/sum_list" class="point-hover "><span>스케치북 목록형</span></a></li>
