@@ -220,6 +220,21 @@ xe.msg_no_shortcut = "바로가기는 선택 할 수 없습니다.";
 xe.msg_select_menu = "대상 메뉴 선택";
 //]]>
 </script>
+<script type="text/javascript">
+	
+	function comment_delete(idx, idx_no, seq, gap, insert_id){
+		var cust_id = "${sessionScope.userLoginInfo.cust_id}";
+		if(cust_id != insert_id){
+			alert("작성자만 삭제 할 수 있습니다.");
+			return;
+		}else{
+			if(confirm("삭제를 하면 하위를 포함한 댓글 또한 모두 삭제됩니다.")){
+				location.href = "/board/comment_delete.do?idx="+idx+"&idx_no="+idx_no+"&seq="+seq+"&gap="+gap;
+			}
+		}
+	}
+
+</script>
 </head>
 <body>
 	<div id="loader-overflow" >
@@ -374,16 +389,98 @@ xe.msg_select_menu = "대상 메뉴 선택";
 														<strong>댓글 쓰기</strong>
 													</label>
 													<div class="bd_wrt clear">
+													<form action="/board/comment_ok.do" name="board_comment" method="post" class="bd_wrt cmt_wrt clear">
+														<input type="hidden" name="idx" value="${tboard.idx }">
+														<input type="hidden" name="seq_re" value="0">
+														<input type="hidden" name="gap" value="0">
 														<div class="simple_wrt">
 															<span class="profile img no_img">?</span>
 															<div class="text">
-																<a class="cmt_disable bd_login" href="#">댓글 쓰기 권한이 없습니다. 로그인 하시겠습니까?</a>
+																<c:if test="${sessionScope.userLoginInfo == ''}">
+																	<a class="cmt_disable bd_login" href="#">댓글 쓰기 권한이 없습니다. 로그인 하시겠습니까?</a>
+																</c:if>
+																<c:if test="${sessionScope.userLoginInfo != ''}">
+																	<textarea id="comment" name="comment" cols="50" rows="4" style="overflow: hidden; min-height: 4em; height: 52px; width: 100%;"></textarea>
+																	<div class="autogrow-textarea-mirror" style="display: none; word-wrap: break-word; padding: 4px 6px; width: 664px; font-family: &quot;Nanum Barun Gothic&quot;, &quot;Apple SD 산돌고딕 Neo&quot;, &quot;Apple SD Gothic Neo&quot;, 나눔고딕, NanumGothic, ng, &quot;맑은 고딕&quot;, &quot;Malgun Gothic&quot;, sans-serif; font-size: 14px; line-height: 21px;">.<br>.</div>
+																</c:if>
 															</div>
-															<input type="button" value="등록" disabled="disabled" class="bd_btn">
+															<input type="submit" value="등록" class="bd_btn">
 														</div>
+													</form>
 													</div>
 												</div>
-												<div id="cmtPosition" aria-live="polite"></div>
+												<div id="cmtPosition" aria-live="polite">
+													<div class="fdb_tag">
+														<a class="ui_font bubble" href="#" onclick="jQuery(this).parent().nextAll('ul,.bd_pg').slideToggle();return false">
+															Comments <b>'${total_comments}'</b>
+															<span class="wrp" style="margin-left: -27px; bottom: 100%; display: none;">
+																<span class="speech">댓글 보기</span>
+																<i class="edge"></i>
+															</span>
+														</a>
+													</div>
+													<ul class="fdb_lst_ul ">
+													<c:forEach var="tboard_comment_list" items="${tboard_comment_list}">
+														<c:if test="${tboard_comment_list.seq_re != 0}">
+														<li id="comment_${tboard_comment_list.seq}" class="fdb_itm clear re bg1" style="margin-left:${tboard_comment_list.gap}%">
+																<i class="fa fa-share fa-flip-vertical re"></i>
+														</c:if>
+														<c:if test="${tboard_comment_list.seq_re == 0}">
+														<li id="comment_${tboard_comment_list.seq}" class="fdb_itm clear">
+														</c:if>
+															<span class="profile img no_img">?</span>				
+															<div class="meta">
+																<a href="#popup_menu_area" class="member_2097" onclick="return false">${tboard_comment_list.insert_id}</a>
+																<span class="date"><fmt:formatDate value="${tboard_comment_list.insert_date}" pattern="yyyy-MM-dd HH:mm"/></span>
+															</div>
+															<!--BeforeComment(2098,2097)-->
+															<div class="comment_2098_2097 xe_content">${tboard_comment_list.comment}</div>
+															<!--AfterComment(2098,2097)-->			
+															<div class="fdb_nav img_tx">
+																<a class="comment_2098 m_no" href="#popup_menu_area" onclick="return false">
+																	<i class="fa fa-ellipsis-h"></i>이 댓글을
+																</a>						
+																<a href="#">
+																	<i class="fa fa-pencil"></i>수정
+																</a>
+																<a href="#" onclick="comment_delete('${tboard_comment_list.idx}', '${tboard_comment_list.idx_no}', 
+																'${tboard_comment_list.seq}', '${tboard_comment_list.gap}', '${tboard_comment_list.insert_id}'); return false;">
+																	<i class="fa fa-eraser"></i>삭제
+																</a>
+																<a class="re_comment" href="#" onclick="jQuery('#re_cmt_${tboard_comment_list.seq}').fadeIn();return false;">
+																	<i class="fa fa-comment"></i>댓글
+																</a>			
+															</div>
+															<div id="re_cmt_${tboard_comment_list.seq}" style="display: none;">
+																<label for="editor_2" class="cmt_editor_tl fl">
+																	<i class="fa fa-share fa-flip-vertical re"></i>
+																	<strong>댓글 쓰기</strong>
+																</label>
+																<div class="editor_select fr">
+																	<a class="close" href="#" onclick="jQuery('#re_cmt_${tboard_comment_list.seq}').fadeOut().parent().find('.re_comment').focus();return false">
+																		<i class="fa fa-times"></i>닫기
+																	</a>
+																</div>
+																<form action="/board/comment_ok.do" method="post" class="bd_wrt clear" editor_sequence="2">
+																	<input type="hidden" name="idx" value="${tboard_comment_list.idx }">
+																	<input type="hidden" name="seq" value="${tboard_comment_list.seq }">
+																	<input type="hidden" name="idx_no" value="${tboard_comment_list.idx_no }">
+																	<input type="hidden" name="seq_re" value="${tboard_comment_list.seq_re }">
+																	<input type="hidden" name="seq_no" value="${tboard_comment_list.seq_no }">
+																	<input type="hidden" name="gap" value="${tboard_comment_list.gap }">
+																	<div class="simple_wrt">
+																		<textarea id="re_comment_${tboard_comment_list.seq}" name="comment" cols="50" rows="8" style="overflow: hidden; min-height: 8em; height: 2px; width: 100%;"></textarea>
+																		<div class="autogrow-textarea-mirror" style="display: none; word-wrap: break-word; padding: 4px 6px; width: 100%; font-family: &quot;Nanum Barun Gothic&quot;, &quot;Apple SD 산돌고딕 Neo&quot;, &quot;Apple SD Gothic Neo&quot;, 나눔고딕, NanumGothic, ng, &quot;맑은 고딕&quot;, &quot;Malgun Gothic&quot;, sans-serif; font-size: 14px; line-height: 21px;">.<br>.</div>
+																	</div>
+																	<div class="edit_opt">
+																		<input type="submit" value="등록" class="bd_btn fr">
+																	</div>
+																</form>
+															</div>
+														</li>
+													</c:forEach>
+													</ul>
+												</div>
 											</div>
 										</div>
 									</div>

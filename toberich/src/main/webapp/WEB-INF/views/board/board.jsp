@@ -359,19 +359,19 @@ xe.msg_select_menu = "대상 메뉴 선택";
 											</thead>
 											<!-- START :: 게시판 목록 불러오는 부분 -->
 											<tbody>
-												<c:forEach var="board_list" items="${board_list}">
+												<c:forEach var="tboard_list" items="${tboard_list}">
 												<tr>
-													<td class="no">${board_list.idx}</td>
+													<td class="no">${tboard_list.idx}</td>
 													<td class="title">
-														<a href="/board/${board_list.idx}.do" class="hx">
-															${board_list.title}</a> 
+														<a href="/board/${tboard_list.idx}.do" class="hx">
+															${tboard_list.title}</a> 
 														<span class="extraimages"></span>
 													</td>
 													<td class="author">
-														<span>${board_list.author}</span>
+														<span>${tboard_list.author}</span>
 													</td>
-													<td class="time"><fmt:formatDate value="${board_list.insert_date}" pattern="yyyy-MM-dd"/> </td>
-													<td class="m_no">${board_list.hit}</td>
+													<td class="time"><fmt:formatDate value="${tboard_list.insert_date}" pattern="yyyy-MM-dd"/> </td>
+													<td class="m_no">${tboard_list.hit}</td>
 												</tr>
 												</c:forEach>
 											</tbody>
