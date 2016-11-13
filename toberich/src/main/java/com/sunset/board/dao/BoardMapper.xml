@@ -36,10 +36,11 @@
     </select>
 
     <insert id="insertBoard">
-         INSERT INTO TBOARD ( title, author, content ) VALUES (
+         INSERT INTO TBOARD ( title, author, content, insert_id ) VALUES (
                 #{title}
               , #{author}
               , #{content}
+              , #{insert_id}
          )
     </insert>
 

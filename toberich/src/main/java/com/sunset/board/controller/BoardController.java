@@ -140,20 +140,25 @@ public class BoardController {
     	Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
     	
     	int idx 	= tboard_comment.getIdx();
-    	int seq 	= tboard_comment.getSeq();
-    	int idx_no	= tboard_comment.getIdx_no();
     	int seq_re	= tboard_comment.getSeq_re();
-    	int seq_no 	= tboard_comment.getSeq_no();
     	int gap 	= tboard_comment.getGap();
     	
-    	System.out.println("idx : " + idx + ", seq : " + seq + ", seq_re : " + seq_re + ", seq_no : " + seq_no + ", gap : " + gap);
-    	
-    	if("0".equals(seq_re) || "".equals(seq_re)){ //가장 최상위 댓글일 경우
+    	if(seq_re == 0){ //가장 최상위 댓글일 경우
     		Integer maxSeqNo = this.boardService.maxSeqNo(idx);
+    		if(maxSeqNo == null){
+    			maxSeqNo = 0;
+    		}
     		Integer maxIdxNo = this.boardService.maxIdxNo(idx);
+    		if(maxIdxNo == null){
+    			maxIdxNo = 0;
+    		}
     		tboard_comment.setSeq_no(maxSeqNo + 1);
     		tboard_comment.setIdx_no(maxIdxNo + 1);
+    		tboard_comment.setGap(0);
     	}else{
+    		int seq = tboard_comment.getSeq();
+    		int idx_no	= tboard_comment.getIdx_no();
+    		int seq_no 	= tboard_comment.getSeq_no();
     		Integer max_seq_no = this.boardService.maxSeqReNo(idx, idx_no, seq, gap); //댓글 쓰려는 곳 중에 마지막 번호
     		if(max_seq_no != null){
     			seq_no = max_seq_no;
