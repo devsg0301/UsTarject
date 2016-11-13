@@ -465,7 +465,7 @@ xe.msg_select_menu = "대상 메뉴 선택";
 																	<input type="hidden" name="idx" value="${tboard_comment_list.idx }">
 																	<input type="hidden" name="seq" value="${tboard_comment_list.seq }">
 																	<input type="hidden" name="idx_no" value="${tboard_comment_list.idx_no }">
-																	<input type="hidden" name="seq_re" value="${tboard_comment_list.seq_re }">
+																	<input type="hidden" name="seq_re" value="${tboard_comment_list.seq }">
 																	<input type="hidden" name="seq_no" value="${tboard_comment_list.seq_no }">
 																	<input type="hidden" name="gap" value="${tboard_comment_list.gap }">
 																	<div class="simple_wrt">
