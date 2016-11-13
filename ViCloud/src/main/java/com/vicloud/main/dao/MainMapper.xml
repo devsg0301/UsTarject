@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunset.main.dao.MainMapper">
+
+    <resultMap id="customerMap" type="com.sunset.model.Tcustomer">
+        <id     property="cust_no" 		column="cust_no" />
+        <result property="cust_id"		column="cust_id" />
+        <result property="password"  	column="password" />
+        <result property="cust_name"	column="cust_name" />
+        <result property="email"		column="email" />
+        <result property="HP"			column="HP" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+    </resultMap>
+
+    <select id="getCustomer" resultMap="customerMap">
+        SELECT * 
+          FROM TCUSTOMER
+         WHERE 1=1
+           AND (EMAIL = #{param1}
+            	OR CUST_ID = #{param1})
+           AND PASSWORD = #{param2}
+    </select>
+    
+</mapper>

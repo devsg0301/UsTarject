@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunset.board.dao.BoardMapper">
+
+    <resultMap id="boardMap" 			type="com.sunset.model.Tboard">
+        <id     property="idx"    		column="idx" />
+        <result property="title"		column="title" />
+        <result property="author"		column="author" />
+        <result property="content"  	column="content" />
+        <result property="hit"			column="hit" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="insert_id"	column="insert_id" />
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="board_commentMap" 	type="com.sunset.model.Tboard_comment">
+        <id     property="idx"    		column="idx" />
+        <result property="seq"			column="seq" />
+        <result property="comment"  	column="comment" />
+        <result property="author"		column="author" />
+        <result property="insert_id"	column="insert_id" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="idx_no"		column="idx_no" />
+        <result property="seq_re"		column="seq_re" />
+        <result property="seq_no"		column="seq_no" />
+        <result property="gap"			column="gap" />
+    </resultMap>
+
+    <select id="boardList" resultMap="boardMap">
+        SELECT  * FROM TBOARD
+    </select>
+
+    <select id="selectOne" resultMap="boardMap">
+        SELECT  * FROM TBOARD WHERE idx = #{idx}
+    </select>
+
+    <insert id="insertBoard">
+         INSERT INTO TBOARD ( title, author, content ) VALUES (
+                #{title}
+              , #{author}
+              , #{content}
+         )
+    </insert>
+
+    <update id="updateBoard">
+         UPDATE TBOARD SET
+              title = #{title},
+              content = #{content},
+              modify_date = SYSDATE()
+         WHERE idx = #{idx} LIMIT 1
+    </update>
+
+    <delete id="deleteBoard">
+         DELETE FROM TBOARD WHERE idx = #{idx}
+    </delete>
+
+	<select id="boardCommentList" resultMap="board_commentMap">
+		SELECT * 
+		  FROM TBOARD_COMMENT 
+		 WHERE idx = #{idx}
+      ORDER BY seq_no
+	</select>
+	
+	<select id="maxSeqNo" resultType="Integer">
+		SELECT MAX(SEQ_NO) 
+		  FROM TBOARD_COMMENT 
+		 WHERE idx = #{idx}
+	</select>
+
+	<select id="maxIdxNo" resultType="Integer">
+		SELECT MAX(IDX_NO) 
+		  FROM TBOARD_COMMENT 
+		 WHERE idx = #{idx}
+	</select>
+
+	<select id="maxSeqReNo" resultType="Integer">
+		SELECT MAX(SEQ_NO) 
+		  FROM TBOARD_COMMENT 
+		 WHERE idx = #{param1}
+		   AND idx_no = #{param2} 
+		   AND seq_re &gt;= #{param3}
+		   AND gap &gt; #{param4}
+	</select>
+	
+	<update id="updateSeqNo">
+		UPDATE TBOARD_COMMENT
+		   SET seq_no = seq_no + 1
+		 WHERE idx = #{param1}
+		   AND seq_no &gt; #{param2}
+	</update>
+
+	<insert id="insertBoardComment">
+		INSERT INTO TBOARD_COMMENT (idx, comment, author, insert_id, idx_no, seq_re, seq_no, gap) VALUES (
+				#{idx},
+				#{comment},
+				#{author},
+				#{insert_id},
+				#{idx_no},
+				#{seq_re},
+				#{seq_no},
+				#{gap}
+		)
+	</insert>
+	
+	<delete id="deleteBoardComment">
+		DELETE 
+		  FROM TBOARD_COMMENT
+		 WHERE seq = #{param1}
+		   AND insert_id = #{param2} 
+	</delete>
+
+	<delete id="deleteBoardReComment">
+		DELETE 
+		  FROM TBOARD_COMMENT
+		 WHERE idx = #{param1}
+		   AND idx_no = #{param2}
+		   AND seq_re &gt;= #{param3}
+		   and gap &gt; #{param4} 
+	</delete>
+</mapper>
