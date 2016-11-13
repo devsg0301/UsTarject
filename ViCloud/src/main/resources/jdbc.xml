@@ -8,8 +8,8 @@
 <!-- 
 <entry key="jdbc.url">jdbc:mysql://39.125.133.27:3306/ustarject</entry>
 -->
-<entry key="jdbc.url">jdbc:mysql://localhost:3307/ustarject</entry> 
-<entry key="jdbc.username">root</entry>
-<entry key="jdbc.password">1234</entry>
+<entry key="jdbc.url">jdbc:mysql://localhost:3306/ustarject</entry> 
+<entry key="jdbc.username">UsTarject</entry>
+<entry key="jdbc.password">tarject1009</entry>
 
 </properties>

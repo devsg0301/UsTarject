@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunset.cust.dao.CustMapper">
+<mapper namespace="com.vicloud.cust.dao.CustMapper">
 
-    <resultMap id="customerMap" type="com.sunset.model.Tcustomer">
+    <resultMap id="customerMap" type="com.vicloud.model.Tcustomer">
         <id     property="cust_no" 		column="cust_no" />
         <result property="cust_id"		column="cust_id" />
         <result property="password"  	column="password" />

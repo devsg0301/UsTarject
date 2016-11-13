@@ -27,11 +27,11 @@ public class MainController {
 	// 메인페이지 이동
 	@RequestMapping(value = "/defaults/main.do", method = RequestMethod.GET)
 	public String displayMain(HttpSession session, Model model){
-		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-			logger.info("You don't login.");
-			System.out.println("You don't login.");
-			return "defaults/login";
-		}
+//		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+//			logger.info("You don't login.");
+//			System.out.println("You don't login.");
+//			return "defaults/login";
+//		}
 		logger.info("main page start");
 		System.out.println("main page start");
 		model.addAttribute("dropdown", "main");

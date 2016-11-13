@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sunset.board.dao.BoardMapper">
+<mapper namespace="com.vicloud.board.dao.BoardMapper">
 
-    <resultMap id="boardMap" 			type="com.sunset.model.Tboard">
+    <resultMap id="boardMap" 			type="com.vicloud.model.Tboard">
         <id     property="idx"    		column="idx" />
         <result property="title"		column="title" />
         <result property="author"		column="author" />
@@ -13,7 +13,7 @@
         <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
     </resultMap>
     
-    <resultMap id="board_commentMap" 	type="com.sunset.model.Tboard_comment">
+    <resultMap id="board_commentMap" 	type="com.vicloud.model.Tboard_comment">
         <id     property="idx"    		column="idx" />
         <result property="seq"			column="seq" />
         <result property="comment"  	column="comment" />
