@@ -28,7 +28,7 @@
     </resultMap>
 
     <select id="boardList" resultMap="boardMap">
-        SELECT  * FROM TBOARD
+        SELECT  * FROM TBOARD 
     </select>
 
     <select id="selectOne" resultMap="boardMap">
