@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.vicloud.board.service.BoardService;
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
+import com.vicloud.model.Tbroadcast;
 import com.vicloud.model.Tcustomer;
 
 @Controller
@@ -29,6 +30,104 @@ public class BoardController {
 	@Resource(name="boardService")
 	private BoardService boardService;
 	
+	// 블로그 이동
+	@RequestMapping(value = "/blog/blog-home.do", method = RequestMethod.GET)
+	public String displayBlog(HttpSession session, Model model){
+		logger.info("main page start");
+		System.out.println("start page blog-home");
+		
+		List<Tbroadcast> broadcastList = this.boardService.getBroadcastList();
+		
+		model.addAttribute("broadcastList", broadcastList);
+		model.addAttribute("dropdown", "blog");
+		
+		return "blog/blog-home";
+	}
+	
+	// 게시판 상세보기
+    // PathVariable 어노테이션을 이용하여 RESTful 방식 적용
+    // board/1 -> id = 1; id = 게시물 번호로 인식함.
+    // 일반 적으로 (@ReuqstParam(value = "board", required = false, defaultValue = "0"), int idx, Model model)
+    @RequestMapping("/blog/{idx}.do")
+    public String displayBlogDetailView(@PathVariable int idx, Model model, HttpSession session) {
+        logger.info("display view Board view idx = {}", idx);
+        System.out.println("display view Board view idx = " + idx);
+        
+//		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+//			logger.info("You don't login.");
+//			System.out.println("You don't login.");
+//			return "defaults/login";
+//		}
+        Tbroadcast broadcastDetail = this.boardService.broadcastDetail(idx);
+        
+        //List<Tboard_comment> tboard_comment_list = this.boardService.boardCommentList(idx); // 댓글 보기
+
+        model.addAttribute("broadcastDetail", broadcastDetail);
+        //model.addAttribute("tboard_comment_list", tboard_comment_list);
+        //model.addAttribute("total_comments", tboard_comment_list.size());
+        model.addAttribute("dropdown", "blog");
+        return "blog/blog-post";
+    }
+    
+    // 게시판 쓰기 폼
+    @RequestMapping(value = "/blog/blog-add.do", method = RequestMethod.GET)
+    public String displayBoardAdd(@RequestParam(value="idx", defaultValue="0") int idx, Model model, HttpSession session) {
+        logger.info("display view Board add");
+        System.out.println("display view Board add");
+        
+//        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+//			logger.info("You don't login.");
+//			System.out.println("You don't login.");
+//			return "defaults/login";
+//		}
+
+        if (idx > 0) { // 수정하기를 눌렀을 경우
+        	logger.info("display view Board modify");
+        	System.out.println("display view Board modify");
+        	Tbroadcast broadcast = this.boardService.getSelectBroadcast(idx);
+            model.addAttribute("broadcast", broadcast);
+        }
+        model.addAttribute("dropdown", "blog");
+
+        return "blog/blog-add";
+    }
+    
+    // 게시판 쓰기 저장
+    @RequestMapping(value = "/blog/add_ok.do", method = RequestMethod.POST)
+    public String procBoardAdd(@ModelAttribute("tbroadcast") Tbroadcast tbroadcast, RedirectAttributes redirectAttributes, HttpSession session) {
+    	logger.info("display view Board write_ok");
+        System.out.println("display view Board write_ok");
+        
+//        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+//        
+//        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+//			logger.info("You don't login.");
+//			System.out.println("You don't login.");
+//			return "defaults/login";
+//		}
+        
+        Integer idx = tbroadcast.getIdx();
+        tbroadcast.setGrade("all");
+        tbroadcast.setUrl("http://vicloud.gq:8081/LocalUser/data/"+tbroadcast.getCategory()+"/"+tbroadcast.getGenre() + "/" + tbroadcast.getFilename());
+        
+        System.out.println(tbroadcast.getGenre());
+        
+        if (idx == null || idx == 0) { //새로입력
+            this.boardService.insertBroadcast(tbroadcast);
+            redirectAttributes.addFlashAttribute("message", "추가되었습니다.");
+            System.out.println("Sucess Board insert");
+            return "redirect:/blog/blog-home.do";
+        } else { //수정
+            this.boardService.updateBroadcast(tbroadcast);
+            redirectAttributes.addFlashAttribute("message", "수정되었습니다.");
+            System.out.println("Sucess Board modify");
+            return "redirect:/blog/blog-home.do";
+        }
+    }
+    
+/* 
+ * ************************************************************************************************************
+ * */
 	// 메인페이지 이동
 	@RequestMapping(value = "/board/board.do", method = RequestMethod.GET)
 	public String displayMain(HttpSession session, Model model){

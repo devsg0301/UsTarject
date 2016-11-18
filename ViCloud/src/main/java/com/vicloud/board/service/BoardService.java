@@ -4,11 +4,22 @@ import java.util.List;
 
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
+import com.vicloud.model.Tbroadcast;
 
 public interface BoardService {
 	
-	public List<Tboard> getBoardList();
+	public List<Tbroadcast> getBroadcastList();
+	
+	public Tbroadcast broadcastDetail(int idx);
+	
+	public Tbroadcast getSelectBroadcast(int idx);
 
+	public void insertBroadcast(Tbroadcast tbroadcast);
+	
+	public void updateBroadcast(Tbroadcast tbroadcast);
+
+	public List<Tboard> getBoardList();
+	
 	public Tboard getSelectOne(int idx);
 
 	public void insertBoard(Tboard tboard);
@@ -32,5 +43,7 @@ public interface BoardService {
 	public void deleteBoardComment(int seq, String insert_id);
 	
 	public void deleteBoardReComment(int idx, int idx_no, int seq, int gap);
+
+
 
 }

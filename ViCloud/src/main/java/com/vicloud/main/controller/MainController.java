@@ -32,9 +32,9 @@ public class MainController {
 //			System.out.println("You don't login.");
 //			return "defaults/login";
 //		}
-		logger.info("main page start");
-		System.out.println("main page start");
-		model.addAttribute("dropdown", "main");
+		logger.info("start page main");
+		System.out.println("start page main");
+		//model.addAttribute("dropdown", "main");
 		
 		return "defaults/main";
 	}

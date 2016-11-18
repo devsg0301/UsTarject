@@ -8,11 +8,32 @@ import org.springframework.stereotype.Service;
 
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
+import com.vicloud.model.Tbroadcast;
 
 @Service(value = "boardDao")
 public class BoardDao {
     @Resource(name = "boardMapper")
     private BoardMapper boardMapper;
+    
+    public List<Tbroadcast> getBroadcastList(){
+    	return this.boardMapper.broadcastList();
+    }
+
+    public Tbroadcast broadcastDetail(int idx){
+    	return this.boardMapper.broadcastDetail(idx);
+    }
+    
+    public Tbroadcast getSelectBroadcast(int idx) {
+    	return this.boardMapper.getSelectBroadcast(idx);
+    }
+    
+    public void insertBroadcast(Tbroadcast tbroadcast) {
+    	this.boardMapper.insertBroadcast(tbroadcast);
+    }
+    
+    public void updateBroadcast(Tbroadcast tbroadcast) {
+    	this.boardMapper.insertBroadcast(tbroadcast);
+    }
 
     public List<Tboard> getBoardList() {
         return this.boardMapper.boardList();
@@ -65,4 +86,6 @@ public class BoardDao {
     public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
     	this.boardMapper.deleteBoardReComment(idx, idx_no, seq, gap);
     }
+
+
 }

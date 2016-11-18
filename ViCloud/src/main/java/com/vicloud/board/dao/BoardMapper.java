@@ -6,9 +6,17 @@ import org.springframework.stereotype.Repository;
 
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
+import com.vicloud.model.Tbroadcast;
 
 @Repository(value = "boardMapper")
 public interface BoardMapper {
+	
+	List<Tbroadcast> broadcastList();
+	Tbroadcast broadcastDetail(int idx);
+	Tbroadcast getSelectBroadcast(int idx);
+	void insertBroadcast(Tbroadcast tbroadcast);
+	void updateBroadcast(Tbroadcast tbroadcast);
+	
 	List<Tboard> boardList();
     Tboard selectOne(int idx);
     void insertBoard(Tboard tboard);

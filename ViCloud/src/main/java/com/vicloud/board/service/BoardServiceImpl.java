@@ -9,12 +9,33 @@ import org.springframework.stereotype.Service;
 import com.vicloud.board.dao.BoardDao;
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
+import com.vicloud.model.Tbroadcast;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	
 	@Resource(name="boardDao")
 	private BoardDao boardDao;
+	
+	public List<Tbroadcast> getBroadcastList() {
+		return boardDao.getBroadcastList();
+	}
+	
+	public Tbroadcast broadcastDetail(int idx){
+		return boardDao.broadcastDetail(idx);
+	}
+	
+	public Tbroadcast getSelectBroadcast(int idx) {
+		return boardDao.getSelectBroadcast(idx);
+	}
+	
+	public void insertBroadcast(Tbroadcast tbroadcast){
+		boardDao.insertBroadcast(tbroadcast);
+	}
+	
+	public void updateBroadcast(Tbroadcast tbroadcast){
+		boardDao.insertBroadcast(tbroadcast);
+	}
 	
 	public List<Tboard> getBoardList(){
 		return boardDao.getBoardList();
@@ -67,5 +88,6 @@ public class BoardServiceImpl implements BoardService{
 	public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
 		boardDao.deleteBoardReComment(idx, idx_no, seq, gap);
 	}
+
 	
 }
