@@ -12,8 +12,8 @@
 <script type="text/javascript">
 
 $(function () {
-	$("#category").val($("#select_category").val());
-	$("#genre").val($("#select_genre").val());
+	$("#category").val("TV");
+	$("#genre").val("드라마");
 	
 	$("#select_category").change(function(){
 	    $("#category").val($(this).val());
@@ -21,12 +21,16 @@ $(function () {
 	    $("#select_genre").html("");
 	    if($(this).val() == "TV"){
 	    	$("#select_genre").html("<option>드라마</option>"+"<option>예능</option>"+"<option>액션</option>");
+	    	$("#genre").val("드라마");
 	    }else if($(this).val() == "MOVIE"){
 	    	$("#select_genre").html("<option>액션</option>"+"<option>드라마</option>"+"<option>SF</option>"+"<option>멜로</option>");
+	    	$("#genre").val("액션");
 	    }else if($(this).val() == "INTERNET"){
 	    	$("#select_genre").html("<option>CF</option>"+"<option>뮤비</option>"+"<option>게임</option>");
+	    	$("#genre").val("CF");
 	    }else if($(this).val() == "ETC"){
 	    	$("#select_genre").html("<option>ETC</option>");
+	    	$("#genre").val("ETC");
 	    }
 	});
 	$("#select_genre").change(function(){
@@ -93,6 +97,9 @@ $(function () {
                         <div class="controls">
                             <label>장르:</label>
                             <select class="form-control" id="select_genre">
+                            	<option>드라마</option>
+								<option>예능</option>
+								<option>액션</option>
 							</select>
                             <input type="hidden" class="form-control" id="genre" name="genre" value="${broadcast.genre}" required data-validation-required-message="Please enter gemre.">
                         </div>
@@ -100,7 +107,7 @@ $(function () {
                     <div class="control-group form-group">
                         <div class="controls">
                             <label>파일명:</label>
-                            <input type="text" class="form-control" id="genre" name="genre" value="${broadcast.filename}" required data-validation-required-message="Please enter Filename.">
+                            <input type="text" class="form-control" id="filename" name="filename" value="${broadcast.filename}" required data-validation-required-message="Please enter Filename.">
                         </div>
                     </div>
                     

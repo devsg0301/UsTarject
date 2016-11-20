@@ -108,7 +108,7 @@ public class BoardController {
         
         Integer idx = tbroadcast.getIdx();
         tbroadcast.setGrade("all");
-        tbroadcast.setUrl("http://vicloud.gq:8081/LocalUser/data/"+tbroadcast.getCategory()+"/"+tbroadcast.getGenre() + "/" + tbroadcast.getFilename());
+        tbroadcast.setUrl("http://39.125.133.27:8081/LocalUser/data/"+tbroadcast.getCategory()+"/"+tbroadcast.getGenre() + "/" + tbroadcast.getFilename());
         
         System.out.println(tbroadcast.getGenre());
         

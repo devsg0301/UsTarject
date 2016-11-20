@@ -40,7 +40,9 @@
     </resultMap>
     
     <select id="broadcastList" resultMap="broadcastMap">
-    	SELECT * FROM TBROADCAST
+    	SELECT * 
+    	  FROM TBROADCAST
+      ORDER BY INSERT_DATE DESC
     </select>
     
     <select id="broadcastDetail" resultMap="broadcastMap">
