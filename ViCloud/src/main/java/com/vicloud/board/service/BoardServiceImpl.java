@@ -17,8 +17,11 @@ public class BoardServiceImpl implements BoardService{
 	@Resource(name="boardDao")
 	private BoardDao boardDao;
 	
-	public List<Tbroadcast> getBroadcastList() {
-		return boardDao.getBroadcastList();
+	public List<Tbroadcast> getBroadcastList(int rnum) {
+		return boardDao.getBroadcastList(rnum);
+	}
+	public Integer totalBroadcast() {
+		return boardDao.totalBroadcast();
 	}
 	
 	public Tbroadcast broadcastDetail(int idx){
@@ -88,6 +91,7 @@ public class BoardServiceImpl implements BoardService{
 	public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
 		boardDao.deleteBoardReComment(idx, idx_no, seq, gap);
 	}
+
 
 	
 }

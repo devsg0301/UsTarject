@@ -23,6 +23,9 @@ video{
 }
 </style>
 
+<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet" />
+<script src="http://vjs.zencdn.net/c/video.js"></script>
+
 <script type="text/javascript">
 
 	function vidEvent() {
@@ -58,7 +61,7 @@ video{
                 <ol class="breadcrumb">
                     <li><a href="/defaults/main.do">Home</a>
                     </li>
-                    <li class="active">Blog Post</li>
+                    <li class="active">Blog View</li>
                 </ol>
             </div>
         </div>
@@ -69,27 +72,29 @@ video{
 
 			<!-- Blog Sidebar Widgets Column -->
 
-            <!-- Blog Post Content Column -->
+            <!-- Blog View Content Column -->
             <div class="col-lg-8" style="width: 100%;">
 
-                <!-- Blog Post -->
+                <!-- Blog View -->
 
                 <hr>
 
                 <!-- Date/Time -->
-                <p><i class="fa fa-clock-o"></i> Posted on <fmt:formatDate value="${broadcastDetail.insert_date}" pattern="yyyy-MM-dd HH:dd"/></p>
+                <p><i class="fa fa-clock-o"></i> Viewed on <fmt:formatDate value="${broadcastDetail.insert_date}" pattern="yyyy-MM-dd HH:dd"/></p>
 
                 <hr>
 
                 <!-- Preview Image -->
                 <div class="col-video">
 	      			<video width="680" height="430" controls>
-	      				<source src="${broadcastDetail.url}"/>
+	      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}"/>
+	      				
+			   			<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}" srclang="ko" label="Korean" default/>
 	      			</video>
       			</div>
                 <hr>
 
-                <!-- Post Content -->
+                <!-- View Content -->
 
                 <hr>
 
@@ -108,7 +113,7 @@ video{
 
                 <hr>
 
-                <!-- Posted Comments -->
+                <!-- Viewed Comments -->
 
                 <!-- Comment -->
                 <div class="media">

@@ -15,8 +15,12 @@ public class BoardDao {
     @Resource(name = "boardMapper")
     private BoardMapper boardMapper;
     
-    public List<Tbroadcast> getBroadcastList(){
-    	return this.boardMapper.broadcastList();
+    public List<Tbroadcast> getBroadcastList(int rnum){
+    	return this.boardMapper.broadcastList(rnum);
+    }
+
+    public Integer totalBroadcast() {
+    	return this.boardMapper.totalBroadcast();
     }
 
     public Tbroadcast broadcastDetail(int idx){
@@ -86,6 +90,7 @@ public class BoardDao {
     public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
     	this.boardMapper.deleteBoardReComment(idx, idx_no, seq, gap);
     }
+
 
 
 }

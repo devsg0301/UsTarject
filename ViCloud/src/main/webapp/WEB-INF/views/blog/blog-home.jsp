@@ -98,22 +98,26 @@
             <!-- Blog Entries Column -->
             <div class="col-md-8">
 				<c:forEach var="broadcastList" items="${broadcastList}">
-		         	<!-- First Blog Post -->
-		        	<h3>
+		         	<!-- First Blog View -->
+		        	<h4>
 		            	<a href="/blog/${broadcastList.idx}.do">${broadcastList.title }</a>
-	            	</h3>
-	            	<p><i class="fa fa-clock-o"></i> Posted on <fmt:formatDate value="${broadcastList.insert_date}" pattern="yyyy-MM-dd"/></p>
+	            	</h4>
+	            	<p><i class="fa fa-clock-o"></i> Viewed on <fmt:formatDate value="${broadcastList.insert_date}" pattern="yyyy-MM-dd"/></p>
 					<hr>
 				</c:forEach>
 
                 <!-- Pager -->
                 <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
+                	<c:if test="${prev != 0 }">
+	                    <li class="previous">
+	                        <a href="/blog/blog-home.do?rnum=${prev }">&larr; Prev</a>
+	                    </li>
+                    </c:if>
+                    <c:if test="${next != 0 }">
+	                    <li class="next">
+	                        <a href="/blog/blog-home.do?rnum=${next }">Next &rarr;</a>
+	                    </li>
+	                </c:if>
                 </ul>
 
             </div>

@@ -32,13 +32,34 @@ public class BoardController {
 	
 	// 블로그 이동
 	@RequestMapping(value = "/blog/blog-home.do", method = RequestMethod.GET)
-	public String displayBlog(HttpSession session, Model model){
+	public String displayBlog(@RequestParam(value="rnum", defaultValue="1") int rnum, HttpSession session, Model model){
 		logger.info("main page start");
 		System.out.println("start page blog-home");
+		int totalBroadcast = 0;
+		int prev = 0;
+		int next = 0;
+
+		System.out.println("rnum : " + rnum);
 		
-		List<Tbroadcast> broadcastList = this.boardService.getBroadcastList();
+		List<Tbroadcast> broadcastList = this.boardService.getBroadcastList((rnum * 10) - 9);
+		totalBroadcast = boardService.totalBroadcast();
 		
+		if(rnum > 1){
+			prev = rnum - 1;
+		}
+		if(rnum < totalBroadcast / 10 ){
+			next = rnum + 1;
+		}else if(rnum == totalBroadcast / 10){
+			if(totalBroadcast % 10 > 0){
+				next = rnum + 1;
+			}
+		}
+		System.out.println("prev : " + prev + ", next : " + next);
 		model.addAttribute("broadcastList", broadcastList);
+		model.addAttribute("totalBroadcast", totalBroadcast);
+		model.addAttribute("rnum", rnum);
+		model.addAttribute("prev", prev);
+		model.addAttribute("next", next);
 		model.addAttribute("dropdown", "blog");
 		
 		return "blog/blog-home";
@@ -66,7 +87,7 @@ public class BoardController {
         //model.addAttribute("tboard_comment_list", tboard_comment_list);
         //model.addAttribute("total_comments", tboard_comment_list.size());
         model.addAttribute("dropdown", "blog");
-        return "blog/blog-post";
+        return "blog/blog-view";
     }
     
     // 게시판 쓰기 폼
@@ -105,12 +126,12 @@ public class BoardController {
 //			System.out.println("You don't login.");
 //			return "defaults/login";
 //		}
+        int nFileIndex = tbroadcast.getFilename().lastIndexOf(".");
         
         Integer idx = tbroadcast.getIdx();
-        tbroadcast.setGrade("all");
-        tbroadcast.setUrl("http://39.125.133.27:8081/LocalUser/data/"+tbroadcast.getCategory()+"/"+tbroadcast.getGenre() + "/" + tbroadcast.getFilename());
+        tbroadcast.setFile_url(tbroadcast.getCategory() + "/" + tbroadcast.getFoldername() + "/" + tbroadcast.getFilename());
         
-        System.out.println(tbroadcast.getGenre());
+        tbroadcast.setSub_url(tbroadcast.getFilename().substring(0, nFileIndex)+".vtt");
         
         if (idx == null || idx == 0) { //새로입력
             this.boardService.insertBroadcast(tbroadcast);

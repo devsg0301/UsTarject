@@ -9,7 +9,8 @@
         <result property="title"		column="title" />
         <result property="grade"		column="grade" />
         <result property="filename"		column="filename" />
-        <result property="url"	  		column="url" />
+        <result property="file_url"	  	column="file_url" />
+        <result property="sub_url"	  	column="sub_url" />
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="hit"			column="hit" />
     </resultMap>
@@ -40,9 +41,39 @@
     </resultMap>
     
     <select id="broadcastList" resultMap="broadcastMap">
-    	SELECT * 
+    	SELECT STEP_TWO.*                                                             
+		  FROM( SELECT STEP_ONE.*                                                           
+				  FROM( SELECT @ROWNUM:=@ROWNUM+1 AS RNUM,                                                  
+				               XA.*                                                                              
+				          FROM( SELECT (SELECT COUNT(*) FROM TBROADCAST) AS TOTAL_COUNT,
+				                       IDX,
+				                       CATEGORY,
+				                       GENRE,
+				                       TITLE,
+				                       GRADE,
+				                       FILENAME,
+				                       FILE_URL,
+				                       SUB_URL,
+				                       INSERT_DATE,
+				                       HIT
+				                  FROM TBROADCAST
+				                 WHERE 1=1
+				              ORDER BY INSERT_DATE DESC
+				              ) XA,
+				                (SELECT @ROWNUM:=0) TMP
+				         WHERE 1=1
+				      ORDER BY XA.IDX DESC
+				       ) STEP_ONE                                                              
+				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 9                                                  
+			   ) STEP_TWO                                                                  
+		 WHERE STEP_TWO.RNUM &gt;= #{param1}                                                    
+      ORDER BY RNUM    
+    </select>
+    
+    <select id="totalBroadcast" resultType="Integer">
+    	SELECT COUNT(*)
     	  FROM TBROADCAST
-      ORDER BY INSERT_DATE DESC
+    	 WHERE 1=1
     </select>
     
     <select id="broadcastDetail" resultMap="broadcastMap">
@@ -58,13 +89,14 @@
     </select>
     
     <insert id="insertBroadcast">
-         INSERT INTO TBROADCAST ( category, genre, title, grade, filename, url ) VALUES (
+         INSERT INTO TBROADCAST ( category, genre, title, grade, filename, file_url, sub_url ) VALUES (
                 #{category}
               , #{genre}
               , #{title}
               , #{grade}
               , #{filename}
-              , #{url}
+              , #{file_url}
+              , #{sub_url}
          )
     </insert>
     

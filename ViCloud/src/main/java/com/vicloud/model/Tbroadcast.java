@@ -9,11 +9,14 @@ public class Tbroadcast {
 	private String title;
 	private String grade;
 	private String filename;
-	private String url;
+	private String file_url;
+	private String sub_url;
 	private Date insert_date;
 	private String insert_id;
 	private Date modify_date;
+	private String foldername;
 	private int hit;
+	private int total_count;
 	
 	public Integer getIdx() {
 		return idx;
@@ -51,11 +54,17 @@ public class Tbroadcast {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	public String getUrl() {
-		return url;
+	public String getFile_url() {
+		return file_url;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setFile_url(String file_url) {
+		this.file_url = file_url;
+	}
+	public String getSub_url() {
+		return sub_url;
+	}
+	public void setSub_url(String sub_url) {
+		this.sub_url = sub_url;
 	}
 	public Date getInsert_date() {
 		return insert_date;
@@ -80,6 +89,18 @@ public class Tbroadcast {
 	}
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+	public int getTotal_count() {
+		return total_count;
+	}
+	public void setTotal_count(int total_count) {
+		this.total_count = total_count;
+	}
+	public String getFoldername() {
+		return foldername;
+	}
+	public void setFoldername(String foldername) {
+		this.foldername = foldername;
 	}
 	
 }

@@ -11,7 +11,8 @@ import com.vicloud.model.Tbroadcast;
 @Repository(value = "boardMapper")
 public interface BoardMapper {
 	
-	List<Tbroadcast> broadcastList();
+	List<Tbroadcast> broadcastList(int rnum);
+	Integer totalBroadcast();
 	Tbroadcast broadcastDetail(int idx);
 	Tbroadcast getSelectBroadcast(int idx);
 	void insertBroadcast(Tbroadcast tbroadcast);

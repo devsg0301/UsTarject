@@ -14,6 +14,7 @@
 $(function () {
 	$("#category").val("TV");
 	$("#genre").val("드라마");
+	$("#grade").val("전체");
 	
 	$("#select_category").change(function(){
 	    $("#category").val($(this).val());
@@ -23,7 +24,7 @@ $(function () {
 	    	$("#select_genre").html("<option>드라마</option>"+"<option>예능</option>"+"<option>액션</option>");
 	    	$("#genre").val("드라마");
 	    }else if($(this).val() == "MOVIE"){
-	    	$("#select_genre").html("<option>액션</option>"+"<option>드라마</option>"+"<option>SF</option>"+"<option>멜로</option>");
+	    	$("#select_genre").html("<option>액션</option>"+"<option>모험</option>"+"<option>판타지</option>"+"<option>드라마</option>"+"<option>SF</option>"+"<option>멜로</option>");
 	    	$("#genre").val("액션");
 	    }else if($(this).val() == "INTERNET"){
 	    	$("#select_genre").html("<option>CF</option>"+"<option>뮤비</option>"+"<option>게임</option>");
@@ -35,6 +36,9 @@ $(function () {
 	});
 	$("#select_genre").change(function(){
 	    $("#genre").val($(this).val());
+	});
+	$("#select_grade").change(function(){
+	    $("#grade").val($(this).val());
 	});
 });
 </script>
@@ -101,7 +105,26 @@ $(function () {
 								<option>예능</option>
 								<option>액션</option>
 							</select>
-                            <input type="hidden" class="form-control" id="genre" name="genre" value="${broadcast.genre}" required data-validation-required-message="Please enter gemre.">
+                            <input type="hidden" class="form-control" id="genre" name="genre" value="${broadcast.genre}" required data-validation-required-message="Please enter genre.">
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>등급:</label>
+                            <select class="form-control" id="select_grade">
+                            	<option>전체</option>
+								<option>19</option>
+								<option>15</option>
+								<option>12</option>
+								<option>7</option>
+							</select>
+                            <input type="hidden" class="form-control" id="grade" name="grade" value="${broadcast.grade}" required data-validation-required-message="Please enter grade.">
+                        </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>폴더명:</label>
+                            <input type="text" class="form-control" id="foldername" name="foldername" value="" required data-validation-required-message="Please enter Foldername.">
                         </div>
                     </div>
                     <div class="control-group form-group">
