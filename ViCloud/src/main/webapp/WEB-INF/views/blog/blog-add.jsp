@@ -18,13 +18,14 @@ $(function () {
 	
 	$("#select_category").change(function(){
 	    $("#category").val($(this).val());
-	    
 	    $("#select_genre").html("");
 	    if($(this).val() == "TV"){
-	    	$("#select_genre").html("<option>드라마</option>"+"<option>예능</option>"+"<option>액션</option>");
+	    	$("#select_genre").html("<option>드라마</option>"+"<option>예능</option>"+"<option>스포츠</option>");
 	    	$("#genre").val("드라마");
 	    }else if($(this).val() == "MOVIE"){
-	    	$("#select_genre").html("<option>액션</option>"+"<option>모험</option>"+"<option>판타지</option>"+"<option>드라마</option>"+"<option>SF</option>"+"<option>멜로</option>");
+	    	$("#select_genre").html("<option>액션/전쟁</option>"+"<option>스릴러/범죄</option>"+"<option>로멘스/멜로</option>"+
+	    			"<option>드라마/가족</option>"+"<option>애니</option>"+"<option>코미디</option>"+"<option>다큐멘터리</option>"+
+	    			"<option>SF/환타지</option>")+"<option>공포/호러</option>"+"<option>스포츠</option>"+"<option>음악/뮤지컬</option>";
 	    	$("#genre").val("액션");
 	    }else if($(this).val() == "INTERNET"){
 	    	$("#select_genre").html("<option>CF</option>"+"<option>뮤비</option>"+"<option>게임</option>");
@@ -103,7 +104,6 @@ $(function () {
                             <select class="form-control" id="select_genre">
                             	<option>드라마</option>
 								<option>예능</option>
-								<option>액션</option>
 							</select>
                             <input type="hidden" class="form-control" id="genre" name="genre" value="${broadcast.genre}" required data-validation-required-message="Please enter genre.">
                         </div>

@@ -86,12 +86,13 @@ video{
 
                 <!-- Preview Image -->
                 <div class="col-video">
-	      			<video width="680" height="430" controls>
-	      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}"/>
+	      			<video width="680" height="430" controls >
+	      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" />
 	      				
 			   			<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}" srclang="ko" label="Korean" default/>
 	      			</video>
       			</div>
+      			<a href="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}">클릭</a>
                 <hr>
 
                 <!-- View Content -->

@@ -17,11 +17,20 @@ public class BoardServiceImpl implements BoardService{
 	@Resource(name="boardDao")
 	private BoardDao boardDao;
 	
-	public List<Tbroadcast> getBroadcastList(int rnum) {
-		return boardDao.getBroadcastList(rnum);
+	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String searchWord) {
+		return boardDao.getBroadcastList(rnum, category, genre, searchWord);
 	}
-	public Integer totalBroadcast() {
-		return boardDao.totalBroadcast();
+	
+	public Integer totalBroadcast(String category, String genre, String searchWord) {
+		return boardDao.totalBroadcast(category, genre, searchWord);
+	}
+	
+	public List getCategoryList() {
+		return boardDao.getCategoryList();
+	}
+	
+	public List getGenerList(String category) {
+		return boardDao.getGenerList(category);
 	}
 	
 	public Tbroadcast broadcastDetail(int idx){
@@ -92,6 +101,4 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.deleteBoardReComment(idx, idx_no, seq, gap);
 	}
 
-
-	
 }

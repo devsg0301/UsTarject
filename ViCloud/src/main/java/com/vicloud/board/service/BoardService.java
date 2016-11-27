@@ -8,9 +8,13 @@ import com.vicloud.model.Tbroadcast;
 
 public interface BoardService {
 	
-	public List<Tbroadcast> getBroadcastList(int rnum);
-	
-	public Integer totalBroadcast();
+	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String searchWord);
+
+	public Integer totalBroadcast(String category, String genre, String searchWord);
+
+	public List getCategoryList();
+
+	public List getGenerList(String category);
 	
 	public Tbroadcast broadcastDetail(int idx);
 	
@@ -45,6 +49,7 @@ public interface BoardService {
 	public void deleteBoardComment(int seq, String insert_id);
 	
 	public void deleteBoardReComment(int idx, int idx_no, int seq, int gap);
+
 
 
 

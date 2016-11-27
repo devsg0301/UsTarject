@@ -32,17 +32,37 @@ public class BoardController {
 	
 	// 블로그 이동
 	@RequestMapping(value = "/blog/blog-home.do", method = RequestMethod.GET)
-	public String displayBlog(@RequestParam(value="rnum", defaultValue="1") int rnum, HttpSession session, Model model){
+	public String displayBlog(@RequestParam(value="rnum", defaultValue="1") int rnum, 
+			@RequestParam(value="category", defaultValue="all") String category,
+			@RequestParam(value="genre", defaultValue="") String genre,
+			@RequestParam(value="searchWord", defaultValue="") String searchWord,
+			HttpSession session, Model model){
 		logger.info("main page start");
 		System.out.println("start page blog-home");
 		int totalBroadcast = 0;
 		int prev = 0;
 		int next = 0;
+		List genreList = null;
+		
+		if(!"".equals(searchWord) && searchWord != null){
+			searchWord = "%"+ searchWord +"%";
+		}else{
+			searchWord = "%%";
+		}
+		if(category.equals("all") || category.equals("")){
+			category = "%%";
+			genre = "%%";
+		}else{
+			category = "%" + category + "%";
+			genre = "%" + genre + "%";
+			genreList = this.boardService.getGenerList(category);
+		}
 
 		System.out.println("rnum : " + rnum);
+		System.out.println("category : " + category + ", genre : " + genre + ", searchWord : " + searchWord);
 		
-		List<Tbroadcast> broadcastList = this.boardService.getBroadcastList((rnum * 10) - 9);
-		totalBroadcast = boardService.totalBroadcast();
+		List<Tbroadcast> broadcastList = this.boardService.getBroadcastList((rnum * 10) - 9, category, genre, searchWord);
+		totalBroadcast = boardService.totalBroadcast(category, genre, searchWord);
 		
 		if(rnum > 1){
 			prev = rnum - 1;
@@ -55,7 +75,12 @@ public class BoardController {
 			}
 		}
 		System.out.println("prev : " + prev + ", next : " + next);
+		
+		List categoryList = this.boardService.getCategoryList();
+		
 		model.addAttribute("broadcastList", broadcastList);
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("genreList", genreList);
 		model.addAttribute("totalBroadcast", totalBroadcast);
 		model.addAttribute("rnum", rnum);
 		model.addAttribute("prev", prev);

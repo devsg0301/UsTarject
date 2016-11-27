@@ -40,7 +40,16 @@
         <result property="gap"			column="gap" />
     </resultMap>
     
-    <select id="broadcastList" resultMap="broadcastMap">
+    <resultMap id="categoryListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="category" 	property="category"/>
+	</resultMap> 
+
+    <resultMap id="genreListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="category" 	property="category"/>
+        <result javaType="java.lang.String" column="genre" 		property="genre"/>
+	</resultMap> 
+    
+    <select id="getBroadcastList" resultMap="broadcastMap">
     	SELECT STEP_TWO.*                                                             
 		  FROM( SELECT STEP_ONE.*                                                           
 				  FROM( SELECT @ROWNUM:=@ROWNUM+1 AS RNUM,                                                  
@@ -62,6 +71,9 @@
 				              ) XA,
 				                (SELECT @ROWNUM:=0) TMP
 				         WHERE 1=1
+				           AND XA.CATEGORY LIKE #{param2}
+				           AND XA.GENRE LIKE #{param3}
+				           AND (XA.TITLE LIKE #{param4} OR XA.FILENAME LIKE #{param4})
 				      ORDER BY XA.IDX DESC
 				       ) STEP_ONE                                                              
 				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 9                                                  
@@ -70,10 +82,28 @@
       ORDER BY RNUM    
     </select>
     
+    <select id="getCategoryList" resultMap="categoryListMap">
+    	SELECT CATEGORY
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+      GROUP BY CATEGORY
+    </select>
+    
+    <select id="getGenerList" resultMap="genreListMap">
+    	SELECT CATEGORY, GENRE
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+      GROUP BY CATEGORY, GENRE
+    </select>
+    
     <select id="totalBroadcast" resultType="Integer">
     	SELECT COUNT(*)
     	  FROM TBROADCAST
     	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+    	   AND GENRE LIKE #{param2}
+    	   AND (TITLE LIKE #{param3} OR FILENAME LIKE #{param3})
     </select>
     
     <select id="broadcastDetail" resultMap="broadcastMap">

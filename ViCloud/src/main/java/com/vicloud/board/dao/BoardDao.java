@@ -15,12 +15,20 @@ public class BoardDao {
     @Resource(name = "boardMapper")
     private BoardMapper boardMapper;
     
-    public List<Tbroadcast> getBroadcastList(int rnum){
-    	return this.boardMapper.broadcastList(rnum);
+    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String searchWord){
+    	return this.boardMapper.getBroadcastList(rnum, category, genre, searchWord);
     }
 
-    public Integer totalBroadcast() {
-    	return this.boardMapper.totalBroadcast();
+    public Integer totalBroadcast(String category, String genre, String searchWord) {
+    	return this.boardMapper.totalBroadcast(category, genre, searchWord);
+    }
+
+    public List getCategoryList() {
+    	return this.boardMapper.getCategoryList();
+    }
+
+    public List getGenerList(String category) {
+    	return this.boardMapper.getGenerList(category);
     }
 
     public Tbroadcast broadcastDetail(int idx){
@@ -90,6 +98,7 @@ public class BoardDao {
     public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
     	this.boardMapper.deleteBoardReComment(idx, idx_no, seq, gap);
     }
+
 
 
 

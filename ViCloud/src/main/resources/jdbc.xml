@@ -16,7 +16,7 @@
 <!-- 
 <entry key="jdbc.url">jdbc:mysql://localhost:3306/vicloud</entry> 
  -->
-<entry key="jdbc.url">jdbc:mysql://39.125.133.27:3306/vicloud</entry> 
+<entry key="jdbc.url">jdbc:mysql://39.125.133.27:3306/vicloud?autoReconnection=true</entry> 
 <entry key="jdbc.username">vicloud</entry>
 <entry key="jdbc.password">1234</entry>
 

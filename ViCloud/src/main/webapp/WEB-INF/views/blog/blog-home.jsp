@@ -9,6 +9,22 @@
 <head>
 	<c:import url="../common/includecommon.jsp" />
 
+<script type="text/javascript">
+	function fileSearch(){
+		var searchWord = $("#searchWord").val();
+		location.href = "/blog/blog-home.do?searchWord="+searchWord;
+	}
+	
+	/* 검색 - enter값 이벤트   */
+	function EventSearchGo(e){
+		var form = document.boardForm;
+		if(e.keyCode == '13'){
+			fileSearch();
+		}
+	}
+	
+</script>
+
 </head>
 
 <body>
@@ -44,11 +60,11 @@
 
                 <!-- Blog Search Well -->
                 <div class="well">
-                    <h4>Blog Search</h4>
+                    <h4>File Search</h4>
                     <div class="input-group">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="searchWord" onkeydown="javascript:EventSearchGo(event);">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-default" type="button" onClick="fileSearch();"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                     <!-- /.input-group -->
@@ -60,27 +76,24 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
+                            	<li>
+                                	<a href="/blog/blog-home.do?category=all">전체</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
+                            <c:forEach var="categoryList" items="${categoryList}">
+                                <li>
+                                	<a href="/blog/blog-home.do?category=${categoryList.category}">${categoryList.category}</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                            </c:forEach>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
+                            <c:forEach var="genreList" items="${genreList}">
+                                <li>
+                                	<a href="/blog/blog-home.do?category=${genreList.category}&genre=${genreList.genre}">${genreList.genre}</a>
                                 </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
+                            </c:forEach>
                             </ul>
                         </div>
                         <!-- /.col-lg-6 -->
