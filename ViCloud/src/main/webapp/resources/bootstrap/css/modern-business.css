@@ -42,6 +42,14 @@ header.carousel .fill {
     background-size: cover;
 }
 
+.col-lg-6 .list-unstyled li {
+	background: url(../images/bg_circle.png) no-repeat left 7px;
+}
+
+.col-lg-6 .list-unstyled li a {
+	padding-left: 10px;
+}
+
 /* 404 Page Styles */
 
 .error-404 {

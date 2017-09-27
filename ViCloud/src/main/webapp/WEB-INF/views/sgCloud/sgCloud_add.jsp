@@ -26,7 +26,7 @@ $(function () {
 	    	$("#select_genre").html("<option>액션/전쟁</option>"+"<option>스릴러/범죄</option>"+"<option>로멘스/멜로</option>"+
 	    			"<option>드라마/가족</option>"+"<option>애니</option>"+"<option>코미디</option>"+"<option>다큐멘터리</option>"+
 	    			"<option>SF/환타지</option>")+"<option>공포/호러</option>"+"<option>스포츠</option>"+"<option>음악/뮤지컬</option>";
-	    	$("#genre").val("액션");
+	    	$("#genre").val("액션/전쟁");
 	    }else if($(this).val() == "INTERNET"){
 	    	$("#select_genre").html("<option>CF</option>"+"<option>뮤비</option>"+"<option>게임</option>");
 	    	$("#genre").val("CF");
@@ -64,7 +64,7 @@ $(function () {
                 <ol class="breadcrumb">
                     <li><a href="/defaults/main.do">Home</a>
                     </li>
-                    <li class="active">Blog Post</li>
+                    <li class="active">sgCloud register</li>
                 </ol>
             </div>
         </div>
@@ -73,11 +73,11 @@ $(function () {
         <!-- Content Row -->
         <div class="row">
 
-			<!-- Blog Sidebar Widgets Column -->
+			<!-- sgCloud Sidebar Widgets Column -->
 
-            <!-- Blog Post Content Column -->
+            <!-- sgCloud Post Content Column -->
             <div class="well">
-	            <form id="form" name="form" method="post" action="/blog/add_ok.do">
+	            <form id="form" name="form" method="post" action="/sgCloud/add_ok.do">
 	            	<input type="hidden" name="idx" id="idx" value="${broadcast.idx}" />
 	            	<div class="control-group form-group">
                         <div class="controls">

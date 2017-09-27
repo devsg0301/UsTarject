@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	function fileSearch(){
 		var searchWord = $("#searchWord").val();
-		location.href = "/blog/blog-home.do?searchWord="+searchWord;
+		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
 	}
 	
 	/* 검색 - enter값 이벤트   */
@@ -41,13 +41,13 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Blog Home One
+                <h1 class="page-header">sgCloud
                     <small>Subheading</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="/defaults/main.do">Home</a>
                     </li>
-                    <li class="active">Blog Home One</li>
+                    <li class="active">sgCloud</li>
                 </ol>
             </div>
         </div>
@@ -55,10 +55,10 @@
 
         <div class="row">
         
-        	 <!-- Blog Sidebar Widgets Column -->
+        	 <!-- sgCloud SidsgCloud Widgets Column -->
             <div class="col-md-4">
 
-                <!-- Blog Search Well -->
+                <!-- sgCloud Search Well -->
                 <div class="well">
                     <h4>File Search</h4>
                     <div class="input-group">
@@ -70,28 +70,31 @@
                     <!-- /.input-group -->
                 </div>
 
-                <!-- Blog Categories Well -->
+                <!-- sgCloud Categories Well -->
                 <div class="well">
-                    <h4>Blog Categories</h4>
+                    <h4>sgCloud Categories</h4>
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
                             	<li>
-                                	<a href="/blog/blog-home.do?category=all">전체</a>
+                                	<a href="/sgCloud/sgCloud_main.do?category=all">전체</a>
                                 </li>
                             <c:forEach var="categoryList" items="${categoryList}">
                                 <li>
-                                	<a href="/blog/blog-home.do?category=${categoryList.category}">${categoryList.category}</a>
+                                	<a href="/sgCloud/sgCloud_main.do?category=${categoryList.category}">${categoryList.category}</a>
                                 </li>
                             </c:forEach>
                             </ul>
                         </div>
+                        <c:if test="${!empty genreList}">
+                        <hr>
+                        </c:if>
                         <!-- /.col-lg-6 -->
                         <div class="col-lg-6">
                             <ul class="list-unstyled">
                             <c:forEach var="genreList" items="${genreList}">
                                 <li>
-                                	<a href="/blog/blog-home.do?category=${genreList.category}&genre=${genreList.genre}">${genreList.genre}</a>
+                                	<a href="/sgCloud/sgCloud_main.do?category=${genreList.category}&genre=${genreList.genre}">${genreList.genre}</a>
                                 </li>
                             </c:forEach>
                             </ul>
@@ -103,17 +106,17 @@
 
                 <!-- Side Widget Well -->
                 <div class="">
-                    <a href="/blog/blog-add.do" class="btn btn-default">add file</a>
+                    <a href="/sgCloud/sgCloud_add.do" class="btn btn-default">add file</a>
                 </div>
 
             </div>
 
-            <!-- Blog Entries Column -->
+            <!-- sgCloud Entries Column -->
             <div class="col-md-8">
 				<c:forEach var="broadcastList" items="${broadcastList}">
-		         	<!-- First Blog View -->
+		         	<!-- First sgCloud View -->
 		        	<h4>
-		            	<a href="/blog/${broadcastList.idx}.do">${broadcastList.title }</a>
+		            	<a href="/sgCloud/${broadcastList.idx}.do">${broadcastList.title }</a>
 	            	</h4>
 	            	<p><i class="fa fa-clock-o"></i> Viewed on <fmt:formatDate value="${broadcastList.insert_date}" pattern="yyyy-MM-dd"/></p>
 					<hr>
@@ -123,12 +126,12 @@
                 <ul class="pager">
                 	<c:if test="${prev != 0 }">
 	                    <li class="previous">
-	                        <a href="/blog/blog-home.do?rnum=${prev }">&larr; Prev</a>
+	                        <a href="/sgCloud/sgCloud_main.do?rnum=${prev }">&larr; Prev</a>
 	                    </li>
                     </c:if>
                     <c:if test="${next != 0 }">
 	                    <li class="next">
-	                        <a href="/blog/blog-home.do?rnum=${next }">Next &rarr;</a>
+	                        <a href="/sgCloud/sgCloud_main.do?rnum=${next }">Next &rarr;</a>
 	                    </li>
 	                </c:if>
                 </ul>

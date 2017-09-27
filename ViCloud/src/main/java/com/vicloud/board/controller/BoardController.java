@@ -20,6 +20,7 @@ import com.vicloud.board.service.BoardService;
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
 import com.vicloud.model.Tbroadcast;
+import com.vicloud.model.Tbroadcast_comment;
 import com.vicloud.model.Tcustomer;
 
 @Controller
@@ -30,15 +31,22 @@ public class BoardController {
 	@Resource(name="boardService")
 	private BoardService boardService;
 	
-	// 블로그 이동
-	@RequestMapping(value = "/blog/blog-home.do", method = RequestMethod.GET)
-	public String displayBlog(@RequestParam(value="rnum", defaultValue="1") int rnum, 
+	// sgCloud 이동
+	@RequestMapping(value = "/sgCloud/sgCloud_main.do", method = RequestMethod.GET)
+	public String displaySgCloud(@RequestParam(value="rnum", defaultValue="1") int rnum, 
 			@RequestParam(value="category", defaultValue="all") String category,
 			@RequestParam(value="genre", defaultValue="") String genre,
 			@RequestParam(value="searchWord", defaultValue="") String searchWord,
 			HttpSession session, Model model){
 		logger.info("main page start");
-		System.out.println("start page blog-home");
+		System.out.println("start page sgCloud_main");
+		/*
+		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+			logger.info("You don't login.");
+			System.out.println("You don't login.");
+			return "defaults/login";
+		}
+		*/
 		int totalBroadcast = 0;
 		int prev = 0;
 		int next = 0;
@@ -85,72 +93,74 @@ public class BoardController {
 		model.addAttribute("rnum", rnum);
 		model.addAttribute("prev", prev);
 		model.addAttribute("next", next);
-		model.addAttribute("dropdown", "blog");
+		model.addAttribute("dropdown", "sgCloud");
 		
-		return "blog/blog-home";
+		return "sgCloud/sgCloud_main";
 	}
 	
 	// 게시판 상세보기
     // PathVariable 어노테이션을 이용하여 RESTful 방식 적용
     // board/1 -> id = 1; id = 게시물 번호로 인식함.
     // 일반 적으로 (@ReuqstParam(value = "board", required = false, defaultValue = "0"), int idx, Model model)
-    @RequestMapping("/blog/{idx}.do")
-    public String displayBlogDetailView(@PathVariable int idx, Model model, HttpSession session) {
+    @RequestMapping("/sgCloud/{idx}.do")
+    public String displaySgCloudDetailView(@PathVariable int idx, Model model, HttpSession session) {
         logger.info("display view Board view idx = {}", idx);
         System.out.println("display view Board view idx = " + idx);
-        
-//		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-//			logger.info("You don't login.");
-//			System.out.println("You don't login.");
-//			return "defaults/login";
-//		}
+        /*
+		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+			logger.info("You don't login.");
+			System.out.println("You don't login.");
+			return "defaults/login";
+		}
+		*/
         Tbroadcast broadcastDetail = this.boardService.broadcastDetail(idx);
         
-        //List<Tboard_comment> tboard_comment_list = this.boardService.boardCommentList(idx); // 댓글 보기
+        List<Tbroadcast_comment> tbroadcast_comment_list = this.boardService.broadcastCommentList(idx); // 댓글 보기
 
         model.addAttribute("broadcastDetail", broadcastDetail);
-        //model.addAttribute("tboard_comment_list", tboard_comment_list);
+        model.addAttribute("tbroadcast_comment_list", tbroadcast_comment_list);
         //model.addAttribute("total_comments", tboard_comment_list.size());
-        model.addAttribute("dropdown", "blog");
-        return "blog/blog-view";
+        model.addAttribute("dropdown", "sgCloud");
+        return "sgCloud/sgCloud_view";
     }
     
     // 게시판 쓰기 폼
-    @RequestMapping(value = "/blog/blog-add.do", method = RequestMethod.GET)
-    public String displayBoardAdd(@RequestParam(value="idx", defaultValue="0") int idx, Model model, HttpSession session) {
+    @RequestMapping(value = "/sgCloud/sgCloud_add.do", method = RequestMethod.GET)
+    public String displayBroadcastAdd(@RequestParam(value="idx", defaultValue="0") int idx, Model model, HttpSession session) {
         logger.info("display view Board add");
         System.out.println("display view Board add");
         
-//        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-//			logger.info("You don't login.");
-//			System.out.println("You don't login.");
-//			return "defaults/login";
-//		}
-
+        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+			logger.info("You don't login.");
+			System.out.println("You don't login.");
+			return "defaults/login";
+		}
+        
         if (idx > 0) { // 수정하기를 눌렀을 경우
         	logger.info("display view Board modify");
         	System.out.println("display view Board modify");
         	Tbroadcast broadcast = this.boardService.getSelectBroadcast(idx);
             model.addAttribute("broadcast", broadcast);
         }
-        model.addAttribute("dropdown", "blog");
+        model.addAttribute("dropdown", "sgCloud");
 
-        return "blog/blog-add";
+        return "sgCloud/sgCloud_add";
     }
     
     // 게시판 쓰기 저장
-    @RequestMapping(value = "/blog/add_ok.do", method = RequestMethod.POST)
-    public String procBoardAdd(@ModelAttribute("tbroadcast") Tbroadcast tbroadcast, RedirectAttributes redirectAttributes, HttpSession session) {
-    	logger.info("display view Board write_ok");
-        System.out.println("display view Board write_ok");
+    @RequestMapping(value = "/sgCloud/add_ok.do", method = RequestMethod.POST)
+    public String procBroadcastAdd(@ModelAttribute("tbroadcast") Tbroadcast tbroadcast, RedirectAttributes redirectAttributes, HttpSession session) {
+    	logger.info("display view Broadcast write_ok");
+        System.out.println("display view Broadcast write_ok");
         
-//        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
-//        
-//        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-//			logger.info("You don't login.");
-//			System.out.println("You don't login.");
-//			return "defaults/login";
-//		}
+        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+			logger.info("You don't login.");
+			System.out.println("You don't login.");
+			return "defaults/login";
+		}
+        
+        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+
         int nFileIndex = tbroadcast.getFilename().lastIndexOf(".");
         
         Integer idx = tbroadcast.getIdx();
@@ -162,13 +172,60 @@ public class BoardController {
             this.boardService.insertBroadcast(tbroadcast);
             redirectAttributes.addFlashAttribute("message", "추가되었습니다.");
             System.out.println("Sucess Board insert");
-            return "redirect:/blog/blog-home.do";
+            return "redirect:/sgCloud/sgCloud_main.do";
         } else { //수정
             this.boardService.updateBroadcast(tbroadcast);
             redirectAttributes.addFlashAttribute("message", "수정되었습니다.");
             System.out.println("Sucess Board modify");
-            return "redirect:/blog/blog-home.do";
+            return "redirect:/sgCloud/sgCloud_main.do";
         }
+    }
+    
+    //댓글 저장
+    @RequestMapping(value = "/broadcast/comment_ok.do", method = RequestMethod.POST)
+    public String procBroadcastCommentWrite(@ModelAttribute("tbroadcast_comment") Tbroadcast_comment tbroadcast_comment, HttpSession session){
+    	logger.info("Start Broadcast comment write.");
+        System.out.println("Start Broadcast comment write.");
+    	
+    	Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+    	
+    	int idx 	= tbroadcast_comment.getIdx();
+    	int seq_re	= tbroadcast_comment.getSeq_re();
+    	int gap 	= tbroadcast_comment.getGap();
+    	
+    	if(seq_re == 0){ //가장 최상위 댓글일 경우
+    		Integer maxSeqNo = this.boardService.maxSeqNo(idx);
+    		if(maxSeqNo == null){
+    			maxSeqNo = 0;
+    		}
+    		Integer maxIdxNo = this.boardService.maxIdxNo(idx);
+    		if(maxIdxNo == null){
+    			maxIdxNo = 0;
+    		}
+    		tbroadcast_comment.setSeq_no(maxSeqNo + 1);
+    		tbroadcast_comment.setIdx_no(maxIdxNo + 1);
+    		tbroadcast_comment.setGap(0);
+    	}else{
+    		int seq = tbroadcast_comment.getSeq();
+    		int idx_no	= tbroadcast_comment.getIdx_no();
+    		int seq_no 	= tbroadcast_comment.getSeq_no();
+    		Integer max_seq_no = this.boardService.maxSeqReNo(idx, idx_no, seq, gap); //댓글 쓰려는 곳 중에 마지막 번호
+    		if(max_seq_no != null){
+    			seq_no = max_seq_no;
+    		}
+    		this.boardService.updateSeqNo(idx, seq_no); //댓글의 순서를 정하기 위해 기존 댓글을 1씩 증가한다.
+    		tbroadcast_comment.setSeq_no(seq_no + 1); //지금 쓸 댓글의 순서를 정한다.
+    		tbroadcast_comment.setGap(gap + 2); //댓글의 간격을 증가한다.
+    		tbroadcast_comment.setSeq_re(seq); //상위 댓글번호를  seq_re에 입력
+    	}
+    	
+    	tbroadcast_comment.setAuthor(customer.getCust_name());
+    	tbroadcast_comment.setInsert_id(customer.getCust_id());
+    	
+    	this.boardService.insertBroadcastComment(tbroadcast_comment);
+    	System.out.println("Sucess Broadcast comment insert");
+    	
+    	return "redirect:/sgCloud/"+ idx +".do";
     }
     
 /* 

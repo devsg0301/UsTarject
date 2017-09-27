@@ -6,18 +6,24 @@
 <!-- Common Code Definition -->
 <entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 <!-- 
-<entry key="jdbc.url">jdbc:mysql://39.125.133.27:3306/ustarject</entry>
+<entry key="jdbc.url">jdbc:mysql://211.200.138.35:3306/ustarject</entry>
 
 <entry key="jdbc.url">jdbc:mysql://localhost:3306/ustarject</entry> 
 <entry key="jdbc.username">UsTarject</entry>
 <entry key="jdbc.password">tarject1009</entry>
 
 -->
+<!-- 로컬 -->
 <!-- 
-<entry key="jdbc.url">jdbc:mysql://localhost:3306/vicloud</entry> 
  -->
-<entry key="jdbc.url">jdbc:mysql://39.125.133.27:3306/vicloud?autoReconnection=true</entry> 
-<entry key="jdbc.username">vicloud</entry>
+<entry key="jdbc.url">jdbc:mysql://localhost:3306/vicloud</entry> 
 <entry key="jdbc.password">1234</entry>
+<entry key="jdbc.username">vicloud</entry>
+<!-- 운영 -->
+<!-- 
+<entry key="jdbc.url">jdbc:mysql://211.200.138.35:3306/vicloud?autoReconnection=true</entry>
+<entry key="jdbc.username">vicloud</entry>
+<entry key="jdbc.password">1234qwer</entry>
+ --> 
 
 </properties>

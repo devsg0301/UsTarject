@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
 import com.vicloud.model.Tbroadcast;
+import com.vicloud.model.Tbroadcast_comment;
 
 @Service(value = "boardDao")
 public class BoardDao {
@@ -46,7 +47,29 @@ public class BoardDao {
     public void updateBroadcast(Tbroadcast tbroadcast) {
     	this.boardMapper.insertBroadcast(tbroadcast);
     }
+    
+    public List<Tbroadcast_comment> broadcastCommentList(int idx){
+    	return this.boardMapper.broadcastCommentList(idx);
+    }
 
+    public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment){
+    	this.boardMapper.insertBroadcastComment(tbroadcast_comment);
+    }
+    
+    public Integer maxSeqNo(int idx){
+    	return this.boardMapper.maxSeqNo(idx);
+    }
+    
+    public Integer maxIdxNo(int idx){
+    	return this.boardMapper.maxIdxNo(idx);
+    }
+    
+    public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap){
+    	return this.boardMapper.maxSeqReNo(idx, idx_no, seq, gap);
+    }
+    
+    /* ********************************************************************* */
+    
     public List<Tboard> getBoardList() {
         return this.boardMapper.boardList();
     }
@@ -69,18 +92,6 @@ public class BoardDao {
     
     public List<Tboard_comment> boardCommentList(int idx){
     	return this.boardMapper.boardCommentList(idx);
-    }
-    
-    public Integer maxSeqNo(int idx){
-    	return this.boardMapper.maxSeqNo(idx);
-    }
-    
-    public Integer maxIdxNo(int idx){
-    	return this.boardMapper.maxIdxNo(idx);
-    }
-    
-    public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap){
-    	return this.boardMapper.maxSeqReNo(idx, idx_no, seq, gap);
     }
     
     public void updateSeqNo(int idx, int seq_no){

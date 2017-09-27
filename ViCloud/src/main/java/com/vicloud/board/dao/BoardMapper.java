@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
 import com.vicloud.model.Tbroadcast;
+import com.vicloud.model.Tbroadcast_comment;
 
 @Repository(value = "boardMapper")
 public interface BoardMapper {
@@ -19,6 +20,13 @@ public interface BoardMapper {
 	Tbroadcast getSelectBroadcast(int idx);
 	void insertBroadcast(Tbroadcast tbroadcast);
 	void updateBroadcast(Tbroadcast tbroadcast);
+	List<Tbroadcast_comment> broadcastCommentList(int idx);
+	Integer maxSeqNo(int idx);
+	Integer maxIdxNo(int idx);
+	Integer maxSeqReNo(int idx, int idx_no, int seq, int gap);
+	void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment);
+	
+	/* ********************************************************************* */
 	
 	List<Tboard> boardList();
     Tboard selectOne(int idx);
@@ -27,9 +35,6 @@ public interface BoardMapper {
     void deleteBoard(int idx);
     
     List<Tboard_comment> boardCommentList(int idx);
-    Integer maxSeqNo(int idx);
-    Integer maxIdxNo(int idx);
-    Integer maxSeqReNo(int idx, int idx_no, int seq, int gap);
     void updateSeqNo(int idx, int seq_no);
     void insertBoardComment(Tboard_comment tboard_comment);
     void deleteBoardComment(int seq, String insert_id);

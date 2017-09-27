@@ -10,6 +10,7 @@ import com.vicloud.board.dao.BoardDao;
 import com.vicloud.model.Tboard;
 import com.vicloud.model.Tboard_comment;
 import com.vicloud.model.Tbroadcast;
+import com.vicloud.model.Tbroadcast_comment;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -49,6 +50,28 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.insertBroadcast(tbroadcast);
 	}
 	
+	public List<Tbroadcast_comment> broadcastCommentList(int idx){
+		return boardDao.broadcastCommentList(idx);
+	}
+	
+	public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment){
+		boardDao.insertBroadcastComment(tbroadcast_comment);
+	}
+	
+	public Integer maxSeqNo(int idx){
+		return boardDao.maxSeqNo(idx);
+	}
+	
+	public Integer maxIdxNo(int idx){
+		return boardDao.maxIdxNo(idx);
+	}
+	
+	public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap){
+		return boardDao.maxSeqReNo(idx, idx_no, seq, gap);
+	}
+	
+	/* ******************************************************************** */
+	
 	public List<Tboard> getBoardList(){
 		return boardDao.getBoardList();
 	}
@@ -71,18 +94,6 @@ public class BoardServiceImpl implements BoardService{
 	
 	public List<Tboard_comment> boardCommentList(int idx){
 		return boardDao.boardCommentList(idx);
-	}
-	
-	public Integer maxSeqNo(int idx){
-		return boardDao.maxSeqNo(idx);
-	}
-	
-	public Integer maxIdxNo(int idx){
-		return boardDao.maxIdxNo(idx);
-	}
-	
-	public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap){
-		return boardDao.maxSeqReNo(idx, idx_no, seq, gap);
 	}
 	
 	public void updateSeqNo(int idx, int seq_no){

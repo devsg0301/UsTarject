@@ -27,7 +27,18 @@ video{
 <script src="http://vjs.zencdn.net/c/video.js"></script>
 
 <script type="text/javascript">
-
+	
+	function copy_trackback(trb) {
+		
+        var IE=(document.all)?true:false;
+        if (IE) {
+            if(confirm("이 글의 트랙백 주소를 클립보드에 복사하시겠습니까?"))
+                window.clipboardData.setData("Text", "http://devsg.gq:8081/LocalUser/data/" + encodeURI(trb));
+        } else {
+            temp = prompt("이 글의 트랙백 주소입니다. Ctrl+C를 눌러 클립보드로 복사하세요", "http://devsg.gq:8081/LocalUser/data/" + encodeURI(trb));
+        }
+    }
+	
 	function vidEvent() {
 		var videos = document.getElementsByTagName('video');
 		var vidCount = videos.length;
@@ -61,7 +72,7 @@ video{
                 <ol class="breadcrumb">
                     <li><a href="/defaults/main.do">Home</a>
                     </li>
-                    <li class="active">Blog View</li>
+                    <li class="active">sgCloud View</li>
                 </ol>
             </div>
         </div>
@@ -70,12 +81,12 @@ video{
         <!-- Content Row -->
         <div class="row">
 
-			<!-- Blog Sidebar Widgets Column -->
+			<!-- sgCloud Sidebar Widgets Column -->
 
-            <!-- Blog View Content Column -->
+            <!-- sgCloud View Content Column -->
             <div class="col-lg-8" style="width: 100%;">
 
-                <!-- Blog View -->
+                <!-- sgCloud View -->
 
                 <hr>
 
@@ -92,24 +103,30 @@ video{
 			   			<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}" srclang="ko" label="Korean" default/>
 	      			</video>
       			</div>
-      			<a href="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}">클릭</a>
+      			<p>영상이 재생되지 않을 경우에는 아래 링크를 눌러주세요. <a href="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}">링크</a></p>
+      			
+      			<p>링크 복사를 통해  URL재생을 이용하시면 됩니다.(아이폰) <a href="#" onclick="copy_trackback('${broadcastDetail.file_url}');">링크복사</a></p>
+      			
                 <hr>
 
                 <!-- View Content -->
 
                 <hr>
 
-                <!-- Blog Comments -->
+                <!-- sgCloud Comments -->
 
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    <form action="/broadcast/comment_ok.do" name="tbroadcast_comment" method="post" class="bd_wrt cmt_wrt clear">
+						<input type="hidden" name="idx" value="${broadcastDetail.idx }">
+						<input type="hidden" name="seq_re" value="0">
+						<input type="hidden" name="gap" value="0">
+						<div class="form-group">
+							<textarea id="comment" name="comment" cols="50" rows="4" style="overflow: hidden; min-height: 4em; height: 52px; width: 100%;"></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</form>
                 </div>
 
                 <hr>
@@ -117,46 +134,20 @@ video{
                 <!-- Viewed Comments -->
 
                 <!-- Comment -->
+                <c:forEach var="tbroadcast_comment_list" items="${tbroadcast_comment_list}">
                 <div class="media">
-                    <a class="pull-left" href="#">
+                   	<a class="pull-left" href="#">
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading">${tbroadcast_comment_list.insert_id}
+                            <small><fmt:formatDate value="${tbroadcast_comment_list.insert_date}" pattern="yyyy-MM-dd HH:mm"/></small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        ${tbroadcast_comment_list.comment}
                     </div>
                 </div>
-
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        <!-- Nested Comment -->
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div>
-                        <!-- End Nested Comment -->
-                    </div>
-                </div>
-
+				</c:forEach>
             </div>
-
         </div>
         <!-- /.row -->
 

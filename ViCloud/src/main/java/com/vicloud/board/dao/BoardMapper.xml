@@ -26,7 +26,21 @@
         <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
     </resultMap>
     
-    <resultMap id="board_commentMap" 	type="com.vicloud.model.Tboard_comment">
+    <resultMap id="board_commentMap" type="com.vicloud.model.Tboard_comment">
+        <id     property="idx"    		column="idx" />
+        <result property="seq"			column="seq" />
+        <result property="comment"  	column="comment" />
+        <result property="author"		column="author" />
+        <result property="insert_id"	column="insert_id" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="idx_no"		column="idx_no" />
+        <result property="seq_re"		column="seq_re" />
+        <result property="seq_no"		column="seq_no" />
+        <result property="gap"			column="gap" />
+    </resultMap>
+    
+    <resultMap id="broadcast_commentMap" type="com.vicloud.model.Tbroadcast_comment">
         <id     property="idx"    		column="idx" />
         <result property="seq"			column="seq" />
         <result property="comment"  	column="comment" />
@@ -141,6 +155,50 @@
          WHERE idx = #{idx} LIMIT 1
     </update>
     
+    <select id="broadcastCommentList" resultMap="broadcast_commentMap">
+		SELECT * 
+		  FROM TBROADCAST_COMMENT 
+		 WHERE idx = #{idx}
+      ORDER BY seq_no
+	</select>
+	
+	<select id="maxSeqNo" resultType="Integer">
+		SELECT MAX(SEQ_NO) 
+		  FROM TBROADCAST_COMMENT 
+		 WHERE idx = #{idx}
+	</select>
+
+	<select id="maxIdxNo" resultType="Integer">
+		SELECT MAX(IDX_NO) 
+		  FROM TBROADCAST_COMMENT
+		 WHERE idx = #{idx}
+	</select>
+
+	<select id="maxSeqReNo" resultType="Integer">
+		SELECT MAX(SEQ_NO) 
+		  FROM TBROADCAST_COMMENT 
+		 WHERE idx = #{param1}
+		   AND idx_no = #{param2} 
+		   AND seq_re &gt;= #{param3}
+		   AND gap &gt; #{param4}
+	</select>
+	
+    
+    <insert id="insertBroadcastComment">
+		INSERT INTO TBROADCAST_COMMENT (idx, comment, author, insert_id, idx_no, seq_re, seq_no, gap) VALUES (
+				#{idx},
+				#{comment},
+				#{author},
+				#{insert_id},
+				#{idx_no},
+				#{seq_re},
+				#{seq_no},
+				#{gap}
+		)
+	</insert>
+    
+    
+    
     <select id="boardList" resultMap="boardMap">
         SELECT * FROM TBOARD 
     </select>
@@ -174,27 +232,6 @@
 		  FROM TBOARD_COMMENT 
 		 WHERE idx = #{idx}
       ORDER BY seq_no
-	</select>
-	
-	<select id="maxSeqNo" resultType="Integer">
-		SELECT MAX(SEQ_NO) 
-		  FROM TBOARD_COMMENT 
-		 WHERE idx = #{idx}
-	</select>
-
-	<select id="maxIdxNo" resultType="Integer">
-		SELECT MAX(IDX_NO) 
-		  FROM TBOARD_COMMENT 
-		 WHERE idx = #{idx}
-	</select>
-
-	<select id="maxSeqReNo" resultType="Integer">
-		SELECT MAX(SEQ_NO) 
-		  FROM TBOARD_COMMENT 
-		 WHERE idx = #{param1}
-		   AND idx_no = #{param2} 
-		   AND seq_re &gt;= #{param3}
-		   AND gap &gt; #{param4}
 	</select>
 	
 	<update id="updateSeqNo">
