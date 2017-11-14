@@ -18,12 +18,12 @@ public class BoardServiceImpl implements BoardService{
 	@Resource(name="boardDao")
 	private BoardDao boardDao;
 	
-	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String searchWord) {
-		return boardDao.getBroadcastList(rnum, category, genre, searchWord);
+	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) {
+		return boardDao.getBroadcastList(rnum, category, genre, foldername, searchWord);
 	}
 	
-	public Integer totalBroadcast(String category, String genre, String searchWord) {
-		return boardDao.totalBroadcast(category, genre, searchWord);
+	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) {
+		return boardDao.totalBroadcast(category, genre, foldername, searchWord);
 	}
 	
 	public List getCategoryList() {
@@ -32,6 +32,10 @@ public class BoardServiceImpl implements BoardService{
 	
 	public List getGenerList(String category) {
 		return boardDao.getGenerList(category);
+	}
+	
+	public List getFolderList(String category, String genre) {
+		return boardDao.getFolderList(category, genre);
 	}
 	
 	public Tbroadcast broadcastDetail(int idx){
@@ -47,7 +51,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	public void updateBroadcast(Tbroadcast tbroadcast){
-		boardDao.insertBroadcast(tbroadcast);
+		boardDao.updateBroadcast(tbroadcast);
 	}
 	
 	public List<Tbroadcast_comment> broadcastCommentList(int idx){

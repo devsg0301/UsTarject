@@ -8,13 +8,17 @@ public class Tbroadcast {
 	private String genre;
 	private String title;
 	private String grade;
+	private String foldername;
+	private String albumname;
 	private String filename;
 	private String file_url;
+	private String extension;
 	private String sub_url;
+	private boolean sub_check;
+	private String play_date;
 	private Date insert_date;
 	private String insert_id;
 	private Date modify_date;
-	private String foldername;
 	private int hit;
 	private int total_count;
 	
@@ -101,6 +105,30 @@ public class Tbroadcast {
 	}
 	public void setFoldername(String foldername) {
 		this.foldername = foldername;
+	}
+	public boolean isSub_check() {
+		return sub_check;
+	}
+	public void setSub_check(boolean sub_check) {
+		this.sub_check = sub_check;
+	}
+	public String getExtension() {
+		return extension;
+	}
+	public void setExtension(String extension) {
+		this.extension = extension;
+	}
+	public String getAlbumname() {
+		return albumname;
+	}
+	public void setAlbumname(String albumname) {
+		this.albumname = albumname;
+	}
+	public String getPlay_date() {
+		return play_date;
+	}
+	public void setPlay_date(String play_date) {
+		this.play_date = play_date;
 	}
 	
 }

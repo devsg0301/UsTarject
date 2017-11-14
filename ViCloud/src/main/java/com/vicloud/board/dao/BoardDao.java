@@ -16,12 +16,12 @@ public class BoardDao {
     @Resource(name = "boardMapper")
     private BoardMapper boardMapper;
     
-    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String searchWord){
-    	return this.boardMapper.getBroadcastList(rnum, category, genre, searchWord);
+    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord){
+    	return this.boardMapper.getBroadcastList(rnum, category, genre, foldername, searchWord);
     }
 
-    public Integer totalBroadcast(String category, String genre, String searchWord) {
-    	return this.boardMapper.totalBroadcast(category, genre, searchWord);
+    public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) {
+    	return this.boardMapper.totalBroadcast(category, genre, foldername, searchWord);
     }
 
     public List getCategoryList() {
@@ -31,6 +31,10 @@ public class BoardDao {
     public List getGenerList(String category) {
     	return this.boardMapper.getGenerList(category);
     }
+    
+    public List getFolderList(String category, String genre) {
+		return this.boardMapper.getFolderList(category, genre);
+	}
 
     public Tbroadcast broadcastDetail(int idx){
     	return this.boardMapper.broadcastDetail(idx);
@@ -45,7 +49,7 @@ public class BoardDao {
     }
     
     public void updateBroadcast(Tbroadcast tbroadcast) {
-    	this.boardMapper.insertBroadcast(tbroadcast);
+    	this.boardMapper.updateBroadcast(tbroadcast);
     }
     
     public List<Tbroadcast_comment> broadcastCommentList(int idx){
@@ -109,8 +113,5 @@ public class BoardDao {
     public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
     	this.boardMapper.deleteBoardReComment(idx, idx_no, seq, gap);
     }
-
-
-
 
 }

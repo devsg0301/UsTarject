@@ -12,10 +12,11 @@ import com.vicloud.model.Tbroadcast_comment;
 @Repository(value = "boardMapper")
 public interface BoardMapper {
 	
-	List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String searchWord);
-	Integer totalBroadcast(String category, String genre, String searchWord);
+	List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord);
+	Integer totalBroadcast(String category, String genre, String foldername, String searchWord);
 	List getCategoryList();
 	List getGenerList(String category);
+	List getFolderList(String category, String genre);
 	Tbroadcast broadcastDetail(int idx);
 	Tbroadcast getSelectBroadcast(int idx);
 	void insertBroadcast(Tbroadcast tbroadcast);

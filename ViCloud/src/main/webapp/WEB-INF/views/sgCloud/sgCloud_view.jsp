@@ -70,7 +70,11 @@ video{
                 <h1 class="page-header">${broadcastDetail.title }
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="/defaults/main.do">Home</a>
+                    <li>
+                    	<a href="/defaults/main.do">Home</a>
+                    </li>
+                    <li>
+                    	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
                     </li>
                     <li class="active">sgCloud View</li>
                 </ol>
@@ -91,7 +95,7 @@ video{
                 <hr>
 
                 <!-- Date/Time -->
-                <p><i class="fa fa-clock-o"></i> Viewed on <fmt:formatDate value="${broadcastDetail.insert_date}" pattern="yyyy-MM-dd HH:dd"/></p>
+                <p><i class="fa fa-clock-o"></i> Registration Date <fmt:formatDate value="${broadcastDetail.insert_date}" pattern="yyyy-MM-dd HH:dd"/></p>
 
                 <hr>
 
@@ -99,14 +103,19 @@ video{
                 <div class="col-video">
 	      			<video width="680" height="430" controls >
 	      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" />
-	      				
-			   			<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}" srclang="ko" label="Korean" default/>
+	      				<c:if test="${broadcastDetail.sub_url != ''}">
+			   			<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}.vtt" srclang="ko" label="Korean" default/>
+			   			</c:if>
 	      			</video>
       			</div>
       			<p>영상이 재생되지 않을 경우에는 아래 링크를 눌러주세요. <a href="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}">링크</a></p>
       			
       			<p>링크 복사를 통해  URL재생을 이용하시면 됩니다.(아이폰) <a href="#" onclick="copy_trackback('${broadcastDetail.file_url}');">링크복사</a></p>
-      			
+				<c:if test="${customer.cust_id == 'devsg'}">
+					<div class="" style="text-align:right;">
+	                    <a href="/sgCloud/sgCloud_add.do?idx=${idx}" class="btn btn-default">modify</a>
+	                </div>      			
+				</c:if>
                 <hr>
 
                 <!-- View Content -->
@@ -155,11 +164,7 @@ video{
 
         <!-- Footer -->
         <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
+            <c:import url="../common/footer.jsp" />
         </footer>
 
     </div>

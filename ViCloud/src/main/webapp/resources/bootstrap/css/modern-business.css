@@ -42,11 +42,13 @@ header.carousel .fill {
     background-size: cover;
 }
 
-.col-lg-6 .list-unstyled li {
+.list-li {
+	float: left;
+	width: 50%;
 	background: url(../images/bg_circle.png) no-repeat left 7px;
 }
 
-.col-lg-6 .list-unstyled li a {
+.list-li a {
 	padding-left: 10px;
 }
 

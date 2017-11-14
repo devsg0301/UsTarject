@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no" />
-<title>Login</title>
+<title>Beemo_sg</title>
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/singin.css">
 <script type="text/javascript">
@@ -24,6 +24,7 @@
 	<div class="container">
 
 		<form class="form-signin" name="login" method="post" action="/defaults/loginProcess.do">
+			<input type="hidden" name="forwardUrl" value="${forwardUrl}"/>
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="cust_id" class="sr-only">Email or ID</label>
 			<input type="text" id="cust_id" name="cust_id" class="form-control" placeholder="Email or ID" required="required" autofocus="autofocus"> 
@@ -32,7 +33,7 @@
 			<div class="checkbox">
 				<label><input type="checkbox" value="remember-me">Remember me</label>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign	in</button>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 			<br/>
 			<a href="/cust/custJoin.do"><button class="btn btn-lg btn-primary btn-block" type="button">Join in</button></a>
 		</form>

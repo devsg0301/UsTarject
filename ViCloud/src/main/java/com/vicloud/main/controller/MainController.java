@@ -36,7 +36,8 @@ public class MainController {
 		System.out.println("start page main");
 		//model.addAttribute("dropdown", "main");
 		
-		return "defaults/main";
+//		return "defaults/main";
+		return "redirect:/sgCloud/sgCloud_main.do";
 	}
 	
 	// 로그인 처리
@@ -45,14 +46,20 @@ public class MainController {
     	logger.info("login start!");
     	System.out.println("login start!");
     	ModelAndView mav = new ModelAndView();
- 
+    	String forwardUrl = "";
         Tcustomer loginUser = mainService.getCustomer(customer.getCust_id(), customer.getPassword());
  
         if (loginUser != null) {
         	logger.info("login sucess!");
         	System.out.println("login sucess!");
             session.setAttribute("userLoginInfo", loginUser);
-            mav.setViewName("redirect:/defaults/main.do");
+            forwardUrl = request.getParameter("forwardUrl");
+            System.out.println("forwardUrl : " + forwardUrl);
+            if(forwardUrl == null){
+            	mav.setViewName("redirect:/defaults/main.do");
+            }else{
+            	mav.setViewName("redirect:" + forwardUrl);
+            }
         }else{
         	logger.info("login fail!");
         	System.out.println("login fail!");

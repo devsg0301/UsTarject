@@ -32,16 +32,19 @@ boolean appFlag = useragent.indexOf("bandaimallapp") > -1;
 <meta name="format-detection" content="telephone=no" />
 <meta name="description" content="">
 <meta name="author" content="">
-<title>viCloud</title>
+<title>BeemoSG</title>
+
+<link href="${path_root}/resources/bootstrap/css/main.css" rel="stylesheet">
 
 <!-- Bootstrap Core CSS -->
-<link href="${path_root}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="${path_root}/resources/bootstrap/css/bootstrap.css" rel="stylesheet">
 
 <!-- Custom CSS -->
 <link href="${path_root}/resources/bootstrap/css/modern-business.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${path_root}/resources/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<%-- <link href="${path_root}/resources/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> --%>
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

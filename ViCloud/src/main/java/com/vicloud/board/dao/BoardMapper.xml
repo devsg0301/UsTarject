@@ -8,9 +8,12 @@
         <result property="genre"		column="genre" />
         <result property="title"		column="title" />
         <result property="grade"		column="grade" />
+        <result property="foldername"	column="foldername" />
+        <result property="albumname"	column="albumname" />
         <result property="filename"		column="filename" />
         <result property="file_url"	  	column="file_url" />
         <result property="sub_url"	  	column="sub_url" />
+        <result property="play_date"	column="play_date" />
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="hit"			column="hit" />
     </resultMap>
@@ -62,6 +65,12 @@
         <result javaType="java.lang.String" column="category" 	property="category"/>
         <result javaType="java.lang.String" column="genre" 		property="genre"/>
 	</resultMap> 
+
+    <resultMap id="folderListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="category" 	property="category"/>
+        <result javaType="java.lang.String" column="genre" 		property="genre"/>
+        <result javaType="java.lang.String" column="foldername"	property="foldername"/>
+	</resultMap> 
     
     <select id="getBroadcastList" resultMap="broadcastMap">
     	SELECT STEP_TWO.*                                                             
@@ -74,23 +83,27 @@
 				                       GENRE,
 				                       TITLE,
 				                       GRADE,
+				                       FOLDERNAME,
+				                       ALBUMNAME,
 				                       FILENAME,
 				                       FILE_URL,
 				                       SUB_URL,
-				                       INSERT_DATE,
+				                       PLAY_DATE,
+				                       DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
 				                       HIT
 				                  FROM TBROADCAST
 				                 WHERE 1=1
-				              ORDER BY INSERT_DATE DESC
+				              ORDER BY PLAY_DATE DESC
 				              ) XA,
 				                (SELECT @ROWNUM:=0) TMP
 				         WHERE 1=1
 				           AND XA.CATEGORY LIKE #{param2}
 				           AND XA.GENRE LIKE #{param3}
-				           AND (XA.TITLE LIKE #{param4} OR XA.FILENAME LIKE #{param4})
-				      ORDER BY XA.IDX DESC
+				           AND XA.FOLDERNAME LIKE #{param4}
+				           AND (XA.TITLE LIKE #{param5} OR XA.FILENAME LIKE #{param5})
+				      ORDER BY XA.PLAY_DATE DESC, XA.INSERT_DATE DESC, XA.TITLE DESC
 				       ) STEP_ONE                                                              
-				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 9                                                  
+				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 12                                                  
 			   ) STEP_TWO                                                                  
 		 WHERE STEP_TWO.RNUM &gt;= #{param1}                                                    
       ORDER BY RNUM    
@@ -110,6 +123,16 @@
     	   AND CATEGORY LIKE #{param1}
       GROUP BY CATEGORY, GENRE
     </select>
+
+    <select id="getFolderList" resultMap="folderListMap">
+    	SELECT CATEGORY, GENRE, FOLDERNAME
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+    	   AND GENRE LIKE #{param2}
+      GROUP BY CATEGORY, GENRE, FOLDERNAME
+      ORDER BY MAX(PLAY_DATE) DESC, INSERT_DATE DESC      
+    </select>
     
     <select id="totalBroadcast" resultType="Integer">
     	SELECT COUNT(*)
@@ -117,41 +140,51 @@
     	 WHERE 1=1
     	   AND CATEGORY LIKE #{param1}
     	   AND GENRE LIKE #{param2}
-    	   AND (TITLE LIKE #{param3} OR FILENAME LIKE #{param3})
+    	   AND FOLDERNAME LIKE #{param3}
+    	   AND (TITLE LIKE #{param4} OR FILENAME LIKE #{param4})
     </select>
     
     <select id="broadcastDetail" resultMap="broadcastMap">
-        SELECT * 
+        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, FILE_URL, SUB_URL,
+        	   PLAY_DATE, DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r'), HIT        	 
           FROM TBROADCAST 
          WHERE idx = #{idx}
     </select>
 
     <select id="getSelectBroadcast" resultMap="broadcastMap">
-        SELECT * 
+        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, FILE_URL, SUB_URL,
+        	   PLAY_DATE, DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r'), HIT 
           FROM TBROADCAST
          WHERE idx = #{idx}
     </select>
     
     <insert id="insertBroadcast">
-         INSERT INTO TBROADCAST ( category, genre, title, grade, filename, file_url, sub_url ) VALUES (
+         INSERT INTO TBROADCAST ( category, genre, title, grade, foldername, albumname, filename, file_url, sub_url, play_date ) VALUES (
                 #{category}
               , #{genre}
               , #{title}
               , #{grade}
+              , #{foldername}
+              , #{albumname}
               , #{filename}
               , #{file_url}
               , #{sub_url}
+              , #{play_date}
          )
     </insert>
     
     <update id="updateBroadcast">
          UPDATE TBROADCAST SET
-              category 	= #{category},
-              genre 	= #{genre},
-              title 	= #{title},
-              filename 	= #{filename},
-              url 		= #{url},
-              modify_date = SYSDATE()
+              category 	 = #{category},
+              genre 	 = #{genre},
+              title 	 = #{title},
+              grade		 = #{grade},
+              foldername = #{foldername},
+              albumname  = #{albumname},
+              filename 	 = #{filename},
+              file_url 	 = #{file_url},
+              sub_url 	 = #{sub_url},
+              play_date	 = #{play_date}
          WHERE idx = #{idx} LIMIT 1
     </update>
     
