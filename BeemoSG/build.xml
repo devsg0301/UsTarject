@@ -2,61 +2,86 @@
 <project name="project" default="jspUpload">
 	<description>ftp upload</description>
 	<property file="build.properties" />
-	<property name="web.home" value="D:\BeemoSG\workspaces\BeemoSG\src\main\webapp" />
+	<property name="web.home" value="D:\BeemoSG\workspaces\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\BeemoSG" />
 	<!-- ==================== ftp upload Target ================================== -->
 	<target name="jspUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+		<input message="운영서버 jsp파일을 deploy 하시겠습니까?(Yes/No)?"
+		   	   validargs="Y,y,N,n"
+			   addproperty="do.PlatForm" />
+
+		<condition property="do.abort">
+			<or>
+			<equals arg1="n" arg2="${do.PlatForm}"/>
+		    <equals arg1="N" arg2="${do.PlatForm}"/>
+			</or>
+		</condition>
+		<fail if="do.abort">aborted by user.</fail>
+		
 		<echo message="|-------------------------------------------------------------| " />
-		<echo message="|                                                             | " />
 		<echo message="|                      jsp Uploaindg......                    | " />
-		<echo message="|                                                             | " />
 		<echo message="|-------------------------------------------------------------| " />
-		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}" userid="${ftp.userid}" password="${ftp.password}" verbose="yes" >
-			<fileset dir="${web.home}">
+		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}/WEB-INF/views" userid="${ftp.userid}" password="${ftp.password}" verbose="true" depends="yes" >
+			<fileset dir="${web.home}/WEB-INF/views">
 				<include name="**/*.*" />
 			</fileset>
 		</ftp>
 		<echo message="|-------------------------------------------------------------| " />
-		<echo message="|                                                             | " />
 		<echo message="|                      Upload OK!                             | " />
-		<echo message="|                                                             | " />
 		<echo message="|-------------------------------------------------------------| " />
 	</target>
 	<target name="classUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+		<input message="운영서버 class파일을 deploy 하시겠습니까?(Yes/No)?"
+		   	   validargs="Y,y,N,n"
+			   addproperty="do.PlatForm" />
+
+		<condition property="do.abort">
+			<or>
+			<equals arg1="n" arg2="${do.PlatForm}"/>
+		    <equals arg1="N" arg2="${do.PlatForm}"/>
+			</or>
+		</condition>
+		<fail if="do.abort">aborted by user.</fail>
+
 		<echo message="|-------------------------------------------------------------| " />
-		<echo message="|                                                             | " />
-		<echo message="|                      class Uploaindg......                    | " />
-		<echo message="|                                                             | " />
+		<echo message="|                      class Uploaindg......                  | " />
 		<echo message="|-------------------------------------------------------------| " />
-		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}" userid="${ftp.userid}" password="${ftp.password}" verbose="yes" timediffauto="yes">
-			<fileset dir="${web.home}">
+		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}/WEB-INF/classes" userid="${ftp.userid}" password="${ftp.password}" depends="yes" verbose="true" >
+			<fileset dir="${web.home}/WEB-INF/classes">
 				<include name="**/*.*" />
 				<exclude name="jdbc.xml"/>
 				<exclude name="log4j.xml"/>
 			</fileset>
 		</ftp>
 		<echo message="|-------------------------------------------------------------| " />
-		<echo message="|                                                             | " />
-		<echo message="|                      Uplo	ad OK!                             | " />
-		<echo message="|                                                             | " />
+		<echo message="|                      Upload OK!                             | " />
 		<echo message="|-------------------------------------------------------------| " />
 	</target>
-	<target name="xmlUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+	<target name="resourcesUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+		<input message="운영서버 resources파일을 deploy 하시겠습니까?(Yes/No)?"
+		   	   validargs="Y,y,N,n"
+			   addproperty="do.PlatForm" />
+
+		<condition property="do.abort">
+			<or>
+			<equals arg1="n" arg2="${do.PlatForm}"/>
+		    <equals arg1="N" arg2="${do.PlatForm}"/>
+			</or>
+		</condition>
+		<fail if="do.abort">aborted by user.</fail>
+
 		<echo message="|-------------------------------------------------------------| " />
-		<echo message="|                                                             | " />
-		<echo message="|                      xml Uploaindg......                    | " />
-		<echo message="|                                                             | " />
+		<echo message="|                      resources Uploaindg......              | " />
 		<echo message="|-------------------------------------------------------------| " />
-		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}" userid="${ftp.userid}" password="${ftp.password}" verbose="yes" timediffauto="yes">
-			<fileset dir="${web.home}">
-				<include name="**/*.xml" />
+		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}/resources" userid="${ftp.userid}" password="${ftp.password}" depends="yes" verbose="true" >
+			<fileset dir="${web.home}/resources">
+				<include name="**/*.*" />
 			</fileset>
 		</ftp>
 		<echo message="|-------------------------------------------------------------| " />
-		<echo message="|                                                             | " />
 		<echo message="|                      Upload OK!                             | " />
-		<echo message="|                                                             | " />
 		<echo message="|-------------------------------------------------------------| " />
 	</target>
+	
 	<!-- ==================== check java version Target ================================== -->
 	<target name="check">
 		<echo message="${java.version}">
