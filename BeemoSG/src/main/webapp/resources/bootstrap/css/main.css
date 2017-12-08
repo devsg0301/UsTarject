@@ -1,0 +1,342 @@
+@CHARSET "UTF-8";
+
+header {
+	background-size: cover;
+	border-bottom: 1px solid #2a2a2a;
+	box-shadow: 0px 0px 10px 0px #6f6f6f;
+}
+
+.gnb_btm_bg {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: url(../images/gnb_btm_bg.png)
+		repeat;
+	height: 6px;
+	z-index: 2;
+	border-top: 1px solid #2a2a2a;
+}
+
+body {
+	background-color: #dbdbdc;
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #000;
+	margin: 0;
+	padding: 0;
+}
+
+#myCarousel .swiper-container {
+	width: 100%;
+	height: 100%;
+}
+
+#myCarousel .swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #000;
+}
+
+#myCarousel .swiper-slide img {
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	-ms-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+}
+
+#myCarousel .swiper-button-prev {
+	width: 65px;
+	height: 65px;
+	background-image: url(../images/banner_button_prev.png);
+	background-size: 50px;
+	
+}
+
+#myCarousel .swiper-button-next {
+	width: 65px;
+	height: 65px;
+	background-image: url(../images/banner_button_next.png);
+	background-size: 50px;
+}
+
+#myCarousel .swiper-button-prev:hover {
+	width: 65px;
+	height: 65px;
+	background-image: url(../images/banner_button_hover_prev.png);
+	background-size: 50px;
+}
+
+#myCarousel .swiper-button-next:hover {
+	width: 65px;
+	height: 65px;
+	background-image: url(../images/banner_button_hover_next.png);
+	background-size: 50px;
+}
+
+@media ( min-width : 100px) {
+	.container .swiper-container {
+		height: 210px;
+	}
+	.container .swiper-slide {
+		height: 210px;
+	}
+	.container .broadcastImg {
+		height: 79%;
+	}
+	.container .swiper-container-vod {
+		height: 160px;
+	}
+	.container .swiper-slide-vod {
+		height: 160px;
+	}
+	.container .vodImg {
+		height: 70%;
+	}
+	.swiper-button-prev{
+		display: none;
+	}
+	.swiper-button-next{
+		display: none;
+	}
+	header.carousel {
+	    height: 40%;
+	}
+}
+
+@media ( min-width : 460px) {
+	.container .swiper-container {
+		height: 282px;
+	}
+	.container .swiper-slide {
+		height: 282px;
+	}
+	.container .broadcastImg {
+		height: 84.5%;
+	}
+	.container .swiper-container-vod {
+		height: 160px;
+	}
+	.container .swiper-slide-vod {
+		height: 160px;
+	}
+	.container .vodImg {
+		height: 70%;
+	}
+	.swiper-button-prev{
+		display: block;
+	}
+	.swiper-button-next{
+		display: block;
+	}
+	header.carousel {
+	    height: 50%;
+	}
+}
+
+.container .swiper-container {
+	width: 90%;
+	/* height: 280px; */
+	margin-bottom: 50px;
+}
+
+.container .swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #e6e6e7;;
+	/* height: 280px; */
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
+}
+
+.container .vodImg {
+	width: 100%;
+}
+
+.container .broadcastImg {
+	width: 100%;
+}
+
+.swiper-slide>a:hover {
+	border: 2px solid #363636;
+}
+
+.swiper-slide>a {
+	
+}
+
+.dBanner {
+	width: 83%;
+	height: 100%;
+}
+
+.prd_slide_t01_wrap {
+	position: relative;
+}
+
+.program-lists-title {
+	overflow: hidden;
+	width: 90%;
+	margin: 20px auto 10px auto; 
+	display : block;
+	padding-left: 20px;
+	padding-right: 20px;
+	font-family: 'Noto Sans KR';
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: -0.05em;
+	color: #333;
+	display: block;
+}
+
+.program-lists-more {
+	overflow: hidden;
+	font-family: 'Noto Sans KR';
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 1.2;
+	letter-spacing: -0.05em;
+	color: #333;
+	float: right;
+}
+
+.vod-info-box {
+	display: block;
+	border-top: 1px solid #c8c8c8;
+	background-color: #fff;
+	font-size: 12px;
+	line-height: 1;
+	padding: 6px 16px;
+}
+
+.vod-title {
+	display: block; 
+	text-overflow: ellipsis;
+	color: black;
+	font-family: 'Noto Sans KR';
+	margin-bottom: 6px;
+	font-weight: bold;
+	line-height: 1.2;
+	margin-bottom: 6px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.vod-info {
+	width: 164px;
+	color: black;
+	font-family: 'Noto Sans KR';
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	line-height: 1;
+	vertical-align: middle;
+}
+
+.broadcast-title {
+	overflow: hidden;
+	width: 164px;
+	text-overflow: ellipsis;
+	color: black;
+	font-family: 'Noto Sans KR';
+	font-weight: bold;
+	line-height: 1.2;
+	white-space: nowrap;
+}
+
+.broadcast-info-box {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	border-top: 1px solid #c8c8c8;
+	background-color: #fff;
+	font-size: 14px;
+	line-height: 1;
+	padding: 13px 16px;
+}
+
+.container .swiper-button-prev {
+	left: 20px;
+	background-image: url(../images/button_prev.png);
+}
+
+.container .swiper-button-next {
+	right: 20px;
+	background-image: url(../images/button_next.png);
+}
+
+span.icons {
+    position: absolute;
+    top: 4px;
+    right: 23px;
+    width: 65px;
+    text-align: right;
+}
+
+.ico-grade {
+    display: inline-block;
+    overflow: hidden;
+    width: 29px;
+    height: 29px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.hot-icons{
+	position: absolute;
+	top: 4px;
+	left: 23px;
+}
+
+.hot-icons img{
+	width: 29px;
+	height:29px;
+}
+
+.ico-grade-0 {
+    display: inline-block;
+    background-image: url(../images/ico-grade-0.png);
+}
+.ico-grade-12 {
+    display: inline-block;
+    background-image: url(../images/ico-grade-12.png);
+}
+.ico-grade-15 {
+    display: inline-block;
+    background-image: url(../images/ico-grade-15.png);
+}
+.ico-grade-19 {
+    display: inline-block;
+    background-image: url(../images/ico-grade-19.png);
+}
+.ico-hot {
+    display: inline-block;
+    background-image: url(../images/ico-hot.png);
+}
+
+.container .swiper-button-next:hover{
+	background-image: url(../images/button_hover_next.png);
+}
+
+.container .swiper-button-prev:hover{
+	background-image: url(../images/button_hover_prev.png);
+}

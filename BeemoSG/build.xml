@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<project name="project" default="jspUpload">
+	<description>ftp upload</description>
+	<property file="build.properties" />
+	<property name="web.home" value="D:\BeemoSG\workspaces\BeemoSG\src\main\webapp" />
+	<!-- ==================== ftp upload Target ================================== -->
+	<target name="jspUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+		<echo message="|-------------------------------------------------------------| " />
+		<echo message="|                                                             | " />
+		<echo message="|                      jsp Uploaindg......                    | " />
+		<echo message="|                                                             | " />
+		<echo message="|-------------------------------------------------------------| " />
+		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}" userid="${ftp.userid}" password="${ftp.password}" verbose="yes" >
+			<fileset dir="${web.home}">
+				<include name="**/*.*" />
+			</fileset>
+		</ftp>
+		<echo message="|-------------------------------------------------------------| " />
+		<echo message="|                                                             | " />
+		<echo message="|                      Upload OK!                             | " />
+		<echo message="|                                                             | " />
+		<echo message="|-------------------------------------------------------------| " />
+	</target>
+	<target name="classUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+		<echo message="|-------------------------------------------------------------| " />
+		<echo message="|                                                             | " />
+		<echo message="|                      class Uploaindg......                    | " />
+		<echo message="|                                                             | " />
+		<echo message="|-------------------------------------------------------------| " />
+		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}" userid="${ftp.userid}" password="${ftp.password}" verbose="yes" timediffauto="yes">
+			<fileset dir="${web.home}">
+				<include name="**/*.*" />
+				<exclude name="jdbc.xml"/>
+				<exclude name="log4j.xml"/>
+			</fileset>
+		</ftp>
+		<echo message="|-------------------------------------------------------------| " />
+		<echo message="|                                                             | " />
+		<echo message="|                      Uplo	ad OK!                             | " />
+		<echo message="|                                                             | " />
+		<echo message="|-------------------------------------------------------------| " />
+	</target>
+	<target name="xmlUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+		<echo message="|-------------------------------------------------------------| " />
+		<echo message="|                                                             | " />
+		<echo message="|                      xml Uploaindg......                    | " />
+		<echo message="|                                                             | " />
+		<echo message="|-------------------------------------------------------------| " />
+		<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}" userid="${ftp.userid}" password="${ftp.password}" verbose="yes" timediffauto="yes">
+			<fileset dir="${web.home}">
+				<include name="**/*.xml" />
+			</fileset>
+		</ftp>
+		<echo message="|-------------------------------------------------------------| " />
+		<echo message="|                                                             | " />
+		<echo message="|                      Upload OK!                             | " />
+		<echo message="|                                                             | " />
+		<echo message="|-------------------------------------------------------------| " />
+	</target>
+	<!-- ==================== check java version Target ================================== -->
+	<target name="check">
+		<echo message="${java.version}">
+		</echo>
+	</target>
+	<!-- ==================== check time Target ================================== -->
+	<target name="time">
+		<tstamp>
+			<format property="touch.time" pattern="MM/dd/yyyy hh:mm aa" offset="-5" unit="hour" />
+		</tstamp>
+		<echo message="${touch.time}">
+		</echo>
+	</target>
+</project>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beemosg.board.dao.BoardMapper">
+
+	<resultMap id="broadcastMap" 		type="com.beemosg.model.Tbroadcast">
+        <id     property="idx"    		column="idx" />
+        <result property="category"		column="category" />
+        <result property="genre"		column="genre" />
+        <result property="title"		column="title" />
+        <result property="grade"		column="grade" />
+        <result property="foldername"	column="foldername" />
+        <result property="albumname"	column="albumname" />
+        <result property="filename"		column="filename" />
+        <result property="explanation"	column="explanation" />
+        <result property="file_url"	  	column="file_url" />
+        <result property="sub_url"	  	column="sub_url" />
+        <result property="play_date"	column="play_date" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="hit"			column="hit" />
+        <result property="priority"		column="priority" />
+    </resultMap>
+	
+    <resultMap id="boardMap" 			type="com.beemosg.model.Tboard">
+        <id     property="idx"    		column="idx" />
+        <result property="title"		column="title" />
+        <result property="author"		column="author" />
+        <result property="content"  	column="content" />
+        <result property="hit"			column="hit" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="insert_id"	column="insert_id" />
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="board_commentMap" type="com.beemosg.model.Tboard_comment">
+        <id     property="idx"    		column="idx" />
+        <result property="seq"			column="seq" />
+        <result property="comment"  	column="comment" />
+        <result property="author"		column="author" />
+        <result property="insert_id"	column="insert_id" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="idx_no"		column="idx_no" />
+        <result property="seq_re"		column="seq_re" />
+        <result property="seq_no"		column="seq_no" />
+        <result property="gap"			column="gap" />
+    </resultMap>
+    
+    <resultMap id="broadcast_commentMap" type="com.beemosg.model.Tbroadcast_comment">
+        <id     property="idx"    		column="idx" />
+        <result property="seq"			column="seq" />
+        <result property="comment"  	column="comment" />
+        <result property="author"		column="author" />
+        <result property="insert_id"	column="insert_id" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="idx_no"		column="idx_no" />
+        <result property="seq_re"		column="seq_re" />
+        <result property="seq_no"		column="seq_no" />
+        <result property="gap"			column="gap" />
+    </resultMap>
+    
+    <resultMap id="categoryListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="category" 	property="category"/>
+	</resultMap> 
+
+    <resultMap id="genreListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="category" 	property="category"/>
+        <result javaType="java.lang.String" column="genre" 		property="genre"/>
+	</resultMap> 
+
+    <resultMap id="folderListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="category" 	property="category"/>
+        <result javaType="java.lang.String" column="genre" 		property="genre"/>
+        <result javaType="java.lang.String" column="foldername"	property="foldername"/>
+	</resultMap> 
+    
+    <update id="updateHitCount">
+         UPDATE TBROADCAST SET
+              	hit = hit + 1
+          WHERE foldername = #{param1}
+    </update>
+
+    <select id="getBroadcastList" resultMap="broadcastMap">
+    	SELECT STEP_TWO.*                                                             
+		  FROM( SELECT STEP_ONE.*                                                           
+				  FROM( SELECT @ROWNUM:=@ROWNUM+1 AS RNUM,                                                  
+				               XA.*                                                                              
+				          FROM( SELECT (SELECT COUNT(*) FROM TBROADCAST) AS TOTAL_COUNT,
+				                       IDX,
+				                       CATEGORY,
+				                       GENRE,
+				                       TITLE,
+				                       GRADE,
+				                       FOLDERNAME,
+				                       ALBUMNAME,
+				                       FILENAME,
+				                       EXPLANATION,
+				                       FILE_URL,
+				                       SUB_URL,
+				                       PLAY_DATE,
+				                       DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
+				                       HIT,
+				                       PRIORITY
+				                  FROM TBROADCAST
+				                 WHERE 1=1
+				              ORDER BY PLAY_DATE DESC
+				              ) XA,
+				                (SELECT @ROWNUM:=0) TMP
+				         WHERE 1=1
+				           AND XA.CATEGORY LIKE #{param2}
+				           AND XA.GENRE LIKE #{param3}
+				           AND XA.FOLDERNAME LIKE #{param4}
+				           AND (XA.TITLE LIKE #{param5} OR XA.FILENAME LIKE #{param5})
+				      ORDER BY XA.PLAY_DATE DESC, XA.INSERT_DATE DESC, XA.TITLE DESC
+				       ) STEP_ONE                                                              
+				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 15                                                  
+			   ) STEP_TWO                                                                  
+		 WHERE STEP_TWO.RNUM &gt;= #{param1}                                                    
+      ORDER BY RNUM    
+    </select>
+    
+    <select id="getCategoryList" resultMap="categoryListMap">
+    	SELECT CATEGORY
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+      GROUP BY CATEGORY
+    </select>
+    
+    <select id="getGenerList" resultMap="genreListMap">
+    	SELECT CATEGORY, GENRE
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+      GROUP BY CATEGORY, GENRE
+    </select>
+
+    <select id="getFolderList" resultMap="folderListMap">
+    	SELECT CATEGORY, GENRE, FOLDERNAME
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+    	   AND GENRE LIKE #{param2}
+      GROUP BY CATEGORY, GENRE, FOLDERNAME
+      ORDER BY MAX(PLAY_DATE) DESC, INSERT_DATE DESC      
+    </select>
+    
+    <select id="totalBroadcast" resultType="Integer">
+    	SELECT COUNT(*)
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+    	   AND GENRE LIKE #{param2}
+    	   AND FOLDERNAME LIKE #{param3}
+    	   AND (TITLE LIKE #{param4} OR FILENAME LIKE #{param4})
+    </select>
+    
+    <select id="broadcastDetail" resultMap="broadcastMap">
+        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL,
+        	   PLAY_DATE, DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r'), HIT, PRIORITY        	 
+          FROM TBROADCAST 
+         WHERE idx = #{idx}
+    </select>
+
+    <select id="getSelectBroadcast" resultMap="broadcastMap">
+        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL,
+        	   PLAY_DATE, DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r'), HIT, PRIORITY 
+          FROM TBROADCAST
+         WHERE idx = #{idx}
+    </select>
+    
+    <insert id="insertBroadcast">
+         INSERT INTO TBROADCAST ( category, genre, title, grade, foldername, albumname, filename, explanation, file_url, sub_url, play_date, priority ) VALUES (
+                #{category}
+              , #{genre}
+              , #{title}
+              , #{grade}
+              , #{foldername}
+              , #{albumname}
+              , #{filename}
+              , #{explanation}
+              , #{file_url}
+              , #{sub_url}
+              , #{play_date}
+              , #{priority}
+         )
+    </insert>
+    
+    <update id="updateBroadcast">
+         UPDATE TBROADCAST 
+         	SET category 	= #{category},
+              	genre 	 	= #{genre},
+              	title 	 	= #{title},
+              	grade		= #{grade},
+              	foldername	= #{foldername},
+              	albumname	= #{albumname},
+              	filename 	= #{filename},
+              	explanation = #{explanation},
+              	file_url 	= #{file_url},
+              	sub_url 	= #{sub_url},
+              	play_date	= #{play_date},
+              	priority	= #{priority}
+          WHERE idx = #{idx} LIMIT 1
+    </update>
+    
+    <select id="broadcastCommentList" resultMap="broadcast_commentMap">
+		SELECT * 
+		  FROM TBROADCAST_COMMENT 
+		 WHERE idx = #{idx}
+      ORDER BY seq_no
+	</select>
+	
+	<select id="maxSeqNo" resultType="Integer">
+		SELECT MAX(SEQ_NO) 
+		  FROM TBROADCAST_COMMENT 
+		 WHERE idx = #{idx}
+	</select>
+
+	<select id="maxIdxNo" resultType="Integer">
+		SELECT MAX(IDX_NO) 
+		  FROM TBROADCAST_COMMENT
+		 WHERE idx = #{idx}
+	</select>
+
+	<select id="maxSeqReNo" resultType="Integer">
+		SELECT MAX(SEQ_NO) 
+		  FROM TBROADCAST_COMMENT 
+		 WHERE idx = #{param1}
+		   AND idx_no = #{param2} 
+		   AND seq_re &gt;= #{param3}
+		   AND gap &gt; #{param4}
+	</select>
+	
+    
+    <insert id="insertBroadcastComment">
+		INSERT INTO TBROADCAST_COMMENT (idx, comment, author, insert_id, idx_no, seq_re, seq_no, gap) VALUES (
+				#{idx},
+				#{comment},
+				#{author},
+				#{insert_id},
+				#{idx_no},
+				#{seq_re},
+				#{seq_no},
+				#{gap}
+		)
+	</insert>
+    
+    
+    
+    <select id="boardList" resultMap="boardMap">
+        SELECT * FROM TBOARD 
+    </select>
+
+    <select id="selectOne" resultMap="boardMap">
+        SELECT * FROM TBOARD WHERE idx = #{idx}
+    </select>
+
+    <insert id="insertBoard">
+         INSERT INTO TBOARD ( title, author, content ) VALUES (
+                #{title}
+              , #{author}
+              , #{content}
+         )
+    </insert>
+
+    <update id="updateBoard">
+         UPDATE TBOARD SET
+              title = #{title},
+              content = #{content},
+              modify_date = SYSDATE()
+         WHERE idx = #{idx} LIMIT 1
+    </update>
+
+    <delete id="deleteBoard">
+         DELETE FROM TBOARD WHERE idx = #{idx}
+    </delete>
+
+	<select id="boardCommentList" resultMap="board_commentMap">
+		SELECT * 
+		  FROM TBOARD_COMMENT 
+		 WHERE idx = #{idx}
+      ORDER BY seq_no
+	</select>
+	
+	<update id="updateSeqNo">
+		UPDATE TBOARD_COMMENT
+		   SET seq_no = seq_no + 1
+		 WHERE idx = #{param1}
+		   AND seq_no &gt; #{param2}
+	</update>
+
+	<insert id="insertBoardComment">
+		INSERT INTO TBOARD_COMMENT (idx, comment, author, insert_id, idx_no, seq_re, seq_no, gap) VALUES (
+				#{idx},
+				#{comment},
+				#{author},
+				#{insert_id},
+				#{idx_no},
+				#{seq_re},
+				#{seq_no},
+				#{gap}
+		)
+	</insert>
+	
+	<delete id="deleteBoardComment">
+		DELETE 
+		  FROM TBOARD_COMMENT
+		 WHERE seq = #{param1}
+		   AND insert_id = #{param2} 
+	</delete>
+
+	<delete id="deleteBoardReComment">
+		DELETE 
+		  FROM TBOARD_COMMENT
+		 WHERE idx = #{param1}
+		   AND idx_no = #{param2}
+		   AND seq_re &gt;= #{param3}
+		   and gap &gt; #{param4} 
+	</delete>
+</mapper>

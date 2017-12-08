@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beemosg.main.dao.MainMapper">
+
+    <resultMap id="customerMap" type="com.beemosg.model.Tcustomer">
+        <id     property="cust_no" 		column="cust_no" />
+        <result property="cust_id"		column="cust_id" />
+        <result property="password"  	column="password" />
+        <result property="cust_name"	column="cust_name" />
+        <result property="email"		column="email" />
+        <result property="HP"			column="HP" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+    </resultMap>
+	
+	<resultMap id="broadcastMap" 		type="com.beemosg.model.Tbroadcast">
+        <id     property="idx"    		column="idx" />
+        <result property="category"		column="category" />
+        <result property="genre"		column="genre" />
+        <result property="title"		column="title" />
+        <result property="grade"		column="grade" />
+        <result property="foldername"	column="foldername" />
+        <result property="albumname"	column="albumname" />
+        <result property="filename"		column="filename" />
+        <result property="explanation"	column="explanation" />
+        <result property="file_url"	  	column="file_url" />
+        <result property="sub_url"	  	column="sub_url" />
+        <result property="play_date"	column="play_date" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="hit"			column="hit" />
+        <result property="priority"		column="priority" />
+    </resultMap>
+	    
+    <resultMap id="folderListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String"  column="category" 		property="category"/>
+        <result javaType="java.lang.String"  column="genre" 		property="genre"/>
+        <result javaType="java.lang.String"  column="foldername"	property="foldername"/>
+        <result javaType="java.lang.String"  column="grade"			property="grade"/>
+        <result javaType="java.lang.Integer" column="hit"			property="hit"/>
+	</resultMap> 
+
+    <select id="getCustomer" resultMap="customerMap">
+        SELECT * 
+          FROM TCUSTOMER
+         WHERE 1=1
+           AND (EMAIL = #{param1}
+            	OR CUST_ID = #{param1})
+           AND PASSWORD = #{param2}
+    </select>
+    
+    <select id="getBroadcastList" resultMap="broadcastMap">
+    	SELECT IDX,
+               CATEGORY,
+               GENRE,
+               TITLE,
+               GRADE,
+               FOLDERNAME,
+               ALBUMNAME,
+               FILENAME,
+               EXPLANATION,
+               FILE_URL,
+               SUB_URL,
+               PLAY_DATE,
+               DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
+               HIT
+          FROM TBROADCAST
+         WHERE 1=1
+           AND CATEGORY NOT IN ('MUSIC', 'UTILITY')
+      ORDER BY UNIX_TIMESTAMP(INSERT_DATE) DESC
+    </select>
+    
+    <select id="getFolderList" resultMap="folderListMap">
+    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, MAX(HIT) AS HIT
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY LIKE #{param1}
+    	   AND GENRE LIKE #{param2}
+    	   <!-- AND PRIORITY &lt;&gt; 99 -->
+      GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE
+      ORDER BY MIN(PRIORITY), MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
+    </select>
+    
+</mapper>
