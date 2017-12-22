@@ -15,15 +15,15 @@ public class MainDao {
 	@Resource(name="mainMapper")
 	private MainMapper mainMapper;
 	
-	public Tcustomer getCustomer(String cust_id, String password){
+	public Tcustomer getCustomer(String cust_id, String password) throws Exception{
 		return this.mainMapper.getCustomer(cust_id, password);
 	}
 
-	public List getFolderList(String category, String genre) {
+	public List getFolderList(String category, String genre) throws Exception{
 		return this.mainMapper.getFolderList(category, genre);
 	}
 
-	public List<Tbroadcast> getBroadcastList() {
+	public List<Tbroadcast> getBroadcastList() throws Exception{
 		return this.mainMapper.getBroadcastList();
 	}
 	

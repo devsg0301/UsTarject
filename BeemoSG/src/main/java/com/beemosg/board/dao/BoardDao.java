@@ -16,105 +16,105 @@ public class BoardDao {
     @Resource(name = "boardMapper")
     private BoardMapper boardMapper;
     
-    public void updateHitCount(String foldername) {
+    public void updateHitCount(String foldername) throws Exception{
     	this.boardMapper.updateHitCount(foldername);
     }
     
-    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord){
+    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception{
     	return this.boardMapper.getBroadcastList(rnum, category, genre, foldername, searchWord);
     }
 
-    public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) {
+    public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception{
     	return this.boardMapper.totalBroadcast(category, genre, foldername, searchWord);
     }
 
-    public List getCategoryList() {
+    public List getCategoryList() throws Exception{
     	return this.boardMapper.getCategoryList();
     }
 
-    public List getGenerList(String category) {
+    public List getGenerList(String category) throws Exception{
     	return this.boardMapper.getGenerList(category);
     }
     
-    public List getFolderList(String category, String genre) {
+    public List getFolderList(String category, String genre) throws Exception{
 		return this.boardMapper.getFolderList(category, genre);
 	}
 
-    public Tbroadcast broadcastDetail(int idx){
+    public Tbroadcast broadcastDetail(int idx) throws Exception{
     	return this.boardMapper.broadcastDetail(idx);
     }
     
-    public Tbroadcast getSelectBroadcast(int idx) {
+    public Tbroadcast getSelectBroadcast(int idx) throws Exception{
     	return this.boardMapper.getSelectBroadcast(idx);
     }
     
-    public void insertBroadcast(Tbroadcast tbroadcast) {
+    public void insertBroadcast(Tbroadcast tbroadcast) throws Exception{
     	this.boardMapper.insertBroadcast(tbroadcast);
     }
     
-    public void updateBroadcast(Tbroadcast tbroadcast) {
+    public void updateBroadcast(Tbroadcast tbroadcast) throws Exception{
     	this.boardMapper.updateBroadcast(tbroadcast);
     }
     
-    public List<Tbroadcast_comment> broadcastCommentList(int idx){
+    public List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception{
     	return this.boardMapper.broadcastCommentList(idx);
     }
 
-    public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment){
+    public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment) throws Exception{
     	this.boardMapper.insertBroadcastComment(tbroadcast_comment);
     }
     
-    public Integer maxSeqNo(int idx){
+    public Integer maxSeqNo(int idx) throws Exception{
     	return this.boardMapper.maxSeqNo(idx);
     }
     
-    public Integer maxIdxNo(int idx){
+    public Integer maxIdxNo(int idx) throws Exception{
     	return this.boardMapper.maxIdxNo(idx);
     }
     
-    public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap){
+    public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap) throws Exception{
     	return this.boardMapper.maxSeqReNo(idx, idx_no, seq, gap);
     }
     
     /* ********************************************************************* */
     
-    public List<Tboard> getBoardList() {
+    public List<Tboard> getBoardList() throws Exception{
         return this.boardMapper.boardList();
     }
 
-    public Tboard getSelectOne(int idx) {
+    public Tboard getSelectOne(int idx) throws Exception{
         return this.boardMapper.selectOne(idx);
     }
     
-    public void insertBoard(Tboard tboard) {
+    public void insertBoard(Tboard tboard) throws Exception{
         this.boardMapper.insertBoard(tboard);
     }
 
-    public void updateBoard(Tboard tboard) {
+    public void updateBoard(Tboard tboard) throws Exception{
         this.boardMapper.updateBoard(tboard);
     }
 
-    public void deleteBoard(int idx) {
+    public void deleteBoard(int idx) throws Exception{
         this.boardMapper.deleteBoard(idx);
     }
     
-    public List<Tboard_comment> boardCommentList(int idx){
+    public List<Tboard_comment> boardCommentList(int idx) throws Exception{
     	return this.boardMapper.boardCommentList(idx);
     }
     
-    public void updateSeqNo(int idx, int seq_no){
+    public void updateSeqNo(int idx, int seq_no) throws Exception{
     	this.boardMapper.updateSeqNo(idx, seq_no);
     }
 
-    public void insertBoardComment(Tboard_comment tboard_comment){
+    public void insertBoardComment(Tboard_comment tboard_comment) throws Exception{
     	this.boardMapper.insertBoardComment(tboard_comment);
     }
     
-    public void deleteBoardComment(int seq, String insert_id){
+    public void deleteBoardComment(int seq, String insert_id) throws Exception{
     	this.boardMapper.deleteBoardComment(seq, insert_id);
     }
     
-    public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
+    public void deleteBoardReComment(int idx, int idx_no, int seq, int gap) throws Exception{
     	this.boardMapper.deleteBoardReComment(idx, idx_no, seq, gap);
     }
 

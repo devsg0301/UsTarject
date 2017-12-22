@@ -13,7 +13,7 @@
 	<!--  날짜별 로그 -->  
 	<appender name="dailyout" class="org.apache.log4j.DailyRollingFileAppender">  
         <!-- 이것은 날짜별로  로그를 남김. 파일명.확장자.DatePattern으로 정의 함-->  
-        <param name="file" value="logs/Beemosg/base.log"/>  
+        <param name="File" value="D:/BeemoSG/logs/Beemosg/base.log"/>  
         <param name="Append" value="true"/>  
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>  
         <layout class="org.apache.log4j.PatternLayout">  
@@ -23,24 +23,24 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.beemosg">
-		<level value="info" />
+		<level value="INFO" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
-		<level value="info" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="org.springframework.beans">
-		<level value="info" />
+		<level value="INFO" />
 	</logger>
 	
 	<logger name="org.springframework.context">
-		<level value="info" />
+		<level value="INFO" />
 	</logger>
 
 	<logger name="org.springframework.web">
-		<level value="info" />
+		<level value="INFO" />
 	</logger>
 	
 	<!-- 특정 로거 설정 -->
@@ -52,7 +52,7 @@
 
 	<!-- root 로거 기본 설정 -->
 	<root>  
-        <level value="INFO"/>  
+        <level value="DEBUG"/>  
         <appender-ref ref="dailyout"/>  
     </root>  
 	

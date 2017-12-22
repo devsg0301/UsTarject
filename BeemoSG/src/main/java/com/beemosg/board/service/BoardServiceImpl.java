@@ -18,105 +18,105 @@ public class BoardServiceImpl implements BoardService{
 	@Resource(name="boardDao")
 	private BoardDao boardDao;
 	
-	public void updateHitCount(String foldername) {
+	public void updateHitCount(String foldername) throws Exception {
 		boardDao.updateHitCount(foldername);
 	}
 	
-	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) {
+	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception {
 		return boardDao.getBroadcastList(rnum, category, genre, foldername, searchWord);
 	}
 	
-	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) {
+	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception {
 		return boardDao.totalBroadcast(category, genre, foldername, searchWord);
 	}
 	
-	public List getCategoryList() {
+	public List getCategoryList() throws Exception {
 		return boardDao.getCategoryList();
 	}
 	
-	public List getGenerList(String category) {
+	public List getGenerList(String category) throws Exception {
 		return boardDao.getGenerList(category);
 	}
 	
-	public List getFolderList(String category, String genre) {
+	public List getFolderList(String category, String genre) throws Exception {
 		return boardDao.getFolderList(category, genre);
 	}
 	
-	public Tbroadcast broadcastDetail(int idx){
+	public Tbroadcast broadcastDetail(int idx) throws Exception {
 		return boardDao.broadcastDetail(idx);
 	}
 	
-	public Tbroadcast getSelectBroadcast(int idx) {
+	public Tbroadcast getSelectBroadcast(int idx) throws Exception {
 		return boardDao.getSelectBroadcast(idx);
 	}
 	
-	public void insertBroadcast(Tbroadcast tbroadcast){
+	public void insertBroadcast(Tbroadcast tbroadcast) throws Exception {
 		boardDao.insertBroadcast(tbroadcast);
 	}
 	
-	public void updateBroadcast(Tbroadcast tbroadcast){
+	public void updateBroadcast(Tbroadcast tbroadcast) throws Exception {
 		boardDao.updateBroadcast(tbroadcast);
 	}
 	
-	public List<Tbroadcast_comment> broadcastCommentList(int idx){
+	public List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception {
 		return boardDao.broadcastCommentList(idx);
 	}
 	
-	public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment){
+	public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment) throws Exception {
 		boardDao.insertBroadcastComment(tbroadcast_comment);
 	}
 	
-	public Integer maxSeqNo(int idx){
+	public Integer maxSeqNo(int idx) throws Exception {
 		return boardDao.maxSeqNo(idx);
 	}
 	
-	public Integer maxIdxNo(int idx){
+	public Integer maxIdxNo(int idx) throws Exception {
 		return boardDao.maxIdxNo(idx);
 	}
 	
-	public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap){
+	public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap) throws Exception {
 		return boardDao.maxSeqReNo(idx, idx_no, seq, gap);
 	}
 	
 	/* ******************************************************************** */
 	
-	public List<Tboard> getBoardList(){
+	public List<Tboard> getBoardList() throws Exception{
 		return boardDao.getBoardList();
 	}
 
-	public Tboard getSelectOne(int idx) {
+	public Tboard getSelectOne(int idx) throws Exception{
 		return boardDao.getSelectOne(idx);
 	}
 
-	public void insertBoard(Tboard tboard) {
+	public void insertBoard(Tboard tboard) throws Exception{
 		boardDao.insertBoard(tboard);
 	}
 
-	public void updateBoard(Tboard tboard) {
+	public void updateBoard(Tboard tboard) throws Exception{
 		boardDao.updateBoard(tboard);
 	}
 
-	public void deleteBoard(int idx) {
+	public void deleteBoard(int idx) throws Exception{
 		boardDao.deleteBoard(idx);
 	}
 	
-	public List<Tboard_comment> boardCommentList(int idx){
+	public List<Tboard_comment> boardCommentList(int idx) throws Exception{
 		return boardDao.boardCommentList(idx);
 	}
 	
-	public void updateSeqNo(int idx, int seq_no){
+	public void updateSeqNo(int idx, int seq_no) throws Exception{
 		boardDao.updateSeqNo(idx, seq_no);
 	}
 
-	public void insertBoardComment(Tboard_comment tboard_comment){
+	public void insertBoardComment(Tboard_comment tboard_comment) throws Exception{
 		boardDao.insertBoardComment(tboard_comment);
 	}
 	
-	public void deleteBoardComment(int seq, String insert_id){
+	public void deleteBoardComment(int seq, String insert_id) throws Exception{
 		boardDao.deleteBoardComment(seq, insert_id);
 	}
 	
-	public void deleteBoardReComment(int idx, int idx_no, int seq, int gap){
+	public void deleteBoardReComment(int idx, int idx_no, int seq, int gap) throws Exception{
 		boardDao.deleteBoardReComment(idx, idx_no, seq, gap);
 	}
 

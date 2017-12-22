@@ -56,6 +56,31 @@
 		<echo message="|                      Upload OK!                             | " />
 		<echo message="|-------------------------------------------------------------| " />
 	</target>
+	<target name="libUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
+			<input message="운영서버lib파일을 deploy 하시겠습니까?(Yes/No)?"
+			   	   validargs="Y,y,N,n"
+				   addproperty="do.PlatForm" />
+
+			<condition property="do.abort">
+				<or>
+				<equals arg1="n" arg2="${do.PlatForm}"/>
+			    <equals arg1="N" arg2="${do.PlatForm}"/>
+				</or>
+			</condition>
+			<fail if="do.abort">aborted by user.</fail>
+
+			<echo message="|-------------------------------------------------------------| " />
+			<echo message="|                      lib Uploaindg......                    | " />
+			<echo message="|-------------------------------------------------------------| " />
+			<ftp server="${ftp.server}" port="${ftp.port}" remotedir="${ftp.remotedir}/WEB-INF/lib" userid="${ftp.userid}" password="${ftp.password}" depends="yes" verbose="true" >
+				<fileset dir="${web.home}/WEB-INF/lib">
+					<include name="**/*.*" />
+				</fileset>
+			</ftp>
+			<echo message="|-------------------------------------------------------------| " />
+			<echo message="|                      Upload OK!                             | " />
+			<echo message="|-------------------------------------------------------------| " />
+		</target>
 	<target name="resourcesUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
 		<input message="운영서버 resources파일을 deploy 하시겠습니까?(Yes/No)?"
 		   	   validargs="Y,y,N,n"

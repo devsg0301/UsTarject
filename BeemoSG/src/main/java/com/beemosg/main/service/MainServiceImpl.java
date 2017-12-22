@@ -16,15 +16,15 @@ public class MainServiceImpl implements MainService {
 	@Resource(name="mainDao")
 	private MainDao mainDao;
 
-	public Tcustomer getCustomer(String cust_id, String password) {
+	public Tcustomer getCustomer(String cust_id, String password) throws Exception{
 		return mainDao.getCustomer(cust_id, password);
 	}
 
-	public List getFolderList(String category, String genre) {
+	public List getFolderList(String category, String genre) throws Exception{
 		return mainDao.getFolderList(category, genre);
 	}
 
-	public List<Tbroadcast> getBroadcastList() {
+	public List<Tbroadcast> getBroadcastList() throws Exception{
 		return mainDao.getBroadcastList();
 	}
 

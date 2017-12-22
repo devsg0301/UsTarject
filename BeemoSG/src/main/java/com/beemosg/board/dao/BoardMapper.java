@@ -12,34 +12,34 @@ import com.beemosg.model.Tbroadcast_comment;
 @Repository(value = "boardMapper")
 public interface BoardMapper {
 	
-	void updateHitCount(String foldername);
-	List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord);
-	Integer totalBroadcast(String category, String genre, String foldername, String searchWord);
-	List getCategoryList();
-	List getGenerList(String category);
-	List getFolderList(String category, String genre);
-	Tbroadcast broadcastDetail(int idx);
-	Tbroadcast getSelectBroadcast(int idx);
-	void insertBroadcast(Tbroadcast tbroadcast);
-	void updateBroadcast(Tbroadcast tbroadcast);
-	List<Tbroadcast_comment> broadcastCommentList(int idx);
-	Integer maxSeqNo(int idx);
-	Integer maxIdxNo(int idx);
-	Integer maxSeqReNo(int idx, int idx_no, int seq, int gap);
-	void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment);
+	void updateHitCount(String foldername) throws Exception;
+	List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception;
+	Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception;
+	List getCategoryList() throws Exception;
+	List getGenerList(String category) throws Exception;
+	List getFolderList(String category, String genre) throws Exception;
+	Tbroadcast broadcastDetail(int idx) throws Exception;
+	Tbroadcast getSelectBroadcast(int idx) throws Exception;
+	void insertBroadcast(Tbroadcast tbroadcast) throws Exception;
+	void updateBroadcast(Tbroadcast tbroadcast) throws Exception;
+	List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception;
+	Integer maxSeqNo(int idx) throws Exception;
+	Integer maxIdxNo(int idx) throws Exception;
+	Integer maxSeqReNo(int idx, int idx_no, int seq, int gap) throws Exception;
+	void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment) throws Exception;
 	
 	/* ********************************************************************* */
 	
-	List<Tboard> boardList();
-    Tboard selectOne(int idx);
-    void insertBoard(Tboard tboard);
-    void updateBoard(Tboard tboard);
-    void deleteBoard(int idx);
+	List<Tboard> boardList() throws Exception;
+    Tboard selectOne(int idx) throws Exception;
+    void insertBoard(Tboard tboard) throws Exception;
+    void updateBoard(Tboard tboard) throws Exception;
+    void deleteBoard(int idx) throws Exception;
     
-    List<Tboard_comment> boardCommentList(int idx);
-    void updateSeqNo(int idx, int seq_no);
-    void insertBoardComment(Tboard_comment tboard_comment);
-    void deleteBoardComment(int seq, String insert_id);
-    void deleteBoardReComment(int idx, int idx_no, int seq, int gap);
+    List<Tboard_comment> boardCommentList(int idx) throws Exception;
+    void updateSeqNo(int idx, int seq_no) throws Exception;
+    void insertBoardComment(Tboard_comment tboard_comment) throws Exception;
+    void deleteBoardComment(int seq, String insert_id) throws Exception;
+    void deleteBoardReComment(int idx, int idx_no, int seq, int gap) throws Exception;
     
 }

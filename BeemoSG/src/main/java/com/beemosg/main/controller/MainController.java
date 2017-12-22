@@ -29,7 +29,7 @@ public class MainController {
 	
 	// 메인페이지 이동
 	@RequestMapping(value = "/defaults/main.do", method = RequestMethod.GET)
-	public String displayMain(HttpSession session, Model model){
+	public String displayMain(HttpSession session, Model model) throws Exception {
 //		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
 //			logger.info("You don't login.");
 //			return "defaults/login";
@@ -42,53 +42,66 @@ public class MainController {
 		List dreamFolderList 			= null;
 		List entertainmentFolderList 	= null;
 		
-		broadcastList 			= this.mainService.getBroadcastList();
-		tvFolderList 			= this.mainService.getFolderList("%TV%","%%");
-		movieFolderList 		= this.mainService.getFolderList("%MOVIE%","%%");
-		dreamFolderList 		= this.mainService.getFolderList("%TV%","드라마%");
-		entertainmentFolderList = this.mainService.getFolderList("%TV%","예능%");
-		
-		model.addAttribute("broadcastList", 			broadcastList);
-		model.addAttribute("tvFolderList", 				tvFolderList);
-		model.addAttribute("movieFolderList", 			movieFolderList);
-		model.addAttribute("dreamFolderList", 			dreamFolderList);
-		model.addAttribute("entertainmentFolderList", 	entertainmentFolderList);
-		
+		try{
+			broadcastList 			= this.mainService.getBroadcastList();
+			tvFolderList 			= this.mainService.getFolderList("%TV%","%%");
+			movieFolderList 		= this.mainService.getFolderList("%MOVIE%","%%");
+			dreamFolderList 		= this.mainService.getFolderList("%TV%","드라마%");
+			entertainmentFolderList = this.mainService.getFolderList("%TV%","예능%");
+			
+			model.addAttribute("broadcastList", 			broadcastList);
+			model.addAttribute("tvFolderList", 				tvFolderList);
+			model.addAttribute("movieFolderList", 			movieFolderList);
+			model.addAttribute("dreamFolderList", 			dreamFolderList);
+			model.addAttribute("entertainmentFolderList", 	entertainmentFolderList);
+		}
+		catch(Exception e){
+			logger.error("defaults/main.do ERROR, " + e.getMessage());
+		}
 		return "defaults/main";
 	}
 	
 	// 로그인 처리
     @RequestMapping(value="/defaults/loginProcess.do", method = RequestMethod.POST)
-    public ModelAndView loginProcess(Model model, Tcustomer customer, HttpSession session, HttpServletRequest request) {
+    public ModelAndView loginProcess(Model model, Tcustomer customer, HttpSession session, HttpServletRequest request) throws Exception{
     	logger.info("login start!");
-    	ModelAndView mav = new ModelAndView();
     	String forwardUrl = "";
-        Tcustomer loginUser = mainService.getCustomer(customer.getCust_id(), customer.getPassword());
- 
-        if (loginUser != null) {
-        	logger.info("login sucess!");
-            session.setAttribute("userLoginInfo", loginUser);
-            forwardUrl = request.getParameter("forwardUrl");
-            if(forwardUrl == null){
-            	mav.setViewName("redirect:/defaults/main.do");
-            }else{
-            	mav.setViewName("redirect:" + forwardUrl);
-            }
-        }else{
-        	logger.info("login fail!");
-        	model.addAttribute("fail", "fail");
-        	mav.setViewName("defaults/login");
-        }
+    	ModelAndView mav = null;
+    	try{
+	    	mav = new ModelAndView();
+	        Tcustomer loginUser = mainService.getCustomer(customer.getCust_id(), customer.getPassword());
+	 
+	        if (loginUser != null) {
+	        	logger.info("login sucess!");
+	            session.setAttribute("userLoginInfo", loginUser);
+	            forwardUrl = request.getParameter("forwardUrl");
+	            if(forwardUrl == null){
+	            	mav.setViewName("redirect:/defaults/main.do");
+	            }else{
+	            	mav.setViewName("redirect:" + forwardUrl);
+	            }
+	        }else{
+	        	logger.info("login fail!");
+	        	model.addAttribute("fail", "fail");
+	        	mav.setViewName("defaults/login");
+	        }
+    	}
+    	catch(Exception e){
+			logger.error("defaults/loginProcess.do ERROR, " + e.getMessage());
+		}
         return mav;
     }
     
     // 로그아웃 처리
     @RequestMapping(value="/defaults/logout.do", method = RequestMethod.GET)
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) throws Exception{
     	logger.info("logout!");
-    	
-    	session.setAttribute("userLoginInfo", null);
-    	
+    	try{
+    		session.setAttribute("userLoginInfo", null);
+    	}
+    	catch(Exception e){
+			logger.error("defaults/logout.do ERROR, " + e.getMessage());
+		}
     	return "defaults/login";
     }
 	
