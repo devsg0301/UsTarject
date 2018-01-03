@@ -27,7 +27,6 @@ public class CustController {
 	@RequestMapping(value = "/cust/custJoin.do", method = RequestMethod.GET)
 	public String custJoinForm(){
 		logger.info("custJoin input page");
-		System.out.println("custJoin input page");
 		return "cust/custJoinForm";
 	}
 	
@@ -35,7 +34,6 @@ public class CustController {
 	@RequestMapping(value = "/cust/custJoinOk.do", method = RequestMethod.POST)
 	public String custJoinOk(@ModelAttribute("tcustomer") Tcustomer tcustomer){
 		logger.info("custJoinOk start");
-		System.out.println("custJoinOk start");
 		
 		String strDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		

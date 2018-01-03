@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.beemosg.common.AESCrypto;
+import com.beemosg.common.ComUtils;
+import com.beemosg.common.Const;
 import com.beemosg.main.service.MainService;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tcustomer;
@@ -30,11 +34,11 @@ public class MainController {
 	// 메인페이지 이동
 	@RequestMapping(value = "/defaults/main.do", method = RequestMethod.GET)
 	public String displayMain(HttpSession session, Model model) throws Exception {
-//		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+//		if(session.getAttribute("Const.USER_KEY") == null || "".equals(session.getAttribute("Const.USER_KEY"))){
 //			logger.info("You don't login.");
 //			return "defaults/login";
 //		}
-		logger.info("start page main");
+//		logger.info("start page main");
 		
 		List<Tbroadcast> broadcastList 	= null;
 		List tvFolderList 				= null;
@@ -62,47 +66,100 @@ public class MainController {
 	}
 	
 	// 로그인 처리
-    @RequestMapping(value="/defaults/loginProcess.do", method = RequestMethod.POST)
-    public ModelAndView loginProcess(Model model, Tcustomer customer, HttpSession session, HttpServletRequest request) throws Exception{
+    @RequestMapping(value="/defaults/loginProcess.do")
+    public ModelAndView loginProcess(Model model, Tcustomer customer, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
     	logger.info("login start!");
-    	String forwardUrl = "";
+    	String forwardUrl 	= "";
+    	String password   	= "";
+    	String keep_login 	= "";
+    	String passwd_org 	= "";
+    	String cust_id 		= "";
+    	String autochk 		= "";
+    	
     	ModelAndView mav = null;
     	try{
+    		keep_login 	= (String)request.getParameter("keep_login");
+    		cust_id		= (String)request.getParameter("cust_id");
+    		password 	= (String)request.getParameter("password");
+    		autochk 	= (String)request.getParameter("autochk");
+    		
+    		if("1".equals(autochk)){
+    			//passwd = VigEnc.decrypt(passwd); 
+    			AESCrypto aes = new AESCrypto();
+    			aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
+    			password = aes.Decrypt(password);
+    		}
+    		
 	    	mav = new ModelAndView();
-	        Tcustomer loginUser = mainService.getCustomer(customer.getCust_id(), customer.getPassword());
+	        Tcustomer loginUser = mainService.getCustomer(cust_id, password);
+	        
+	        if("1".equals(keep_login)){
+				AESCrypto aes = new AESCrypto();
+				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
+				passwd_org = aes.Encrypt(password);
+				
+				ComUtils.setCookie(response, "beemosgautoL", passwd_org, 60*60*24*9999);
+			} else {
+				ComUtils.setCookie(response, "beemosgautoL", "", -1);
+			}
 	 
 	        if (loginUser != null) {
 	        	logger.info("login sucess!");
-	            session.setAttribute("userLoginInfo", loginUser);
+
+	        	AESCrypto aes = new AESCrypto();
+				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
+				String enc_mem_id = aes.Encrypt(cust_id);
+				
+		    	session.setAttribute("enc_mem_id", enc_mem_id);
+		    	
+		    	session.removeAttribute(Const.USER_KEY);
+		    	session.setAttribute(Const.USER_KEY, loginUser);
+	            
 	            forwardUrl = request.getParameter("forwardUrl");
-	            if(forwardUrl == null){
+	            if(forwardUrl == null || forwardUrl == ""){
 	            	mav.setViewName("redirect:/defaults/main.do");
 	            }else{
 	            	mav.setViewName("redirect:" + forwardUrl);
 	            }
 	        }else{
 	        	logger.info("login fail!");
+	        	ComUtils.setCookie(response, "beemosgautoL", "", -1);
 	        	model.addAttribute("fail", "fail");
 	        	mav.setViewName("defaults/login");
 	        }
     	}
     	catch(Exception e){
+    		ComUtils.setCookie(response, "beemosgautoL", "", -1);
 			logger.error("defaults/loginProcess.do ERROR, " + e.getMessage());
 		}
         return mav;
     }
     
+    // 로그인 처리
+    @RequestMapping(value="/defaults/login.do", method = RequestMethod.GET)
+    public String login(HttpSession session) throws Exception{
+    	logger.info("login!");
+    	try{
+    		//session.setAttribute(Const.USER_KEY, null);
+    	}
+    	catch(Exception e){
+			logger.error("defaults/login.do ERROR, " + e.getMessage());
+		}
+    	return "defaults/login";
+    }
+    
     // 로그아웃 처리
     @RequestMapping(value="/defaults/logout.do", method = RequestMethod.GET)
-    public String logout(HttpSession session) throws Exception{
+    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
     	logger.info("logout!");
     	try{
-    		session.setAttribute("userLoginInfo", null);
+    		session.invalidate();
+    		ComUtils.setCookie(response, "beemosgautoL", "", -1);
     	}
     	catch(Exception e){
 			logger.error("defaults/logout.do ERROR, " + e.getMessage());
 		}
-    	return "defaults/login";
+    	return "redirect:/defaults/main.do";
     }
 	
 }

@@ -22,6 +22,7 @@
 	
     <resultMap id="boardMap" 			type="com.beemosg.model.Tboard">
         <id     property="idx"    		column="idx" />
+        <result property="gubun"		column="gubun" />
         <result property="title"		column="title" />
         <result property="author"		column="author" />
         <result property="content"  	column="content" />
@@ -244,10 +245,34 @@
 		)
 	</insert>
     
-    
-    
     <select id="boardList" resultMap="boardMap">
-        SELECT * FROM TBOARD 
+   		SELECT STEP_TWO.*                                                             
+		  FROM( SELECT STEP_ONE.*                                                           
+				  FROM( SELECT @ROWNUM:=@ROWNUM+1 AS RNUM,                                                  
+				               XA.*                                                                              
+				          FROM( SELECT (SELECT COUNT(*) FROM TBOARD) AS TOTAL_COUNT,
+				                       IDX,
+				                       IF(GUBUN = 'level', '등업', '자료요청') AS GUBUN,
+				                       TITLE,
+				                       AUTHOR,
+                               		   CONTENT,
+                               		   HIT,                               
+				                       DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
+				                       INSERT_ID,
+				                       MODIFY_DATE
+				                  FROM TBOARD
+				                 WHERE 1=1
+				                   AND GUBUN = #{param2}
+				              ORDER BY INSERT_DATE DESC
+				              ) XA,
+				              (SELECT @ROWNUM:=0) TMP
+				         WHERE 1=1				           
+				      ORDER BY XA.INSERT_DATE DESC, XA.IDX
+				       ) STEP_ONE
+				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 15
+			   ) STEP_TWO
+		 WHERE STEP_TWO.RNUM &gt;= #{param1}
+      ORDER BY RNUM     
     </select>
 
     <select id="selectOne" resultMap="boardMap">
@@ -255,10 +280,12 @@
     </select>
 
     <insert id="insertBoard">
-         INSERT INTO TBOARD ( title, author, content ) VALUES (
-                #{title}
+         INSERT INTO TBOARD (GUBUN, TITLE, AUTHOR, CONTENT, INSERT_ID) VALUES (
+                #{gubun}
+              , #{title}
               , #{author}
               , #{content}
+              , #{insert_id}
          )
     </insert>
 

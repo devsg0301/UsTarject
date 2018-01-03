@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Tboard {
 	private Integer idx;
+	private String gubun;
 	private String title;
 	private String content;
 	private String author;
@@ -17,6 +18,12 @@ public class Tboard {
 	}
 	public void setIdx(Integer idx) {
 		this.idx = idx;
+	}
+	public String getGubun() {
+		return gubun;
+	}
+	public void setGubun(String gubun) {
+		this.gubun = gubun;
 	}
 	public String getTitle() {
 		return title;

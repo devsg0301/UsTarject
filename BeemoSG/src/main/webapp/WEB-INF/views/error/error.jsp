@@ -28,7 +28,7 @@
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
+                    <li><a href="/defaults/main.do">Home</a>
                     </li>
                     <li class="active">ERROR</li>
                 </ol>

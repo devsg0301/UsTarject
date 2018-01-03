@@ -45,15 +45,15 @@
 			</div>
 			<form class="form-horizontal" name="custInputForm" method="post" action="/cust/custJoinOk.do">
 				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputCustId">아이디</label>
+					<label class="col-sm-3 control-label" for="inputName">이름</label>
 					<div class="col-sm-6">
-						<input class="form-control" name="cust_id" id="inputCustId" type="text" placeholder="ID" required="required">
+						<input class="form-control" name="cust_name" id="inputName" type="text" placeholder="이름">
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
+					<label class="col-sm-3 control-label" for="inputCustId">아이디</label>
 					<div class="col-sm-6">
-						<input class="form-control" name="email" id="inputEmail" type="email" placeholder="Email address" required="required">
+						<input class="form-control" name="cust_id" id="inputCustId" type="text" placeholder="ID" required="required">
 					</div>
 				</div>
 				<div class="form-group">
@@ -72,9 +72,15 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputName">이름</label>
+					<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 					<div class="col-sm-6">
-						<input class="form-control" name="cust_name" id="inputName" type="text" placeholder="이름">
+						<input class="form-control" name="email" id="inputEmail" type="email" placeholder="Email address" required="required">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="inputEmail">전화번호(HP)</label>
+					<div class="col-sm-6">
+						<input class="form-control" name="hp" id="inputHp" type="number" placeholder="HP address" required="required">
 					</div>
 				</div>
 				<div class="form-group">

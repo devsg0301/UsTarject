@@ -39,13 +39,13 @@ public interface BoardService {
 	
 	public Integer maxSeqReNo(int idx, int idx_no, int seq, int gap) throws Exception;
 
-	/* *************************************************************** */
-	
-	public List<Tboard> getBoardList() throws Exception;
-	
-	public Tboard getSelectOne(int idx) throws Exception;
+	public List<Tboard> getBoardList(int rnum, String gubun) throws Exception;
 
+	public Tboard getSelectOne(int idx) throws Exception;
+	
 	public void insertBoard(Tboard tboard) throws Exception;
+
+	/* *************************************************************** */
 
 	public void updateBoard(Tboard tboard) throws Exception;
 

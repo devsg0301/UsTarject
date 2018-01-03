@@ -55,6 +55,7 @@ video{
 <script src="http://vjs.zencdn.net/c/video.js"></script>
 
 <script type="text/javascript">
+	var tmpUser = navigator.userAgent;
 	
 	function copy_trackback(trb) {
 		
@@ -84,6 +85,14 @@ video{
 		//alert(eFileUrl);
 		
 		location.href = "/sgCloud/fileDownload.do?fileName="+fileName+"&fileUrl="+fileUrl;
+	}
+	
+	function folderSearch(category, genre, foldername){
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername);
+		}else{
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername) + "#view_position";
+		}
 	}
 
 </script>
@@ -135,12 +144,16 @@ video{
                 <hr>
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
 	                <div class="col-video">
-		      			<video controls >
+		      			<video controls autoplay>
 		      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" />
 		      				<c:if test="${broadcastDetail.sub_url != ''}">
 				   				<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}.vtt" srclang="ko" label="Korean" default/>
 				   			</c:if>
 		      			</video>
+	      			</div>
+	      			<div class="" style="text-align:center;">
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fa fa-list-ul"></i> 파일목록</a>
+	      				<br>
 	      			</div>
 	      			<div>
 		      			<p>영상이 재생되지 않을 경우에는 아래 링크를 눌러주세요. <a href="http://beemosg.gq:8081/LocalUser/data/${broadcastDetail.file_url}">링크</a></p>
@@ -151,8 +164,12 @@ video{
       				<div>
       					<p>${broadcastDetail.explanation}</p>
       				</div>
+      				<div class="" style="text-align:center;">
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fa fa-list-ul"></i> 파일목록</a>
+	      				<br>
+	      			</div>
       			</c:if>
-				<c:if test="${customer.cust_id == 'devsg' || customer.cust_id == 'beemosg'}">
+				<c:if test="${customer.admin_yn == '1'}">
 					<div class="" style="text-align:right;">
 	                    <a href="/sgCloud/sgCloud_add.do?idx=${idx}" class="btn btn-default">modify</a>
 	                </div>      			

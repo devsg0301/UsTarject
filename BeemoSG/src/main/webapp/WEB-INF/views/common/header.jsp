@@ -139,11 +139,11 @@
 			<img src="${path_root}/resources/bootstrap/images/profile.png" class="img-responsive center-block" alt="">
 			<h3>BeemoSG</h3>
 		</div>
-		<c:if test="${sessionScope.userLoginInfo.cust_id != ''}">
+		<c:if test="${sessionScope.user.cust_id != ''}">
 		<div class="profile-usertitle">
 			<div class="profile-usertitle-name">
-				이름 : ${sessionScope.userLoginInfo.cust_name}<br/>
-	 			아이디 : ${sessionScope.userLoginInfo.cust_id}<br/>
+				이름 : ${sessionScope.user.cust_name}<br/>
+	 			아이디 : ${sessionScope.user.cust_id}<br/>
 			</div>
 		</div>
 		<!-- END SIDEBAR USER TITLE -->
@@ -152,7 +152,7 @@
 			<button type="button" class="btn btn-danger btn-sm">로그아웃</button>
 		</div>
 		</c:if>
-		<c:if test="${sessionScope.userLoginInfo.cust_id == ''}">
+		<c:if test="${sessionScope.user.cust_id == ''}">
 		<div class="profile-userbuttons">
 			<button type="button" class="btn btn-success btn-sm">로그인</button>
 		</div>
@@ -174,6 +174,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+            <li>
+            	<c:if test="${empty sessionScope.user}">
+                	<a href="/defaults/login.do">로그인</a>
+                </c:if>
+                <c:if test="${!empty sessionScope.user}">
+                	<a href="/defaults/logout.do">로그아웃</a>
+                </c:if>                
+            </li>
             <li class="<c:if test="${dropdown == 'sgCloud'}">active</c:if>">
                 <a href="/sgCloud/sgCloud_main.do">sgCloud</a>
             </li>

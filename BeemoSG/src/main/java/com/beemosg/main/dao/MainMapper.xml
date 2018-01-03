@@ -8,7 +8,7 @@
         <result property="password"  	column="password" />
         <result property="cust_name"	column="cust_name" />
         <result property="email"		column="email" />
-        <result property="HP"			column="HP" />
+        <result property="hp"			column="hp" />
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
     </resultMap>

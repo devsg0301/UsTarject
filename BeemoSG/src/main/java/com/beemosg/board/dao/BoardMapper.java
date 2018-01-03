@@ -27,12 +27,12 @@ public interface BoardMapper {
 	Integer maxIdxNo(int idx) throws Exception;
 	Integer maxSeqReNo(int idx, int idx_no, int seq, int gap) throws Exception;
 	void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment) throws Exception;
+	List<Tboard> boardList(int rnum, String gubun) throws Exception;
+	Tboard selectOne(int idx) throws Exception;
+	void insertBoard(Tboard tboard) throws Exception;
 	
 	/* ********************************************************************* */
 	
-	List<Tboard> boardList() throws Exception;
-    Tboard selectOne(int idx) throws Exception;
-    void insertBoard(Tboard tboard) throws Exception;
     void updateBoard(Tboard tboard) throws Exception;
     void deleteBoard(int idx) throws Exception;
     

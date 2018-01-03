@@ -76,19 +76,19 @@ public class BoardDao {
     	return this.boardMapper.maxSeqReNo(idx, idx_no, seq, gap);
     }
     
-    /* ********************************************************************* */
-    
-    public List<Tboard> getBoardList() throws Exception{
-        return this.boardMapper.boardList();
+    public List<Tboard> getBoardList(int rnum, String gubun) throws Exception{
+    	return this.boardMapper.boardList(rnum, gubun);
     }
-
+    
     public Tboard getSelectOne(int idx) throws Exception{
-        return this.boardMapper.selectOne(idx);
+    	return this.boardMapper.selectOne(idx);
     }
     
     public void insertBoard(Tboard tboard) throws Exception{
-        this.boardMapper.insertBoard(tboard);
+    	this.boardMapper.insertBoard(tboard);
     }
+    
+    /* ********************************************************************* */
 
     public void updateBoard(Tboard tboard) throws Exception{
         this.boardMapper.updateBoard(tboard);

@@ -28,6 +28,16 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  <!-- Auto Login 필터추가 Start -->
+  <filter>
+	<filter-name>AutoLogin</filter-name>
+	<filter-class>com.beemosg.filter.AutoLogin</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>AutoLogin</filter-name>
+	<url-pattern>*.do</url-pattern>
+  </filter-mapping>
+	<!-- Auto Login 필터추가 End -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

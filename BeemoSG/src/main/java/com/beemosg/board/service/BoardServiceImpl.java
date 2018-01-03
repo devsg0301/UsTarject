@@ -78,19 +78,18 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.maxSeqReNo(idx, idx_no, seq, gap);
 	}
 	
-	/* ******************************************************************** */
-	
-	public List<Tboard> getBoardList() throws Exception{
-		return boardDao.getBoardList();
+	public List<Tboard> getBoardList(int rnum, String gubun) throws Exception{
+		return boardDao.getBoardList(rnum, gubun);
 	}
-
 	public Tboard getSelectOne(int idx) throws Exception{
 		return boardDao.getSelectOne(idx);
 	}
-
+	
 	public void insertBoard(Tboard tboard) throws Exception{
 		boardDao.insertBoard(tboard);
 	}
+
+	/* ******************************************************************** */
 
 	public void updateBoard(Tboard tboard) throws Exception{
 		boardDao.updateBoard(tboard);

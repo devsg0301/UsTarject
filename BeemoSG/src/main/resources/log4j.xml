@@ -10,9 +10,10 @@
 		</layout>
 	</appender>
 	
-	<!--  날짜별 로그 -->  
+	<!--  날짜별 로그 -->
+	<!--   
 	<appender name="dailyout" class="org.apache.log4j.DailyRollingFileAppender">  
-        <!-- 이것은 날짜별로  로그를 남김. 파일명.확장자.DatePattern으로 정의 함-->  
+        이것은 날짜별로  로그를 남김. 파일명.확장자.DatePattern으로 정의 함  
         <param name="File" value="D:/BeemoSG/logs/Beemosg/base.log"/>  
         <param name="Append" value="true"/>  
         <param name="DatePattern" value="'.'yyyy-MM-dd"/>  
@@ -20,6 +21,15 @@
             <param name="ConversionPattern" value="[%d{HH:mm:ss}][%p][%F::%M:%L]-%m%n"/>  
         </layout>  
     </appender>
+     -->
+    <appender name="FILE" class="org.apache.log4j.rolling.RollingFileAppender">
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+	    	<param name="FileNamePattern" value="D:/BeemoSG/logs/Beemosg/base.%d{yyyy-MM-dd-HH-mm}.log"/>
+	   	</rollingPolicy>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{HH:mm:ss}][%p][%F::%M:%L]-%m%n" />
+		</layout>
+	</appender>
 	
 	<!-- Application Loggers -->
 	<logger name="com.beemosg">

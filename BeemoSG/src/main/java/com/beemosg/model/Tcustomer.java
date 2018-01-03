@@ -8,10 +8,12 @@ public class Tcustomer {
 	private String cust_id;
 	private String password;
 	private String cust_name;
+	private String cust_gb;
 	private String email;
-	private String HP;
+	private String hp;
 	private Date insert_date;
 	private Date modify_date;
+	private String admin_yn;
 	private String remark;
 	private String remark2;
 	
@@ -45,11 +47,11 @@ public class Tcustomer {
 	public void setCust_name(String cust_name) {
 		this.cust_name = cust_name;
 	}
-	public String getHP() {
-		return HP;
+	public String getHp() {
+		return hp;
 	}
-	public void setHP(String hP) {
-		HP = hP;
+	public void setHp(String hp) {
+		this.hp = hp;
 	}
 	public Date getInsert_date() {
 		return insert_date;
@@ -74,6 +76,18 @@ public class Tcustomer {
 	}
 	public void setRemark2(String remark2) {
 		this.remark2 = remark2;
+	}
+	public String getCust_gb() {
+		return cust_gb;
+	}
+	public void setCust_gb(String cust_gb) {
+		this.cust_gb = cust_gb;
+	}
+	public String getAdmin_yn() {
+		return admin_yn;
+	}
+	public void setAdmin_yn(String admin_yn) {
+		this.admin_yn = admin_yn;
 	}
 	
 }

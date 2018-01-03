@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beemosg.board.service.BoardService;
+import com.beemosg.common.Const;
 import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
@@ -51,20 +52,24 @@ public class BoardController {
 			@RequestParam(value="searchWord", defaultValue="") String searchWord,
 			HttpSession session, Model model) throws Exception {
 		logger.info("sgCloud Main");
-		/*
-		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-			logger.info("You don't login.");
-			System.out.println("You don't login.");
-			return "defaults/login";
-		}
-		*/
 		int totalBroadcast = 0;
 		int prev = 0;
 		int next = 0;
 		List genreList = null;
 		List folderList = null;
-		
+		Tcustomer customer = null;
 		try{
+			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+				logger.info("You don't login.");
+				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do");
+				return "defaults/login";
+			}else{
+				customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+				if(!customer.getCust_gb().equals("20")){
+					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+				}
+			}
+
 			if(!foldername.equals("")){
 				this.boardService.updateHitCount(foldername);
 			}
@@ -138,15 +143,20 @@ public class BoardController {
     @RequestMapping("/sgCloud/{idx}.do")
     public String displaySgCloudDetailView(@PathVariable int idx, Model model, HttpSession session) throws Exception {
         logger.info("display view Board view idx = {}", idx);
-        /*
-		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-			logger.info("You don't login.");
-			System.out.println("You don't login.");
-			return "defaults/login";
-		}
-		*/
+        Tcustomer customer = null;
+        
         try{
-	        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+        	if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+        		logger.info("You don't login.");
+        		model.addAttribute("forwardUrl", "/sgCloud/" + idx + ".do");
+        		return "defaults/login";
+        	}else{
+        		customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+        		if(!customer.getCust_gb().equals("20")){
+        			return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+        		}
+        	}
+	        //Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
 	        
 	        Tbroadcast broadcastDetail = this.boardService.broadcastDetail(idx);
 	        
@@ -171,11 +181,16 @@ public class BoardController {
         logger.info("display view Board add");
         
         try{
-	        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+	        if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
 				//request.setAttribute("forwardUrl", "/sgCloud/sgCloud_add.do");
 				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_add.do");
 				return "defaults/login";
+			}else{
+				Tcustomer customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+				if(!customer.getCust_gb().equals("20")){
+					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+				}
 			}
 	        
 	        if (idx > 0) { // 수정하기를 눌렀을 경우
@@ -202,20 +217,25 @@ public class BoardController {
     @RequestMapping(value = "/sgCloud/add_ok.do", method = RequestMethod.POST)
     public String procBroadcastAdd(@ModelAttribute("tbroadcast") Tbroadcast tbroadcast, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
     	logger.info("display view Broadcast write_ok");
-        
+
+    	Tcustomer customer = null;
+
     	try{
-	        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-				logger.info("You don't login.");
-				return "defaults/login";
-			}
+    		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+    			logger.info("You don't login.");
+    			return "defaults/login";
+    		}else{
+    			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+    			if(!customer.getCust_gb().equals("20")){
+    				return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    			}
+    		}
 	        
-	        if(tbroadcast.getCategory().equals("UTILITY") || tbroadcast.getExtension().equals("none")){
+    		if(tbroadcast.getCategory().equals("UTILITY") || tbroadcast.getExtension().equals("none")){
 	        	tbroadcast.setExtension("");
 	        }else if(tbroadcast.getExtension() == null || tbroadcast.getExtension().equals("")){
 	        	tbroadcast.setExtension(".mp4");
 	        }
-	        
-	        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
 	
 	        tbroadcast.setFilename(tbroadcast.getTitle()+tbroadcast.getExtension());
 	        
@@ -255,15 +275,26 @@ public class BoardController {
     
     //댓글 저장
     @RequestMapping(value = "/broadcast/comment_ok.do", method = RequestMethod.POST)
-    public String procBroadcastCommentWrite(@ModelAttribute("tbroadcast_comment") Tbroadcast_comment tbroadcast_comment, HttpSession session) throws Exception {
+    public String procBroadcastCommentWrite(@ModelAttribute("tbroadcast_comment") Tbroadcast_comment tbroadcast_comment, Model model, HttpSession session) throws Exception {
     	logger.info("Start Broadcast comment write.");
     	
+    	Tcustomer customer = null;
     	int idx 	= tbroadcast_comment.getIdx();
     	int seq_re	= tbroadcast_comment.getSeq_re();
     	int gap 	= tbroadcast_comment.getGap();
     	
     	try{
-	    	Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+    		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+    			logger.info("You don't login.");
+    			//model.addAttribute("forwardUrl", "/broadcast/comment_ok.do");
+    			return "defaults/login";
+    		}else{
+    			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+    			if(!customer.getCust_gb().equals("20")){
+    				return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    			}
+    		}
+	    	//customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
 	    	
 	    	if(seq_re == 0){ //가장 최상위 댓글일 경우
 	    		Integer maxSeqNo = this.boardService.maxSeqNo(idx);
@@ -307,13 +338,16 @@ public class BoardController {
     @RequestMapping(value = "/sgCloud/fileDownload.do", method = RequestMethod.GET)
     public void fileDownload(@RequestParam(value="fileUrl", defaultValue="") String fileUrl, Model model,
     		@RequestParam(value="fileName", defaultValue="") String fileName, @RequestHeader("User-Agent") String userAgent, 
-    		HttpServletResponse response, HttpServletRequest request) throws Exception{
+    		HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception{
     	
+    	Tcustomer customer = null;
         //File file = new File(fileUrl);
         try {
 	        InputStream is = null;
+	        customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
 	        
 	        logger.info("------Download Start------");
+	        logger.info("Cust ID : " + customer.getCust_id());
 	        logger.info("fileName : " + fileName + ", fileUrl : " + fileUrl);
 	        
 	        char[] txtChar = fileUrl.toCharArray();
@@ -338,6 +372,8 @@ public class BoardController {
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 	        is = conn.getInputStream();
 	        
+	        int file_size = conn.getContentLength();
+	        
 	        switch (getBrowser(userAgent)) {
 	            case Chrome:
 	            case Opear:
@@ -357,7 +393,7 @@ public class BoardController {
 	        }
 	
 	        response.setContentType("application/octet-stream;charset=utf-8");
-	        //response.setContentLengthLong();
+	        response.setContentLength(file_size);
 	        response.setHeader("Pragma", "no-cache;");
 	        response.setHeader("Expires", "-1;");
 	        response.setHeader("Content-Transfer-Encoding", "binary");
@@ -433,15 +469,132 @@ public class BoardController {
         MSIE, Chrome, Opear, Firefox
     }
     
+ // sgCloud 이동
+ 	@RequestMapping(value = "/sgCloud/sgCloud_board.do", method = RequestMethod.GET)
+ 	public String displayBoard(@RequestParam(value="rnum", defaultValue="1") int rnum,
+ 			@RequestParam(value="gubun", defaultValue="level") String gubun,
+ 			@RequestParam(value="check", defaultValue="no") String check,
+ 			HttpSession session, Model model) throws Exception {
+ 		logger.info("sgCloud Main");
+ 		int totalBoard = 0;
+ 		int prev = 0;
+ 		int next = 0; 		
+ 		Tcustomer customer = null;
+ 		try{
+ 			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+ 				logger.info("You don't login.");
+ 				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do");
+ 				return "defaults/login";
+ 			}
+ 			
+ 			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+ 			
+ 			logger.info("rnum : " + rnum);
+ 			
+ 			List<Tboard> boardList = this.boardService.getBoardList((rnum * 16) - 15, gubun);
+ 			
+ 			if(rnum > 1){
+ 				prev = rnum - 1;
+ 			}
+ 			if(rnum < totalBoard / 16 ){
+ 				next = rnum + 1;
+ 			}else if(rnum == totalBoard / 16){
+ 				if(totalBoard % 16 > 0){
+ 					next = rnum + 1;
+ 				}
+ 			}
+ 			logger.info("prev : " + prev + ", next : " + next);
+ 			
+ 			
+ 			model.addAttribute("totalBoard", totalBoard);
+ 			model.addAttribute("boardList", boardList);
+ 			model.addAttribute("rnum", rnum);
+ 			model.addAttribute("prev", prev);
+ 			model.addAttribute("next", next);
+ 			model.addAttribute("gubun", gubun);
+ 			model.addAttribute("check", check);
+ 			model.addAttribute("dropdown", "sgCloud");
+ 		}
+ 		catch(Exception e){
+ 			logger.error("sgCloud/sgCloud_board.do ERROR, " + e.getMessage());
+ 		}
+ 		return "sgCloud/sgCloud_board";
+ 	}
+ 	
+ 	// 게시판 쓰기 폼
+ 	@RequestMapping(value = "/sgCloud/sgCloud_boardwrite.do", method = RequestMethod.GET)
+ 	public String displayBoardWrite(@RequestParam(value="idx", defaultValue="0") int idx,
+ 			@RequestParam(value="gubun", defaultValue="level") String gubun,
+ 			Model model, HttpSession session) throws Exception{
+ 		logger.info("display view Board write");
+ 		
+ 		try {
+	 		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+	 			logger.info("You don't login.");
+	 			model.addAttribute("forwardUrl", "/sgCloud/sgCloud_boardwrite.do");
+	 			return "defaults/login";
+	 		}
+	 		
+	 		if (idx > 0) { // 수정하기를 눌렀을 경우
+	 			logger.info("display view Board modify");
+	 			Tboard board = this.boardService.getSelectOne(idx);
+	 			model.addAttribute("board", board);
+	 		}
+	 		model.addAttribute("dropdown", "sgCloud");
+	 		model.addAttribute("gubun", gubun);
+ 		
+ 		} catch (Exception e) {
+ 			logger.error("sgCloud/sgCloud_boardwrite.do ERROR, " + e.getMessage());
+ 		}
+ 		return "sgCloud/sgCloud_boardwrite";
+ 	}
+ 	
+ 	// 게시판 쓰기 저장
+ 	@RequestMapping(value = "/sgCloud/sgCloud_boardwrite_ok.do", method = RequestMethod.POST)
+ 	public String procBoardWrite(@ModelAttribute("tboard") Tboard tboard,
+ 			RedirectAttributes redirectAttributes, Model model, HttpSession session) throws Exception{
+ 		logger.info("display view Board write_ok");
+ 		
+ 		Tcustomer customer = null;
+ 		
+ 		try {
+	 		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+	 			logger.info("You don't login.");
+	 			model.addAttribute("forwardUrl", "/sgCloud/sgCloud_boardwrite.do");
+	 			return "defaults/login";
+	 		}
+	 		
+	 		customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
+	 		
+	 		Integer idx = tboard.getIdx();
+	 		tboard.setAuthor(customer.getCust_name());
+	 		tboard.setInsert_id(customer.getCust_id());
+	 		
+	 		if (idx == null || idx == 0) { //새로입력
+	 			this.boardService.insertBoard(tboard);
+	 			redirectAttributes.addFlashAttribute("message", "추가되었습니다.");
+	 			logger.info("Sucess Board insert");	 			
+	 		} else { //수정
+	 			this.boardService.updateBoard(tboard);
+	 			redirectAttributes.addFlashAttribute("message", "수정되었습니다.");
+	 			logger.info("Sucess Board modify");	 			
+	 		}
+ 		} catch (Exception e) {
+ 			logger.error("sgCloud/sgCloud_boardWrite_ok.do ERROR, " + e.getMessage());
+ 		}
+ 		return "redirect:/sgCloud/sgCloud_board.do?gubun="+tboard.getGubun();
+ 	}
+
+    
 /* 
  * ************************************************************************************************************
  * */
-	// 메인페이지 이동
+	/*// 메인페이지 이동
 	@RequestMapping(value = "/board/board.do", method = RequestMethod.GET)
 	public String displayMain(HttpSession session, Model model) throws Exception{
 		logger.info("board page start");
 		System.out.println("board page start");
-		if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 			logger.info("You don't login.");
 			System.out.println("You don't login.");
 			return "defaults/login";
@@ -458,7 +611,7 @@ public class BoardController {
 
 		return "board/board";
 	}
-	
+	*/
 	// 게시판 상세보기
     // PathVariable 어노테이션을 이용하여 RESTful 방식 적용
     // board/1 -> id = 1; id = 게시물 번호로 인식함.
@@ -468,7 +621,7 @@ public class BoardController {
         logger.info("display view Board view idx = {}", idx);
         System.out.println("display view Board view idx = " + idx);
         
-        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
+        if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 			logger.info("You don't login.");
 			System.out.println("You don't login.");
 			return "defaults/login";
@@ -484,66 +637,13 @@ public class BoardController {
         return "board/view";
     }
     
-    // 게시판 쓰기 폼
-    @RequestMapping(value = "/board/write.do", method = RequestMethod.GET)
-    public String displayBoardWrite(@RequestParam(value="idx", defaultValue="0") int idx, Model model, HttpSession session) throws Exception{
-        logger.info("display view Board write");
-        System.out.println("display view Board write");
-        
-        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-			logger.info("You don't login.");
-			System.out.println("You don't login.");
-			return "defaults/login";
-		}
-
-        if (idx > 0) { // 수정하기를 눌렀을 경우
-        	logger.info("display view Board modify");
-        	System.out.println("display view Board modify");
-            Tboard tboard = this.boardService.getSelectOne(idx);
-            model.addAttribute("tboard", tboard);
-        }
-        model.addAttribute("dropdown", "board");
-
-        return "board/write";
-    }
-    
-    // 게시판 쓰기 저장
-    @RequestMapping(value = "/board/write_ok.do", method = RequestMethod.POST)
-    public String procBoardWrite(@ModelAttribute("tboard") Tboard tboard, RedirectAttributes redirectAttributes, HttpSession session) throws Exception{
-    	logger.info("display view Board write_ok");
-        System.out.println("display view Board write_ok");
-        
-        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
-        
-        if(session.getAttribute("userLoginInfo") == null || "".equals(session.getAttribute("userLoginInfo"))){
-			logger.info("You don't login.");
-			System.out.println("You don't login.");
-			return "defaults/login";
-		}
-        
-        Integer idx = tboard.getIdx();
-        tboard.setAuthor(customer.getCust_name());
-        tboard.setInsert_id(customer.getCust_id());
-        
-        if (idx == null || idx == 0) { //새로입력
-            this.boardService.insertBoard(tboard);
-            redirectAttributes.addFlashAttribute("message", "추가되었습니다.");
-            System.out.println("Sucess Board insert");
-            return "redirect:/board/board.do";
-        } else { //수정
-            this.boardService.updateBoard(tboard);
-            redirectAttributes.addFlashAttribute("message", "수정되었습니다.");
-            System.out.println("Sucess Board modify");
-            return "redirect:/board/board.do";
-        }
-    }
     
     //댓글 저장
     @RequestMapping(value = "/board/comment_ok.do", method = RequestMethod.POST)
     public String procBoardCommentWrite(@ModelAttribute("tboard_comment") Tboard_comment tboard_comment, HttpSession session) throws Exception{
     	logger.info("Start Board comment write.");
     	
-    	Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+    	Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
     	
     	int idx 	= tboard_comment.getIdx();
     	int seq 	= tboard_comment.getSeq();
@@ -587,7 +687,7 @@ public class BoardController {
         System.out.println("Start Board comment delete.");
         
         System.out.println("idx : " + idx + ", seq : " + seq);
-        Tcustomer customer = (Tcustomer) session.getAttribute("userLoginInfo");
+        Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
         
         this.boardService.deleteBoardComment(seq, customer.getCust_id()); //선택 댓글 삭제
         System.out.println("Sucess Board comment delete.");

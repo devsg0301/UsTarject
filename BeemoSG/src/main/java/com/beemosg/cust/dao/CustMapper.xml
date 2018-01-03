@@ -5,12 +5,14 @@
     <resultMap id="customerMap" type="com.beemosg.model.Tcustomer">
         <id     property="cust_no" 		column="cust_no" />
         <result property="cust_id"		column="cust_id" />
-        <result property="password"  	column="password" />
         <result property="cust_name"	column="cust_name" />
+        <result property="cust_gb"		column="cust_gb" />
+        <result property="password"  	column="password" />
         <result property="email"		column="email" />
-        <result property="HP"			column="HP" />
+        <result property="hp"			column="hp" />
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="admin_yn"		column="admin_yn" />
     </resultMap>
 
     <select id="getCustomer" resultMap="customerMap">
@@ -30,12 +32,13 @@
     </select>
     
     <insert id="insertCust">
-    	INSERT INTO TCUSTOMER (CUST_NO, CUST_ID, PASSWORD, CUST_NAME, EMAIL) VALUES (
+    	INSERT INTO TCUSTOMER (CUST_NO, CUST_ID, PASSWORD, CUST_NAME, EMAIL, HP) VALUES (
     		#{cust_no},
     		#{cust_id},
     		#{password},
     		#{cust_name},
-    		#{email}    		
+    		#{email},    		
+    		#{hp}    		
     	)
     </insert>
 

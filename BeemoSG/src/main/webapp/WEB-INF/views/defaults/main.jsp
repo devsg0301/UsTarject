@@ -10,7 +10,7 @@
 <head>
 <c:import url="../common/includecommon.jsp" />
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/swiper.min.css">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20171206001">
+<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20171227001">
 
 <style>
 </style>
@@ -57,7 +57,8 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="broadcastList" items="${broadcastList}" end="14">
 						<div class="swiper-slide swiper-slide-vod">
-							<a class="dBanner" href="javascript:folderSearch('${broadcastList.category}','${broadcastList.genre}','${broadcastList.foldername}');" >
+							<%-- <a class="dBanner" href="javascript:folderSearch('${broadcastList.category}','${broadcastList.genre}','${broadcastList.foldername}');" > --%>
+							<a class="dBanner" href="/sgCloud/${broadcastList.idx}.do" >
 								<img class="vodImg" src="http://beemosg.gq:8081/LocalUser/data/${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.title}_thum.png" alt="${broadcastList.title}"/>
 								<span class="vod-info-box" aria-hidden="true">
 									<span class="vod-title">${broadcastList.title}</span>
@@ -74,11 +75,11 @@
 		    <div class="swiper-button-next next1"></div>
 		</div>
 		
-		<h2 class="program-lists-title">추천 TV프로그램<a href="/sgCloud/sgCloud_main.do?category=TV" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 TV프로그램<a href="javascript:fileSearch('TV','');" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper2">
 				<div class="swiper-wrapper">
-					<c:forEach var="tvFolderList" items="${tvFolderList}" end="9">
+					<c:forEach var="tvFolderList" items="${tvFolderList}" end="14">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${tvFolderList.category}','${tvFolderList.genre}','${tvFolderList.foldername}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${tvFolderList.category}/${tvFolderList.genre}/${tvFolderList.foldername}/${tvFolderList.foldername}.jpg" alt="${tvFolderList.foldername}"/>
@@ -103,7 +104,7 @@
 		    <div class="swiper-button-next next2"></div>
 		</div>
 
-		<h2 class="program-lists-title">추천 영화<a href="/sgCloud/sgCloud_main.do?category=MOVIE" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 영화<a href="javascript:fileSearch('MOVIE','');" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper3">
 				<div class="swiper-wrapper">
@@ -130,11 +131,11 @@
 		    <div class="swiper-button-next next3"></div>
 		</div>
 
-		<h2 class="program-lists-title">추천 드라마<a href="/sgCloud/sgCloud_main.do?category=TV&genre=드라마" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 드라마<a href="javascript:fileSearch('TV','드라마');" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper4">
 				<div class="swiper-wrapper">
-					<c:forEach var="dreamFolderList" items="${dreamFolderList}" end="9">
+					<c:forEach var="dreamFolderList" items="${dreamFolderList}" end="14">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${dreamFolderList.category}','${dreamFolderList.genre}','${dreamFolderList.foldername}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${dreamFolderList.category}/${dreamFolderList.genre}/${dreamFolderList.foldername}/${dreamFolderList.foldername}.jpg" alt="${dreamFolderList.foldername}"/>
@@ -157,7 +158,7 @@
 		    <div class="swiper-button-next next4"></div>
 		</div>
 		
-		<h2 class="program-lists-title">추천 예능<a href="/sgCloud/sgCloud_main.do?category=TV&genre=예능" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 예능<a href="javascript:fileSearch('TV','예능');" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper5">
 				<div class="swiper-wrapper">
@@ -191,210 +192,223 @@
 	
 	<script src="${path_root}/resources/bootstrap/js/swiper.min.js"></script>
 	<script>
-	var swiper0 = new Swiper('.swiper0', {		
-		loop: true,
-		centeredSlides: true,
-      	autoplay: {
-        	delay: 3500,
-        	disableOnInteraction: false,
-      	},
-		pagination: {
-	        el: '.swiper-pagination',
-	        clickable: true,
-	    },
-		navigation: {
-		    nextEl: '.next0',
-		    prevEl: '.prev0',
-		}	
-	});
+		var tmpUser = navigator.userAgent;
+		var swiper0 = new Swiper('.swiper0', {		
+			loop: true,
+			centeredSlides: true,
+	      	autoplay: {
+	        	delay: 3500,
+	        	disableOnInteraction: false,
+	      	},
+			pagination: {
+		        el: '.swiper-pagination',
+		        clickable: true,
+		    },
+			navigation: {
+			    nextEl: '.next0',
+			    prevEl: '.prev0',
+			}	
+		});
+		
+		var swiper1 = new Swiper('.swiper1', {
+			slidesPerView : 5,
+			spaceBetween : 0,
+			slidesPerGroup: 5,
+			loop: true,
+	      	autoplay: {
+	        	delay: 4000,
+	        	disableOnInteraction: false,
+	      	},
+			navigation: {
+			    nextEl: '.next1',
+			    prevEl: '.prev1',
+			},
+			breakpoints : {
+				// when window width is <= 320px
+				370 : {
+					slidesPerView : 1,
+					spaceBetween : 0,
+					slidesPerGroup: 1,
+				},
+				// when window width is <= 480px
+				768 : {
+					slidesPerView : 2,
+					spaceBetween : 0,
+					slidesPerGroup: 2,
+				},
+				// when window width is <= 640px
+				992 : {
+					slidesPerView : 3,
+					spaceBetween : 0,
+					slidesPerGroup: 3,
+				},
+				1200 : {
+					slidesPerView : 4,
+					spaceBetween : 0,
+					slidesPerGroup: 4,
+				}
+			}		
+		});
+		
+		var swiper2 = new Swiper('.swiper2', {
+			slidesPerView : 5,
+			spaceBetween : 0,
+			slidesPerGroup: 5,
+			loop: true,
+			navigation: {
+			    nextEl: '.next2',
+			    prevEl: '.prev2',
+			},
+			breakpoints : {
+				// when window width is <= 320px
+				370 : {
+					slidesPerView : 1,
+					spaceBetween : 0,
+					slidesPerGroup: 1,
+				},
+				// when window width is <= 480px
+				768 : {
+					slidesPerView : 2,
+					spaceBetween : 0,
+					slidesPerGroup: 2,
+				},
+				// when window width is <= 640px
+				992 : {
+					slidesPerView : 3,
+					spaceBetween : 0,
+					slidesPerGroup: 3,
+				},
+				1200 : {
+					slidesPerView : 4,
+					spaceBetween : 0,
+					slidesPerGroup: 4,
+				}
+			}		
+		});
+		
+		var swiper3 = new Swiper('.swiper3', {
+			slidesPerView : 5,
+			spaceBetween : 0,
+			slidesPerGroup: 5,
+			loop: true,
+			navigation: {
+			    nextEl: '.next3',
+			    prevEl: '.prev3',
+			},
+			breakpoints : {
+				// when window width is <= 320px
+				370 : {
+					slidesPerView : 1,
+					spaceBetween : 0,
+					slidesPerGroup: 1,
+				},
+				// when window width is <= 480px
+				768 : {
+					slidesPerView : 2,
+					spaceBetween : 0,
+					slidesPerGroup: 2,
+				},
+				// when window width is <= 640px
+				992 : {
+					slidesPerView : 3,
+					spaceBetween : 0,
+					slidesPerGroup: 3,
+				},
+				1200 : {
+					slidesPerView : 4,
+					spaceBetween : 0,
+					slidesPerGroup: 4,
+				}
+			}		
+		});
+		
+		var swiper4 = new Swiper('.swiper4', {
+			slidesPerView : 5,
+			spaceBetween : 0,
+			slidesPerGroup: 5,
+			loop: true,
+			navigation: {
+			    nextEl: '.next4',
+			    prevEl: '.prev4',
+			},
+			breakpoints : {
+				// when window width is <= 320px
+				370 : {
+					slidesPerView : 1,
+					spaceBetween : 0,
+					slidesPerGroup: 1,
+				},
+				// when window width is <= 480px
+				768 : {
+					slidesPerView : 2,
+					spaceBetween : 0,
+					slidesPerGroup: 2,
+				},
+				// when window width is <= 640px
+				992 : {
+					slidesPerView : 3,
+					spaceBetween : 0,
+					slidesPerGroup: 3,
+				},
+				1200 : {
+					slidesPerView : 4,
+					spaceBetween : 0,
+					slidesPerGroup: 4,
+				}
+			}		
+		});
 	
-	var swiper1 = new Swiper('.swiper1', {
-		slidesPerView : 5,
-		spaceBetween : 0,
-		slidesPerGroup: 5,
-		loop: true,
-      	autoplay: {
-        	delay: 4000,
-        	disableOnInteraction: false,
-      	},
-		navigation: {
-		    nextEl: '.next1',
-		    prevEl: '.prev1',
-		},
-		breakpoints : {
-			// when window width is <= 320px
-			370 : {
-				slidesPerView : 1,
-				spaceBetween : 0,
-				slidesPerGroup: 1,
+		var swiper5 = new Swiper('.swiper5', {
+			slidesPerView : 5,
+			spaceBetween : 0,
+			slidesPerGroup: 5,
+			loop: true,
+			navigation: {
+			    nextEl: '.next5',
+			    prevEl: '.prev5',
 			},
-			// when window width is <= 480px
-			768 : {
-				slidesPerView : 2,
-				spaceBetween : 0,
-				slidesPerGroup: 2,
-			},
-			// when window width is <= 640px
-			992 : {
-				slidesPerView : 3,
-				spaceBetween : 0,
-				slidesPerGroup: 3,
-			},
-			1200 : {
-				slidesPerView : 4,
-				spaceBetween : 0,
-				slidesPerGroup: 4,
+			breakpoints : {
+				// when window width is <= 320px
+				370 : {
+					slidesPerView : 1,
+					spaceBetween : 0,
+					slidesPerGroup: 1,
+				},
+				// when window width is <= 480px
+				768 : {
+					slidesPerView : 2,
+					spaceBetween : 0,
+					slidesPerGroup: 2,
+				},
+				// when window width is <= 640px
+				992 : {
+					slidesPerView : 3,
+					spaceBetween : 0,
+					slidesPerGroup: 3,
+				},
+				1200 : {
+					slidesPerView : 4,
+					spaceBetween : 0,
+					slidesPerGroup: 4,
+				}
+			}		
+		});
+		
+		function fileSearch(category, genre){
+			if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre);
+			}else{
+				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "#view_position";
 			}
-		}		
-	});
-	
-	var swiper2 = new Swiper('.swiper2', {
-		slidesPerView : 5,
-		spaceBetween : 0,
-		slidesPerGroup: 5,
-		loop: true,
-		navigation: {
-		    nextEl: '.next2',
-		    prevEl: '.prev2',
-		},
-		breakpoints : {
-			// when window width is <= 320px
-			370 : {
-				slidesPerView : 1,
-				spaceBetween : 0,
-				slidesPerGroup: 1,
-			},
-			// when window width is <= 480px
-			768 : {
-				slidesPerView : 2,
-				spaceBetween : 0,
-				slidesPerGroup: 2,
-			},
-			// when window width is <= 640px
-			992 : {
-				slidesPerView : 3,
-				spaceBetween : 0,
-				slidesPerGroup: 3,
-			},
-			1200 : {
-				slidesPerView : 4,
-				spaceBetween : 0,
-				slidesPerGroup: 4,
+		}
+		
+		function folderSearch(category, genre, foldername){
+			if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername);
+			}else{
+				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername) + "#view_position";
 			}
-		}		
-	});
-	
-	var swiper3 = new Swiper('.swiper3', {
-		slidesPerView : 5,
-		spaceBetween : 0,
-		slidesPerGroup: 5,
-		loop: true,
-		navigation: {
-		    nextEl: '.next3',
-		    prevEl: '.prev3',
-		},
-		breakpoints : {
-			// when window width is <= 320px
-			370 : {
-				slidesPerView : 1,
-				spaceBetween : 0,
-				slidesPerGroup: 1,
-			},
-			// when window width is <= 480px
-			768 : {
-				slidesPerView : 2,
-				spaceBetween : 0,
-				slidesPerGroup: 2,
-			},
-			// when window width is <= 640px
-			992 : {
-				slidesPerView : 3,
-				spaceBetween : 0,
-				slidesPerGroup: 3,
-			},
-			1200 : {
-				slidesPerView : 4,
-				spaceBetween : 0,
-				slidesPerGroup: 4,
-			}
-		}		
-	});
-	
-	var swiper4 = new Swiper('.swiper4', {
-		slidesPerView : 5,
-		spaceBetween : 0,
-		slidesPerGroup: 5,
-		loop: true,
-		navigation: {
-		    nextEl: '.next4',
-		    prevEl: '.prev4',
-		},
-		breakpoints : {
-			// when window width is <= 320px
-			370 : {
-				slidesPerView : 1,
-				spaceBetween : 0,
-				slidesPerGroup: 1,
-			},
-			// when window width is <= 480px
-			768 : {
-				slidesPerView : 2,
-				spaceBetween : 0,
-				slidesPerGroup: 2,
-			},
-			// when window width is <= 640px
-			992 : {
-				slidesPerView : 3,
-				spaceBetween : 0,
-				slidesPerGroup: 3,
-			},
-			1200 : {
-				slidesPerView : 4,
-				spaceBetween : 0,
-				slidesPerGroup: 4,
-			}
-		}		
-	});
-
-	var swiper5 = new Swiper('.swiper5', {
-		slidesPerView : 5,
-		spaceBetween : 0,
-		slidesPerGroup: 5,
-		loop: true,
-		navigation: {
-		    nextEl: '.next5',
-		    prevEl: '.prev5',
-		},
-		breakpoints : {
-			// when window width is <= 320px
-			370 : {
-				slidesPerView : 1,
-				spaceBetween : 0,
-				slidesPerGroup: 1,
-			},
-			// when window width is <= 480px
-			768 : {
-				slidesPerView : 2,
-				spaceBetween : 0,
-				slidesPerGroup: 2,
-			},
-			// when window width is <= 640px
-			992 : {
-				slidesPerView : 3,
-				spaceBetween : 0,
-				slidesPerGroup: 3,
-			},
-			1200 : {
-				slidesPerView : 4,
-				spaceBetween : 0,
-				slidesPerGroup: 4,
-			}
-		}		
-	});
-	
-	function folderSearch(category, genre, foldername){
-		location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername);
-	}
+		}
 	</script>
 </body>
 </html>
