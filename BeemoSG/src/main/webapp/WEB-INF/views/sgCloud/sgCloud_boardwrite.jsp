@@ -24,7 +24,7 @@
 
 	var tmpUser = navigator.userAgent;
 	
-	function fileSearch(){
+	function searchGo(){
 		var searchWord = $("#searchWord").val();
 		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
 	}
@@ -33,7 +33,7 @@
 	function EventSearchGo(e){
 		var form = document.boardForm;
 		if(e.keyCode == '13'){
-			fileSearch();
+			searchGo();
 		}
 	}
 	
@@ -68,6 +68,14 @@
 			location.href = "/sgCloud/sgCloud_main.do?rnum=" + rnum + "&gubun=" + gubun + "#view_position";
 		}
 	}
+	
+	function goUrl(gubun){
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			location.href = "/sgCloud/sgCloud_board.do?gubun=" + gubun;
+		}else{
+			location.href = "/sgCloud/sgCloud_board.do?gubun=" + gubun + "#view_position";
+		}
+	}
 
 </script>
 </head>
@@ -92,9 +100,19 @@
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
                     </li>
-                    <li class="active">등업게시판</li>
+                    <li class="active">글쓰기</li>
                 </ol>
             </div>
+        </div>
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="">
+            <div class="inbox-head">
+	            <h3>sgCloud</h3>
+                <div class="input-append pull-right position">
+                    <input type="text" class="sr-input" placeholder="파일 검색" id="searchWord" onkeydown="javascript:EventSearchGo(event);">
+                    <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fa fa-search"></i></button>
+                </div>
+	        </div>
         </div>
         <!-- /.row -->
 
@@ -171,15 +189,15 @@
 
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="color: #333;" data-toggle="collapse" href="#dropdown-board1" aria-expanded="true">
-					                    <i class="fa fa-database"></i> 자유게시판 <span class="caret"></span>
+					                    <i class="fa fa-list-alt"></i> 자유게시판 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-board1" class="panel-collapse collapse in">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'level'}">font-weight: 600; color: #333;</c:if>" href="/sgCloud/sgCloud_board.do?gubun=level"><i class="fa fa-caret-right"></i>등업게시판</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'request'}">font-weight: 600; color: #333;</c:if>" href="/sgCloud/sgCloud_board.do?gubun=request"><i class="fa fa-caret-right"></i>자료요청게시판</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'level'}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrl('level');"><i class="fa fa-caret-right"></i>등업게시판</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'request'}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrl('request');"><i class="fa fa-caret-right"></i>자료요청게시판</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
@@ -196,12 +214,9 @@
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading">
-						<c:if test="${gubun == 'level'}">
-							<span>등업게시판</span>
-						</c:if>
-						<c:if test="${gubun == 'request'}">
-							<span>자료요청게시판</span>
-						</c:if>						
+						<h3 style="margin-top: 10px; font-family: 'Noto Sans KR'; font-size: 20px;">
+							글쓰기
+						</h3>					
 					</div>
 					<div class="well">
 			            <form id="form" name="form" method="post" action="/sgCloud/sgCloud_boardwrite_ok.do">
@@ -233,11 +248,11 @@
 								<div class="cols-sm-10">
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-										<input type="text" class="form-control" id="title" name="title" value="${board.title}" placeholder="Enter your Title" required data-validation-required-message="Please enter title.">
+										<input type="text" class="form-control" id="title" name="title" value="${board.title}" placeholder="ex) 등업 요청 부탁 드립니다." required data-validation-required-message="Please enter title.">
 									</div>
 								</div>
 							</div>							
-							<div class="form-group">
+							<div class="form-group" style="display:none;">
 								<label for="content" class="cols-sm-2 control-label">내용</label>
 								<div class="cols-sm-10">
 									<div class="input-group">

@@ -9,19 +9,9 @@
 <head>
 	<c:import url="../common/includecommon.jsp" />
 <style type="text/css">
-
 </style>
 
 <script type="text/javascript">
-
-	window.onload = levelup_check;
-	
-	function levelup_check(){
-		if(${check == 'ok'}){
-			alert("회원등급 요청을 해야 이용이 가능합니다.");
-		}
-	}
-
 	var tmpUser = navigator.userAgent;
 	
 	function searchGo(){
@@ -76,22 +66,6 @@
 			location.href = "/sgCloud/sgCloud_board.do?gubun=" + gubun + "#view_position";
 		}
 	}
-	
-	function board_write(gubun){
-		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_boardwrite.do?gubun=" + gubun;
-		}else{
-			location.href = "/sgCloud/sgCloud_boardwrite.do?gubun=" + gubun + "#view_position";
-		}
-	}
-	
-	function goCustInfo(cust_id){
-		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/cust/custInfo.do?cust_id=" + cust_id;
-		}else{
-			location.href = "/cust/custInfo.do?cust_id=" + cust_id + "#view_position";
-		}
-	}
 
 </script>
 </head>
@@ -116,11 +90,10 @@
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
                     </li>
-                    <li class="active">자유게시판</li>
+                    <li class="active">회원정보</li>
                 </ol>
             </div>
         </div>
-        <!-- Page Heading/Breadcrumbs -->
         <div class="">
             <div class="inbox-head">
 	            <h3>sgCloud</h3>
@@ -204,16 +177,16 @@
 					            </li>
 
 					            <li class="panel panel-default" id="dropdown">
-					                <a style="color: #333;" data-toggle="collapse" href="#dropdown-board1" aria-expanded="true">
+					                <a style="" data-toggle="collapse" href="#dropdown-board1">
 					                    <i class="fa fa-list-alt"></i> 자유게시판 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
-					                <div id="dropdown-board1" class="panel-collapse collapse in">
+					                <div id="dropdown-board1" class="panel-collapse collapse">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'level'}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrl('level');"><i class="fa fa-caret-right"></i>등업게시판</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'request'}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrl('request');"><i class="fa fa-caret-right"></i>자료요청게시판</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:goUrl('level');"><i class="fa fa-caret-right"></i>등업게시판</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:goUrl('request');"><i class="fa fa-caret-right"></i>자료요청게시판</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
@@ -231,64 +204,48 @@
 					<!-- Default panel contents -->
 					<div class="panel-heading">
 						<h3 style="margin-top: 10px; font-family: 'Noto Sans KR'; font-size: 20px;">
-							<c:if test="${gubun == 'level'}">
-								등업게시판
-							</c:if>
-							<c:if test="${gubun == 'request'}">
-								자료요청게시판
-							</c:if>
-							<span style="float: right;"><a href="javascript:board_write('${gubun}');" class="btn btn-default">글쓰기</a></span>
-						</h3>
+							회원정보
+						</h3>					
 					</div>
-					<table class="table">
-						<tbody>
-							<tr>
-			                    <th>제목</th>
-			                    <th>작성자</th>
-			                    <th>작성일</th>			                    
-			                    <th>상태</th>
-							</tr>
-							<c:forEach var="boardList" items="${boardList}">
-							<tr>
-			                    <td class="view-message">${boardList.title}</td>
-			                    <td class="view-message">
-			                    	<c:if test="${sessionScope.user.admin_yn == '1'}">
-			                    	<a href="javascript:goCustInfo('${boardList.insert_id}');">${boardList.author}</a>
-			                    	</c:if>
-			                    </td>
-			                    <td class="view-message"><fmt:formatDate value="${boardList.insert_date}" pattern="yyyy.MM.dd(E)"/></td>
-			                    <c:if test="${sessionScope.user.admin_yn == '1'}">
-			                   		<c:if test="${boardList.cust_gb == '10'}">
-			                    		<td class="view-message"><a href="/sgCloud/levelup/${boardList.idx}.do">등업</a></td>
-			                    	</c:if>			                    	
-			                    </c:if>
-			                    <c:if test="${sessionScope.user.admin_yn != '1'}">
-				                    <c:if test="${boardList.cust_gb == '10'}">
-			                    		<td class="view-message">대기</td>
-			                    	</c:if>
-		                    	</c:if>
-		                    	<c:if test="${boardList.cust_gb == '20'}">
-		                    		<td class="view-message">완료</td>
-		                    	</c:if>			                    	
-							</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+					<div class="form-horizontal">
+			            <div class="form-group">
+							<label class="col-sm-3 control-label">이름</label>
+							<div class="col-sm-6">
+								<input class="form-control" name="cust_name" type="text" value="${customer.cust_name }" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">아이디</label>
+							<div class="col-sm-6">
+								<input class="form-control" name="cust_id" type="text" value="${customer.cust_id }" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">등급</label>
+							<div class="col-sm-6">
+								<input class="form-control" name="cust_gb" type="text" value="${customer.cust_gb }" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">비밀번호</label>
+							<div class="col-sm-6">
+								<input class="form-control" name="password" type="text" value="${customer.password }" >						
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">이메일</label>
+							<div class="col-sm-6">
+								<input class="form-control" name="email" type="text" value="${customer.email }" >
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">전화번호(HP)</label>
+							<div class="col-sm-6">
+								<input class="form-control" name="hp" type="text" value="${customer.hp }" >
+							</div>
+						</div>
+		            </div>
 				</div>
-                <!-- Pager -->
-                <ul class="pager">
-                	<c:if test="${prev != 0 }">
-	                    <li class="previous">
-	                        <a href="javascript:paging('${prev}','${gubun}');">&larr; Prev</a>
-	                    </li>
-                    </c:if>
-                    <c:if test="${next != 0 }">
-	                    <li class="next">
-	                        <a href="javascript:paging('${next}','${gubun}');">Next &rarr;</a>
-	                    </li>
-	                </c:if>
-                </ul>
-
             </div>
         </div>
         <!-- /.row -->

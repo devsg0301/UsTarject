@@ -9,7 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no" />
-<title>Beemo_sg</title>
+<title>BeemoSG</title>
+<link rel="shortcut icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/singin.css">
 <script type="text/javascript">

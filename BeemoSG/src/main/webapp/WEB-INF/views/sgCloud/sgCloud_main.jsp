@@ -14,7 +14,7 @@
 
 	var tmpUser = navigator.userAgent;
 
-	function fileSearch(){
+	function searchGo(){
 		var searchWord = $("#searchWord").val();
 		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
 	}
@@ -23,7 +23,7 @@
 	function EventSearchGo(e){
 		var form = document.boardForm;
 		if(e.keyCode == '13'){
-			fileSearch();
+			searchGo();
 		}
 	}
 
@@ -57,7 +57,14 @@
 		}else{
 			location.href = "/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
 		}
-		
+	}
+	
+	function goUrl(gubun){
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			location.href = "/sgCloud/sgCloud_board.do?gubun=" + gubun;
+		}else{
+			location.href = "/sgCloud/sgCloud_board.do?gubun=" + gubun + "#view_position";
+		}
 	}
 	
 </script>
@@ -93,7 +100,7 @@
 	            <h3>sgCloud</h3>
                 <div class="input-append pull-right position">
                     <input type="text" class="sr-input" placeholder="파일 검색" id="searchWord" onkeydown="javascript:EventSearchGo(event);">
-                    <button class="btn sr-btn" type="button" onClick="fileSearch();"><i class="fa fa-search"></i></button>
+                    <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fa fa-search"></i></button>
                 </div>
 	        </div>
         </div>
@@ -178,8 +185,8 @@
 					                <div id="dropdown-board1" class="panel-collapse collapse">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a href="/sgCloud/sgCloud_board.do?gubun=level"><i class="fa fa-caret-right"></i>등업게시판</a></li>
-	                                            <li style="padding-left:30px;"><a href="/sgCloud/sgCloud_board.do?gubun=request"><i class="fa fa-caret-right"></i>자료요청게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('level');"><i class="fa fa-caret-right"></i>등업게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('request');"><i class="fa fa-caret-right"></i>자료요청게시판</a></li>
 					                        </ul>
 					                    </div>
 					                </div>

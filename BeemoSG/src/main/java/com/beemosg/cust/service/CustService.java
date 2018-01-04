@@ -4,9 +4,11 @@ import com.beemosg.model.Tcustomer;
 
 public interface CustService {
 	
-	Tcustomer getCustomer(String cust_id, String password);
+	public Tcustomer getCustomer(String cust_id, String password);
 	
-	void insertCust(Tcustomer tcustomer);
+	public void insertCust(Tcustomer tcustomer);
 	
-	Integer getMaxCustNo(String strDate);
+	public Integer getMaxCustNo(String strDate);
+
+	public Tcustomer selectCustomer(String cust_id) throws Exception;
 }

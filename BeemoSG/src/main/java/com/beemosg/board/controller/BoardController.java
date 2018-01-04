@@ -188,8 +188,8 @@ public class BoardController {
 				return "defaults/login";
 			}else{
 				Tcustomer customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
-				if(!customer.getCust_gb().equals("20")){
-					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+				if(customer.getAdmin_yn() != "1"){
+					return "redirect:/sgCloud/sgCloud_main.do";
 				}
 			}
 	        
@@ -584,6 +584,33 @@ public class BoardController {
  		}
  		return "redirect:/sgCloud/sgCloud_board.do?gubun="+tboard.getGubun();
  	}
+ 	
+ 	@RequestMapping("/sgCloud/levelup/{idx}.do")
+    public String updateCustgb(@PathVariable int idx, Model model, HttpSession session) throws Exception {
+        logger.info("Update Cust_gb idx = {}", idx);
+        Tcustomer customer = null;
+        
+        try{
+        	if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+        		logger.info("You don't login.");
+        		return "defaults/login";
+        	}else{
+        		customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+        		if(!customer.getAdmin_yn().equals("1")){
+        			return "redirect:/sgCloud/sgCloud_main.do";
+        		}
+        	}
+	        
+        	this.boardService.updateCustomer(idx);
+	
+	        //model.addAttribute("total_comments", tboard_comment_list.size());
+	        model.addAttribute("dropdown", "sgCloud");
+        }
+        catch(Exception e){
+			logger.error("sgCloud/"+ idx +".do ERROR, " + e.getMessage());
+		}
+        return "redirect:/sgCloud/sgCloud_board.do?gubun=level";
+    }
 
     
 /* 

@@ -30,6 +30,7 @@ public interface BoardMapper {
 	List<Tboard> boardList(int rnum, String gubun) throws Exception;
 	Tboard selectOne(int idx) throws Exception;
 	void insertBoard(Tboard tboard) throws Exception;
+	void updateCustomer(int idx) throws Exception;
 	
 	/* ********************************************************************* */
 	

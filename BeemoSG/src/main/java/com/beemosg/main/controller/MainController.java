@@ -40,6 +40,7 @@ public class MainController {
 //		}
 //		logger.info("start page main");
 		
+		Tcustomer loginUser 			= null;
 		List<Tbroadcast> broadcastList 	= null;
 		List tvFolderList 				= null;
 		List movieFolderList		 	= null;
@@ -47,6 +48,14 @@ public class MainController {
 		List entertainmentFolderList 	= null;
 		
 		try{
+			if(session.getAttribute("Const.USER_KEY") != null && !"".equals(session.getAttribute("Const.USER_KEY"))){
+				loginUser = (Tcustomer)session.getAttribute("Const.USER_KEY");
+				loginUser = mainService.getCustomer(loginUser.getCust_id(), loginUser.getPassword());
+				if(loginUser.getCust_gb().equals("20")){
+					session.removeAttribute(Const.USER_KEY);
+					session.setAttribute(Const.USER_KEY, loginUser);
+				}
+			}
 			broadcastList 			= this.mainService.getBroadcastList();
 			tvFolderList 			= this.mainService.getFolderList("%TV%","%%");
 			movieFolderList 		= this.mainService.getFolderList("%MOVIE%","%%");

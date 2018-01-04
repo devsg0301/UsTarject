@@ -9,7 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0,user-scalable=no">
 <meta name="format-detection" content="telephone=no" />
-<title>Beemo_sg</title>
+<title>BeemoSG</title>
+<link rel="shortcut icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/style.css">
@@ -39,9 +41,7 @@
 	<article class="container">
 		<div class="col-md-12">
 			<div class="page-header">
-				<h1>
-					회원가입 <small>아래 항목을 입력해주세요.</small>
-				</h1>
+				<h2>회원가입</h2>
 			</div>
 			<form class="form-horizontal" name="custInputForm" method="post" action="/cust/custJoinOk.do">
 				<div class="form-group">
@@ -59,8 +59,7 @@
 				<div class="form-group">
 					<label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
 					<div class="col-sm-6">
-						<input class="form-control" name="password" id="inputPassword" type="password" placeholder="비밀번호" required="required">
-						<p class="help-block">숫자, 문자 포함 8자 이상</p>
+						<input class="form-control" name="password" id="inputPassword" type="password" placeholder="비밀번호" required="required">						
 					</div>
 				</div>
 				<div class="form-group">
@@ -84,12 +83,8 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputAgree">약관 동의</label>
-					<div class="col-sm-6" data-toggle="buttons">
-						<label class="btn btn-warning active"> 
-							<input id="agree" type="checkbox" autocomplete="off" >
-								<span class="fa fa-check"></span>
-						</label> <a href="#">이용약관</a> 에 동의 합니다.
+					<div class="" style="padding-top: 7px; font-weight: 700; text-align: center;">
+						<p>★ 가입 후 등업 신청을 해야 정상적으로 이용이 가능합니다.</p>
 					</div>
 				</div>
 				<div class="form-group">

@@ -88,10 +88,14 @@ public class BoardDao {
     	this.boardMapper.insertBoard(tboard);
     }
     
+    public void updateCustomer(int idx) throws Exception{
+    	this.boardMapper.updateCustomer(idx);
+    }
+    
     /* ********************************************************************* */
 
     public void updateBoard(Tboard tboard) throws Exception{
-        this.boardMapper.updateBoard(tboard);
+    	this.boardMapper.updateBoard(tboard);
     }
 
     public void deleteBoard(int idx) throws Exception{

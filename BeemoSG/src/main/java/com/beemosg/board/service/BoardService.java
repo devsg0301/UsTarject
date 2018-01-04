@@ -44,6 +44,8 @@ public interface BoardService {
 	public Tboard getSelectOne(int idx) throws Exception;
 	
 	public void insertBoard(Tboard tboard) throws Exception;
+	
+	public void updateCustomer(int idx) throws Exception;
 
 	/* *************************************************************** */
 

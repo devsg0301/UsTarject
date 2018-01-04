@@ -23,6 +23,13 @@
             	OR CUST_ID = #{param1})
            AND PASSWORD = #{param2}
     </select>
+
+    <select id="selectCustomer" resultMap="customerMap">
+        SELECT * 
+          FROM TCUSTOMER
+         WHERE 1=1
+           AND CUST_ID = #{param1}           
+    </select>
     
     <select id="getMaxCustNo" resultType="Integer">
     	SELECT COUNT(*)

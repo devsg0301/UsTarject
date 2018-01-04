@@ -140,7 +140,8 @@ video{
 				        	 ,&nbsp;<i class="fa fa-cc"></i>자막
 				        </a>
 					</c:if>
-					)<span><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span></h2>
+					)<span><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
+				</h2>
                 <hr>
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
 	                <div class="col-video">

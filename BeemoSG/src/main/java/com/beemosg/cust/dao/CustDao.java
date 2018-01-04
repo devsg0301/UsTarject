@@ -23,4 +23,8 @@ public class CustDao {
 	public Integer getMaxCustNo(String strDate){
 		return this.custMapper.getMaxCustNo(strDate);
 	}
+
+	public Tcustomer selectCustomer(String cust_id) throws Exception{
+		return this.custMapper.selectCustomer(cust_id);
+	}
 }

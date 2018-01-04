@@ -12,7 +12,14 @@ public class Tboard {
 	private Date insert_date;
 	private String insert_id;
 	private Date modify_date;
+	private String cust_gb;
 	
+	public String getCust_gb() {
+		return cust_gb;
+	}
+	public void setCust_gb(String cust_gb) {
+		this.cust_gb = cust_gb;
+	}
 	public Integer getIdx() {
 		return idx;
 	}

@@ -89,6 +89,10 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.insertBoard(tboard);
 	}
 
+	public void updateCustomer(int idx) throws Exception{
+		boardDao.updateCustomer(idx);
+	}
+
 	/* ******************************************************************** */
 
 	public void updateBoard(Tboard tboard) throws Exception{

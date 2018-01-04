@@ -13,4 +13,6 @@ public interface CustMapper {
 	
 	Integer getMaxCustNo(String strDate);
 
+	Tcustomer selectCustomer(String cust_id);
+
 }

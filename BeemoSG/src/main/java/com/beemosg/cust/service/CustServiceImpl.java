@@ -25,4 +25,8 @@ public class CustServiceImpl implements CustService {
 		return custDao.getMaxCustNo(strDate);
 	}
 
+	public Tcustomer selectCustomer(String cust_id) throws Exception {
+		return custDao.selectCustomer(cust_id);
+	}
+
 }

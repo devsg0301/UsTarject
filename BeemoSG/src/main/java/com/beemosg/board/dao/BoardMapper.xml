@@ -30,6 +30,7 @@
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="insert_id"	column="insert_id" />
         <result property="modify_date"	column="modify_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+        <result property="cust_gb"		column="cust_gb" />
     </resultMap>
     
     <resultMap id="board_commentMap" type="com.beemosg.model.Tboard_comment">
@@ -259,7 +260,8 @@
                                		   HIT,                               
 				                       DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
 				                       INSERT_ID,
-				                       MODIFY_DATE
+				                       MODIFY_DATE,
+				                       (SELECT CUST_GB FROM TCUSTOMER WHERE CUST_ID = INSERT_ID) AS CUST_GB
 				                  FROM TBOARD
 				                 WHERE 1=1
 				                   AND GUBUN = #{param2}
@@ -288,6 +290,12 @@
               , #{insert_id}
          )
     </insert>
+
+    <update id="updateCustomer">
+         UPDATE TCUSTOMER SET
+                cust_gb = '20'              
+          WHERE cust_id = (SELECT insert_id FROM TBOARD WHERE idx = #{idx})
+    </update>
 
     <update id="updateBoard">
          UPDATE TBOARD SET
