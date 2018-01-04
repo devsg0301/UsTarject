@@ -1,9 +1,12 @@
 package com.beemosg.cust.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.beemosg.common.Const;
 import com.beemosg.cust.service.CustService;
@@ -82,6 +86,23 @@ public class CustController {
 		return "cust/custInfo";
 	}
 	
-	
-	
+	@RequestMapping(value = "/cust/idCheck.do", method = RequestMethod.GET)
+	public void AjaxIdCheck(@RequestParam("cust_id") String cust_id, HttpServletResponse response) throws Exception{
+		
+		String checkId = "";
+		Tcustomer customer = null;
+		
+	    try {
+	    	customer = custService.selectCustomer(cust_id);
+	    	if(customer != null){
+	    		checkId = "no";
+	    	}
+	    	else{
+	    		checkId = "ok";
+	    	}
+	        response.getWriter().print(checkId);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }   
+	}
 }

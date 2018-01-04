@@ -255,6 +255,9 @@
 			                    	<c:if test="${sessionScope.user.admin_yn == '1'}">
 			                    	<a href="javascript:goCustInfo('${boardList.insert_id}');">${boardList.author}</a>
 			                    	</c:if>
+			                    	<c:if test="${sessionScope.user.admin_yn != '1'}">
+			                    	${boardList.author}
+			                    	</c:if>
 			                    </td>
 			                    <td class="view-message"><fmt:formatDate value="${boardList.insert_date}" pattern="yyyy.MM.dd(E)"/></td>
 			                    <c:if test="${sessionScope.user.admin_yn == '1'}">

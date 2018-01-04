@@ -179,7 +179,7 @@ public class BoardController {
     @RequestMapping(value = "/sgCloud/sgCloud_add.do", method = RequestMethod.GET)
     public String displayBroadcastAdd(@RequestParam(value="idx", defaultValue="0") int idx, Model model, HttpSession session, HttpServletRequest request) throws Exception {
         logger.info("display view Board add");
-        
+        Tcustomer customer = null;
         try{
 	        if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
@@ -187,8 +187,8 @@ public class BoardController {
 				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_add.do");
 				return "defaults/login";
 			}else{
-				Tcustomer customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
-				if(customer.getAdmin_yn() != "1"){
+				customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+				if(!customer.getAdmin_yn().equals("1")){
 					return "redirect:/sgCloud/sgCloud_main.do";
 				}
 			}

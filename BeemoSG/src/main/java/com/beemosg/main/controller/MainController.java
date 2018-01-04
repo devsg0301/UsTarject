@@ -34,7 +34,7 @@ public class MainController {
 	// 메인페이지 이동
 	@RequestMapping(value = "/defaults/main.do", method = RequestMethod.GET)
 	public String displayMain(HttpSession session, Model model) throws Exception {
-//		if(session.getAttribute("Const.USER_KEY") == null || "".equals(session.getAttribute("Const.USER_KEY"))){
+//		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 //			logger.info("You don't login.");
 //			return "defaults/login";
 //		}
@@ -48,8 +48,8 @@ public class MainController {
 		List entertainmentFolderList 	= null;
 		
 		try{
-			if(session.getAttribute("Const.USER_KEY") != null && !"".equals(session.getAttribute("Const.USER_KEY"))){
-				loginUser = (Tcustomer)session.getAttribute("Const.USER_KEY");
+			if(session.getAttribute(Const.USER_KEY) != null && !"".equals(session.getAttribute(Const.USER_KEY))){
+				loginUser = (Tcustomer)session.getAttribute(Const.USER_KEY);
 				loginUser = mainService.getCustomer(loginUser.getCust_id(), loginUser.getPassword());
 				if(loginUser.getCust_gb().equals("20")){
 					session.removeAttribute(Const.USER_KEY);

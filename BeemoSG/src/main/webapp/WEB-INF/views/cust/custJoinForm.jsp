@@ -3,19 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="path_root"  value="${pageContext.request.contextPath}" scope="application"/>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-<meta http-equiv="Content-Type"  content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0,user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<title>BeemoSG</title>
-<link rel="shortcut icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
-<link rel="icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/style.css">
+<c:import url="../common/includecommon.jsp" />
+
 <script type="text/javascript">
+	var idChecked = false;
+	var checkedId = ""; //중복체크후 아이디가 변경되었을 경우!
 	
 	function cancle(){
 		location.href = "/defaults/main.do";
@@ -35,74 +30,128 @@
 			}
 		}
 	}
+	
+	function idCheck(){
+	    $.ajax({
+	        type: "GET",
+	        url : "/cust/idCheck.do",
+	        data: { "cust_id" : $("#inputCustId").val() },
+	        async: true,
+	        success : function(data) {
+	            if(data == "ok"){
+	            	alert("사용 가능한 아이디 입니다.");
+	            	checkedId = $("#inputCustId").val();
+	            	idChecked = true;
+	            }else if(data == "no"){
+	            	alert("이미 사용된 아이디 입니다.");
+	            	$("#inputCustId").val("")
+	            }
+	        }	        
+	    });
+	}
+	
+	function cust_join(){
+		var form = document.custJoinForm;
+		
+		if(!idChecked){
+			alert("아이디 중복확인을 해야합니다.");
+			return;
+		}
+		if(form.cust_id.value != checkedId){
+			alert("아이디 중복확인을 다시 해야합니다.");
+			return;
+		}
+		form.submit();
+	}
+
 </script>
 </head>
 <body>
-	<article class="container">
-		<div class="col-md-12">
-			<div class="page-header">
-				<h2>회원가입</h2>
+	<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <c:import url="../common/header.jsp" />
+        <!-- /.container -->
+    </nav>
+    
+    <!-- Page Content -->
+    <div class="container" style="background-color: #fff; box-shadow: 0px 0px 10px 0px #6f6f6f;">
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb_sgcloud">
+                    <li>
+                    	<a href="/defaults/main.do">Home</a>
+                    </li>                    
+                    <li class="active">회원가입</li>
+                </ol>
+            </div>
+        </div>
+		<!-- Content Row -->
+        <div class="row">
+			<div class="col-md-12">
+				<form class="form-horizontal" name="custJoinForm" method="post" action="/cust/custJoinOk.do">
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputName">이름</label>
+						<div class="col-sm-6">
+							<input class="form-control" name="cust_name" id="inputName" type="text" placeholder="이름" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputCustId">아이디</label>
+						<div class="col-sm-6">
+							<input style="width: 75%; display: inline;" class="form-control" name="cust_id" id="inputCustId" type="text" placeholder="ID" required="required">
+							<button class="btn btn-default" type="button" onclick="javascript:idCheck();">중복체크</button>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
+						<div class="col-sm-6">
+							<input class="form-control" name="password" id="inputPassword" type="password" placeholder="비밀번호" required="required">						
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호  확인</label>
+						<div class="col-sm-6">
+							<input class="form-control" id="inputPasswordCheck" type="password" placeholder="비밀번호를 한번더 입력해주세요." 
+							onblur="check_confirm_passwd(document.custInputForm , document.getElementById('inputPassword').value, this.value);" required="required">
+							<div class="text-danger" id="pwcomment"></div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
+						<div class="col-sm-6">
+							<input class="form-control" name="email" id="inputEmail" type="email" placeholder="Email address" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label" for="inputEmail">전화번호(HP)</label>
+						<div class="col-sm-6">
+							<input class="form-control" name="hp" id="inputHp" type="number" placeholder="HP address" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="" style="padding-top: 7px; font-weight: 700; text-align: center;">
+							<p>★ 가입 후 등업 신청을 해야 정상적으로 이용이 가능합니다.</p>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12 text-center">
+							<button class="btn btn-primary" type="button" onclick="javascript:cust_join();">
+								회원가입<i class="fa fa-check spaceLeft"></i>
+							</button>
+							<button class="btn btn-danger" type="button" onclick="javascript:cancle();">
+								가입취소<i class="fa fa-times spaceLeft"></i>
+							</button>
+						</div>
+					</div>
+				</form>
 			</div>
-			<form class="form-horizontal" name="custInputForm" method="post" action="/cust/custJoinOk.do">
-				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputName">이름</label>
-					<div class="col-sm-6">
-						<input class="form-control" name="cust_name" id="inputName" type="text" placeholder="이름">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputCustId">아이디</label>
-					<div class="col-sm-6">
-						<input class="form-control" name="cust_id" id="inputCustId" type="text" placeholder="ID" required="required">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
-					<div class="col-sm-6">
-						<input class="form-control" name="password" id="inputPassword" type="password" placeholder="비밀번호" required="required">						
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호  확인</label>
-					<div class="col-sm-6">
-						<input class="form-control" id="inputPasswordCheck" type="password" placeholder="비밀번호를 한번더 입력해주세요." 
-						onblur="check_confirm_passwd(document.custInputForm , document.getElementById('inputPassword').value, this.value);" required="required">
-						<div class="text-danger" id="pwcomment"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-					<div class="col-sm-6">
-						<input class="form-control" name="email" id="inputEmail" type="email" placeholder="Email address" required="required">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-3 control-label" for="inputEmail">전화번호(HP)</label>
-					<div class="col-sm-6">
-						<input class="form-control" name="hp" id="inputHp" type="number" placeholder="HP address" required="required">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="" style="padding-top: 7px; font-weight: 700; text-align: center;">
-						<p>★ 가입 후 등업 신청을 해야 정상적으로 이용이 가능합니다.</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-12 text-center">
-						<button class="btn btn-primary" type="submit">
-							회원가입<i class="fa fa-check spaceLeft"></i>
-						</button>
-						<button class="btn btn-danger" type="button" onclick="javascript:cancle();">
-							가입취소<i class="fa fa-times spaceLeft"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-			<hr>
 		</div>
-	</article>
+		<!-- Footer -->
+        <footer>
+            <c:import url="../common/footer.jsp" />
+        </footer>		
+	</div>
 
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script type="text/javascript" src="${path_root}/resources/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
