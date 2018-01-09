@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- 
+
+<!--
 <style type="text/css">
 #sidebar-wrapper {
 	margin-right: -300px;
@@ -128,38 +129,34 @@
 	min-height: 460px;
 }
 </style>
- -->
-<%-- 
+-->
+<%--
 <div id="sidebar-wrapper">
 	<div class="sidebar-nav">
 		<div>
 			<img src="${path_root}/resources/bootstrap/images/profile.png" class="img-responsive center-block" alt="">
 		</div>
-		<div class="profile-userpic">
-			<img src="${path_root}/resources/bootstrap/images/profile.png" class="img-responsive center-block" alt="">
-			<h3>BeemoSG</h3>
-		</div>
-		<c:if test="${sessionScope.user.cust_id != ''}">
+		<c:if test="${!empty sessionScope.user}">
 		<div class="profile-usertitle">
 			<div class="profile-usertitle-name">
 				이름 : ${sessionScope.user.cust_name}<br/>
 	 			아이디 : ${sessionScope.user.cust_id}<br/>
 			</div>
 		</div>
+		</c:if>
 		<!-- END SIDEBAR USER TITLE -->
 		<!-- SIDEBAR BUTTONS -->
 		<div class="profile-userbuttons">
+		<c:if test="${!empty sessionScope.user}">
 			<button type="button" class="btn btn-danger btn-sm">로그아웃</button>
-		</div>
 		</c:if>
-		<c:if test="${sessionScope.user.cust_id == ''}">
-		<div class="profile-userbuttons">
+		<c:if test="${empty sessionScope.user}">
 			<button type="button" class="btn btn-success btn-sm">로그인</button>
-		</div>
 		</c:if>
+		</div>
 	</div>
 </div>
- --%>
+--%>
 <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -183,13 +180,13 @@
                 </c:if>                
             </li>
             <li class="<c:if test="${dropdown == 'sgCloud'}">active</c:if>">
-                <a href="/sgCloud/sgCloud_main.do">sgCloud</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');">sgCloud</a>
             </li>
-            <li>
-                <a href="#">Services</a>
+            <li class="<c:if test="${dropdown == 'level'}">active</c:if>">
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=level');">등업게시판</a>
             </li>
-            <li>
-                <a href="#">Contact</a>
+            <li class="<c:if test="${dropdown == 'request'}">active</c:if>">
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');">자료요청게시판</a>
             </li>
             <!-- 
             <li class="dropdown">
@@ -240,11 +237,18 @@
     </div>
     <!-- /.navbar-collapse -->
 </div>
-<%-- 
-<script src="${path_root}/resources/bootstrap/js/jquery.js"></script>
 
 <script type="text/javascript">
-
+	var tmpUser = navigator.userAgent;
+	
+	function goUrlHeader(url){
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			location.href = url;
+		}else{
+			location.href = url + "#view_position";
+		}
+	}
+	/* 
 	$("#menu-close").click(function(e) {
 		e.preventDefault();
 		$("#sidebar-wrapper").toggleClass("active");
@@ -252,6 +256,5 @@
 	$("#menu-toggle").click(function(e) {
 		e.preventDefault();
 		$("#sidebar-wrapper").toggleClass("active");
-	});
+	}); */
 </script> 
---%>

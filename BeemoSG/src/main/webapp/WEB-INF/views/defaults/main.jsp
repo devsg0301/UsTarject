@@ -62,7 +62,7 @@
 		</div>
 	</header>
 	<div class="container" style="background-color: #e6e6e7; box-shadow: 0px 0px 10px 0px #6f6f6f;">	
-		<h2 class="program-lists-title">최근 등록 VOD<a href="/sgCloud/sgCloud_main.do" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>
+		<h2 class="program-lists-title">최근 등록 VOD<a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper1 swiper-container-vod">
 				<div class="swiper-wrapper">

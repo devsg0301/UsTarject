@@ -113,7 +113,7 @@
 					<nav class="navbar navbar-default" role="navigation">
 		            	<div class="side-menu-container">
 		            		<ul class="nav navbar-nav">
-			            		<li class="active"><a style="<c:if test="${category == ''}">font-weight: 600; color: #333;</c:if>" href="/sgCloud/sgCloud_main.do"><i class="fa fa-cloud"></i> 전체</a></li>
+			            		<li class="active"><a style="<c:if test="${category == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');"><i class="fa fa-cloud"></i> 전체</a></li>
 			            		<!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="<c:if test="${category == 'TV'}">color: #333;</c:if>" data-toggle="collapse" href="#dropdown-tv1" <c:if test="${category == 'TV'}">aria-expanded="true"</c:if>>
@@ -203,7 +203,7 @@
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading">
-						<c:forEach var="folderList" items="${folderList}" end="20">
+						<c:forEach var="folderList" items="${folderList}" end="10">
 							<button type="button" style="<c:if test="${folderList.category == 'TV' && folderList.foldername != foldername}">background-color: #f1fff9;</c:if> 
 														 <c:if test="${folderList.category == 'MOVIE' && folderList.foldername != foldername}">background-color: #fbffe9;</c:if>
 														 <c:if test="${folderList.category == 'MUSIC' && folderList.foldername != foldername}">background-color: #fff0f7;</c:if>
@@ -212,7 +212,7 @@
 												  			 <c:if test="${folderList.foldername != foldername}">btn-default</c:if> btn-round-sm btn-sm" 
 												  onclick="javascript:folderSearch('${folderList.category}','${folderList.genre}','${folderList.foldername}');">${folderList.foldername}</button>
 						</c:forEach>
-						<c:if test="${fn:length(folderList) > 20}">
+						<c:if test="${fn:length(folderList) > 10}">
 							<span style="font-size: 20px;">.....</span>
 						</c:if>
 					</div>

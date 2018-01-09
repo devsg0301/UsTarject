@@ -122,10 +122,10 @@
 		<form class="form-signin" name="loginForm" method="post" action="/defaults/loginProcess.do">
 			<input type="hidden" name="forwardUrl" value="${forwardUrl}"/>
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="cust_id" class="sr-only">Email or ID</label>
-			<input type="text" id="cust_id" name="cust_id" class="form-control" placeholder="Email or ID" required="required" autofocus="autofocus"> 
-			<label for="password" class="sr-only">Password</label>
-			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required="required" onkeydown="javascript:keyDown_login();">
+			<label for="cust_id" class="sr-only">아이디</label>
+			<input type="text" id="cust_id" name="cust_id" class="form-control" placeholder="아이디" required="required" autofocus="autofocus"> 
+			<label for="password" class="sr-only">비밀번호</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required="required" onkeydown="javascript:keyDown_login();">
 			<div class="checkbox">
 				<label><input type="checkbox" id="keep_login" name="keep_login" onclick="autoChk();" value="1">로그인 유지</label>
 				<label><input type="checkbox" id="keep_id" name="checksaveid" onclick="javascript:saveidalert();">아이디 저장</label>

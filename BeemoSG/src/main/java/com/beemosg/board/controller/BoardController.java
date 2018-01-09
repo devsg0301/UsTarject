@@ -502,8 +502,7 @@ public class BoardController {
     private enum Browser {
         MSIE, Chrome, Opear, Firefox
     }
-    
- // sgCloud 이동
+     // 
  	@RequestMapping(value = "/sgCloud/sgCloud_board.do", method = RequestMethod.GET)
  	public String displayBoard(@RequestParam(value="rnum", defaultValue="1") int rnum,
  			@RequestParam(value="gubun", defaultValue="level") String gubun,
@@ -547,7 +546,7 @@ public class BoardController {
  			model.addAttribute("next", next);
  			model.addAttribute("gubun", gubun);
  			model.addAttribute("check", check);
- 			model.addAttribute("dropdown", "sgCloud");
+ 			model.addAttribute("dropdown", gubun);
  		}
  		catch(Exception e){
  			logger.error("sgCloud/sgCloud_board.do ERROR, " + e.getMessage());
@@ -574,7 +573,7 @@ public class BoardController {
 	 			Tboard board = this.boardService.getSelectOne(idx);
 	 			model.addAttribute("board", board);
 	 		}
-	 		model.addAttribute("dropdown", "sgCloud");
+	 		model.addAttribute("dropdown", gubun);
 	 		model.addAttribute("gubun", gubun);
  		
  		} catch (Exception e) {
@@ -638,7 +637,7 @@ public class BoardController {
         	this.boardService.updateCustomer(idx);
 	
 	        //model.addAttribute("total_comments", tboard_comment_list.size());
-	        model.addAttribute("dropdown", "sgCloud");
+	        model.addAttribute("dropdown", "level");
         }
         catch(Exception e){
 			logger.error("sgCloud/"+ idx +".do ERROR, " + e.getMessage());
