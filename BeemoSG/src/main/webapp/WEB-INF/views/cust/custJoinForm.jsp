@@ -61,6 +61,10 @@
 			alert("아이디 중복확인을 다시 해야합니다.");
 			return;
 		}
+		if(form.hp.value == ''){
+			alert("휴대폰 번호를 입렵해주세요.");
+			return;
+		}
 		form.submit();
 	}
 
@@ -99,7 +103,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="inputCustId">아이디</label>
 						<div class="col-sm-6">
-							<input style="width: 75%; display: inline;" class="form-control" name="cust_id" id="inputCustId" type="text" placeholder="ID" required="required">
+							<input style="width: 75%; display: inline;" class="form-control" name="cust_id" id="inputCustId" type="text" placeholder="아이디" required="required">
 							<button class="btn btn-default" type="button" onclick="javascript:idCheck();">중복체크</button>
 						</div>
 					</div>
@@ -120,18 +124,18 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label" for="inputEmail">이메일</label>
 						<div class="col-sm-6">
-							<input class="form-control" name="email" id="inputEmail" type="email" placeholder="Email address" required="required">
+							<input class="form-control" name="email" id="inputEmail" type="email" placeholder="이메일주소 입력" required="required">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-3 control-label" for="inputEmail">전화번호(HP)</label>
+						<label class="col-sm-3 control-label" for="inputEmail">휴대폰(HP)</label>
 						<div class="col-sm-6">
-							<input class="form-control" name="hp" id="inputHp" type="number" placeholder="HP address" required="required">
+							<input class="form-control" name="hp" id="inputHp" type="number" placeholder="숫자만 입력" required="required">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="" style="padding-top: 7px; font-weight: 700; text-align: center;">
-							<p>★ 가입 후 등업 신청을 해야 정상적으로 이용이 가능합니다.</p>
+							<p>★ 가입 후 등업 신청을 해야 정상적으로 이용이 가능합니다!!</p>
 						</div>
 					</div>
 					<div class="form-group">

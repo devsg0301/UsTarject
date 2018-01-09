@@ -130,9 +130,9 @@
 				<label><input type="checkbox" id="keep_login" name="keep_login" onclick="autoChk();" value="1">로그인 유지</label>
 				<label><input type="checkbox" id="keep_id" name="checksaveid" onclick="javascript:saveidalert();">아이디 저장</label>
 			</div>
-			<a href="javascript:;" onclick="javascript:login();return false;" ><button class="btn btn-lg btn-primary btn-block" type="button">Login</button></a>
+			<a href="javascript:;" onclick="javascript:login();return false;" ><button class="btn btn-lg btn-primary btn-block" type="button">로그인</button></a>
 			<br/>
-			<a href="/cust/custJoin.do"><button class="btn btn-lg btn-primary btn-block" type="button">Join in</button></a>
+			<a href="/cust/custJoin.do"><button class="btn btn-lg btn-primary btn-block" type="button">회원가입</button></a>
 		</form>
 
 	</div>

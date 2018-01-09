@@ -14,11 +14,31 @@
 <script type="text/javascript">
 
 	$(document).ready(function () {
-		$("#gubun").val("${gubun}");
+		$("#gubun").val("${gubun}");		
+		
+		if("${gubun}" == "request"){
+	    	$("#category_div").removeAttr("style");
+			$("#category").val("드라마");
+	    	$("#title").attr("placeholder","ex) 강식당 5화 올려주세요.");
+		}else{
+			$("#category_div").attr("style","display:none;");
+			$("#category").val("");
+			$("#title").attr("placeholder","ex) 등업 요청 부탁 드립니다.");
+		}
 		
 		$("#select_gubun").change(function(){
-			alert("asdf"+$(this).val());
 			$("#gubun").val($(this).val());
+			if($(this).val() == "request"){
+		    	$("#category_div").removeAttr("style");
+		    	$("#title").attr("placeholder","ex) 강식당 5화 올려주세요.");
+			}else{
+				$("#category_div").attr("style","display:none;");
+				$("#category").val("");
+				$("#title").attr("placeholder","ex) 등업 요청 부탁 드립니다.");
+			}
+		});
+		$("#select_category").change(function(){
+			$("#category").val($(this).val());
 		});
 	});
 
@@ -236,10 +256,26 @@
 									<div class="input-group">
 										<span class="input-group-addon"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
 										<select class="form-control" id="select_gubun">
-											<option <c:if test="${board.gubun == 'level'}">selected</c:if> value="level">등업</option>
-											<option <c:if test="${board.gubun == 'request'}">selected</c:if> value="request">자료요청</option>
+											<option <c:if test="${gubun == 'level'}">selected</c:if> value="level">등업</option>
+											<option <c:if test="${gubun == 'request'}">selected</c:if> value="request">자료요청</option>
 										</select>
 			                            <input type="hidden" class="form-control" id="gubun" name="gubun" value="${board.gubun}"/>
+									</div>
+								</div>
+							</div>
+							<div class="form-group" id="category_div" style="display:none;">
+								<label for="category" class="cols-sm-2 control-label">카테고리</label>
+								<div class="cols-sm-10">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-list-ul" aria-hidden="true"></i></span>
+										<select class="form-control" id="select_category">
+											<option>드라마</option>
+											<option>예능</option>
+											<option>영화</option>
+											<option>애니</option>
+											<option>기타</option>
+										</select>
+			                            <input type="hidden" class="form-control" id="category" name="category" value="${board.category}" required />
 									</div>
 								</div>
 							</div>

@@ -136,8 +136,9 @@ video{
 				      	<i class="fa fa-download"></i>다운
 					</a>
 				    <c:if test="${broadcastDetail.sub_url != ''}">
+				    	,&nbsp;
 				    	<a href="javascript:;" onclick="fileDownload('${broadcastDetail.category}/${broadcastDetail.genre}/${broadcastDetail.foldername}/${broadcastDetail.sub_url}.smi','${broadcastDetail.sub_url}.smi');">
-				        	 ,&nbsp;<i class="fa fa-cc"></i>자막
+				        	 <i class="fa fa-cc"></i>자막
 				        </a>
 					</c:if>
 					)<span><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>

@@ -13,17 +13,17 @@
 </style>
 
 <script type="text/javascript">
-
+	var tmpUser = navigator.userAgent;
+	
 	window.onload = levelup_check;
 	
 	function levelup_check(){
 		if(${check == 'ok'}){
-			alert("회원등급 요청을 해야 이용이 가능합니다.");
-		}
+			alert("회원등급 요청을 해야 이용이 가능합니다.\n자유게시판에 등업을 요청해주세요.");
+			return;
+		}		
 	}
 
-	var tmpUser = navigator.userAgent;
-	
 	function searchGo(){
 		var searchWord = $("#searchWord").val();
 		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
@@ -243,13 +243,21 @@
 					<table class="table">
 						<tbody>
 							<tr>
+								<c:if test="${gubun == 'request'}">
+			                    <th>카테고리</th>
+			                    </c:if>
 			                    <th>제목</th>
 			                    <th>작성자</th>
-			                    <th>작성일</th>			                    
+			                    <th>작성일</th>
+			                    <c:if test="${gubun == 'level'}">
 			                    <th>상태</th>
+			                    </c:if>
 							</tr>
 							<c:forEach var="boardList" items="${boardList}">
 							<tr>
+								<c:if test="${gubun == 'request'}">
+			                    	<td class="view-message">${boardList.category}</td>
+			                    </c:if>
 			                    <td class="view-message">${boardList.title}</td>
 			                    <td class="view-message">
 			                    	<c:if test="${sessionScope.user.admin_yn == '1'}">
@@ -260,19 +268,21 @@
 			                    	</c:if>
 			                    </td>
 			                    <td class="view-message"><fmt:formatDate value="${boardList.insert_date}" pattern="yyyy.MM.dd(E)"/></td>
-			                    <c:if test="${sessionScope.user.admin_yn == '1'}">
-			                   		<c:if test="${boardList.cust_gb == '10'}">
-			                    		<td class="view-message"><a href="/sgCloud/levelup/${boardList.idx}.do">등업</a></td>
-			                    	</c:if>			                    	
-			                    </c:if>
-			                    <c:if test="${sessionScope.user.admin_yn != '1'}">
-				                    <c:if test="${boardList.cust_gb == '10'}">
-			                    		<td class="view-message">대기</td>
+			                    <c:if test="${gubun == 'level'}">
+				                    <c:if test="${sessionScope.user.admin_yn == '1'}">
+				                   		<c:if test="${boardList.cust_gb == '10'}">
+				                    		<td class="view-message"><a href="/sgCloud/levelup/${boardList.idx}.do">등업</a></td>
+				                    	</c:if>			                    	
+				                    </c:if>
+				                    <c:if test="${sessionScope.user.admin_yn != '1'}">
+					                    <c:if test="${boardList.cust_gb == '10'}">
+				                    		<td class="view-message">대기</td>
+				                    	</c:if>
 			                    	</c:if>
-		                    	</c:if>
-		                    	<c:if test="${boardList.cust_gb == '20'}">
-		                    		<td class="view-message">완료</td>
-		                    	</c:if>			                    	
+			                    	<c:if test="${boardList.cust_gb == '20'}">
+			                    		<td class="view-message">완료</td>
+			                    	</c:if>			                 
+		                    	</c:if>   	
 							</tr>
 							</c:forEach>
 						</tbody>

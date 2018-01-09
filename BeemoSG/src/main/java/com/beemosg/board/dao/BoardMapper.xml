@@ -23,6 +23,7 @@
     <resultMap id="boardMap" 			type="com.beemosg.model.Tboard">
         <id     property="idx"    		column="idx" />
         <result property="gubun"		column="gubun" />
+        <result property="category"		column="category" />
         <result property="title"		column="title" />
         <result property="author"		column="author" />
         <result property="content"  	column="content" />
@@ -254,6 +255,7 @@
 				          FROM( SELECT (SELECT COUNT(*) FROM TBOARD) AS TOTAL_COUNT,
 				                       IDX,
 				                       IF(GUBUN = 'level', '등업', '자료요청') AS GUBUN,
+				                       CATEGORY,
 				                       TITLE,
 				                       AUTHOR,
                                		   CONTENT,
@@ -282,8 +284,9 @@
     </select>
 
     <insert id="insertBoard">
-         INSERT INTO TBOARD (GUBUN, TITLE, AUTHOR, CONTENT, INSERT_ID) VALUES (
+         INSERT INTO TBOARD (GUBUN, CATEGORY, TITLE, AUTHOR, CONTENT, INSERT_ID) VALUES (
                 #{gubun}
+              , #{category}
               , #{title}
               , #{author}
               , #{content}

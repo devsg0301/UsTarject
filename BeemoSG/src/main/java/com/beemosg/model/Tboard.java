@@ -5,6 +5,7 @@ import java.util.Date;
 public class Tboard {
 	private Integer idx;
 	private String gubun;
+	private String category;
 	private String title;
 	private String content;
 	private String author;
@@ -31,6 +32,12 @@ public class Tboard {
 	}
 	public void setGubun(String gubun) {
 		this.gubun = gubun;
+	}
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getTitle() {
 		return title;

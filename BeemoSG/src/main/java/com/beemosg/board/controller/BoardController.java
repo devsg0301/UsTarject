@@ -50,7 +50,7 @@ public class BoardController {
 			@RequestParam(value="genre2", defaultValue="") String genre2,			
 			@RequestParam(value="foldername", defaultValue="") String foldername,			
 			@RequestParam(value="searchWord", defaultValue="") String searchWord,
-			HttpSession session, Model model) throws Exception {
+			HttpSession session, HttpServletRequest request, Model model) throws Exception {
 		logger.info("sgCloud Main");
 		int totalBroadcast = 0;
 		int prev = 0;
@@ -58,15 +58,22 @@ public class BoardController {
 		List genreList = null;
 		List folderList = null;
 		Tcustomer customer = null;
-		try{
+		boolean isMobile = false;
+		
+		try{			
 			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
 				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do");
 				return "defaults/login";
 			}else{
+				isMobile = isMobile(request.getHeader("User-Agent"));
 				customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
 				if(!customer.getCust_gb().equals("20")){
-					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+					if(isMobile){
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
+    				}else{
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				}
 				}
 			}
 
@@ -141,19 +148,24 @@ public class BoardController {
     // board/1 -> id = 1; id = 게시물 번호로 인식함.
     // 일반 적으로 (@ReuqstParam(value = "board", required = false, defaultValue = "0"), int idx, Model model)
     @RequestMapping("/sgCloud/{idx}.do")
-    public String displaySgCloudDetailView(@PathVariable int idx, Model model, HttpSession session) throws Exception {
+    public String displaySgCloudDetailView(@PathVariable int idx, Model model, HttpSession session, HttpServletRequest request) throws Exception {
         logger.info("display view Board view idx = {}", idx);
         Tcustomer customer = null;
-        
+        boolean isMobile = false;
         try{
         	if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
         		logger.info("You don't login.");
         		model.addAttribute("forwardUrl", "/sgCloud/" + idx + ".do");
         		return "defaults/login";
         	}else{
+        		isMobile = isMobile(request.getHeader("User-Agent"));
         		customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
         		if(!customer.getCust_gb().equals("20")){
-        			return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+        			if(isMobile){
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
+    				}else{
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				}
         		}
         	}
 	        //Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
@@ -215,19 +227,25 @@ public class BoardController {
     
     // 게시판 쓰기 저장
     @RequestMapping(value = "/sgCloud/add_ok.do", method = RequestMethod.POST)
-    public String procBroadcastAdd(@ModelAttribute("tbroadcast") Tbroadcast tbroadcast, RedirectAttributes redirectAttributes, HttpSession session) throws Exception {
+    public String procBroadcastAdd(@ModelAttribute("tbroadcast") Tbroadcast tbroadcast, 
+    		RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request) throws Exception {
     	logger.info("display view Broadcast write_ok");
 
     	Tcustomer customer = null;
-
+    	boolean isMobile = false;
     	try{
     		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
     			logger.info("You don't login.");
     			return "defaults/login";
     		}else{
+    			isMobile = isMobile(request.getHeader("User-Agent"));
     			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
     			if(!customer.getCust_gb().equals("20")){
-    				return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				if(isMobile){
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
+    				}else{
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				}
     			}
     		}
 	        
@@ -275,23 +293,29 @@ public class BoardController {
     
     //댓글 저장
     @RequestMapping(value = "/broadcast/comment_ok.do", method = RequestMethod.POST)
-    public String procBroadcastCommentWrite(@ModelAttribute("tbroadcast_comment") Tbroadcast_comment tbroadcast_comment, Model model, HttpSession session) throws Exception {
+    public String procBroadcastCommentWrite(@ModelAttribute("tbroadcast_comment") Tbroadcast_comment tbroadcast_comment, 
+    		Model model, HttpSession session, HttpServletRequest request) throws Exception {
     	logger.info("Start Broadcast comment write.");
     	
     	Tcustomer customer = null;
     	int idx 	= tbroadcast_comment.getIdx();
     	int seq_re	= tbroadcast_comment.getSeq_re();
-    	int gap 	= tbroadcast_comment.getGap();
-    	
+    	int gap 	= tbroadcast_comment.getGap();    	
+    	boolean isMobile = false;
     	try{
     		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
     			logger.info("You don't login.");
     			//model.addAttribute("forwardUrl", "/broadcast/comment_ok.do");
     			return "defaults/login";
     		}else{
+    			isMobile = isMobile(request.getHeader("User-Agent"));
     			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
     			if(!customer.getCust_gb().equals("20")){
-    				return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				if(isMobile){
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
+    				}else{
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				}
     			}
     		}
 	    	//customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
@@ -463,6 +487,16 @@ public class BoardController {
             return Browser.Opear;
         }
         return Browser.Firefox;
+    }
+    
+    private boolean isMobile(String agent){
+    	if (agent.indexOf("iPhone") > -1 && agent.indexOf("Mobile") > -1) {
+    		return true;
+    	} else if (agent.indexOf("Android") > -1 && agent.indexOf("Mobile") > -1) {
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 
     private enum Browser {

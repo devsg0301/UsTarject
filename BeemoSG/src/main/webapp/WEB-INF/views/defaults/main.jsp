@@ -10,7 +10,7 @@
 <head>
 <c:import url="../common/includecommon.jsp" />
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/swiper.min.css">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20171227001">
+<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20180108001">
 
 <style>
 </style>
@@ -28,18 +28,29 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','예능','윤식당2');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner04.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','화유기');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner05.jpg">
+						<span>차승원의 계략! 금강고를 찾기 위한 유일한 방법?</span>
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','예능','강식당');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner02.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','마녀의법정');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner01.jpg">
+					<a href="javascript:folderSearch('TV','드라마','나쁜녀석들2');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner07.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','예능','꽃보다청춘 위너');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner03.jpg">
+					<a href="javascript:folderSearch('TV','드라마','마녀의법정');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner01.jpg">
 					</a>
 				</div>
 			</div>
@@ -64,6 +75,9 @@
 									<span class="vod-title">${broadcastList.title}</span>
 									<fmt:parseDate var="dateString" value="${broadcastList.play_date}" pattern="yyyy-MM-dd" />
 									<span class="vod-info"><fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
+								</span>
+								<span class="play-icons" aria-hidden="true">
+									<img src="${path_root}/resources/bootstrap/images/ico-play.png" alt="">
 								</span>
 							</a>
 						</div>
@@ -225,7 +239,7 @@
 			},
 			breakpoints : {
 				// when window width is <= 320px
-				370 : {
+				350 : {
 					slidesPerView : 1,
 					spaceBetween : 0,
 					slidesPerGroup: 1,
@@ -261,7 +275,7 @@
 			},
 			breakpoints : {
 				// when window width is <= 320px
-				370 : {
+				350 : {
 					slidesPerView : 1,
 					spaceBetween : 0,
 					slidesPerGroup: 1,
@@ -297,7 +311,7 @@
 			},
 			breakpoints : {
 				// when window width is <= 320px
-				370 : {
+				350 : {
 					slidesPerView : 1,
 					spaceBetween : 0,
 					slidesPerGroup: 1,
@@ -333,7 +347,7 @@
 			},
 			breakpoints : {
 				// when window width is <= 320px
-				370 : {
+				350 : {
 					slidesPerView : 1,
 					spaceBetween : 0,
 					slidesPerGroup: 1,
@@ -369,7 +383,7 @@
 			},
 			breakpoints : {
 				// when window width is <= 320px
-				370 : {
+				350 : {
 					slidesPerView : 1,
 					spaceBetween : 0,
 					slidesPerGroup: 1,
