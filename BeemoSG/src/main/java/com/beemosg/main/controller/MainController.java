@@ -1,5 +1,6 @@
 package com.beemosg.main.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.beemosg.common.AESCrypto;
@@ -144,7 +146,71 @@ public class MainController {
         return mav;
     }
     
-    // 로그인 처리
+    @RequestMapping(value = "/defaults/loginAjax.do", method = RequestMethod.GET)
+	public void AjaxLoginProcess(@RequestParam("cust_id") String cust_id,
+			@RequestParam("password") String password, HttpSession session, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+    	logger.info("loginAjax start!");
+    	//String password   	= "";
+    	String keep_login 	= "";
+    	String passwd_org 	= "";
+    	//String cust_id 		= "";
+    	String autochk 		= "";
+    	
+    	ModelAndView mav = null;
+    	try{
+    		keep_login 	= (String)request.getParameter("keep_login");
+    		//cust_id		= (String)request.getParameter("cust_id");
+    		//password 	= (String)request.getParameter("password");
+    		autochk 	= (String)request.getParameter("autochk");
+    		
+    		if("1".equals(autochk)){
+    			//passwd = VigEnc.decrypt(passwd); 
+    			AESCrypto aes = new AESCrypto();
+    			aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
+    			password = aes.Decrypt(password);
+    		}
+    		
+	    	mav = new ModelAndView();
+	        Tcustomer loginUser = mainService.getCustomer(cust_id, password);
+	        
+	        if("1".equals(keep_login)){
+				AESCrypto aes = new AESCrypto();
+				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
+				passwd_org = aes.Encrypt(password);
+				
+				ComUtils.setCookie(response, "beemosgautoL", passwd_org, 60*60*24*9999);
+			} else {
+				ComUtils.setCookie(response, "beemosgautoL", "", -1);
+			}
+	 
+	        if (loginUser != null) {
+	        	logger.info("login sucess!");
+
+	        	AESCrypto aes = new AESCrypto();
+				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
+				String enc_mem_id = aes.Encrypt(cust_id);
+				
+		    	session.setAttribute("enc_mem_id", enc_mem_id);
+		    	
+		    	session.removeAttribute(Const.USER_KEY);
+		    	session.setAttribute(Const.USER_KEY, loginUser);
+		    	response.getWriter().print("sucess");
+	        }else{
+	        	logger.info("login fail!");
+	        	ComUtils.setCookie(response, "beemosgautoL", "", -1);
+	        	response.getWriter().print("fail");
+	        }
+    	}
+    	catch(Exception e){
+    		ComUtils.setCookie(response, "beemosgautoL", "", -1);
+    		response.getWriter().print("fail");
+    		logger.error("defaults/loginProcess.do ERROR, " + e.getMessage());
+		} 
+	}
+    
+    // 로그인 페이지
     @RequestMapping(value="/defaults/login.do", method = RequestMethod.GET)
     public String login(HttpSession session) throws Exception{
     	logger.info("login!");

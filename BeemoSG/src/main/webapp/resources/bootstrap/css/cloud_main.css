@@ -470,7 +470,7 @@ ul {
 
 .checkbox label input[type="checkbox"],
 .radio label input[type="radio"] {
-    display: none;
+    /* display: none; */
 }
 
 .checkbox label input[type="checkbox"] + .cr > .cr-icon,

@@ -1,135 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<!--
-<style type="text/css">
-#sidebar-wrapper {
-	margin-right: -300px;
-	right: 0;
-	width: 300px;
-	background: rgb(255, 255, 255);
-	position: fixed;
-	height: 100%;
-	overflow-y: auto;
-	z-index: 1000;
-	transition: all 0.5s ease-in 0s;
-	-webkit-transition: all 0.5s ease-in 0s;
-	-moz-transition: all 0.5s ease-in 0s;
-	-ms-transition: all 0.5s ease-in 0s;
-	-o-transition: all 0.5s ease-in 0s;
-}
-
-#menu-toggle {
-	top: 0;
-	right: 0;
-	position: fixed;
-	z-index: 1;
-}
-
-#sidebar-wrapper.active {
-	right: 300px;
-	width: 300px;
-	transition: all 0.5s ease-out 0s;
-	-webkit-transition: all 0.5s ease-out 0s;
-	-moz-transition: all 0.5s ease-out 0s;
-	-ms-transition: all 0.5s ease-out 0s;
-	-o-transition: all 0.5s ease-out 0s;
-}
-
-.profile-userpic img {
-	float: none;
-	margin: 0 auto;
-	width: 50%;
-	height: 50%;
-	-webkit-border-radius: 50% !important;
-	-moz-border-radius: 50% !important;
-	border-radius: 50% !important;
-}
-
-.profile-usertitle {
-	text-align: center;
-	margin-top: 20px;
-}
-
-.profile-usertitle-name {
-	color: #5a7391;
-	font-size: 16px;
-	font-weight: 600;
-	margin-bottom: 7px;
-}
-
-.profile-usertitle-job {
-	text-transform: uppercase;
-	color: #5b9bd1;
-	font-size: 12px;
-	font-weight: 600;
-	margin-bottom: 15px;
-}
-
-.profile-userbuttons {
-	text-align: center;
-	margin-top: 10px;
-}
-
-.profile-userbuttons .btn {
-	text-transform: uppercase;
-	font-size: 11px;
-	font-weight: 600;
-	padding: 6px 15px;
-	margin-right: 5px;
-}
-
-.profile-userbuttons .btn:last-child {
-	margin-right: 0px;
-}
-
-.profile-usermenu {
-	margin-top: 30px;
-}
-
-.profile-usermenu ul li {
-	border-bottom: 1px solid #f0f4f7;
-}
-
-.profile-usermenu ul li:last-child {
-	border-bottom: none;
-}
-
-.profile-usermenu ul li a {
-	color: #93a3b5;
-	font-size: 14px;
-	font-weight: 400;
-}
-
-.profile-usermenu ul li a i {
-	margin-right: 8px;
-	font-size: 14px;
-}
-
-.profile-usermenu ul li a:hover {
-	background-color: #fafcfd;
-	color: #5b9bd1;
-}
-
-.profile-usermenu ul li.active {
-	border-bottom: none;
-}
-
-.profile-usermenu ul li.active a {
-	color: #5b9bd1;
-	background-color: #f6f9fb;
-	border-left: 2px solid #5b9bd1;
-	margin-left: -2px;
-}
-
-/* Profile Content */
-.profile-content {
-	padding: 20px;
-	background: #fff;
-	min-height: 460px;
-}
+<style>
+	.login_btn{
+	    background: no-repeat;
+	    border: none;
+	    outline: 0;
+	    color: #9d9d9d;
+	    position: relative;
+    	float: right;
+	}
+	.logout_btn{
+		font-size: 14px;
+		float: right;
+	}
 </style>
--->
 <%--
 <div id="sidebar-wrapper">
 	<div class="sidebar-nav">
@@ -167,18 +51,16 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/defaults/main.do">BeemoSG</a>
+        <c:if test="${empty sessionScope.user}">
+        	<button class="modal-footer button login_btn" data-toggle="modal" data-target="#myModal" style="height:auto;">로그인</button>
+        </c:if>
+        <c:if test="${!empty sessionScope.user}">
+        	<a class="navbar-brand logout_btn" href="/defaults/logout.do">로그아웃</a>
+        </c:if>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li>
-            	<c:if test="${empty sessionScope.user}">
-                	<a href="/defaults/login.do">로그인</a>
-                </c:if>
-                <c:if test="${!empty sessionScope.user}">
-                	<a href="/defaults/logout.do">로그아웃</a>
-                </c:if>                
-            </li>
             <li class="<c:if test="${dropdown == 'sgCloud'}">active</c:if>">
                 <a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');">sgCloud</a>
             </li>
@@ -188,6 +70,11 @@
             <li class="<c:if test="${dropdown == 'request'}">active</c:if>">
                 <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');">자료요청게시판</a>
             </li>
+            <c:if test="${sessionScope.user.admin_yn == '1'}">
+            <li class="">
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');">파일추가</a>
+            </li>
+            </c:if>
             <!-- 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
@@ -242,19 +129,16 @@
 	var tmpUser = navigator.userAgent;
 	
 	function goUrlHeader(url){
+		if("${sessionScope.user}" == "" || "${sessionScope.user}" == null){
+			alert("로그인 후 이용 가능합니다.");
+			$(".login_btn").trigger("click");
+			return;
+		}
+		
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
 			location.href = url;
 		}else{
 			location.href = url + "#view_position";
 		}
 	}
-	/* 
-	$("#menu-close").click(function(e) {
-		e.preventDefault();
-		$("#sidebar-wrapper").toggleClass("active");
-	});
-	$("#menu-toggle").click(function(e) {
-		e.preventDefault();
-		$("#sidebar-wrapper").toggleClass("active");
-	}); */
 </script> 

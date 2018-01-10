@@ -36,11 +36,11 @@ boolean appFlag = useragent.indexOf("bandaimallapp") > -1;
 <link rel="shortcut icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="${path_root}/resources/bootstrap/images/favicon.ico" type="image/x-icon">
 
-<link href="${path_root}/resources/bootstrap/css/cloud_main.css?20171206001" rel="stylesheet">
+<link href="${path_root}/resources/bootstrap/css/cloud_main.css?20180110001" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
-<link href="${path_root}/resources/bootstrap/css/bootstrap.css?20171206001" rel="stylesheet">
+<link href="${path_root}/resources/bootstrap/css/bootstrap.css?20180110001" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="${path_root}/resources/bootstrap/css/modern-business.css?20171206001" rel="stylesheet">
+<link href="${path_root}/resources/bootstrap/css/modern-business.css?20180110001" rel="stylesheet">
 
 <!-- Custom Fonts -->
 <%-- <link href="${path_root}/resources/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"> --%>
