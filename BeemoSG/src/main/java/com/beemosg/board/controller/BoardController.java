@@ -217,7 +217,7 @@ public class BoardController {
 	        	tbroadcast.setExtension(tbroadcast.getFilename().substring(nFileIndex, lastIndex));
 	            model.addAttribute("broadcast", tbroadcast);
 	        }
-	        model.addAttribute("dropdown", "sgCloud");
+	        model.addAttribute("dropdown", "file_add");
         }
         catch(Exception e){
 			logger.error("sgCloud/sgCloud_add.do ERROR, " + e.getMessage());

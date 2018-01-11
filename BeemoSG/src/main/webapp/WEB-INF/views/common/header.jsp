@@ -71,8 +71,8 @@
                 <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');">자료요청게시판</a>
             </li>
             <c:if test="${sessionScope.user.admin_yn == '1'}">
-            <li class="">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');">파일추가</a>
+            <li class="<c:if test="${dropdown == 'file_add'}">active</c:if>">
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');">파일등록</a>
             </li>
             </c:if>
             <!-- 

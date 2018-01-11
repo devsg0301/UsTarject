@@ -31,6 +31,10 @@
 		//var eFileUrl = encodeURIComponent(fileUrl);
 		//var eFileName = encodeURIComponent(fileName);
 		//alert(eFileUrl);
+		if(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0){
+			alert("아이폰은 파일을 다운로드 할 수 없습니다.");
+			return;
+		}
 		
 		location.href = "/sgCloud/fileDownload.do?fileName="+fileName+"&fileUrl="+fileUrl;
 	}
@@ -191,7 +195,7 @@
 					                    </div>
 					                </div>
 					            </li>
-					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fa fa-upload"></i> 파일추가</a></li>
+					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fa fa-upload"></i> 파일등록</a></li>
 							</ul>
 			            </div>
 		            </nav>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path_root"  value="${pageContext.request.contextPath}" scope="application"/>
 
 <!DOCTYPE html>
@@ -15,14 +16,12 @@
 <script type="text/javascript">
 	var tmpUser = navigator.userAgent;
 	
-	window.onload = levelup_check;
-	
-	function levelup_check(){
-		if(${check == 'ok'}){
-			alert("회원등급 요청을 해야 이용이 가능합니다.\n자유게시판에 등업을 요청해주세요.");
+	$(document).ready(function() {
+		if("${check}" == "ok"){
+			alert("회원등급 요청을 해야 이용이 가능합니다.\n자유게시판에서 등업 신청을 해주세요.");
 			return;
-		}		
-	}
+		}
+	});
 
 	function searchGo(){
 		var searchWord = $("#searchWord").val();
@@ -219,7 +218,7 @@
 					                </div>
 					            </li>
 					            <!-- Dropdown-->
-					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fa fa-upload"></i> 파일추가</a></li>
+					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fa fa-upload"></i> 파일등록</a></li>
 							</ul>
 			            </div>
 		            </nav>
@@ -243,6 +242,7 @@
 					<table class="table">
 						<tbody>
 							<tr>
+								<th>번호</th>
 								<c:if test="${gubun == 'request'}">
 			                    <th>카테고리</th>
 			                    </c:if>
@@ -255,16 +255,18 @@
 							</tr>
 							<c:forEach var="boardList" items="${boardList}">
 							<tr>
+		                    	<td class="view-message">${boardList.idx}</td>
 								<c:if test="${gubun == 'request'}">
 			                    	<td class="view-message">${boardList.category}</td>
 			                    </c:if>
 			                    <td class="view-message">${boardList.title}</td>
 			                    <td class="view-message">
+			                    	<c:set var="insert_id" value="${boardList.insert_id}"/>
 			                    	<c:if test="${sessionScope.user.admin_yn == '1'}">
-			                    	<a href="javascript:goCustInfo('${boardList.insert_id}');">${boardList.author}</a>
+			                    	<a href="javascript:goCustInfo('${boardList.insert_id}');">${fn:substring(insert_id,0,3)}**</a>
 			                    	</c:if>
 			                    	<c:if test="${sessionScope.user.admin_yn != '1'}">
-			                    	${boardList.author}
+			                    	${fn:substring(insert_id,0,3)}**
 			                    	</c:if>
 			                    </td>
 			                    <td class="view-message"><fmt:formatDate value="${boardList.insert_date}" pattern="yyyy.MM.dd(E)"/></td>

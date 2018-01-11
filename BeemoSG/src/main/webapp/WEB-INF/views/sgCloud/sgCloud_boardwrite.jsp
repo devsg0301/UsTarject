@@ -223,7 +223,7 @@
 					                </div>
 					            </li>
 					            <!-- Dropdown-->
-					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fa fa-upload"></i> 파일추가</a></li>
+					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fa fa-upload"></i> 파일등록</a></li>
 							</ul>
 			            </div>
 		            </nav>

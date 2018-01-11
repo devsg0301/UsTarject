@@ -12,14 +12,12 @@
 <script type="text/javascript">
 
 $(document).ready(function () {
-	if(${empty broadcast}){
+	if("${broadcast}" == "" || "${broadcast}" == null){
 		$("#category").val("TV");
 		$("#genre").val("드라마");
 		$("#grade").val("전체");
 		$("#priority").val("99");
-	}
-	
-	if(${!empty broadcast}){
+	}else{
 		$("#category").val("${broadcast.category}");
 	    $("#select_genre").html("");
 	    if("${broadcast.category}" == "TV"){
@@ -232,7 +230,14 @@ $(document).ready(function () {
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
                     </li>
-                    <li class="active">sgCloud Registration</li>
+                    <li class="active">
+                    <c:if test="${empty broadcast}">
+                		파일등록
+                	</c:if>
+                	<c:if test="${!empty broadcast}">
+                		파일수정
+                	</c:if>
+                    </li>
                 </ol>
             </div>
         </div>
@@ -375,14 +380,14 @@ $(document).ready(function () {
                     <div class="form-group">
 						<div class="checkbox">
 							<label style="padding-left:0px;">
-								<input type="checkbox" id="sub_check" name="sub_check" <c:if test="${broadcast.sub_check }">checked</c:if>/>
+								<input type="checkbox" id="sub_check" name="sub_check" style="display:none;" <c:if test="${broadcast.sub_check }">checked</c:if>/>
 								<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
 								자막여부				            
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+						<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
 					</div>
                 </form>
             </div>

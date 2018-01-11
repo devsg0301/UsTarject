@@ -38,24 +38,26 @@ public class CustController {
 		logger.info("custJoin input page");
 		return "cust/custJoinForm";
 	}
-	
-	// 회원가입 페이지 이동
-	@RequestMapping(value = "/cust/custJoinOk.do", method = RequestMethod.POST)
-	public String custJoinOk(@ModelAttribute("tcustomer") Tcustomer tcustomer){
-		logger.info("custJoinOk start");
+	// 아이디 중복 체크
+	@RequestMapping(value = "/cust/idCheck.do", method = RequestMethod.GET)
+	public void AjaxIdCheck(@RequestParam("cust_id") String cust_id, HttpServletResponse response) throws Exception{
 		
-		String strDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+		String checkId = "";
+		Tcustomer customer = null;
 		
-		String cust_no = strDate + String.format("%02d", custService.getMaxCustNo(strDate + "%"));
-		System.out.println("cust_no : " + cust_no );
-		
-		tcustomer.setCust_no(cust_no);
-		
-		custService.insertCust(tcustomer);
-		
-		return "defaults/login";
+	    try {
+	    	customer = custService.selectCustomer(cust_id);
+	    	if(customer != null){
+	    		checkId = "no";
+	    	}
+	    	else{
+	    		checkId = "ok";
+	    	}
+	        response.getWriter().print(checkId);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }   
 	}
-	
 	// 회원가입 페이지 이동
 	@RequestMapping(value = "/cust/custInfo.do", method = RequestMethod.GET)
 	public String custInfo(@RequestParam(value="cust_id", defaultValue="") String cust_id,
@@ -85,24 +87,22 @@ public class CustController {
 		
 		return "cust/custInfo";
 	}
-	
-	@RequestMapping(value = "/cust/idCheck.do", method = RequestMethod.GET)
-	public void AjaxIdCheck(@RequestParam("cust_id") String cust_id, HttpServletResponse response) throws Exception{
+	// 회원가입 시작
+	@RequestMapping(value = "/cust/custJoinOk.do", method = RequestMethod.POST)
+	public String custJoinOk(@ModelAttribute("tcustomer") Tcustomer tcustomer, Model model){
+		logger.info("custJoinOk start");
 		
-		String checkId = "";
-		Tcustomer customer = null;
+		String strDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
 		
-	    try {
-	    	customer = custService.selectCustomer(cust_id);
-	    	if(customer != null){
-	    		checkId = "no";
-	    	}
-	    	else{
-	    		checkId = "ok";
-	    	}
-	        response.getWriter().print(checkId);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }   
+		String cust_no = strDate + String.format("%02d", custService.getMaxCustNo(strDate + "%"));
+		System.out.println("cust_no : " + cust_no );
+		
+		tcustomer.setCust_no(cust_no);
+		
+		custService.insertCust(tcustomer);
+		
+		model.addAttribute("joinCheck", "joinOk");
+		
+		return "defaults/login";
 	}
 }

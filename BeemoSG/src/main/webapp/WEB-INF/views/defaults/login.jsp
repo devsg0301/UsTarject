@@ -20,6 +20,9 @@
 		<c:if test="${fail == 'fail'}">
 	   	alert("아이디 또는 비밀번호를 확인해 주세요.");
 		</c:if>
+		<c:if test="${joinCheck == 'joinOk'}">
+	   	alert("회원가입이 완료 되었습니다.\n로그인 후 등업 신청을 해주세요.");
+		</c:if>
 		var form = document.loginForm;
 	    getid(form);
 	    //captcha();		
