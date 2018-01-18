@@ -2,6 +2,7 @@ package com.beemosg.board.controller;
 
 import java.io.File;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;	
@@ -402,6 +403,18 @@ public class BoardController {
 	        
 	        URL url = new URL("http://211.200.138.35:8081/LocalUser/data/" + fileUrl);
 	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	        if(conn.getResponseCode() == 404){
+	        	response.setContentType("text/html; charset=UTF-8");
+	        	response.setCharacterEncoding("UTF-8");
+	        	PrintWriter out = response.getWriter();
+	        	out.println("<script type='text/javascript'>");
+	        	out.println("alert('해당 파일이 존재하지 않습니다. 추후에 다시 시도 해주세요.');");
+	        	out.println("history.back();");
+	        	out.println("</script>");
+	        	out.flush();
+	        	return;
+	        }
+	        
 	        is = conn.getInputStream();
 	        
 	        int file_size = conn.getContentLength();
@@ -431,8 +444,8 @@ public class BoardController {
 	        response.setHeader("Content-Transfer-Encoding", "binary");
 	        response.setHeader("Connection", "close");
 	        FileCopyUtils.copy(is, response.getOutputStream());
-	        logger.info("------Download End------");
-        } catch (Exception e) {
+	        logger.info("------Download End------");	        
+        } catch (Exception e) {        	
         	logger.error("fileDownload ERROR, " + e.getMessage());
 		}
     	
