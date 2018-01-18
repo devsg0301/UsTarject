@@ -72,7 +72,7 @@
     </select>
     
     <select id="getFolderList" resultMap="folderListMap">
-    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, MAX(HIT) AS HIT
+    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, SUM(HIT) AS HIT
     	  FROM TBROADCAST
     	 WHERE 1=1
     	   AND CATEGORY LIKE #{param1}
@@ -80,6 +80,17 @@
     	   <!-- AND PRIORITY &lt;&gt; 99 -->
       GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE
       ORDER BY MIN(PRIORITY), MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
+    </select>
+
+    <select id="recentFolderList" resultMap="folderListMap">
+    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, SUM(HIT) AS HIT
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY IN ('TV', 'MOVIE')
+    	   <!-- AND GENRE LIKE #{param2} -->
+    	   <!-- AND PRIORITY &lt;&gt; 99 -->
+      GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE
+      ORDER BY MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
     </select>
     
 </mapper>

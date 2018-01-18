@@ -23,6 +23,10 @@ public class MainDao {
 		return this.mainMapper.getFolderList(category, genre);
 	}
 
+	public List recentFolderList() throws Exception{
+		return this.mainMapper.recentFolderList();
+	}
+
 	public List<Tbroadcast> getBroadcastList() throws Exception{
 		return this.mainMapper.getBroadcastList();
 	}

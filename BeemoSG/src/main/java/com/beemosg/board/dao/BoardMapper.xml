@@ -14,6 +14,7 @@
         <result property="explanation"	column="explanation" />
         <result property="file_url"	  	column="file_url" />
         <result property="sub_url"	  	column="sub_url" />
+        <result property="country"	  	column="country" />
         <result property="play_date"	column="play_date" />
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="hit"			column="hit" />
@@ -83,6 +84,12 @@
           WHERE foldername = #{param1}
     </update>
 
+    <update id="updateHitCountIdx">
+         UPDATE TBROADCAST SET
+              	hit = hit + 1
+          WHERE idx = #{idx}
+    </update>
+
     <select id="getBroadcastList" resultMap="broadcastMap">
     	SELECT STEP_TWO.*                                                             
 		  FROM( SELECT STEP_ONE.*                                                           
@@ -100,6 +107,7 @@
 				                       EXPLANATION,
 				                       FILE_URL,
 				                       SUB_URL,
+				                       COUNTRY,
 				                       PLAY_DATE,
 				                       DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
 				                       HIT,
@@ -114,6 +122,7 @@
 				           AND XA.GENRE LIKE #{param3}
 				           AND XA.FOLDERNAME LIKE #{param4}
 				           AND (XA.TITLE LIKE #{param5} OR XA.FILENAME LIKE #{param5})
+				           AND XA.COUNTRY LIKE #{param6}
 				      ORDER BY XA.PLAY_DATE DESC, XA.INSERT_DATE DESC, XA.TITLE DESC
 				       ) STEP_ONE                                                              
 				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 15                                                  
@@ -143,6 +152,9 @@
     	 WHERE 1=1
     	   AND CATEGORY LIKE #{param1}
     	   AND GENRE LIKE #{param2}
+    	   AND FOLDERNAME LIKE #{param3}
+    	   AND (TITLE LIKE #{param4} OR FILENAME LIKE #{param4})
+    	   AND COUNTRY LIKE #{param5}
       GROUP BY CATEGORY, GENRE, FOLDERNAME
       ORDER BY MAX(PLAY_DATE) DESC, INSERT_DATE DESC      
     </select>
@@ -155,24 +167,25 @@
     	   AND GENRE LIKE #{param2}
     	   AND FOLDERNAME LIKE #{param3}
     	   AND (TITLE LIKE #{param4} OR FILENAME LIKE #{param4})
+    	   AND COUNTRY LIKE #{param5}
     </select>
     
     <select id="broadcastDetail" resultMap="broadcastMap">
-        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL,
+        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL, COUNTRY,
         	   PLAY_DATE, DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r'), HIT, PRIORITY        	 
           FROM TBROADCAST 
          WHERE idx = #{idx}
     </select>
 
     <select id="getSelectBroadcast" resultMap="broadcastMap">
-        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL,
+        SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL, COUNTRY,
         	   PLAY_DATE, DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r'), HIT, PRIORITY 
           FROM TBROADCAST
          WHERE idx = #{idx}
     </select>
     
     <insert id="insertBroadcast">
-         INSERT INTO TBROADCAST ( category, genre, title, grade, foldername, albumname, filename, explanation, file_url, sub_url, play_date, priority ) VALUES (
+         INSERT INTO TBROADCAST ( category, genre, title, grade, foldername, albumname, filename, explanation, file_url, sub_url, country, play_date, priority ) VALUES (
                 #{category}
               , #{genre}
               , #{title}
@@ -183,6 +196,7 @@
               , #{explanation}
               , #{file_url}
               , #{sub_url}
+              , #{country}
               , #{play_date}
               , #{priority}
          )
@@ -200,6 +214,7 @@
               	explanation = #{explanation},
               	file_url 	= #{file_url},
               	sub_url 	= #{sub_url},
+              	country 	= #{country},
               	play_date	= #{play_date},
               	priority	= #{priority}
           WHERE idx = #{idx} LIMIT 1

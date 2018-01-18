@@ -14,6 +14,8 @@ public interface MainMapper {
 
 	List getFolderList(String category, String genre) throws Exception;
 
+	List recentFolderList() throws Exception;
+
 	List<Tbroadcast> getBroadcastList() throws Exception;
 	
 }

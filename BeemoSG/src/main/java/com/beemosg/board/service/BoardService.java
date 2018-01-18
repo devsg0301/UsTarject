@@ -10,16 +10,18 @@ import com.beemosg.model.Tbroadcast_comment;
 public interface BoardService {
 	
 	public void updateHitCount(String foldername) throws Exception;
-	
-	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception ;
 
-	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception ;
+	public void updateHitCountIdx(int idx) throws Exception;
+	
+	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord, String country) throws Exception ;
+
+	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord, String country) throws Exception ;
 
 	public List getCategoryList() throws Exception;
 
 	public List getGenerList(String category) throws Exception;
 
-	public List getFolderList(String category, String genre) throws Exception;
+	public List getFolderList(String category, String genre, String foldername, String searchWord, String country) throws Exception;
 	
 	public Tbroadcast broadcastDetail(int idx) throws Exception;
 	

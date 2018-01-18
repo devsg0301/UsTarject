@@ -24,6 +24,10 @@ public class MainServiceImpl implements MainService {
 		return mainDao.getFolderList(category, genre);
 	}
 
+	public List recentFolderList() throws Exception{
+		return mainDao.recentFolderList();
+	}
+
 	public List<Tbroadcast> getBroadcastList() throws Exception{
 		return mainDao.getBroadcastList();
 	}

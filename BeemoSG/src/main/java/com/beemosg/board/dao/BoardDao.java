@@ -19,13 +19,17 @@ public class BoardDao {
     public void updateHitCount(String foldername) throws Exception{
     	this.boardMapper.updateHitCount(foldername);
     }
+
+    public void updateHitCountIdx(int idx) throws Exception{
+    	this.boardMapper.updateHitCountIdx(idx);
+    }
     
-    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception{
-    	return this.boardMapper.getBroadcastList(rnum, category, genre, foldername, searchWord);
+    public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord, String country) throws Exception{
+    	return this.boardMapper.getBroadcastList(rnum, category, genre, foldername, searchWord, country);
     }
 
-    public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception{
-    	return this.boardMapper.totalBroadcast(category, genre, foldername, searchWord);
+    public Integer totalBroadcast(String category, String genre, String foldername, String searchWord, String country) throws Exception{
+    	return this.boardMapper.totalBroadcast(category, genre, foldername, searchWord, country);
     }
 
     public List getCategoryList() throws Exception{
@@ -36,8 +40,8 @@ public class BoardDao {
     	return this.boardMapper.getGenerList(category);
     }
     
-    public List getFolderList(String category, String genre) throws Exception{
-		return this.boardMapper.getFolderList(category, genre);
+    public List getFolderList(String category, String genre, String foldername, String searchWord, String country) throws Exception{
+		return this.boardMapper.getFolderList(category, genre, foldername, searchWord, country);
 	}
 
     public Tbroadcast broadcastDetail(int idx) throws Exception{

@@ -13,11 +13,12 @@ import com.beemosg.model.Tbroadcast_comment;
 public interface BoardMapper {
 	
 	void updateHitCount(String foldername) throws Exception;
-	List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception;
-	Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception;
+	void updateHitCountIdx(int idx) throws Exception;
+	List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord, String country) throws Exception;
+	Integer totalBroadcast(String category, String genre, String foldername, String searchWord, String country) throws Exception;
 	List getCategoryList() throws Exception;
 	List getGenerList(String category) throws Exception;
-	List getFolderList(String category, String genre) throws Exception;
+	List getFolderList(String category, String genre, String foldername, String searchWord, String country) throws Exception;
 	Tbroadcast broadcastDetail(int idx) throws Exception;
 	Tbroadcast getSelectBroadcast(int idx) throws Exception;
 	void insertBroadcast(Tbroadcast tbroadcast) throws Exception;

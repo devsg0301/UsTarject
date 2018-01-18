@@ -32,9 +32,13 @@
 					</a>
 				</div>
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','왕좌의게임7');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner08.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','화유기');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner05.jpg">
-						<span>차승원의 계략! 금강고를 찾기 위한 유일한 방법?</span>
+						<img src="${path_root}/resources/bootstrap/images/main_banner05.jpg">						
 					</a>
 				</div>
 				<div class="swiper-slide">
@@ -45,11 +49,6 @@
 				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','나쁜녀석들2');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner07.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','마녀의법정');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner01.jpg">
 					</a>
 				</div>
 			</div>
@@ -88,6 +87,35 @@
 		    <div class="swiper-button-next next1"></div>
 		</div>
 		
+		<h2 class="program-lists-title">최근 등록 영상</h2>	
+		<div class="prd_slide_t01_wrap">
+			<div class="swiper-container swiper6">
+				<div class="swiper-wrapper">
+					<c:forEach var="recentFolderList" items="${recentFolderList}" end="14">
+						<div class="swiper-slide">
+							<a class="dBanner" href="javascript:folderSearch('${recentFolderList.category}','${recentFolderList.genre}','${recentFolderList.foldername}');" >
+								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${recentFolderList.category}/${recentFolderList.genre}/${recentFolderList.foldername}/${recentFolderList.foldername}.jpg" alt="${recentFolderList.foldername}"/>
+								<span class="broadcast-info-box" aria-hidden="true">
+									<span class="broadcast-title">${recentFolderList.foldername}</span>
+								</span>
+								<span class="icons" aria-hidden="true">
+									<span class="ico-grade ico-grade-${recentFolderList.grade}"></span>
+								</span>
+								<c:if test="${recentFolderList.hit >= 20 }">
+								<span class="hot-icons" aria-hidden="true">
+									<img src="${path_root}/resources/bootstrap/images/ico-hot.png" alt="">
+								</span>
+								</c:if>
+							</a>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<!-- If we need navigation buttons -->
+		    <div class="swiper-button-prev prev6"></div>
+		    <div class="swiper-button-next next6"></div>
+		</div>
+		
 		<h2 class="program-lists-title">추천 TV프로그램<a href="javascript:fileSearch('TV','');" class="program-lists-more">더보기 <i class="fa fa-plus-circle"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper2">
@@ -102,7 +130,7 @@
 								<span class="icons" aria-hidden="true">
 									<span class="ico-grade ico-grade-${tvFolderList.grade}"></span>
 								</span>
-								<c:if test="${tvFolderList.hit >= 6 }">
+								<c:if test="${tvFolderList.hit >= 20 }">
 								<span class="hot-icons" aria-hidden="true">
 									<img src="${path_root}/resources/bootstrap/images/ico-hot.png" alt="">
 								</span>
@@ -156,7 +184,7 @@
 								<span class="icons" aria-hidden="true">
 									<span class="ico-grade ico-grade-${dreamFolderList.grade}"></span>
 								</span>
-								<c:if test="${dreamFolderList.hit >= 6 }">
+								<c:if test="${dreamFolderList.hit >= 20 }">
 								<span class="hot-icons" aria-hidden="true">
 									<img src="${path_root}/resources/bootstrap/images/ico-hot.png" alt="">
 								</span>
@@ -183,7 +211,7 @@
 								<span class="icons" aria-hidden="true">
 									<span class="ico-grade ico-grade-${entertainmentFolderList.grade}"></span>
 								</span>
-								<c:if test="${entertainmentFolderList.hit >= 6 }">
+								<c:if test="${entertainmentFolderList.hit >= 20 }">
 								<span class="hot-icons" aria-hidden="true">
 									<img src="${path_root}/resources/bootstrap/images/ico-hot.png" alt="">
 								</span>
@@ -379,6 +407,42 @@
 			navigation: {
 			    nextEl: '.next5',
 			    prevEl: '.prev5',
+			},
+			breakpoints : {
+				// when window width is <= 320px
+				350 : {
+					slidesPerView : 1,
+					spaceBetween : 0,
+					slidesPerGroup: 1,
+				},
+				// when window width is <= 480px
+				768 : {
+					slidesPerView : 2,
+					spaceBetween : 0,
+					slidesPerGroup: 2,
+				},
+				// when window width is <= 640px
+				992 : {
+					slidesPerView : 3,
+					spaceBetween : 0,
+					slidesPerGroup: 3,
+				},
+				1200 : {
+					slidesPerView : 4,
+					spaceBetween : 0,
+					slidesPerGroup: 4,
+				}
+			}		
+		});
+
+		var swiper6 = new Swiper('.swiper6', {
+			slidesPerView : 5,
+			spaceBetween : 0,
+			slidesPerGroup: 5,
+			loop: true,
+			navigation: {
+			    nextEl: '.next6',
+			    prevEl: '.prev6',
 			},
 			breakpoints : {
 				// when window width is <= 320px

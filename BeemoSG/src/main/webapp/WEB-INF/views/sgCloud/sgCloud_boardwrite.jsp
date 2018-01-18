@@ -65,11 +65,11 @@
 		location.href = "/sgCloud/fileDownload.do?fileName="+fileName+"&fileUrl="+fileUrl;
 	}
 	
-	function fileSearch(category, genre){
+	function fileSearch(category, genre, country){
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre);
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&country=" + country;
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "#view_position";
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&country=" + country + "#view_position";
 		}
 	}
 	
@@ -154,9 +154,10 @@
 					                <div id="dropdown-tv1" class="panel-collapse collapse" >
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','');"><i class="fa fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마');"><i class="fa fa-caret-right"></i>드라마</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','예능');"><i class="fa fa-caret-right"></i>예능</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','','');"><i class="fa fa-caret-right"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마','KO');"><i class="fa fa-caret-right"></i>한국드라마</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마','EN');"><i class="fa fa-caret-right"></i>외국드라마</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','예능','');"><i class="fa fa-caret-right"></i>예능</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
@@ -171,23 +172,23 @@
 					                <div id="dropdown-movie1" class="panel-collapse collapse " >
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','');"><i class="fa fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','액션ㆍ전쟁');"><i class="fa fa-caret-right"></i>액션ㆍ전쟁</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스릴러ㆍ범죄');"><i class="fa fa-caret-right"></i>스릴러ㆍ범죄</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','로멘스ㆍ멜로');"><i class="fa fa-caret-right"></i>로멘스ㆍ멜로</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','드라마ㆍ가족');"><i class="fa fa-caret-right"></i>드라마ㆍ가족</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','SFㆍ환타지');"><i class="fa fa-caret-right"></i>SFㆍ환타지</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','공포ㆍ호러');"><i class="fa fa-caret-right"></i>공포ㆍ호러</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','코미디');"><i class="fa fa-caret-right"></i>코미디</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','애니');"><i class="fa fa-caret-right"></i>애니</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','뮤지컬ㆍ음악');"><i class="fa fa-caret-right"></i>뮤지컬ㆍ음악</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','다큐멘터리');"><i class="fa fa-caret-right"></i>다큐멘터리</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스포츠');"><i class="fa fa-caret-right"></i>스포츠</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','','');"><i class="fa fa-caret-right"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','액션ㆍ전쟁','');"><i class="fa fa-caret-right"></i>액션ㆍ전쟁</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스릴러ㆍ범죄','');"><i class="fa fa-caret-right"></i>스릴러ㆍ범죄</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','로멘스ㆍ멜로','');"><i class="fa fa-caret-right"></i>로멘스ㆍ멜로</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','드라마ㆍ가족','');"><i class="fa fa-caret-right"></i>드라마ㆍ가족</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','SFㆍ환타지','');"><i class="fa fa-caret-right"></i>SFㆍ환타지</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','공포ㆍ호러','');"><i class="fa fa-caret-right"></i>공포ㆍ호러</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','코미디','');"><i class="fa fa-caret-right"></i>코미디</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','애니','');"><i class="fa fa-caret-right"></i>애니</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','뮤지컬ㆍ음악','');"><i class="fa fa-caret-right"></i>뮤지컬ㆍ음악</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','다큐멘터리','');"><i class="fa fa-caret-right"></i>다큐멘터리</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스포츠','');"><i class="fa fa-caret-right"></i>스포츠</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
-					            <li class=""><a style="" href="javascript:fileSearch('MUSIC','');"><i class="fa fa-music"></i> 노래</a></li>
+					            <li class=""><a style="" href="javascript:fileSearch('MUSIC','','');"><i class="fa fa-music"></i> 노래</a></li>
 					            <!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="" data-toggle="collapse" href="#dropdown-utility1" >
@@ -198,10 +199,10 @@
 					                <div id="dropdown-utility1" class="panel-collapse collapse">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','');"><i class="fa fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','소프트웨어');"><i class="fa fa-caret-right"></i>소프트웨어</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','보안ㆍ백신');"><i class="fa fa-caret-right"></i>보안ㆍ백신</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','기타설치');"><i class="fa fa-caret-right"></i>기타설치</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','','');"><i class="fa fa-caret-right"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','소프트웨어','');"><i class="fa fa-caret-right"></i>소프트웨어</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','보안ㆍ백신','');"><i class="fa fa-caret-right"></i>보안ㆍ백신</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','기타설치','');"><i class="fa fa-caret-right"></i>기타설치</a></li>
 					                        </ul>
 					                    </div>
 					                </div>

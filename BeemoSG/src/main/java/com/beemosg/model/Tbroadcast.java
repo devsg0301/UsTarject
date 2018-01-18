@@ -15,6 +15,7 @@ public class Tbroadcast {
 	private String file_url;
 	private String extension;
 	private String sub_url;
+	private String country;
 	private boolean sub_check;
 	private String play_date;
 	private Date insert_date;
@@ -26,6 +27,12 @@ public class Tbroadcast {
 	
 	public String getExplanation() {
 		return explanation;
+	}
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
 	}
 	public void setExplanation(String explanation) {
 		this.explanation = explanation;

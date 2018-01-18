@@ -21,13 +21,17 @@ public class BoardServiceImpl implements BoardService{
 	public void updateHitCount(String foldername) throws Exception {
 		boardDao.updateHitCount(foldername);
 	}
-	
-	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord) throws Exception {
-		return boardDao.getBroadcastList(rnum, category, genre, foldername, searchWord);
+
+	public void updateHitCountIdx(int idx) throws Exception {
+		boardDao.updateHitCountIdx(idx);
 	}
 	
-	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord) throws Exception {
-		return boardDao.totalBroadcast(category, genre, foldername, searchWord);
+	public List<Tbroadcast> getBroadcastList(int rnum, String category, String genre, String foldername, String searchWord, String country) throws Exception {
+		return boardDao.getBroadcastList(rnum, category, genre, foldername, searchWord, country);
+	}
+	
+	public Integer totalBroadcast(String category, String genre, String foldername, String searchWord, String country) throws Exception {
+		return boardDao.totalBroadcast(category, genre, foldername, searchWord, country);
 	}
 	
 	public List getCategoryList() throws Exception {
@@ -38,8 +42,8 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.getGenerList(category);
 	}
 	
-	public List getFolderList(String category, String genre) throws Exception {
-		return boardDao.getFolderList(category, genre);
+	public List getFolderList(String category, String genre, String foldername, String searchWord, String country) throws Exception {
+		return boardDao.getFolderList(category, genre, foldername, searchWord, country);
 	}
 	
 	public Tbroadcast broadcastDetail(int idx) throws Exception {

@@ -44,11 +44,12 @@ public class BoardController {
 	
 	// sgCloud 이동
 	@RequestMapping(value = "/sgCloud/sgCloud_main.do", method = RequestMethod.GET)
-	public String displaySgCloud(@RequestParam(value="rnum", defaultValue="1") int rnum, 
+	public String displaySgCloud(@RequestParam(value="rnum", defaultValue="1") int rnum,
 			@RequestParam(value="category", defaultValue="") String category,
-			@RequestParam(value="genre", defaultValue="") String genre,			
-			@RequestParam(value="genre2", defaultValue="") String genre2,			
-			@RequestParam(value="foldername", defaultValue="") String foldername,			
+			@RequestParam(value="genre", defaultValue="") String genre,
+			@RequestParam(value="genre2", defaultValue="") String genre2,
+			@RequestParam(value="foldername", defaultValue="") String foldername,
+			@RequestParam(value="country", defaultValue="") String country,
 			@RequestParam(value="searchWord", defaultValue="") String searchWord,
 			HttpSession session, HttpServletRequest request, Model model) throws Exception {
 		logger.info("sgCloud Main");
@@ -57,16 +58,21 @@ public class BoardController {
 		int next = 0;
 		List genreList = null;
 		List folderList = null;
+		String foldername2 = "";
 		Tcustomer customer = null;
 		boolean isMobile = false;
 		
-		try{			
+		try{
+			isMobile = isMobile(request.getHeader("User-Agent"));
 			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
-				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do");
+				if(isMobile){
+					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+URLEncoder.encode(category, "UTF-8")+"&genre="+URLEncoder.encode(genre, "UTF-8")+"&foldername="+URLEncoder.encode(foldername, "UTF-8")+"#view_position");
+				}else{
+					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+URLEncoder.encode(category, "UTF-8")+"&genre="+URLEncoder.encode(genre, "UTF-8")+"&foldername="+URLEncoder.encode(foldername, "UTF-8"));
+				}
 				return "defaults/login";
 			}else{
-				isMobile = isMobile(request.getHeader("User-Agent"));
 				customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
 				if(!customer.getCust_gb().equals("20")){
 					if(isMobile){
@@ -77,37 +83,33 @@ public class BoardController {
 				}
 			}
 
-			if(!foldername.equals("")){
+			if(category.equals("MOVIE") && !foldername.equals("")){
 				this.boardService.updateHitCount(foldername);
 			}
 			
 			if(!"".equals(searchWord) && searchWord != null){
-				searchWord = "%"+ searchWord +"%";
+				searchWord = "%"+ searchWord.replaceAll("%20", " ") +"%";
 			}else{
 				searchWord = "%%";
 			}
-			//if(category.equals("all") || category.equals("")){
-				//category = "%%";
-				//genre = "%%";
-				//foldername = "%%";
-			//}else{
-				category = "%" + category + "%";
-				genreList = this.boardService.getGenerList(category);
-				//if(!genre.equals("")){
-					genre = "%" + genre + "%";
-					foldername = "%" + foldername.replaceAll("%20", " ") + "%";
-					folderList = this.boardService.getFolderList(category, genre);
-				//}else{
-					//genre = "%%";
-					//foldername = "%%";
-				//}
-			//}
+			category = "%" + category + "%";
+			genreList = this.boardService.getGenerList(category);
+			genre = "%" + genre + "%";
+			if(!"".equals(foldername) && foldername != null){
+				foldername2 = "%" + foldername.substring(0, foldername.replaceAll("%20", " ").length() - 1) + "%";
+				foldername = "%" + foldername.replaceAll("%20", " ") + "%";
+			}else{
+				foldername2 = "%%";
+				foldername = "%%";
+			}
+			country = "%" + country + "%";
+			folderList = this.boardService.getFolderList(category, genre, foldername2, searchWord, country);
 	
 			logger.info("rnum : " + rnum);
 			logger.info("category : " + category + ", genre : " + genre + ", foldername : " + foldername + ", searchWord : " + searchWord);
 			
-			List<Tbroadcast> broadcastList = this.boardService.getBroadcastList((rnum * 16) - 15, category, genre, foldername, searchWord);
-			totalBroadcast = boardService.totalBroadcast(category, genre, foldername, searchWord);
+			List<Tbroadcast> broadcastList = this.boardService.getBroadcastList((rnum * 16) - 15, category, genre, foldername, searchWord, country);
+			totalBroadcast = boardService.totalBroadcast(category, genre, foldername, searchWord, country);
 			
 			if(rnum > 1){
 				prev = rnum - 1;
@@ -129,6 +131,7 @@ public class BoardController {
 			model.addAttribute("category", category.replaceAll("%", ""));
 			model.addAttribute("genreList", genreList);
 			model.addAttribute("genre", genre.replaceAll("%", ""));
+			model.addAttribute("country", country.replaceAll("%", ""));
 			model.addAttribute("folderList", folderList);
 			model.addAttribute("foldername", foldername.replaceAll("%", ""));
 			model.addAttribute("totalBroadcast", totalBroadcast);
@@ -169,6 +172,7 @@ public class BoardController {
         		}
         	}
 	        //Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
+        	this.boardService.updateHitCountIdx(idx);
 	        
 	        Tbroadcast broadcastDetail = this.boardService.broadcastDetail(idx);
 	        
@@ -254,6 +258,10 @@ public class BoardController {
 	        }else if(tbroadcast.getExtension() == null || tbroadcast.getExtension().equals("")){
 	        	tbroadcast.setExtension(".mp4");
 	        }
+    		
+    		if(tbroadcast.getCountry() == null || tbroadcast.getCountry().equals("")){
+    			tbroadcast.setCountry("KO");
+    		}
 	
 	        tbroadcast.setFilename(tbroadcast.getTitle()+tbroadcast.getExtension());
 	        
@@ -508,7 +516,7 @@ public class BoardController {
  			@RequestParam(value="gubun", defaultValue="level") String gubun,
  			@RequestParam(value="check", defaultValue="no") String check,
  			HttpSession session, Model model) throws Exception {
- 		logger.info("sgCloud Main");
+ 		logger.info("board Main");
  		int totalBoard = 0;
  		int prev = 0;
  		int next = 0; 		

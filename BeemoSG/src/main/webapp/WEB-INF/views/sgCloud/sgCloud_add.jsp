@@ -353,7 +353,7 @@ $(document).ready(function () {
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="filename" class="cols-sm-2 control-label">확장자</label>
+						<label for="extension" class="cols-sm-2 control-label">확장자</label>
 						<div class="buying-selling-group" id="buying-selling-group" data-toggle="buttons">
 					        <label class="btn btn-default buying-selling <c:if test="${broadcast.extension == '.mp4' || empty broadcast}">active</c:if>">
 					        	<input type="radio" name="extension" id="extension1" value=".mp4" autocomplete="off" <c:if test="${broadcast.extension == '.mp4' || empty broadcast}">checked</c:if>>
@@ -375,6 +375,21 @@ $(document).ready(function () {
 					            <span class="radio-dot"></span>
 					            <span class="buying-selling-word">없음</span>
 					        </label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="country" class="cols-sm-2 control-label">국가</label>
+						<div class="buying-selling-group" id="buying-selling-group" data-toggle="buttons">
+					        <label class="btn btn-default buying-selling <c:if test="${broadcast.country == 'KO' || empty broadcast}">active</c:if>">
+					        	<input type="radio" name="country" id="country1" value="KO" autocomplete="off" <c:if test="${broadcast.country == 'KO' || empty broadcast}">checked</c:if>>
+					            <span class="radio-dot"></span>
+					            <span class="buying-selling-word">KO</span>
+					        </label>
+					        <label class="btn btn-default buying-selling <c:if test="${broadcast.country == 'EN'}">active</c:if>">
+					            <input type="radio" name="country" id="country2" value="EN" autocomplete="off" <c:if test="${broadcast.country == 'EN'}">checked</c:if>>
+					            <span class="radio-dot"></span>
+					            <span class="buying-selling-word">EN</span>
+					        </label>					        
 						</div>
 					</div>
                     <div class="form-group">

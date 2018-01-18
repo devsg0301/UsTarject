@@ -41,6 +41,11 @@ body {
 	padding: 0;
 }
 
+th{
+	font-family: 'Noto Sans KR';
+	white-space: nowrap;
+}
+
 .breadcrumb_sgcloud{
 	padding: 8px 15px;
 	margin-bottom: 5px;

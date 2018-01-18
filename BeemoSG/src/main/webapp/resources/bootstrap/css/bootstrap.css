@@ -2297,6 +2297,7 @@ th {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
+  font-family: 'Noto Sans KR';
 }
 .table > thead > tr > th,
 .table > tbody > tr > th,
@@ -2306,7 +2307,7 @@ th {
 .table > tfoot > tr > td {
   padding: 8px;
   line-height: 1.42857143;
-  vertical-align: top;
+  vertical-align: middle;
   border-top: 1px solid #ddd;
 }
 .table > thead > tr > th {

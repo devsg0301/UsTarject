@@ -48,6 +48,7 @@ public class MainController {
 		List movieFolderList		 	= null;
 		List dreamFolderList 			= null;
 		List entertainmentFolderList 	= null;
+		List recentFolderList 			= null;
 		
 		try{
 			if(session.getAttribute(Const.USER_KEY) != null && !"".equals(session.getAttribute(Const.USER_KEY))){
@@ -63,12 +64,14 @@ public class MainController {
 			movieFolderList 		= this.mainService.getFolderList("%MOVIE%","%%");
 			dreamFolderList 		= this.mainService.getFolderList("%TV%","드라마%");
 			entertainmentFolderList = this.mainService.getFolderList("%TV%","예능%");
+			recentFolderList 		= this.mainService.recentFolderList();
 			
 			model.addAttribute("broadcastList", 			broadcastList);
 			model.addAttribute("tvFolderList", 				tvFolderList);
 			model.addAttribute("movieFolderList", 			movieFolderList);
 			model.addAttribute("dreamFolderList", 			dreamFolderList);
 			model.addAttribute("entertainmentFolderList", 	entertainmentFolderList);
+			model.addAttribute("recentFolderList", 			recentFolderList);
 		}
 		catch(Exception e){
 			logger.error("defaults/main.do ERROR, " + e.getMessage());
