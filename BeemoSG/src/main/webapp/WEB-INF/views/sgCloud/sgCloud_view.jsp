@@ -62,9 +62,9 @@ video{
         var IE=(document.all)?true:false;
         if (IE) {
             if(confirm("복사하시겠습니까?"))
-                window.clipboardData.setData("Text", "http://beemosg.gq:8081/LocalUser/data/" + encodeURI(trb));
+                window.clipboardData.setData("Text", "http://beemosg.gq:8081/LocalUser/data/" + trb);
         } else {
-            temp = prompt("Ctrl+C를 눌러 클립보드로 복사하세요", "http://beemosg.gq:8081/LocalUser/data/" + encodeURI(trb));
+            temp = prompt("Ctrl+C를 눌러 클립보드로 복사하세요", "http://beemosg.gq:8081/LocalUser/data/" + trb);
         }
     }
 	
@@ -93,9 +93,9 @@ video{
 	
 	function folderSearch(category, genre, foldername){
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername);
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername;
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + encodeURI(genre) + "&foldername=" + encodeURI(foldername) + "#view_position";
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
 		}
 	}
 
