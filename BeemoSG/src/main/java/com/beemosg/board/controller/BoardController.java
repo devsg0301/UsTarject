@@ -408,7 +408,7 @@ public class BoardController {
 	        	response.setCharacterEncoding("UTF-8");
 	        	PrintWriter out = response.getWriter();
 	        	out.println("<script type='text/javascript'>");
-	        	out.println("alert('해당 파일이 존재하지 않습니다. 추후에 다시 시도 해주세요.');");
+	        	out.println("alert('현재 준비중 입니다. 나중에 다시 시도 해주세요.');");
 	        	out.println("history.back();");
 	        	out.println("</script>");
 	        	out.flush();

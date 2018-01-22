@@ -79,7 +79,7 @@
     	   AND GENRE LIKE #{param2}
     	   <!-- AND PRIORITY &lt;&gt; 99 -->
       GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE
-      ORDER BY MIN(PRIORITY), MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
+      ORDER BY MIN(PRIORITY), SUM(HIT) DESC, MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
     </select>
 
     <select id="recentFolderList" resultMap="folderListMap">

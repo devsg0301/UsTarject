@@ -120,7 +120,7 @@
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper2">
 				<div class="swiper-wrapper">
-					<c:forEach var="tvFolderList" items="${tvFolderList}" end="14">
+					<c:forEach var="tvFolderList" items="${tvFolderList}" end="19">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${tvFolderList.category}','${tvFolderList.genre}','${tvFolderList.foldername}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${tvFolderList.category}/${tvFolderList.genre}/${tvFolderList.foldername}/${tvFolderList.foldername}.jpg" alt="${tvFolderList.foldername}"/>
