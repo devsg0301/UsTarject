@@ -98,6 +98,18 @@ video{
 			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
 		}
 	}
+	
+	function fullScreen(){
+		var video = document.getElementById("video");
+		// 전체화면 기능
+ 		if (video.requestFullscreen) {
+			video.requestFullscreen();
+ 		} else if (video.mozRequestFullScreen) {
+			video.mozRequestFullScreen(); // Firefox
+ 		} else if (video.webkitRequestFullscreen) {
+			video.webkitRequestFullscreen(); // Chrome and Safari
+ 		}
+	}
 
 </script>
 </head>
@@ -150,15 +162,16 @@ video{
                 <hr>
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
 	                <div class="col-video">
-		      			<video controls autoplay>
+		      			<video id="video" controls autoplay>
 		      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" />
 		      				<c:if test="${broadcastDetail.sub_url != ''}">
 				   				<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}.vtt" srclang="ko" label="Korean" default/>
 				   			</c:if>
 		      			</video>
 	      			</div>
-	      			<div class="" style="text-align:center;">
+	      			<div class="" style="text-align:center; margin-left:90px;">
 	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fa fa-list-ul"></i> 파일목록</a>
+	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fa fa-expand"></i> 전체화면</a>
 	      				<br>
 	      			</div>
 	      			<div>
