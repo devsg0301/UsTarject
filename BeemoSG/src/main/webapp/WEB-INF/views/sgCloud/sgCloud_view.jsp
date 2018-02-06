@@ -91,11 +91,11 @@ video{
 		location.href = "/sgCloud/fileDownload.do?fileName="+fileName+"&fileUrl="+fileUrl;
 	}
 	
-	function folderSearch(category, genre, foldername){
+	function folderSearch(category, genre, foldername, rnum){
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername;
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&rnum=" + rnum;
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
+			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&rnum=" + rnum + "#view_position";
 		}
 	}
 	
@@ -107,7 +107,7 @@ video{
  		} else if (video.mozRequestFullScreen) {
 			video.mozRequestFullScreen(); // Firefox
  		} else if (video.webkitRequestFullscreen) {
-			video.webkitRequestFullscreen(); // Chrome and Safari
+			video.webkitRequestFullscreen(); // Chrome and Safasi
  		}
 	}
 
@@ -149,15 +149,15 @@ video{
                 <h2 class="title">
                 	${broadcastDetail.title} (
                 	<a href="javascript:;" onclick="fileDownload('${broadcastDetail.file_url}','${broadcastDetail.filename}');">
-				      	<i class="fa fa-download"></i>다운
+				      	<i class="fas fa-download"></i>다운
 					</a>
 				    <c:if test="${broadcastDetail.sub_url != ''}">
 				    	,&nbsp;
 				    	<a href="javascript:;" onclick="fileDownload('${broadcastDetail.category}/${broadcastDetail.genre}/${broadcastDetail.foldername}/${broadcastDetail.sub_url}.smi','${broadcastDetail.sub_url}.smi');">
-				        	 <i class="fa fa-cc"></i>자막
+				        	 <i class="fas fa-cc"></i>자막
 				        </a>
 					</c:if>
-					)<span><i class="fa fa-clock-o"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
+					)<span><i class="fas fa-clock"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
 				</h2>
                 <hr>
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
@@ -170,8 +170,8 @@ video{
 		      			</video>
 	      			</div>
 	      			<div class="" style="text-align:center; margin-left:90px;">
-	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fa fa-list-ul"></i> 파일목록</a>
-	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fa fa-expand"></i> 전체화면</a>
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}','${rnum}');" class="btn btn-default"><i class="fas fa-list-ul"></i> 파일목록</a>
+	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fas fa-expand"></i> 전체화면</a>
 	      				<br>
 	      			</div>
 	      			<div>
@@ -184,7 +184,7 @@ video{
       					<p>${broadcastDetail.explanation}</p>
       				</div>
       				<div class="" style="text-align:center;">
-	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fa fa-list-ul"></i> 파일목록</a>
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fas fa-list-ul"></i> 파일목록</a>
 	      				<br>
 	      			</div>
       			</c:if>

@@ -56,7 +56,8 @@ public class BoardController {
 		logger.info("sgCloud Main");
 		int totalBroadcast = 0;
 		int prev = 0;
-		int next = 0;
+		int next = 0;		
+		int nextEnd = 0;
 		List genreList = null;
 		List folderList = null;
 		String foldername2 = "";
@@ -122,6 +123,12 @@ public class BoardController {
 					next = rnum + 1;
 				}
 			}
+			if(totalBroadcast % 16 > 0){
+				nextEnd = totalBroadcast / 16 + 1;
+			}else{
+				nextEnd = totalBroadcast / 16;
+			}
+			
 			logger.info("prev : " + prev + ", next : " + next);
 			
 			List categoryList = this.boardService.getCategoryList();
@@ -139,6 +146,7 @@ public class BoardController {
 			model.addAttribute("rnum", rnum);
 			model.addAttribute("prev", prev);
 			model.addAttribute("next", next);
+			model.addAttribute("nextEnd", nextEnd);
 			model.addAttribute("dropdown", "sgCloud");
 		}
 		catch(Exception e){
@@ -152,7 +160,7 @@ public class BoardController {
     // board/1 -> id = 1; id = 게시물 번호로 인식함.
     // 일반 적으로 (@ReuqstParam(value = "board", required = false, defaultValue = "0"), int idx, Model model)
     @RequestMapping("/sgCloud/{idx}.do")
-    public String displaySgCloudDetailView(@PathVariable int idx, Model model, HttpSession session, HttpServletRequest request) throws Exception {
+    public String displaySgCloudDetailView(@PathVariable int idx,@RequestParam(value="rnum", defaultValue="1") int rnum, Model model, HttpSession session, HttpServletRequest request) throws Exception {
         logger.info("display view Board view idx = {}", idx);
         Tcustomer customer = null;
         boolean isMobile = false;
@@ -182,6 +190,7 @@ public class BoardController {
 	        model.addAttribute("broadcastDetail", broadcastDetail);
 	        model.addAttribute("tbroadcast_comment_list", tbroadcast_comment_list);
 	        model.addAttribute("idx", idx);
+	        model.addAttribute("rnum", rnum);
 	        model.addAttribute("customer", customer);
 	        //model.addAttribute("total_comments", tboard_comment_list.size());
 	        model.addAttribute("dropdown", "sgCloud");

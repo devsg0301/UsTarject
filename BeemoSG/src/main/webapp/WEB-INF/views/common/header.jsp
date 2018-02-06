@@ -117,7 +117,7 @@
                 </ul>
             </li>
             <li>
-				<a id="menu-toggle" href="#" class="point-hover btn-lg toggle"><i class="fa fa-bars"></i></a>
+				<a id="menu-toggle" href="#" class="point-hover btn-lg toggle"><i class="fas fa-bars"></i></a>
 			</li>
 			 -->
         </ul>
