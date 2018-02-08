@@ -31,6 +31,7 @@
         <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
         <result property="hit"			column="hit" />
         <result property="priority"		column="priority" />
+        <result property="country"	  	column="country" />
     </resultMap>
 	    
     <resultMap id="folderListMap" type="java.util.HashMap">
@@ -39,6 +40,7 @@
         <result javaType="java.lang.String"  column="foldername"	property="foldername"/>
         <result javaType="java.lang.String"  column="grade"			property="grade"/>
         <result javaType="java.lang.Integer" column="hit"			property="hit"/>
+        <result javaType="java.lang.String"  column="country"		property="country"/>
 	</resultMap> 
 
     <select id="getCustomer" resultMap="customerMap">
@@ -64,7 +66,8 @@
                SUB_URL,
                PLAY_DATE,
                DATE_FORMAT(INSERT_DATE,'%Y-%m-%d %r') AS INSERT_DATE,
-               HIT
+               HIT,
+               COUNTRY
           FROM TBROADCAST
          WHERE 1=1
            AND CATEGORY NOT IN ('MUSIC', 'UTILITY')
@@ -72,24 +75,24 @@
     </select>
     
     <select id="getFolderList" resultMap="folderListMap">
-    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, SUM(HIT) AS HIT
+    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, COUNTRY, SUM(HIT) AS HIT
     	  FROM TBROADCAST
     	 WHERE 1=1
     	   AND CATEGORY LIKE #{param1}
     	   AND GENRE LIKE #{param2}
     	   <!-- AND PRIORITY &lt;&gt; 99 -->
-      GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE
+      GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE, COUNTRY
       ORDER BY MIN(PRIORITY), SUM(HIT) DESC, MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
     </select>
 
     <select id="recentFolderList" resultMap="folderListMap">
-    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, SUM(HIT) AS HIT
+    	SELECT CATEGORY, GENRE, FOLDERNAME, GRADE, COUNTRY, SUM(HIT) AS HIT
     	  FROM TBROADCAST
     	 WHERE 1=1
     	   AND CATEGORY IN ('TV', 'MOVIE')
     	   <!-- AND GENRE LIKE #{param2} -->
     	   <!-- AND PRIORITY &lt;&gt; 99 -->
-      GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE
+      GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE, COUNTRY
       ORDER BY MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
     </select>
     

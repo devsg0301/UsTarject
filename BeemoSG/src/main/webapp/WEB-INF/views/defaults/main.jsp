@@ -27,27 +27,27 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','예능','윤식당2');" >
+					<a href="javascript:folderSearch('TV','예능','윤식당2','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner04.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','왕좌의게임7');" >
+					<a href="javascript:folderSearch('TV','드라마','왕좌의게임7','EN');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner08.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','화유기');" >
+					<a href="javascript:folderSearch('TV','드라마','화유기','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner05.jpg">						
 					</a>
 				</div>
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','예능','강식당');" >
+					<a href="javascript:folderSearch('TV','예능','강식당','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner02.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','나쁜녀석들2');" >
+					<a href="javascript:folderSearch('TV','드라마','나쁜녀석들2','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner07.jpg">
 					</a>
 				</div>
@@ -93,7 +93,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="recentFolderList" items="${recentFolderList}" end="14">
 						<div class="swiper-slide">
-							<a class="dBanner" href="javascript:folderSearch('${recentFolderList.category}','${recentFolderList.genre}','${recentFolderList.foldername}');" >
+							<a class="dBanner" href="javascript:folderSearch('${recentFolderList.category}','${recentFolderList.genre}','${recentFolderList.foldername}','${recentFolderList.country}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${recentFolderList.category}/${recentFolderList.genre}/${recentFolderList.foldername}/${recentFolderList.foldername}.jpg" alt="${recentFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true">
 									<span class="broadcast-title">${recentFolderList.foldername}</span>
@@ -122,7 +122,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="tvFolderList" items="${tvFolderList}" end="19">
 						<div class="swiper-slide">
-							<a class="dBanner" href="javascript:folderSearch('${tvFolderList.category}','${tvFolderList.genre}','${tvFolderList.foldername}');" >
+							<a class="dBanner" href="javascript:folderSearch('${tvFolderList.category}','${tvFolderList.genre}','${tvFolderList.foldername}','${tvFolderList.country}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${tvFolderList.category}/${tvFolderList.genre}/${tvFolderList.foldername}/${tvFolderList.foldername}.jpg" alt="${tvFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true">
 									<span class="broadcast-title">${tvFolderList.foldername}</span>
@@ -151,7 +151,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="movieFolderList" items="${movieFolderList}" end="14">
 						<div class="swiper-slide">
-							<a class="dBanner" href="javascript:folderSearch('${movieFolderList.category}','${movieFolderList.genre}','${movieFolderList.foldername}');" >
+							<a class="dBanner" href="javascript:folderSearch('${movieFolderList.category}','${movieFolderList.genre}','${movieFolderList.foldername}','${movieFolderList.country}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${movieFolderList.category}/${movieFolderList.genre}/${movieFolderList.foldername}/${movieFolderList.foldername}.jpg" alt="${movieFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${movieFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
@@ -178,7 +178,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="dreamFolderList" items="${dreamFolderList}" end="14">
 						<div class="swiper-slide">
-							<a class="dBanner" href="javascript:folderSearch('${dreamFolderList.category}','${dreamFolderList.genre}','${dreamFolderList.foldername}');" >
+							<a class="dBanner" href="javascript:folderSearch('${dreamFolderList.category}','${dreamFolderList.genre}','${dreamFolderList.foldername}''${dreamFolderList.country}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${dreamFolderList.category}/${dreamFolderList.genre}/${dreamFolderList.foldername}/${dreamFolderList.foldername}.jpg" alt="${dreamFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${dreamFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
@@ -205,7 +205,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="entertainmentFolderList" items="${entertainmentFolderList}" end="9">
 						<div class="swiper-slide">
-							<a class="dBanner" href="javascript:folderSearch('${entertainmentFolderList.category}','${entertainmentFolderList.genre}','${entertainmentFolderList.foldername}');" >
+							<a class="dBanner" href="javascript:folderSearch('${entertainmentFolderList.category}','${entertainmentFolderList.genre}','${entertainmentFolderList.foldername}','${entertainmentFolderList.country}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${entertainmentFolderList.category}/${entertainmentFolderList.genre}/${entertainmentFolderList.foldername}/${entertainmentFolderList.foldername}.jpg" alt="${entertainmentFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${entertainmentFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
@@ -479,11 +479,11 @@
 			}
 		}
 		
-		function folderSearch(category, genre, foldername){
+		function folderSearch(category, genre, foldername, country){
 			if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername;
+				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country;
 			}else{
-				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
+				location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country + "#view_position";
 			}
 		}
 	</script>

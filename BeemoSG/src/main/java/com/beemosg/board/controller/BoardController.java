@@ -69,9 +69,9 @@ public class BoardController {
 			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
 				if(isMobile){
-					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+URLEncoder.encode(category, "UTF-8")+"&genre="+URLEncoder.encode(genre, "UTF-8")+"&foldername="+URLEncoder.encode(foldername, "UTF-8")+"#view_position");
+					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+category+"&genre="+URLEncoder.encode(genre.replaceAll("%20", " "), "UTF-8")+"&foldername="+URLEncoder.encode(foldername.replaceAll("%20", " "), "UTF-8")+"#view_position");
 				}else{
-					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+URLEncoder.encode(category, "UTF-8")+"&genre="+URLEncoder.encode(genre, "UTF-8")+"&foldername="+URLEncoder.encode(foldername, "UTF-8"));
+					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+category+"&genre="+URLEncoder.encode(genre.replaceAll("%20", " "), "UTF-8")+"&foldername="+URLEncoder.encode(foldername.replaceAll("%20", " "), "UTF-8"));
 				}
 				return "defaults/login";
 			}else{
