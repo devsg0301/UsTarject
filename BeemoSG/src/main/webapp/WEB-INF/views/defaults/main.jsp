@@ -9,7 +9,7 @@
 <head>
 <c:import url="../common/includecommon.jsp" />
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/swiper.min.css">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20180108001">
+<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20180319001">
 
 <style>
 </style>
@@ -256,8 +256,8 @@
 			spaceBetween : 0,
 			slidesPerGroup: 5,
 			loop: true,
-	      	autoplay: {
-	        	delay: 4000,
+	      	 autoplay: {
+	        	delay: 5500,
 	        	disableOnInteraction: false,
 	      	},
 			navigation: {
