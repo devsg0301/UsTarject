@@ -2,7 +2,7 @@
 <project name="project" default="jspUpload">
 	<description>ftp upload</description>
 	<property file="build.properties" />
-	<property name="web.home" value="D:\BeemoSG\workspaces\.metadata\.plugins\org.eclipse.wst.server.core\tmp2\wtpwebapps\BeemoSG" />
+	<property name="web.home" value="C:\BeemoSG\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BeemoSG" />
 	<!-- ==================== ftp upload Target ================================== -->
 	<target name="jspUpload" depends="time, check" description="ftp 연결후 모듈 서버로 전송">
 		<input message="운영서버 jsp파일을 deploy 하시겠습니까?(Yes/No)?"
