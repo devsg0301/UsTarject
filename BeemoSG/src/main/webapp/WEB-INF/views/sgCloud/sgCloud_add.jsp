@@ -117,6 +117,22 @@ $(document).ready(function () {
 });
 </script>
 
+<script type="text/javascript">
+
+	function foldername_onfocus(){
+		var title = $("#title").val();
+		var foldername = $("#foldername").val();
+		
+		if(title != "" && foldername == ""){
+			if(title.lastIndexOf(' ') > 0){
+				title = title.substring(0, title.lastIndexOf(' '));
+			}
+			$("#foldername").val(title);
+		}
+	}
+
+</script>
+
 <style>
 .buying-selling.active {
     background: #777777;       
@@ -313,7 +329,7 @@ $(document).ready(function () {
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fas fa-edit" aria-hidden="true"></i></span>
-								<input type="text" class="form-control" id="foldername" name="foldername" value="${broadcast.foldername}" placeholder="Enter your FolderName" required data-validation-required-message="Please enter Foldername." />
+								<input type="text" class="form-control" id="foldername" name="foldername" onfocus="foldername_onfocus();" value="${broadcast.foldername}" placeholder="Enter your FolderName" required data-validation-required-message="Please enter Foldername." />
 							</div>
 						</div>
 					</div>
