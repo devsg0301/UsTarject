@@ -68,7 +68,7 @@
 						<div class="swiper-slide swiper-slide-vod">
 							<%-- <a class="dBanner" href="javascript:folderSearch('${broadcastList.category}','${broadcastList.genre}','${broadcastList.foldername}');" > --%>
 							<a class="dBanner" href="/sgCloud/${broadcastList.idx}.do" >
-								<img class="vodImg" src="http://beemosg.gq:8081/LocalUser/data/${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.title}_thum.png" alt="${broadcastList.title}"/>
+								<img class="vodImg" src="http://beemosg.gq:8081/LocalUser/data/${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.title}_thum.jpg" alt="${broadcastList.title}"/>
 								<span class="vod-info-box" aria-hidden="true">
 									<span class="vod-title">${broadcastList.title}</span>
 									<fmt:parseDate var="dateString" value="${broadcastList.play_date}" pattern="yyyy-MM-dd" />

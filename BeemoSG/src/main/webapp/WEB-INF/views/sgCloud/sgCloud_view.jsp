@@ -51,8 +51,7 @@ video{
 }
 </style>
 
-<link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet" />
-<script src="http://vjs.zencdn.net/c/video.js"></script>
+<link href="${path_root}/resources/bootstrap/css/video-js.css" rel="stylesheet">
 
 <script type="text/javascript">
 	var tmpUser = navigator.userAgent;
@@ -100,7 +99,7 @@ video{
 	}
 	
 	function fullScreen(){
-		var video = document.getElementById("video");
+		var video = document.getElementById("my-video");
 		// 전체화면 기능
  		if (video.requestFullscreen) {
 			video.requestFullscreen();
@@ -162,8 +161,8 @@ video{
                 <hr>
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
 	                <div class="col-video">
-		      			<video id="video" controls autoplay>
-		      				<source src="http://devsg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" />
+		      			<video id="my-video" controls autoplay>
+		      				<source src="http://beemosg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" type='video/mp4'>
 		      				<c:if test="${broadcastDetail.sub_url != ''}">
 				   				<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}.vtt" srclang="ko" label="Korean" default/>
 				   			</c:if>
@@ -240,7 +239,7 @@ video{
     <!-- /.container -->
 
     <!-- jQuery -->
-
+	<script src="${path_root}/resources/bootstrap/js/video.js"></script>
 </body>
 
 </html>
