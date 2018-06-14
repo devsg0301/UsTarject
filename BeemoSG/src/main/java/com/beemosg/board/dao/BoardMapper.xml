@@ -269,7 +269,7 @@
 				  			   XAA.*
 				  	      FROM( SELECT @ROWNUM1:=@ROWNUM1+1 AS RNUM1,
 							           XA.*
-							      FROM( SELECT (SELECT COUNT(*) FROM TBOARD) AS TOTAL_COUNT,
+							      FROM( SELECT (SELECT COUNT(*) FROM TBOARD WHERE GUBUN = #{param2}) AS TOTAL_COUNT,
 						                       IDX,
 						                       IF(GUBUN = 'level', '등업', '자료요청') AS GUBUN,
 						                       CATEGORY,
