@@ -27,6 +27,21 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','슈츠','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner11.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','김비서가 왜 그럴까','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner12.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','어바웃타임','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner13.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','예능','윤식당2','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner04.jpg">
 					</a>
@@ -34,21 +49,6 @@
 				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','왕좌의게임7','EN');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner08.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','화유기','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner05.jpg">						
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','예능','강식당','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner02.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','나쁜녀석들2','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner07.jpg">
 					</a>
 				</div>
 			</div>
@@ -178,7 +178,7 @@
 				<div class="swiper-wrapper">
 					<c:forEach var="dreamFolderList" items="${dreamFolderList}" end="14">
 						<div class="swiper-slide">
-							<a class="dBanner" href="javascript:folderSearch('${dreamFolderList.category}','${dreamFolderList.genre}','${dreamFolderList.foldername}''${dreamFolderList.country}');" >
+							<a class="dBanner" href="javascript:folderSearch('${dreamFolderList.category}','${dreamFolderList.genre}','${dreamFolderList.foldername}','${dreamFolderList.country}');" >
 								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${dreamFolderList.category}/${dreamFolderList.genre}/${dreamFolderList.foldername}/${dreamFolderList.foldername}.jpg" alt="${dreamFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${dreamFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
