@@ -555,6 +555,7 @@ public class BoardController {
  			logger.info("rnum : " + rnum);
  			
  			List<Tboard> boardList = this.boardService.getBoardList((rnum * 16) - 15, gubun);
+ 			totalBoard = boardList.get(0).getTotal_count();
  			
  			if(rnum > 1){
  				prev = rnum - 1;

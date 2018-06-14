@@ -3,6 +3,8 @@ package com.beemosg.model;
 import java.util.Date;
 
 public class Tboard {
+	private Integer total_count;
+	private Integer rnum1;
 	private Integer idx;
 	private String gubun;
 	private String category;
@@ -81,6 +83,16 @@ public class Tboard {
 	public void setModify_date(Date modify_date) {
 		this.modify_date = modify_date;
 	}
-	
-
+	public Integer getRnum1() {
+		return rnum1;
+	}
+	public void setRnum1(Integer rnum1) {
+		this.rnum1 = rnum1;
+	}
+	public Integer getTotal_count() {
+		return total_count;
+	}
+	public void setTotal_count(Integer total_count) {
+		this.total_count = total_count;
+	}
 }

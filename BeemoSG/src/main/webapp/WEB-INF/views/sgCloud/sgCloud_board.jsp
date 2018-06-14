@@ -62,9 +62,9 @@
 	
 	function paging(rnum, gubun){
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){		
-			location.href = "/sgCloud/sgCloud_main.do?rnum=" + rnum + "&gubun=" + gubun;
+			location.href = "/sgCloud/sgCloud_board.do?rnum=" + rnum + "&gubun=" + gubun;
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?rnum=" + rnum + "&gubun=" + gubun + "#view_position";
+			location.href = "/sgCloud/sgCloud_board.do?rnum=" + rnum + "&gubun=" + gubun + "#view_position";
 		}
 	}
 	
@@ -257,7 +257,7 @@
 							</tr>
 							<c:forEach var="boardList" items="${boardList}">
 							<tr>
-		                    	<td class="view-message">${boardList.idx}</td>
+		                    	<td class="view-message">${boardList.rnum1}</td>
 								<c:if test="${gubun == 'request'}">
 			                    	<td class="view-message">${boardList.category}</td>
 			                    </c:if>
