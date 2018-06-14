@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@ page import="java.util.*, java.text.*"  %>
+<%
+ java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+ String today = formatter.format(new java.util.Date());
+%>
 <c:set var="path_root"  value="${pageContext.request.contextPath}" scope="application"/>
-
+<c:set var="nowdate" value='<%=today%>' />
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -16,6 +21,7 @@ $(document).ready(function () {
 		$("#category").val("TV");
 		$("#genre").val("드라마");
 		$("#grade").val("전체");
+		$("#play_date").val("${nowdate}");
 		$("#priority").val("99");
 	}else{
 		$("#category").val("${broadcast.category}");

@@ -26,7 +26,7 @@ video{
 		font-size: 21px;	
 	}
 	.title span{	
-		font-size: 12px;
+		font-size: 11px;
 	}
 }
 
@@ -35,7 +35,7 @@ video{
 		font-size: 28px;	
 	}
 	.title span{	
-		font-size: 20px;
+		font-size: 19px;
 	}
 }
 .title{
@@ -173,8 +173,9 @@ video{
 	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fas fa-expand"></i> 전체화면</a>
 	      				<br>
 	      			</div>
-	      			<div>		      			
-		      			<p>링크 복사를 통해 URL재생을 이용하시면 됩니다. <a href="#" onclick="copy_trackback('${broadcastDetail.file_url}');">링크복사</a></p>
+	      			<div>
+	      				<br/>
+		      			<p>링크 복사를 통해 URL재생 이용도 가능합니다. <a href="#" onclick="copy_trackback('${broadcastDetail.file_url}');">링크복사</a></p>
 	      			</div>
       			</c:if>
       			<c:if test="${broadcastDetail.category == 'UTILITY'}">

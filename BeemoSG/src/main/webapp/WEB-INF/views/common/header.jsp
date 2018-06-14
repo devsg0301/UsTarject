@@ -13,6 +13,38 @@
 		font-size: 14px;
 		float: right;
 	}
+	.header-input{
+		border: medium none;
+	    border-radius: 4px;
+	    box-shadow: none;
+	    color: #8a8a8a;
+	    float: left;
+	    height: 34px;
+	    width: 200px;
+	    padding: 0 10px;
+	}
+	.header-btn{
+		display: inline-block;
+		background: none repeat scroll 0 0 #bfbfbf;
+	    padding: 6px 12px;
+	    margin-bottom: 0;
+	    font-size: 14px;
+	    font-weight: normal;
+	    line-height: 1.42857143;
+	    text-align: center;
+	    white-space: nowrap;
+	    vertical-align: middle;
+	    -ms-touch-action: manipulation;
+	    touch-action: manipulation;
+	    cursor: pointer;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	    background-image: none;
+	    border: 1px solid transparent;
+	    border-radius: 4px;
+	}
 </style>
 <%--
 <div id="sidebar-wrapper">
@@ -75,6 +107,10 @@
                 <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');">파일등록</a>
             </li>
             </c:if>
+            <li style="padding: 8px;">
+                <input type="text" class="header-input" placeholder="파일 검색" id="headerSearchWord" onkeydown="javascript:headerEventSearchGo(event);">
+                <button class="header-btn" type="button" onClick="headerSearchGo();"><i class="fas fa-search"></i></button>
+            </li>
             <!-- 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <b class="caret"></b></a>
@@ -140,5 +176,18 @@
 		}else{
 			location.href = url + "#view_position";
 		}
+	}
+	
+	/* 검색 - enter값 이벤트   */
+	function headerEventSearchGo(e){
+		var form = document.boardForm;
+		if(e.keyCode == '13'){
+			headerSearchGo();
+		}
+	}
+	
+	function headerSearchGo(){
+		var searchWord = $("#headerSearchWord").val();
+		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
 	}
 </script> 
