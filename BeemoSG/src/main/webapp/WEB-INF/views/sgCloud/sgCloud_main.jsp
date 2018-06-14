@@ -32,7 +32,7 @@
 		//var eFileName = encodeURIComponent(fileName);
 		//alert(eFileUrl);
 		if(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0){
-			alert("아이폰은 파일을 다운로드 할 수 없습니다.");
+			temp = prompt("iOS의 경우 주소를 복사하여 nPlayer(앱)의 브라우저탭에 주소를 넣으면 다운이 가능합니다.", "http://beemosg.gq:8081/LocalUser/data/" + fileUrl);
 			return;
 		}
 		

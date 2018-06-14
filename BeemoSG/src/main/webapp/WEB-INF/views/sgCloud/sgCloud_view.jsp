@@ -63,7 +63,7 @@ video{
             if(confirm("복사하시겠습니까?"))
                 window.clipboardData.setData("Text", "http://beemosg.gq:8081/LocalUser/data/" + trb);
         } else {
-            temp = prompt("Ctrl+C를 눌러 클립보드로 복사하세요", "http://beemosg.gq:8081/LocalUser/data/" + trb);
+            temp = prompt("주소를 복사하세요", "http://beemosg.gq:8081/LocalUser/data/" + trb);
         }
     }
 	
@@ -83,7 +83,7 @@ video{
 		//var eFileName = encodeURIComponent(fileName);
 		//alert(eFileUrl);
 		if(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0){
-			alert("아이폰은 파일을 다운로드 할 수 없습니다.");
+			temp = prompt("iOS의 경우 아래주소를 복사하여 nPlayer(앱)의 브라우저탭에 주소를 넣고 이동하면 다운이 가능합니다.", "http://beemosg.gq:8081/LocalUser/data/" + fileUrl);
 			return;
 		}
 		
@@ -173,9 +173,8 @@ video{
 	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fas fa-expand"></i> 전체화면</a>
 	      				<br>
 	      			</div>
-	      			<div>
-		      			<p>영상이 재생되지 않을 경우에는 아래 링크를 눌러주세요. <a href="http://beemosg.gq:8081/LocalUser/data/${broadcastDetail.file_url}">링크</a></p>
-		      			<p>링크 복사를 통해  URL재생을 이용하시면 됩니다.(아이폰) <a href="#" onclick="copy_trackback('${broadcastDetail.file_url}');">링크복사</a></p>
+	      			<div>		      			
+		      			<p>링크 복사를 통해 URL재생을 이용하시면 됩니다. <a href="#" onclick="copy_trackback('${broadcastDetail.file_url}');">링크복사</a></p>
 	      			</div>
       			</c:if>
       			<c:if test="${broadcastDetail.category == 'UTILITY'}">
