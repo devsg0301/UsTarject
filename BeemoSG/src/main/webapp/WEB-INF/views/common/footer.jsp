@@ -105,7 +105,7 @@ function getCookie(argName){
 
 function saveid() {
 	var form = document.loginForm;
-	if (form.cust_id.value != '아이디') {
+	if (form.cust_id.value != '') {
 		var expdate = new Date();
 		// 기본적으로 30일동안 기억하게 함. 일수를 조절하려면 * 30에서 숫자를 조절하면 됨
 		if (form.checksaveid.checked){
@@ -120,7 +120,7 @@ function saveid() {
 // 아이디 저장
 function saveidalert() {
 	var form = document.loginForm;
-	if (form.cust_id.value != '아이디') {
+	if (form.cust_id.value != '') {
 		var expdate = new Date();
 		// 기본적으로 30일동안 기억하게 함. 일수를 조절하려면 * 30에서 숫자를 조절하면 됨
 		if (form.checksaveid.checked){
@@ -181,8 +181,8 @@ function login(){
 	    data: {"cust_id" : $("#cust_id").val(), "password" : $("#password").val()},	    
 	    async: true,
 	    success : function(data) {
-	    	if(data == "sucess"){
-	    		alert("로그인 성공");
+	    	if(data != "fail"){
+	    		alert(decodeURIComponent(data) + "님이 로그인 하셨습니다.");
 	    		location.href = "/defaults/main.do";
 	        }else if(data == "fail"){
 	        	alert("아이디 또는 비밀번호가 일치하지 않습니다.");

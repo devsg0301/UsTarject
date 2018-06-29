@@ -25,9 +25,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beemosg.board.service.BoardService;
+import com.beemosg.common.AESCrypto;
+import com.beemosg.common.ComUtils;
 import com.beemosg.common.Const;
 import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
@@ -133,6 +136,7 @@ public class BoardController {
 			
 			List categoryList = this.boardService.getCategoryList();
 			
+			model.addAttribute("customer", customer);
 			model.addAttribute("broadcastList", broadcastList);
 			model.addAttribute("searchWord", searchWord.replaceAll("%", ""));
 			model.addAttribute("categoryList", categoryList);
@@ -304,6 +308,41 @@ public class BoardController {
     	}
     	catch(Exception e){
 			logger.error("sgCloud/add_ok.do ERROR, " + e.getMessage());
+		}
+    	
+        return "redirect:/sgCloud/sgCloud_main.do";
+    }
+
+    @RequestMapping(value = "/sgCloud/sgCloud_delete.do", method = RequestMethod.GET)
+    public String procBroadcastAdd(@RequestParam(value="idx", defaultValue="") String idx,
+    		RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request) throws Exception {
+    	logger.info("BroadcastDelete start!");
+
+    	Tcustomer customer = null;
+    	boolean isMobile = false;
+    	try{
+    		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+    			logger.info("You don't login.");
+    			return "defaults/login";
+    		}else{
+    			isMobile = isMobile(request.getHeader("User-Agent"));
+    			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+    			if(!customer.getCust_gb().equals("20")){
+    				if(isMobile){
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
+    				}else{
+    					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok";
+    				}
+    			}
+    		}
+    		//체크박스로 여러개 삭제하는 기능 추가.
+    		String[] arrIdx = idx.split(",");
+    		for (int i=0; i<arrIdx.length; i++) {
+    			this.boardService.deleteBroadcast(arrIdx[i]);
+    		}
+    	}
+    	catch(Exception e){
+			logger.error("sgCloud/sgCloud_delete.do ERROR, " + e.getMessage());
 		}
     	
         return "redirect:/sgCloud/sgCloud_main.do";

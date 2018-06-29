@@ -1,6 +1,7 @@
 package com.beemosg.main.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -199,7 +200,7 @@ public class MainController {
 		    	
 		    	session.removeAttribute(Const.USER_KEY);
 		    	session.setAttribute(Const.USER_KEY, loginUser);
-		    	response.getWriter().print("sucess");
+		    	response.getWriter().print(URLEncoder.encode(loginUser.getCust_name(), "UTF-8"));
 	        }else{
 	        	logger.info("login fail!");
 	        	ComUtils.setCookie(response, "beemosgautoL", "", -1);

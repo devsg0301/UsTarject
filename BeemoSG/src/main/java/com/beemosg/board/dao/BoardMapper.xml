@@ -220,6 +220,10 @@
           WHERE idx = #{idx} LIMIT 1
     </update>
     
+    <delete id="deleteBroadcast">
+    	DELETE FROM TBROADCAST WHERE IDX = #{idx} 
+    </delete>
+    
     <select id="broadcastCommentList" resultMap="broadcast_commentMap">
 		SELECT * 
 		  FROM TBROADCAST_COMMENT 

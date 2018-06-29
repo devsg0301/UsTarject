@@ -61,6 +61,10 @@ public class BoardServiceImpl implements BoardService{
 	public void updateBroadcast(Tbroadcast tbroadcast) throws Exception {
 		boardDao.updateBroadcast(tbroadcast);
 	}
+
+	public void deleteBroadcast(String idx) throws Exception {
+		boardDao.deleteBroadcast(idx);
+	}
 	
 	public List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception {
 		return boardDao.broadcastCommentList(idx);

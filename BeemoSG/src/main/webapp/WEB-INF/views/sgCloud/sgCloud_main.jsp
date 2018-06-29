@@ -71,6 +71,29 @@
 		}
 	}
 	
+	/* 체크박스 전체선택, 전체해제 */
+	function checkAll(){
+		if($("#th_checkAll").is(':checked') ){
+			$("input[name=checkRow]").prop("checked", true);
+		}else{
+			$("input[name=checkRow]").prop("checked", false);
+		}
+	}
+	
+	/* 삭제(체크박스된 것 전부) */
+	function deleteAction(){
+		var checkRow = "";
+		$( "input[name='checkRow']:checked" ).each (function (){
+			checkRow = checkRow + $(this).val()+"," ;
+		});
+		checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기
+		
+		if(checkRow == ''){
+			alert("삭제할 대상을 선택하세요.");
+			return false;
+		}
+		location.href = "/sgCloud/sgCloud_delete.do?idx=" + checkRow;
+	}
 </script>
 
 </head>
@@ -228,6 +251,12 @@
 			                	<th>장르</th>
 			                    <th>제목</th>
 			                    <th>파일</th>
+			                    <c:if test="${customer.admin_yn == '1'}">
+			                    <th>
+			                    	<a href="javascript:deleteAction();">삭제</a>
+			                    	<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/>
+			                    </th>
+			                    </c:if>
 							</tr>
 							<c:forEach var="broadcastList" items="${broadcastList}">
 								<tr>
@@ -246,6 +275,11 @@
 				                    	</a>
 				                    	</c:if>
 				                    </td>
+				                    <c:if test="${customer.admin_yn == '1'}">
+				                    <td>
+				                    	<input type="checkbox" name="checkRow" value="${broadcastList.idx}" />
+				                    </td>
+				                    </c:if>
 								</tr>
 							</c:forEach>
 						</tbody>

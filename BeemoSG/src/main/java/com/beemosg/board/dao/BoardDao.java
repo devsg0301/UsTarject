@@ -59,6 +59,10 @@ public class BoardDao {
     public void updateBroadcast(Tbroadcast tbroadcast) throws Exception{
     	this.boardMapper.updateBroadcast(tbroadcast);
     }
+
+    public void deleteBroadcast(String idx) throws Exception{
+    	this.boardMapper.deleteBroadcast(idx);
+    }
     
     public List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception{
     	return this.boardMapper.broadcastCommentList(idx);

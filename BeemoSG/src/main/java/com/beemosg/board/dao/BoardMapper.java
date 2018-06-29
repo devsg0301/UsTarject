@@ -23,6 +23,7 @@ public interface BoardMapper {
 	Tbroadcast getSelectBroadcast(int idx) throws Exception;
 	void insertBroadcast(Tbroadcast tbroadcast) throws Exception;
 	void updateBroadcast(Tbroadcast tbroadcast) throws Exception;
+	void deleteBroadcast(String idx) throws Exception;
 	List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception;
 	Integer maxSeqNo(int idx) throws Exception;
 	Integer maxIdxNo(int idx) throws Exception;

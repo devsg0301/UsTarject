@@ -31,6 +31,8 @@ public interface BoardService {
 	
 	public void updateBroadcast(Tbroadcast tbroadcast) throws Exception;
 	
+	public void deleteBroadcast(String idx) throws Exception;
+	
 	public List<Tbroadcast_comment> broadcastCommentList(int idx) throws Exception;
 	
 	public void insertBroadcastComment(Tbroadcast_comment tbroadcast_comment) throws Exception;
