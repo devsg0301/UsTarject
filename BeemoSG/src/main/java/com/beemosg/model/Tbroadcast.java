@@ -17,6 +17,7 @@ public class Tbroadcast {
 	private String sub_url;
 	private String country;
 	private boolean sub_check;
+	private boolean insertdate_check;
 	private String play_date;
 	private Date insert_date;
 	private String insert_id;
@@ -150,5 +151,11 @@ public class Tbroadcast {
 	}
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+	public boolean isInsertdate_check() {
+		return insertdate_check;
+	}
+	public void setInsertdate_check(boolean insertdate_check) {
+		this.insertdate_check = insertdate_check;
 	}
 }

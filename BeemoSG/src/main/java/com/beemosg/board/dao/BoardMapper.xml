@@ -185,20 +185,36 @@
     </select>
     
     <insert id="insertBroadcast">
-         INSERT INTO TBROADCAST ( category, genre, title, grade, foldername, albumname, filename, explanation, file_url, sub_url, country, play_date, priority ) VALUES (
-                #{category}
-              , #{genre}
-              , #{title}
-              , #{grade}
-              , #{foldername}
-              , #{albumname}
-              , #{filename}
-              , #{explanation}
-              , #{file_url}
-              , #{sub_url}
-              , #{country}
-              , #{play_date}
-              , #{priority}
+         INSERT INTO TBROADCAST 
+         ( category, 
+           genre, 
+           title, 
+           grade, 
+           foldername, 
+           albumname, 
+           filename, 
+           explanation, 
+           file_url, 
+           sub_url, 
+           country, 
+           play_date,
+           insert_date,
+           priority ) 
+           VALUES (
+           #{category}
+         , #{genre}
+         , #{title}
+         , #{foldername}
+         , #{grade}
+         , #{albumname}
+         , #{filename}
+         , #{explanation}
+         , #{file_url}
+         , #{sub_url}
+         , #{country}
+         , #{play_date}
+         , #{insert_date}
+         , #{priority}
          )
     </insert>
     

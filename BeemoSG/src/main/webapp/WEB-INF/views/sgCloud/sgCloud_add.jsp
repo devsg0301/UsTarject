@@ -425,6 +425,15 @@ $(document).ready(function () {
 						</div>
 					</div>
 					<div class="form-group">
+						<div class="checkbox">
+							<label style="padding-left:0px;">
+								<input type="checkbox" id="insertdate_check" name="insertdate_check" style="display:none;"/>
+								<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+								저장날짜수정여부
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-lg btn-block">등록</button>
 					</div>
                 </form>

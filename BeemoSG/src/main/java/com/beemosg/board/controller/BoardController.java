@@ -5,8 +5,11 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.URL;	
+import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -29,8 +32,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beemosg.board.service.BoardService;
-import com.beemosg.common.AESCrypto;
-import com.beemosg.common.ComUtils;
 import com.beemosg.common.Const;
 import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
@@ -251,6 +252,8 @@ public class BoardController {
 
     	Tcustomer customer = null;
     	boolean isMobile = false;
+    	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	Date date = new Date();
     	try{
     		if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
     			logger.info("You don't login.");
@@ -291,6 +294,11 @@ public class BoardController {
 	        	tbroadcast.setSub_url(tbroadcast.getTitle());
 	        }else{
 	        	tbroadcast.setSub_url("");
+	        }
+	        if(tbroadcast.isInsertdate_check()){
+	        	tbroadcast.setInsert_date(dateFormat.parse(tbroadcast.getPlay_date() + " 23:59:59"));
+	        }else{
+	        	tbroadcast.setInsert_date(dateFormat.parse(dateFormat.format(date)));
 	        }
 	        if(tbroadcast.getGrade().equals("전체")){
 	        	tbroadcast.setGrade("0");
