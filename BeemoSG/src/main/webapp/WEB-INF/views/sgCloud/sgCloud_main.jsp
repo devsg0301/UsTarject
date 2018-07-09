@@ -81,7 +81,7 @@
 	}
 	
 	/* 삭제(체크박스된 것 전부) */
-	function deleteAction(){
+	function deleteAction(searchWord, rnum, category, genre, foldername, country){
 		var checkRow = "";
 		$( "input[name='checkRow']:checked" ).each (function (){
 			checkRow = checkRow + $(this).val()+"," ;
@@ -92,7 +92,11 @@
 			alert("삭제할 대상을 선택하세요.");
 			return false;
 		}
-		location.href = "/sgCloud/sgCloud_delete.do?idx=" + checkRow;
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			location.href = "/sgCloud/sgCloud_delete.do?idx=" + checkRow + "&searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country;
+		}else{
+			location.href = "/sgCloud/sgCloud_delete.do?idx=" + checkRow + "&searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country + "#view_position";
+		}
 	}
 </script>
 
@@ -253,7 +257,7 @@
 			                    <th>파일</th>
 			                    <c:if test="${customer.admin_yn == '1'}">
 			                    <th>
-			                    	<a href="javascript:deleteAction();">삭제</a>
+			                    	<a href="javascript:deleteAction('${searchWord}','${rnum}','${category}','${genre}','${foldername}','${country}');">삭제</a>
 			                    	<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/>
 			                    </th>
 			                    </c:if>
