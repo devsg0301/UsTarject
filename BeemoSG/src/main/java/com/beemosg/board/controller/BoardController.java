@@ -323,6 +323,12 @@ public class BoardController {
 
     @RequestMapping(value = "/sgCloud/sgCloud_delete.do", method = RequestMethod.GET)
     public String procBroadcastAdd(@RequestParam(value="idx", defaultValue="") String idx,
+    		@RequestParam(value="rnum", defaultValue="1") int rnum,
+			@RequestParam(value="category", defaultValue="") String category,
+			@RequestParam(value="genre", defaultValue="") String genre,
+			@RequestParam(value="foldername", defaultValue="") String foldername,
+			@RequestParam(value="country", defaultValue="") String country,
+			@RequestParam(value="searchWord", defaultValue="") String searchWord,
     		RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request) throws Exception {
     	logger.info("BroadcastDelete start!");
 
@@ -352,8 +358,11 @@ public class BoardController {
     	catch(Exception e){
 			logger.error("sgCloud/sgCloud_delete.do ERROR, " + e.getMessage());
 		}
-    	
-        return "redirect:/sgCloud/sgCloud_main.do";
+    	if(isMobile) {
+    		return "redirect:/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country + "#view_position";
+    	}else {
+    		return "redirect:/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country;
+    	}
     }
     
     //댓글 저장
