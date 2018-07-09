@@ -188,6 +188,10 @@
 	
 	function headerSearchGo(){
 		var searchWord = $("#headerSearchWord").val();
-		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
+		}else{
+			location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord  + "#view_position";
+		}
 	}
 </script> 
