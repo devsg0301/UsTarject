@@ -204,8 +204,8 @@
            #{category}
          , #{genre}
          , #{title}
-         , #{foldername}
          , #{grade}
+         , #{foldername}
          , #{albumname}
          , #{filename}
          , #{explanation}
