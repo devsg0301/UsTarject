@@ -74,6 +74,16 @@
 </div>
 --%>
 <div class="container">
+	<form id="broadcastForm" name="broadcastForm" method="post">
+		<input type="hidden" id="searchWord" name="searchWord"	value="${searchWord}">
+		<input type="hidden" id="rnum" 		 name="rnum" 		value="${rnum}">
+		<input type="hidden" id="prev" 		 name="prev" 		value="${prev}">
+		<input type="hidden" id="next" 		 name="next" 		value="${next}">
+		<input type="hidden" id="category" 	 name="category" 	value="${category}">
+		<input type="hidden" id="genre"  	 name="genre"  		value="${genre}">
+		<input type="hidden" id="foldername" name="foldername"	value="${foldername}">
+		<input type="hidden" id="country" 	 name="country" 	value="${country}">
+	</form>
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
     	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -180,18 +190,90 @@
 	
 	/* 검색 - enter값 이벤트   */
 	function headerEventSearchGo(e){
-		var form = document.boardForm;
 		if(e.keyCode == '13'){
 			headerSearchGo();
 		}
 	}
 	
 	function headerSearchGo(){
+		var form = document.broadcastForm;
 		var searchWord = $("#headerSearchWord").val();
+		
+		form.category.value = "";
+		form.genre.value = "";
+		form.foldername.value = "";
+		form.country.value = "";
+		form.rnum.value = "";
+		form.searchWord.value = searchWord;
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
+			//location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
+			form.action = "/sgCloud/sgCloud_main.do";
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord  + "#view_position";
+			//location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord  + "#view_position";
+			form.action = "/sgCloud/sgCloud_main.do#view_position";
 		}
+		form.submit();
+	}
+	
+	/* 검색 - enter값 이벤트   */
+	function EventSearchGo(e){
+		if(e.keyCode == '13'){
+			searchGo();
+		}
+	}
+	
+	function searchGo(){
+		var form = document.broadcastForm;
+		var searchWord = $("#mainSearchWord").val();
+		
+		form.category.value = "";
+		form.genre.value = "";
+		form.foldername.value = "";
+		form.country.value = "";
+		form.rnum.value = "";
+		form.searchWord.value = searchWord;
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+		//location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
+			form.action = "/sgCloud/sgCloud_main.do";
+		}else{
+			form.action = "/sgCloud/sgCloud_main.do#view_position";
+		}
+		form.submit();
+	}
+	
+	function fileSearch(category, genre, country){
+		var form = document.broadcastForm;
+		form.category.value = category;
+		form.genre.value = genre;
+		form.foldername.value = "";
+		form.country.value = country;
+		form.rnum.value = "";
+		form.searchWord.value = "";
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			//location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&country=" + country;
+			form.action = "/sgCloud/sgCloud_main.do";
+		}else{
+			//location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&country=" + country + "#view_position";
+			form.action = "/sgCloud/sgCloud_main.do#view_position";
+		}
+		form.submit();
+	}
+	
+	function folderSearch(category, genre, foldername){
+		var form = document.broadcastForm;
+		form.category.value = category;
+		form.genre.value = genre;
+		form.foldername.value = foldername;
+		form.country.value = "";
+		form.rnum.value = "";
+		form.searchWord.value = "";
+		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
+			//location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername;
+			form.action = "/sgCloud/sgCloud_main.do";
+		}else{
+			//location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
+			form.action = "/sgCloud/sgCloud_main.do#view_position";
+		}
+		form.submit();
 	}
 </script> 

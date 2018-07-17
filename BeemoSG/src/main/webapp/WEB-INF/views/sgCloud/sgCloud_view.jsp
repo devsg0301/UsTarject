@@ -91,11 +91,22 @@ video{
 	}
 	
 	function folderSearch(category, genre, foldername, rnum){
+		var form = document.broadcastForm;
+		
+		form.searchWord.value = "";
+		form.category.value = category;
+		form.genre.value = genre;
+		form.foldername.value = foldername;
+		form.rnum.value = rnum;
+		form.country.value = "";
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&rnum=" + rnum;
+			//location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&rnum=" + rnum;
+			form.action = "/sgCloud/sgCloud_main.do";
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&rnum=" + rnum + "#view_position";
+			//location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&rnum=" + rnum + "#view_position";
+			form.action = "/sgCloud/sgCloud_main.do#view_position";
 		}
+		form.submit();
 	}
 	
 	function fullScreen(){
@@ -183,7 +194,7 @@ video{
       					<p>${broadcastDetail.explanation}</p>
       				</div>
       				<div class="" style="text-align:center;">
-	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}');" class="btn btn-default"><i class="fas fa-list-ul"></i> 파일목록</a>
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}','${rnum}');" class="btn btn-default"><i class="fas fa-list-ul"></i> 파일목록</a>
 	      				<br>
 	      			</div>
       			</c:if>

@@ -123,7 +123,12 @@
 	<div class="container">
 
 		<form class="form-signin" name="loginForm" method="post" action="/defaults/loginProcess.do">
-			<input type="hidden" name="forwardUrl" value="${forwardUrl}"/>
+			<input type="hidden" name="forwardUrl" 	value="${forwardUrl}"/>
+			<input type="hidden" name="category" 	value="${category}"/>
+			<input type="hidden" name="genre" 		value="${genre}"/>
+			<input type="hidden" name="foldername" 	value="${foldername}"/>
+			<input type="hidden" name="searchWord" 	value="${searchWord}"/>
+			<input type="hidden" name="isMobile" 	value="${isMobile}"/>
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<label for="cust_id" class="sr-only">아이디</label>
 			<input type="text" id="cust_id" name="cust_id" class="form-control" placeholder="아이디" required="required" autofocus="autofocus"> 

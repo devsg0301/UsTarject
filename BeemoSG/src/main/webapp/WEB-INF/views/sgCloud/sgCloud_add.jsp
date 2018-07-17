@@ -227,7 +227,7 @@ $(document).ready(function () {
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <c:import url="../common/header.jsp" />
+        <%-- <c:import url="../common/header.jsp" /> --%>
         <!-- /.container -->
     </nav>
 

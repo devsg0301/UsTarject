@@ -2,7 +2,9 @@ package com.beemosg.main.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -85,6 +87,10 @@ public class MainController {
     public ModelAndView loginProcess(Model model, Tcustomer customer, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
     	logger.info("login start!");
     	String forwardUrl 	= "";
+    	String category 	= "";
+    	String genre 		= "";
+    	String foldername 	= "";
+    	String searchWord 	= "";
     	String password   	= "";
     	String keep_login 	= "";
     	String passwd_org 	= "";
@@ -130,11 +136,16 @@ public class MainController {
 		    	session.removeAttribute(Const.USER_KEY);
 		    	session.setAttribute(Const.USER_KEY, loginUser);
 	            
-	            forwardUrl = request.getParameter("forwardUrl");
+	            forwardUrl 	= request.getParameter("forwardUrl");
+	            category	= request.getParameter("category");
+	            genre		= request.getParameter("genre");
+	            foldername	= request.getParameter("foldername");
+	            searchWord	= request.getParameter("searchWord");
 	            if(forwardUrl == null || forwardUrl == ""){
 	            	mav.setViewName("redirect:/defaults/main.do");
 	            }else{
-	            	mav.setViewName("redirect:" + forwardUrl);
+	            	mav.setViewName("redirect:" + forwardUrl + "?category=" + URLEncoder.encode(category, "UTF-8") + "&genre=" + URLEncoder.encode(genre, "UTF-8") 
+	            								+ "&foldername=" + URLEncoder.encode(foldername, "UTF-8") + "&searchWord=" + URLEncoder.encode(searchWord, "UTF-8") + request.getParameter("isMobile"));
 	            }
 	        }else{
 	        	logger.info("login fail!");

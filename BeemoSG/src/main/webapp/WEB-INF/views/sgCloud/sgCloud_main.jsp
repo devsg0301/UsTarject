@@ -14,19 +14,6 @@
 
 	var tmpUser = navigator.userAgent;
 
-	function searchGo(){
-		var searchWord = $("#searchWord").val();
-		location.href = "/sgCloud/sgCloud_main.do?searchWord="+searchWord;
-	}
-	
-	/* 검색 - enter값 이벤트   */
-	function EventSearchGo(e){
-		var form = document.boardForm;
-		if(e.keyCode == '13'){
-			searchGo();
-		}
-	}
-
 	function fileDownload(fileUrl, fileName){
 		//var eFileUrl = encodeURIComponent(fileUrl);
 		//var eFileName = encodeURIComponent(fileName);
@@ -39,28 +26,22 @@
 		location.href = "/sgCloud/fileDownload.do?fileName="+fileName+"&fileUrl="+fileUrl;
 	}
 	
-	function fileSearch(category, genre, country){
-		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&country=" + country;
-		}else{
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&country=" + country + "#view_position";
-		}
-	}
-	
-	function folderSearch(category, genre, foldername){
-		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername;
-		}else{
-			location.href = "/sgCloud/sgCloud_main.do?category=" + category + "&genre=" + genre + "&foldername=" + foldername + "#view_position";
-		}
-	}
-
 	function paging(searchWord, rnum, category, genre, foldername, country){
+		var form = document.broadcastForm;
+		form.searchWord.value = searchWord;
+		form.rnum.value = rnum;
+		form.category.value = category;
+		form.genre.value = genre;
+		form.foldername.value = foldername;
+		form.country.value = country;
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){		
-			location.href = "/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country;
+			//location.href = "/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country;
+			form.action = "/sgCloud/sgCloud_main.do";
 		}else{
-			location.href = "/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country + "#view_position";
+			//location.href = "/sgCloud/sgCloud_main.do?searchWord=" + searchWord + "&rnum=" + rnum + "&category=" + category + "&genre=" + genre + "&foldername=" + foldername + "&country=" + country + "#view_position";
+			form.action = "/sgCloud/sgCloud_main.do#view_position";
 		}
+		form.submit();
 	}
 	
 	function goUrl(gubun){
@@ -130,13 +111,12 @@
             <div class="inbox-head">
 	            <h3>sgCloud</h3>
                 <div class="input-append pull-right position">
-                    <input type="text" class="sr-input" placeholder="파일 검색" id="searchWord" onkeydown="javascript:EventSearchGo(event);">
+                    <input type="text" class="sr-input" placeholder="파일 검색" id="mainSearchWord" onkeydown="javascript:EventSearchGo(event);">
                     <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fas fa-search"></i></button>
                 </div>
 	        </div>
         </div>
         <!-- /.row -->
-
         <div class="row">
         	 <!-- sgCloud SidsgCloud Widgets Column -->
             <div class="col-md-3">

@@ -1,6 +1,5 @@
 package com.beemosg.board.controller;
 
-import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -10,7 +9,9 @@ import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beemosg.board.service.BoardService;
@@ -48,14 +48,16 @@ public class BoardController {
 	private BoardService boardService;
 	
 	// sgCloud 이동
-	@RequestMapping(value = "/sgCloud/sgCloud_main.do", method = RequestMethod.GET)
-	public String displaySgCloud(@RequestParam(value="rnum", defaultValue="1") int rnum,
-			@RequestParam(value="category", defaultValue="") String category,
-			@RequestParam(value="genre", defaultValue="") String genre,
-			@RequestParam(value="genre2", defaultValue="") String genre2,
-			@RequestParam(value="foldername", defaultValue="") String foldername,
-			@RequestParam(value="country", defaultValue="") String country,
-			@RequestParam(value="searchWord", defaultValue="") String searchWord,
+	//@RequestMapping(value = "/sgCloud/sgCloud_main.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/sgCloud/sgCloud_main.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public String displaySgCloud(
+//			@RequestParam(value="rnum", defaultValue="1") int rnum,
+//			@RequestParam(value="category", defaultValue="") String category,
+//			@RequestParam(value="genre", defaultValue="") String genre,
+//			@RequestParam(value="genre2", defaultValue="") String genre2,
+//			@RequestParam(value="foldername", defaultValue="") String foldername,
+//			@RequestParam(value="country", defaultValue="") String country,
+//			@RequestParam(value="searchWord", defaultValue="") String searchWord,
 			HttpSession session, HttpServletRequest request, Model model) throws Exception {
 		logger.info("sgCloud Main");
 		int totalBroadcast = 0;
@@ -68,14 +70,44 @@ public class BoardController {
 		Tcustomer customer = null;
 		boolean isMobile = false;
 		
+		int rnum = 1;
+		String category = "";
+		String genre = "";
+		String foldername  = "";
+		String country = ""; 
+		String searchWord  = "";
 		try{
+			if(request.getParameter("rnum") != null && !request.getParameter("rnum").equals("")) {
+				rnum = Integer.parseInt(request.getParameter("rnum"));
+			}
+			if(request.getParameter("category") != null && !request.getParameter("category").equals("")) {
+				category = request.getParameter("category");
+			}
+			if(request.getParameter("genre") != null && !request.getParameter("genre").equals("")) {
+				genre = request.getParameter("genre");
+			}
+			if(request.getParameter("foldername") != null && !request.getParameter("foldername").equals("")) {
+				foldername = request.getParameter("foldername");
+			}
+			if(request.getParameter("country") != null && !request.getParameter("country").equals("")) {
+				country = request.getParameter("country");
+			}
+			if(request.getParameter("searchWord") != null && !request.getParameter("searchWord").equals("")) {
+				searchWord = request.getParameter("searchWord");
+			}
+			
 			isMobile = isMobile(request.getHeader("User-Agent"));
 			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
+				model.addAttribute("category"	, category);
+				model.addAttribute("genre"		, genre);
+				model.addAttribute("foldername"	, foldername);
+				model.addAttribute("searchWord"	, searchWord);
+				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do");
 				if(isMobile){
-					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+category+"&genre="+URLEncoder.encode(genre.replaceAll("%20", " "), "UTF-8")+"&foldername="+URLEncoder.encode(foldername.replaceAll("%20", " "), "UTF-8")+"#view_position");
+					model.addAttribute("isMobile", "#view_position");
 				}else{
-					model.addAttribute("forwardUrl", "/sgCloud/sgCloud_main.do?category="+category+"&genre="+URLEncoder.encode(genre.replaceAll("%20", " "), "UTF-8")+"&foldername="+URLEncoder.encode(foldername.replaceAll("%20", " "), "UTF-8"));
+					model.addAttribute("isMobile", "");
 				}
 				return "defaults/login";
 			}else{
