@@ -28,7 +28,8 @@ $(document).ready(function () {
 	    $("#select_genre").html("");
 	    if("${broadcast.category}" == "TV"){
 	    	$("#select_genre").html("<option <c:if test="${broadcast.genre == '드라마'}">selected</c:if>>드라마</option>"+
-	    			"<option <c:if test="${broadcast.genre == '스릴러ㆍ범죄'}">selected</c:if>>예능</option>");
+	    			"<option <c:if test="${broadcast.genre == '예능'}">selected</c:if>>예능</option>"+
+	    			"<option <c:if test="${broadcast.genre == '시사'}">selected</c:if>>시사</option>");
 	    	$("#genre").val("${broadcast.genre}");
 	    }else if("${broadcast.category}" == "MOVIE"){
 	    	$("#select_genre").html("<option <c:if test="${broadcast.genre == '액션ㆍ전쟁'}">selected</c:if>>액션ㆍ전쟁</option>"+
@@ -68,7 +69,7 @@ $(document).ready(function () {
 	    $("#category").val($(this).val());
 	    $("#select_genre").html("");
 	    if($(this).val() == "TV"){
-	    	$("#select_genre").html("<option>드라마</option>"+"<option>예능</option>"+"<option>스포츠</option>");
+	    	$("#select_genre").html("<option>드라마</option>"+"<option>예능</option>"+"<option>시사</option>");
 	    	$("#genre").val("드라마");
 	    	$("#album_div").attr("style","display:none;");
 	    	$("#explanation_div").attr("style","display:none;");
@@ -309,6 +310,7 @@ $(document).ready(function () {
 								<select class="form-control" id="select_genre">
 	                            	<option>드라마</option>
 									<option>예능</option>
+									<option>시사</option>
 								</select>
 	                            <input type="hidden" class="form-control" id="genre" name="genre" value="${broadcast.genre}" required data-validation-required-message="Please enter genre." />
 							</div>
