@@ -57,7 +57,7 @@
 					</div> <!-- /.form-group -->
 
 					<div class="checkbox">
-						<label><input type="checkbox" id="keep_login" name="keep_login" onclick="autoChk();" value="1">로그인 유지</label>
+						<label><input type="checkbox" id="keep_login" name="keep_login" onclick="javascript:autoChk();" checked="checked" value="1">로그인 유지</label>
 						<label><input type="checkbox" id="keep_id" name="checksaveid" onclick="javascript:saveidalert();">아이디 저장</label>
 					</div> <!-- /.checkbox -->
 				</form>

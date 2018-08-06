@@ -89,7 +89,7 @@
 	// 로그인 상태 유지
 	function autoChk(){
 		var form = document.loginForm;
-		form.checksaveid.checked = true;
+		form.checksaveid.checked = true;		
 		saveidalert();
 	}
 	
@@ -135,7 +135,7 @@
 			<label for="password" class="sr-only">비밀번호</label>
 			<input type="password" id="password" name="password" class="form-control" placeholder="비밀번호" required="required" onkeydown="javascript:keyDown_login();">
 			<div class="checkbox">
-				<label><input type="checkbox" id="keep_login" name="keep_login" onclick="autoChk();" value="1">로그인 유지</label>
+				<label><input type="checkbox" id="keep_login" name="keep_login" onclick="javascript:autoChk();" checked="checked" value="1">로그인 유지</label>
 				<label><input type="checkbox" id="keep_id" name="checksaveid" onclick="javascript:saveidalert();">아이디 저장</label>
 			</div>
 			<a href="javascript:;" onclick="javascript:login();return false;" ><button class="btn btn-lg btn-primary btn-block" type="button">로그인</button></a>
