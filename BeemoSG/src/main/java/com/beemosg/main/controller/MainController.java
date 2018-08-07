@@ -57,6 +57,7 @@ public class MainController {
 			if(session.getAttribute(Const.USER_KEY) != null && !"".equals(session.getAttribute(Const.USER_KEY))){
 				loginUser = (Tcustomer)session.getAttribute(Const.USER_KEY);
 				loginUser = mainService.getCustomer(loginUser.getCust_id(), loginUser.getPassword());
+				logger.info("CUST_ID:" + loginUser.getCust_id() + ", CUST_NAME:" + loginUser.getCust_name());
 				if(loginUser.getCust_gb().equals("20")){
 					session.removeAttribute(Const.USER_KEY);
 					session.setAttribute(Const.USER_KEY, loginUser);

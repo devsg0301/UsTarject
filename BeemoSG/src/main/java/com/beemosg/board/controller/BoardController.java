@@ -112,6 +112,7 @@ public class BoardController {
 				return "defaults/login";
 			}else{
 				customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+				logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
 				if(!customer.getCust_gb().equals("20")){
 					if(isMobile){
     					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
@@ -209,6 +210,7 @@ public class BoardController {
         	}else{
         		isMobile = isMobile(request.getHeader("User-Agent"));
         		customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+        		logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
         		if(!customer.getCust_gb().equals("20")){
         			if(isMobile){
     					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
@@ -251,6 +253,7 @@ public class BoardController {
 				return "defaults/login";
 			}else{
 				customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+				logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
 				if(!customer.getAdmin_yn().equals("1")){
 					return "redirect:/sgCloud/sgCloud_main.do";
 				}
@@ -293,6 +296,7 @@ public class BoardController {
     		}else{
     			isMobile = isMobile(request.getHeader("User-Agent"));
     			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+    			logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
     			if(!customer.getCust_gb().equals("20")){
     				if(isMobile){
     					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
@@ -373,6 +377,7 @@ public class BoardController {
     		}else{
     			isMobile = isMobile(request.getHeader("User-Agent"));
     			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+    			logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
     			if(!customer.getCust_gb().equals("20")){
     				if(isMobile){
     					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
@@ -416,6 +421,7 @@ public class BoardController {
     		}else{
     			isMobile = isMobile(request.getHeader("User-Agent"));
     			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+    			logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
     			if(!customer.getCust_gb().equals("20")){
     				if(isMobile){
     					return "redirect:/sgCloud/sgCloud_board.do?gubun=level&check=ok#view_position";
@@ -477,7 +483,7 @@ public class BoardController {
 	        customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
 	        
 	        logger.info("------Download Start------");
-	        logger.info("Cust ID : " + customer.getCust_id());
+	        logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
 	        logger.info("fileName : " + fileName + ", fileUrl : " + fileUrl);
 	        
 	        char[] txtChar = fileUrl.toCharArray();
@@ -639,6 +645,7 @@ public class BoardController {
  			}
  			
  			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+ 			logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
  			
  			logger.info("rnum : " + rnum);
  			
@@ -717,6 +724,7 @@ public class BoardController {
 	 		}
 	 		
 	 		customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
+	 		logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
 	 		
 	 		Integer idx = tboard.getIdx();
 	 		tboard.setAuthor(customer.getCust_name());
@@ -748,6 +756,7 @@ public class BoardController {
         		return "defaults/login";
         	}else{
         		customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+        		logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
         		if(!customer.getAdmin_yn().equals("1")){
         			return "redirect:/sgCloud/sgCloud_main.do";
         		}
@@ -823,6 +832,7 @@ public class BoardController {
     	logger.info("Start Board comment write.");
     	
     	Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
+    	logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
     	
     	int idx 	= tboard_comment.getIdx();
     	int seq 	= tboard_comment.getSeq();
@@ -867,6 +877,7 @@ public class BoardController {
         
         System.out.println("idx : " + idx + ", seq : " + seq);
         Tcustomer customer = (Tcustomer) session.getAttribute(Const.USER_KEY);
+        logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
         
         this.boardService.deleteBoardComment(seq, customer.getCust_id()); //선택 댓글 삭제
         System.out.println("Sucess Board comment delete.");
