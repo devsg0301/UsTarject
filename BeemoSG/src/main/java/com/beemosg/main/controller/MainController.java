@@ -57,11 +57,7 @@ public class MainController {
 			if(session.getAttribute(Const.USER_KEY) != null && !"".equals(session.getAttribute(Const.USER_KEY))){
 				loginUser = (Tcustomer)session.getAttribute(Const.USER_KEY);
 				loginUser = mainService.getCustomer(loginUser.getCust_id(), loginUser.getPassword());
-				logger.info("CUST_ID:" + loginUser.getCust_id() + ", CUST_NAME:" + loginUser.getCust_name());
-				if(loginUser.getCust_gb().equals("20")){
-					session.removeAttribute(Const.USER_KEY);
-					session.setAttribute(Const.USER_KEY, loginUser);
-				}
+				logger.info("CUST_ID:" + loginUser.getCust_id() + ", CUST_NAME:" + loginUser.getCust_name());				
 			}
 			broadcastList 			= this.mainService.getBroadcastList();
 			tvFolderList 			= this.mainService.getFolderList("%TV%","%%");
@@ -86,12 +82,13 @@ public class MainController {
 	// 로그인 처리
     @RequestMapping(value="/defaults/loginProcess.do")
     public ModelAndView loginProcess(Model model, Tcustomer customer, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-    	logger.info("login start!");
+    	logger.info("loginProcess start!");
     	String forwardUrl 	= "";
     	String category 	= "";
     	String genre 		= "";
     	String foldername 	= "";
     	String searchWord 	= "";
+    	String isMobile		= "";
     	String password   	= "";
     	String keep_login 	= "";
     	String passwd_org 	= "";
@@ -120,7 +117,7 @@ public class MainController {
 				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
 				passwd_org = aes.Encrypt(password);
 				
-				ComUtils.setCookie(response, "beemosgautoL", passwd_org, 60*60*24*9999);
+				ComUtils.setCookie(response, "beemosgautoL", passwd_org, 1000 * 3600 * 24 * 9999);
 			} else {
 				ComUtils.setCookie(response, "beemosgautoL", "", -1);
 			}
@@ -137,16 +134,18 @@ public class MainController {
 		    	session.removeAttribute(Const.USER_KEY);
 		    	session.setAttribute(Const.USER_KEY, loginUser);
 	            
-	            forwardUrl 	= request.getParameter("forwardUrl");
-	            category	= request.getParameter("category");
-	            genre		= request.getParameter("genre");
-	            foldername	= request.getParameter("foldername");
-	            searchWord	= request.getParameter("searchWord");
-	            if(forwardUrl == null || forwardUrl == ""){
+	            forwardUrl 	= ComUtils.NVL(request.getParameter("forwardUrl"));
+	            category	= ComUtils.NVL(request.getParameter("category"));
+	            genre		= ComUtils.NVL(request.getParameter("genre"));
+	            foldername	= ComUtils.NVL(request.getParameter("foldername"));
+	            searchWord	= ComUtils.NVL(request.getParameter("searchWord"));
+	            isMobile	= ComUtils.NVL(request.getParameter("isMobile"));
+	            logger.info("login user : " + loginUser.getCust_name());
+	            if(forwardUrl.equals("")){
 	            	mav.setViewName("redirect:/defaults/main.do");
 	            }else{
 	            	mav.setViewName("redirect:" + forwardUrl + "?category=" + URLEncoder.encode(category, "UTF-8") + "&genre=" + URLEncoder.encode(genre, "UTF-8") 
-	            								+ "&foldername=" + URLEncoder.encode(foldername, "UTF-8") + "&searchWord=" + URLEncoder.encode(searchWord, "UTF-8") + request.getParameter("isMobile"));
+	            								+ "&foldername=" + URLEncoder.encode(foldername, "UTF-8") + "&searchWord=" + URLEncoder.encode(searchWord, "UTF-8") + isMobile);
 	            }
 	        }else{
 	        	logger.info("login fail!");
@@ -164,45 +163,32 @@ public class MainController {
     
     @RequestMapping(value = "/defaults/loginAjax.do", method = RequestMethod.GET)
 	public void AjaxLoginProcess(@RequestParam("cust_id") String cust_id,
-			@RequestParam("password") String password, HttpSession session, 
-			HttpServletRequest request, HttpServletResponse response) throws Exception{
+			@RequestParam("password") String password, @RequestParam("keep_login") String keep_login, 
+			HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
     	logger.info("loginAjax start!");
     	//String password   	= "";
-    	String keep_login 	= "";
     	String passwd_org 	= "";
     	//String cust_id 		= "";
-    	String autochk 		= "";
     	
-    	ModelAndView mav = null;
     	try{
-    		keep_login 	= (String)request.getParameter("keep_login");
+    		//keep_login 	= (String)request.getParameter("keep_login");
     		//cust_id		= (String)request.getParameter("cust_id");
     		//password 	= (String)request.getParameter("password");
-    		autochk 	= (String)request.getParameter("autochk");
     		
-    		if("1".equals(autochk)){
-    			//passwd = VigEnc.decrypt(passwd); 
-    			AESCrypto aes = new AESCrypto();
-    			aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
-    			password = aes.Decrypt(password);
-    		}
-    		
-	    	mav = new ModelAndView();
 	        Tcustomer loginUser = mainService.getCustomer(cust_id, password);
-	        
 	        if("1".equals(keep_login)){
 				AESCrypto aes = new AESCrypto();
 				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
 				passwd_org = aes.Encrypt(password);
 				
-				ComUtils.setCookie(response, "beemosgautoL", passwd_org, 60*60*24*9999);
+				ComUtils.setCookie(response, "beemosgautoL", passwd_org, 1000 * 3600 * 24 * 9999);
 			} else {
 				ComUtils.setCookie(response, "beemosgautoL", "", -1);
 			}
 	 
 	        if (loginUser != null) {
-	        	logger.info("login sucess!");
+	        	logger.info("loginAjax sucess!");
 
 	        	AESCrypto aes = new AESCrypto();
 				aes.setSalt(Const.SHORTCUT_URL_AES_KEY);
@@ -214,7 +200,7 @@ public class MainController {
 		    	session.setAttribute(Const.USER_KEY, loginUser);
 		    	response.getWriter().print(URLEncoder.encode(loginUser.getCust_name(), "UTF-8"));
 	        }else{
-	        	logger.info("login fail!");
+	        	logger.info("loginAjax fail!");
 	        	ComUtils.setCookie(response, "beemosgautoL", "", -1);
 	        	response.getWriter().print("fail");
 	        }

@@ -46,8 +46,8 @@ public class AutoLogin implements Filter {
 		String 				autoPW			= null;
 		String				forwardPath		= null;
 		
-		logger.info("login doFilter start!");
-		if(session.getAttribute(Const.USER_KEY) == null){
+		logger.info("==========login doFilter start!============");
+		if(session.getAttribute(Const.USER_KEY) == null || session.getAttribute(Const.USER_KEY).equals("")){
 			if(null == autoLoginStatus || "".equals(autoLoginStatus)){
 				session.setAttribute("AutoLoginStatus", "1");
 				
@@ -69,7 +69,7 @@ public class AutoLogin implements Filter {
 							forwardPath = req.getRequestURI().replace(req.getContextPath(), "");
 						}
 					}
-					
+					logger.info("===========AutoLoginStatus OK!!===========");
 					request.setAttribute("cust_id", autoID);
 					request.setAttribute("password", autoPW);
 					request.setAttribute("autochk", 1);
@@ -84,6 +84,7 @@ public class AutoLogin implements Filter {
 				chain.doFilter(request, response);
 			}
 		}else{
+			logger.info("=============login doFilter <USER_KEY not null> end!============");
 			chain.doFilter(request, response);
 		}
 	}
