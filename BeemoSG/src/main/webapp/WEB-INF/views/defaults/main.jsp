@@ -27,6 +27,16 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','예능','신서유기5','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_sinseoyugi.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','미스터 션샤인','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_mistersunshine.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','슈츠','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner11.jpg">
 					</a>
@@ -35,22 +45,7 @@
 					<a href="javascript:folderSearch('TV','드라마','김비서가 왜 그럴까','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner12.jpg">
 					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','어바웃타임','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner13.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','예능','윤식당2','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner04.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','왕좌의게임7','EN');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner08.jpg">
-					</a>
-				</div>
+				</div>				
 			</div>
 			<!-- Add Pagination -->
 			<div class="swiper-pagination swiper-pagination-white"></div>
