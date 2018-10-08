@@ -232,7 +232,8 @@
               	sub_url 	= #{sub_url},
               	country 	= #{country},
               	play_date	= #{play_date},
-              	priority	= #{priority}
+              	priority	= #{priority},
+              	insert_date	= #{insert_date}
           WHERE idx = #{idx} LIMIT 1
     </update>
     

@@ -1,5 +1,6 @@
 package com.beemosg.board.controller;
 
+import java.io.File;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -8,10 +9,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beemosg.board.service.BoardService;
@@ -38,6 +44,8 @@ import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tbroadcast_comment;
 import com.beemosg.model.Tcustomer;
+
+import javafx.animation.Interpolator;
 
 @Controller
 public class BoardController {
@@ -349,12 +357,63 @@ public class BoardController {
 	            redirectAttributes.addFlashAttribute("message", "수정되었습니다.");
 	            logger.info("Sucess Board modify");
 	        }
+	        
+	        /** 파일업로드 구현 **/
+	        //파일이 저장될 경로 path 설정
+	        String path = "D://web/localhost/LocalUser/data/" + tbroadcast.getFile_url().substring(0, tbroadcast.getFile_url().lastIndexOf("/"));
+	        Map returnObject = new HashMap();
+	        
+	        try {
+				MultipartHttpServletRequest mhsr = (MultipartHttpServletRequest) request;
+				Iterator iter = mhsr.getFileNames();
+				
+				MultipartFile mfile = null;
+				String filedName = "";
+				
+				//디렉토리 확인 후 없으면 생성
+				File dir = new File(path);
+				if(!dir.isDirectory()) {
+					dir.mkdirs();
+				}
+				
+				// 값이 나올때까지 반복
+				while (iter.hasNext()) {
+					filedName = (String) iter.next(); // 내용을 가져옴
+					mfile = mhsr.getFile(filedName);
+					String origName;
+					
+					//origName = new String(mfile.getOriginalFilename().getBytes("8859_1"), "UTF-8"); // 한글깨짐 방지
+					origName = mfile.getOriginalFilename().toString();
+					
+					// 파일명이 없다면
+					if("".equals(origName)) {
+						continue;
+					}
+					
+					// 파일명 변경(uuid로 암호화)
+					String ext = origName.substring(origName.lastIndexOf('.')); // 확장자
+					String saveFileName = getUuid() + ext;
+					origName = tbroadcast.getFilename();
+					
+					// 설정한 path에 파일저장
+					File serverFile = new File(path + File.separator + origName);
+					mfile.transferTo(serverFile);
+				}
+				
+			} catch (Exception e) {
+				logger.error("File Upload ERROR, " + e.getMessage());
+			}
+	        
     	}
     	catch(Exception e){
 			logger.error("sgCloud/add_ok.do ERROR, " + e.getMessage());
 		}
     	
         return "redirect:/sgCloud/sgCloud_main.do";
+    }
+    
+    public static String getUuid() { 
+    	return UUID.randomUUID().toString().replaceAll("-", ""); 
     }
 
     @RequestMapping(value = "/sgCloud/sgCloud_delete.do", method = RequestMethod.GET)

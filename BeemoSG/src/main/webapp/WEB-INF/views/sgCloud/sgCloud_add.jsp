@@ -75,6 +75,8 @@ $(document).ready(function () {
 	    	$("#explanation_div").attr("style","display:none;");
 	    	$("#extension4").parents("label").removeClass("active");
 	    	$("#extension4").removeAttr("checked");
+	    	$("#extension5").parents("label").removeClass("active");
+	    	$("#extension5").removeAttr("checked");
 	    	$("#extension1").attr("checked","checked");
 	    	$("#extension1").parents("label").addClass("active");
 	    }else if($(this).val() == "MOVIE"){
@@ -85,6 +87,8 @@ $(document).ready(function () {
 	    	$("#genre").val("액션ㆍ전쟁");
 	    	$("#album_div").attr("style","display:none;");
 	    	$("#explanation_div").attr("style","display:none;");
+	    	$("#extension5").parents("label").removeClass("active");
+	    	$("#extension5").removeAttr("checked");
 	    	$("#extension4").parents("label").removeClass("active");
 	    	$("#extension4").removeAttr("checked");
 	    	$("#extension1").attr("checked","checked");
@@ -94,6 +98,12 @@ $(document).ready(function () {
 	    	$("#genre").val("소프트웨어");
 	    	$("#album_div").attr("style","display:none;");
 	    	$("#explanation_div").removeAttr("style");
+	    	$("#extension1").parents("label").removeClass("active");
+	    	$("#extension1").removeAttr("checked");
+	    	$("#extension4").parents("label").removeClass("active");
+	    	$("#extension4").removeAttr("checked");
+	    	$("#extension5").attr("checked","checked");
+	    	$("#extension5").parents("label").addClass("active");
 	    }else if($(this).val() == "INTERNET"){
 	    	$("#select_genre").html("<option>CF</option>"+"<option>뮤비</option>"+"<option>게임</option>");
 	    	$("#genre").val("CF");
@@ -106,6 +116,8 @@ $(document).ready(function () {
 	    	$("#explanation_div").attr("style","display:none;");
 	    	$("#extension1").parents("label").removeClass("active");
 	    	$("#extension1").removeAttr("checked");
+	    	$("#extension5").parents("label").removeClass("active");
+	    	$("#extension5").removeAttr("checked");
 	    	$("#extension4").attr("checked","checked");
 	    	$("#extension4").parents("label").addClass("active");
 	    }else if($(this).val() == "ETC"){
@@ -113,6 +125,12 @@ $(document).ready(function () {
 	    	$("#genre").val("ETC");
 	    	$("#album_div").attr("style","display:none;");
 	    	$("#explanation_div").attr("style","display:none;");
+	    	$("#extension1").parents("label").removeClass("active");
+	    	$("#extension1").removeAttr("checked");
+	    	$("#extension4").parents("label").removeClass("active");
+	    	$("#extension4").removeAttr("checked");
+	    	$("#extension5").attr("checked","checked");
+	    	$("#extension5").parents("label").addClass("active");
 	    }
 	});
 	$("#select_genre").change(function(){
@@ -120,6 +138,17 @@ $(document).ready(function () {
 	});
 	$("#select_grade").change(function(){
 	    $("#grade").val($(this).val());
+	});
+	
+	// Fake file upload
+	$("#fake-file-button-browse").click(function() {
+		$("#files-input-upload").click();
+	});
+
+	$("#files-input-upload").change(function() {
+		$("#fake-file-input-name").val(this.value);
+		
+		//$("#fake-file-button-upload").removeAttribute('disabled');
 	});
 });
 </script>
@@ -273,7 +302,7 @@ $(document).ready(function () {
 
             <!-- sgCloud Post Content Column -->
             <div class="well">
-	            <form id="form" name="form" method="post" action="/sgCloud/add_ok.do">
+	            <form id="form" name="form" method="post" action="/sgCloud/add_ok.do" enctype="multipart/form-data">
 	            	<input type="hidden" name="idx" id="idx" value="${broadcast.idx}" />
             		<div class="form-group">
 						<label for="title" class="cols-sm-2 control-label">제목</label>
@@ -433,6 +462,21 @@ $(document).ready(function () {
 								<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
 								저장날짜수정여부
 							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="flie-upload" class="cols-sm-2 control-label">파일업로드</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fas fa-upload" aria-hidden="true"></i></span>
+								<input type="text" class="form-control" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" />
+								<span class="input-group-btn">
+									<button id="fake-file-button-browse" type="button" class="btn btn-default">
+										<span><i class="fas fa-file-upload"></i></span>
+									</button>
+								</span>
+								<input type="file" class="form-control" id="files-input-upload" name="files-input-upload" style="display:none"/>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
