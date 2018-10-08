@@ -43,7 +43,8 @@ boolean appFlag = useragent.indexOf("bandaimallapp") > -1;
 <link href="${path_root}/resources/bootstrap/css/modern-business.css?20180116001" rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${path_root}/resources/bootstrap/fontawesome/fontawesome-all.css" rel="stylesheet">
+<!-- awesome 5.3.1 -->
+<link href="${path_root}/resources/bootstrap/fontawesome/fontawesome-all.css?20181008001" rel="stylesheet">
 <!-- 
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 -->
@@ -54,8 +55,8 @@ boolean appFlag = useragent.indexOf("bandaimallapp") > -1;
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<!-- awesome 5.0 -->
-<script defer src="${path_root}/resources/bootstrap/fontawesome/fontawesome-all.js"></script>
+<!-- awesome 5.3.1 -->
+<script defer src="${path_root}/resources/bootstrap/fontawesome/fontawesome-all.js?20181008001"></script>
 <!-- jQuery -->
 <script src="${path_root}/resources/bootstrap/js/jquery.js"></script>
 
