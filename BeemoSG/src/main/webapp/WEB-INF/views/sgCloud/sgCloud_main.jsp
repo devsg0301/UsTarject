@@ -254,8 +254,9 @@
 				                    		다운 <i class="fas fa-download"></i>
 				                    	</a>
 				                    	<c:if test="${broadcastList.sub_url != ''}">
+				                    	&nbsp;
 				                    	<a href="javascript:;" onclick="fileDownload('${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.sub_url}.smi','${broadcastList.sub_url}.smi');">
-				                    		&nbsp;&nbsp;자막 <i class="fas fa-cc"></i>
+				                    		자막 <i class="fas fa-closed-captioning"></i>
 				                    	</a>
 				                    	</c:if>
 				                    </td>
