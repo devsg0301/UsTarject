@@ -18,4 +18,6 @@ public interface MainMapper {
 
 	List<Tbroadcast> getBroadcastList() throws Exception;
 	
+	int insertLoginHistory(Tcustomer customer) throws Exception;
+	
 }

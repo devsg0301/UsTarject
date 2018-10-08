@@ -31,5 +31,9 @@ public class MainServiceImpl implements MainService {
 	public List<Tbroadcast> getBroadcastList() throws Exception{
 		return mainDao.getBroadcastList();
 	}
+	
+	public int insertLoginHistory(Tcustomer customer) throws Exception{
+		return mainDao.insertLoginHistory(customer);
+	}
 
 }

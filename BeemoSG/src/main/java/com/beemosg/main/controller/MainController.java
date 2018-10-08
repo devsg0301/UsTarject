@@ -57,7 +57,9 @@ public class MainController {
 			if(session.getAttribute(Const.USER_KEY) != null && !"".equals(session.getAttribute(Const.USER_KEY))){
 				loginUser = (Tcustomer)session.getAttribute(Const.USER_KEY);
 				loginUser = mainService.getCustomer(loginUser.getCust_id(), loginUser.getPassword());
-				logger.info("CUST_ID:" + loginUser.getCust_id() + ", CUST_NAME:" + loginUser.getCust_name());				
+				logger.info("CUST_ID:" + loginUser.getCust_id() + ", CUST_NAME:" + loginUser.getCust_name());
+				//로그인정보가 있으면 테이블에 저장한다.
+				mainService.insertLoginHistory(loginUser);
 			}
 			broadcastList 			= this.mainService.getBroadcastList();
 			tvFolderList 			= this.mainService.getFolderList("%TV%","%%");

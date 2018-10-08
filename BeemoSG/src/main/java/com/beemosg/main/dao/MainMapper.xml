@@ -70,7 +70,7 @@
                COUNTRY
           FROM TBROADCAST
          WHERE 1=1
-           AND CATEGORY NOT IN ('MUSIC', 'UTILITY')
+           AND CATEGORY NOT IN ('MUSIC', 'UTILITY', 'ETC')
       ORDER BY UNIX_TIMESTAMP(INSERT_DATE) DESC
     </select>
     
@@ -95,5 +95,17 @@
       GROUP BY CATEGORY, GENRE, FOLDERNAME, GRADE, COUNTRY
       ORDER BY MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC       
     </select>
+    
+    <insert id="insertLoginHistory">
+         INSERT INTO TLOGINHISTORY 
+         ( cust_no,
+           cust_id,
+           insert_date)
+           VALUES (
+           #{cust_no}
+         , #{cust_id}
+         , SYSDATE()
+         )
+    </insert>
     
 </mapper>

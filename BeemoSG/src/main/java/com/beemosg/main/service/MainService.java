@@ -15,4 +15,6 @@ public interface MainService {
 
 	List<Tbroadcast> getBroadcastList() throws Exception;
 	
+	public int insertLoginHistory(Tcustomer customer) throws Exception;
+	
 }

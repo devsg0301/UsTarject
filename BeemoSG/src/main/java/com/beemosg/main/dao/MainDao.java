@@ -31,4 +31,8 @@ public class MainDao {
 		return this.mainMapper.getBroadcastList();
 	}
 	
+	public int insertLoginHistory(Tcustomer customer) throws Exception{
+		return this.mainMapper.insertLoginHistory(customer);
+	}
+	
 }
