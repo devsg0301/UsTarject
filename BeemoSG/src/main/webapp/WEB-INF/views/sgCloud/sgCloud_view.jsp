@@ -164,7 +164,7 @@ video{
 				    <c:if test="${broadcastDetail.sub_url != ''}">
 				    	,&nbsp;
 				    	<a href="javascript:;" onclick="fileDownload('${broadcastDetail.category}/${broadcastDetail.genre}/${broadcastDetail.foldername}/${broadcastDetail.sub_url}.smi','${broadcastDetail.sub_url}.smi');">
-				        	 <i class="fas fa-cc"></i>자막
+				        	 <i class="fas fa-closed-captioning"></i>자막
 				        </a>
 					</c:if>
 					)<span><i class="fas fa-clock"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
