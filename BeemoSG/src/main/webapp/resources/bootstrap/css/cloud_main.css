@@ -331,7 +331,7 @@ ul.inbox-pagination li {
 }
 ul {
     list-style-type: none;
-    padding: 0px;
+    padding: 5px;
     margin: 0px;
 }
 .btn-round-sm{

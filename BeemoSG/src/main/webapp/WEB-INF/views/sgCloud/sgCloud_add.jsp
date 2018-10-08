@@ -277,7 +277,7 @@ $(document).ready(function () {
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                    	<a href="/defaults/main.do">Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>

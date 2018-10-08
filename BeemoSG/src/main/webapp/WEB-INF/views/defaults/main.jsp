@@ -9,7 +9,7 @@
 <head>
 <c:import url="../common/includecommon.jsp" />
 <link rel="stylesheet" href="${path_root}/resources/bootstrap/css/swiper.min.css">
-<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20180319001">
+<link rel="stylesheet" href="${path_root}/resources/bootstrap/css/main.css?20181008001">
 
 <style>
 </style>

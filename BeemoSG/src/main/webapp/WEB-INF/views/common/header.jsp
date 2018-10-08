@@ -1,16 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style>
+	.logo img{
+		height: 60px;
+	}
+	.navbar-header{
+		font-family: 'Noto Sans KR';
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 1.2;
+	}
+	.navbar-collapse{
+		font-family: 'Noto Sans KR';
+		font-size: 18px;
+		font-weight: 500;
+		line-height: 1.2;
+	}
 	.login_btn{
 	    background: no-repeat;
 	    border: none;
 	    outline: 0;
 	    color: #9d9d9d;
+	    font-size: 15px;
 	    position: relative;
     	float: right;
 	}
 	.logout_btn{
-		font-size: 14px;
+		font-size: 15px;
 		float: right;
 	}
 	.header-input{
@@ -19,6 +35,7 @@
 	    box-shadow: none;
 	    color: #8a8a8a;
 	    float: left;
+	    font-size: 14px;
 	    height: 34px;
 	    width: 200px;
 	    padding: 0 10px;
@@ -92,29 +109,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/defaults/main.do">BeemoSG</a>
+        <a class="logo" href="/defaults/main.do">
+        	<img src="${path_root}/resources/bootstrap/images/logo.png" alt="">
+        </a>
         <c:if test="${empty sessionScope.user}">
-        	<button class="modal-footer button login_btn" data-toggle="modal" data-target="#myModal" style="height:auto;">로그인</button>
+        	<button class="modal-footer button login_btn" data-toggle="modal" data-target="#myModal" style="height:auto;"><i class="fas fa-lock"></i> Login</button>
         </c:if>
         <c:if test="${!empty sessionScope.user}">
-        	<a class="navbar-brand logout_btn" href="/defaults/logout.do">로그아웃</a>
+        	<a class="navbar-brand logout_btn" href="/defaults/logout.do"><i class="fas fa-lock-open"></i> Logout</a>
         </c:if>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
             <li class="<c:if test="${dropdown == 'sgCloud'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');">sgCloud</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');"><i class="fas fa-tv"></i> VOD</a>
             </li>
             <li class="<c:if test="${dropdown == 'level'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=level');">등업게시판</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=level');"><i class="fas fa-clipboard-list"></i> 등업요청</a>
             </li>
             <li class="<c:if test="${dropdown == 'request'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');">자료요청게시판</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');"><i class="fas fa-clipboard-list"></i> 자료요청</a>
             </li>
             <c:if test="${sessionScope.user.admin_yn == '1'}">
             <li class="<c:if test="${dropdown == 'file_add'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');">파일등록</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');"><i class="fas fa-upload"></i> 파일등록</a>
             </li>
             </c:if>
             <li style="padding: 8px;">

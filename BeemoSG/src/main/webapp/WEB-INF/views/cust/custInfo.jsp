@@ -40,7 +40,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb_sgcloud">
                     <li>
-                    	<a href="/defaults/main.do">Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>

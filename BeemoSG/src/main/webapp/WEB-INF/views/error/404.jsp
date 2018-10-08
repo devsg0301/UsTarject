@@ -28,7 +28,7 @@
                     <small>Page Not Found</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="/defaults/main.do">Home</a>
+                    <li><a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="active">404</li>
                 </ol>

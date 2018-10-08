@@ -28,7 +28,7 @@
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="/defaults/main.do">Home</a>
+                    <li><a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="active">ERROR</li>
                 </ol>
@@ -45,7 +45,7 @@
                     <p>일시적으로 문제가 발생하였습니다. 새로고침 후 동일한 증상이 발생할 경우 연락 바랍니다.</p>
                     <ul>
                         <li>
-                            <a href="/defaults/main.do">Home</a>
+                            <a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
                         </li>
                         <li>
                             <a href="/sgCloud/sgCloud_main.do">sgCloud</a>
