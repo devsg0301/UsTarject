@@ -45,14 +45,14 @@
 					<div class="form-group">
 						<div class="input-group">
 							<input type="text" class="form-control" id="cust_id" name="cust_id" placeholder="아이디" required="required" autofocus="autofocus">
-							<label for="cust_id" class="input-group-addon"><i class="fas fa-user" aria-hidden="true"></i></label>
+							<label for="cust_id" class="input-group-addon"><i class="fas fa-user fa-fw" aria-hidden="true"></i></label>
 						</div>
 					</div> <!-- /.form-group -->
 
 					<div class="form-group">
 						<div class="input-group">
 							<input type="password" class="form-control" id="password" name="password" placeholder="비밀번호" required="required" onkeydown="javascript:keyDown_login();">
-							<label for="password" class="input-group-addon"><i class="fas fa-lock" aria-hidden="true"></i></label>
+							<label for="password" class="input-group-addon"><i class="fas fa-lock fa-fw" aria-hidden="true"></i></label>
 						</div> <!-- /.input-group -->
 					</div> <!-- /.form-group -->
 

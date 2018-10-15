@@ -40,7 +40,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb_sgcloud">
                     <li>
-                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home fa-fw"></i> Home</a>
                     </li>
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
@@ -54,7 +54,7 @@
 	            <h3>sgCloud</h3>
                 <div class="input-append pull-right position">
                     <input type="text" class="sr-input" placeholder="파일 검색" id="mainSearchWord" onkeydown="javascript:EventSearchGo(event);">
-                    <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fas fa-search"></i></button>
+                    <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fas fa-search fa-fw"></i></button>
                 </div>
 	        </div>
         </div>
@@ -67,21 +67,21 @@
 					<nav class="navbar navbar-default" role="navigation">
 		            	<div class="side-menu-container">
 		            		<ul class="nav navbar-nav">
-			            		<li class="active"><a href="/sgCloud/sgCloud_main.do"><i class="fas fa-cloud"></i> 전체</a></li>
+			            		<li class="active"><a href="/sgCloud/sgCloud_main.do"><i class="fas fa-cloud fa-fw"></i> 전체</a></li>
 			            		<!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a data-toggle="collapse" href="#dropdown-tv1">
-					                    <i class="fas fa-tv"></i> TV프로그램 <span class="caret"></span>
+					                    <i class="fas fa-tv fa-fw"></i> TV프로그램 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-tv1" class="panel-collapse collapse" >
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','','');"><i class="fas fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마','KO');"><i class="fas fa-caret-right"></i>한국드라마</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마','EN');"><i class="fas fa-caret-right"></i>외국드라마</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','예능','');"><i class="fas fa-caret-right"></i>예능</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','','');"><i class="fas fa-caret-right fa-fw"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마','KO');"><i class="fas fa-caret-right fa-fw"></i>한국드라마</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','드라마','EN');"><i class="fas fa-caret-right fa-fw"></i>외국드라마</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('TV','예능','');"><i class="fas fa-caret-right fa-fw"></i>예능</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
@@ -89,45 +89,45 @@
 					            <!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="" data-toggle="collapse" href="#dropdown-movie1" >
-					                    <i class="fas fa-video"></i> 영화 <span class="caret"></span>
+					                    <i class="fas fa-video fa-fw"></i> 영화 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-movie1" class="panel-collapse collapse " >
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','','');"><i class="fas fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','액션ㆍ전쟁','');"><i class="fas fa-caret-right"></i>액션ㆍ전쟁</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스릴러ㆍ범죄','');"><i class="fas fa-caret-right"></i>스릴러ㆍ범죄</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','로멘스ㆍ멜로','');"><i class="fas fa-caret-right"></i>로멘스ㆍ멜로</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','드라마ㆍ가족','');"><i class="fas fa-caret-right"></i>드라마ㆍ가족</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','SFㆍ환타지','');"><i class="fas fa-caret-right"></i>SFㆍ환타지</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','공포ㆍ호러','');"><i class="fas fa-caret-right"></i>공포ㆍ호러</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','코미디','');"><i class="fas fa-caret-right"></i>코미디</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','애니','');"><i class="fas fa-caret-right"></i>애니</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','뮤지컬ㆍ음악','');"><i class="fas fa-caret-right"></i>뮤지컬ㆍ음악</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','다큐멘터리','');"><i class="fas fa-caret-right"></i>다큐멘터리</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스포츠','');"><i class="fas fa-caret-right"></i>스포츠</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','','');"><i class="fas fa-caret-right fa-fw"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','액션ㆍ전쟁','');"><i class="fas fa-caret-right fa-fw"></i>액션ㆍ전쟁</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스릴러ㆍ범죄','');"><i class="fas fa-caret-right fa-fw"></i>스릴러ㆍ범죄</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','로멘스ㆍ멜로','');"><i class="fas fa-caret-right fa-fw"></i>로멘스ㆍ멜로</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','드라마ㆍ가족','');"><i class="fas fa-caret-right fa-fw"></i>드라마ㆍ가족</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','SFㆍ환타지','');"><i class="fas fa-caret-right fa-fw"></i>SFㆍ환타지</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','공포ㆍ호러','');"><i class="fas fa-caret-right fa-fw"></i>공포ㆍ호러</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','코미디','');"><i class="fas fa-caret-right fa-fw"></i>코미디</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','애니','');"><i class="fas fa-caret-right fa-fw"></i>애니</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','뮤지컬ㆍ음악','');"><i class="fas fa-caret-right fa-fw"></i>뮤지컬ㆍ음악</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','다큐멘터리','');"><i class="fas fa-caret-right fa-fw"></i>다큐멘터리</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('MOVIE','스포츠','');"><i class="fas fa-caret-right fa-fw"></i>스포츠</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
 					            <li class=""><a style="" href="javascript:fileSearch('ANIMATION','','');"><i class="fab fa-leanpub"></i> 애니</a></li>
-					            <li class=""><a style="" href="javascript:fileSearch('MUSIC','','');"><i class="fas fa-music"></i> 노래</a></li>
+					            <li class=""><a style="" href="javascript:fileSearch('MUSIC','','');"><i class="fas fa-music fa-fw"></i> 노래</a></li>
 					            <!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="" data-toggle="collapse" href="#dropdown-utility1" >
-					                    <i class="fas fa-database"></i> 유틸리티 <span class="caret"></span>
+					                    <i class="fas fa-database fa-fw"></i> 유틸리티 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-utility1" class="panel-collapse collapse">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','','');"><i class="fas fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','소프트웨어','');"><i class="fas fa-caret-right"></i>소프트웨어</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','보안ㆍ백신','');"><i class="fas fa-caret-right"></i>보안ㆍ백신</a></li>
-	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','기타설치','');"><i class="fas fa-caret-right"></i>기타설치</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','','');"><i class="fas fa-caret-right fa-fw"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','소프트웨어','');"><i class="fas fa-caret-right fa-fw"></i>소프트웨어</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','보안ㆍ백신','');"><i class="fas fa-caret-right fa-fw"></i>보안ㆍ백신</a></li>
+	                                            <li style="padding-left:30px;"><a style="" href="javascript:fileSearch('UTILITY','기타설치','');"><i class="fas fa-caret-right fa-fw"></i>기타설치</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
@@ -135,21 +135,21 @@
 
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="color: #333;" data-toggle="collapse" href="#dropdown-board1" aria-expanded="true">
-					                    <i class="fas fa-list-alt"></i> 자유게시판 <span class="caret"></span>
+					                    <i class="fas fa-list-alt fa-fw"></i> 자유게시판 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-board1" class="panel-collapse collapse in">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('level');"><i class="fas fa-caret-right"></i>등업게시판</a></li>
-	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('request');"><i class="fas fa-caret-right"></i>자료요청게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('level');"><i class="fas fa-caret-right fa-fw"></i>등업게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('request');"><i class="fas fa-caret-right fa-fw"></i>자료요청게시판</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
 					            <!-- Dropdown-->
-					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload"></i> 파일등록</a></li>
+					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload fa-fw"></i> 파일등록</a></li>
 							</ul>
 			            </div>
 		            </nav>

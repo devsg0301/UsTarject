@@ -38,7 +38,7 @@ boolean appFlag = useragent.indexOf("bandaimallapp") > -1;
 
 <link href="${path_root}/resources/bootstrap/css/cloud_main.css?20181008001" rel="stylesheet">
 <!-- Bootstrap Core CSS -->
-<link href="${path_root}/resources/bootstrap/css/bootstrap.css?20181008002" rel="stylesheet">
+<link href="${path_root}/resources/bootstrap/css/bootstrap.css?20181015001" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="${path_root}/resources/bootstrap/css/modern-business.css?20181008001" rel="stylesheet">
 

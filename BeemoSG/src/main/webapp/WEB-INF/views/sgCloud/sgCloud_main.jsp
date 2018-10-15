@@ -98,7 +98,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb_sgcloud">
                     <li>
-                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home fa-fw"></i> Home</a>
                     </li>
                     <li class="active">
                     	sgCloud
@@ -112,7 +112,7 @@
 	            <h3>sgCloud</h3>
                 <div class="input-append pull-right position">
                     <input type="text" class="sr-input" placeholder="파일 검색" id="mainSearchWord" onkeydown="javascript:EventSearchGo(event);">
-                    <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fas fa-search"></i></button>
+                    <button class="btn sr-btn" type="button" onClick="searchGo();"><i class="fas fa-search fa-fw"></i></button>
                 </div>
 	        </div>
         </div>
@@ -124,21 +124,21 @@
 					<nav class="navbar navbar-default" role="navigation">
 		            	<div class="side-menu-container">
 		            		<ul class="nav navbar-nav">
-			            		<li class="active"><a style="<c:if test="${category == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');"><i class="fas fa-cloud"></i> 전체</a></li>
+			            		<li class="active"><a style="<c:if test="${category == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');"><i class="fas fa-cloud fa-fw"></i> 전체</a></li>
 			            		<!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="<c:if test="${category == 'TV'}">color: #333;</c:if>" data-toggle="collapse" href="#dropdown-tv1" <c:if test="${category == 'TV'}">aria-expanded="true"</c:if>>
-					                    <i class="fas fa-tv"></i> TV프로그램 <span class="caret"></span>
+					                    <i class="fas fa-tv fa-fw"></i> TV프로그램 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-tv1" class="panel-collapse collapse <c:if test="${category == 'TV'}">in</c:if>" <c:if test="${category == 'TV'}">aria-expanded="true"</c:if>>
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${category == 'TV' && genre == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','','');"><i class="fas fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '드라마' && country == 'KO'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','드라마','KO');"><i class="fas fa-caret-right"></i>한국드라마</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '드라마' && country == 'EN'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','드라마','EN');"><i class="fas fa-caret-right"></i>외국드라마</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '예능'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','예능','');"><i class="fas fa-caret-right"></i>예능</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${category == 'TV' && genre == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','','');"><i class="fas fa-caret-right fa-fw"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '드라마' && country == 'KO'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','드라마','KO');"><i class="fas fa-caret-right fa-fw"></i>한국드라마</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '드라마' && country == 'EN'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','드라마','EN');"><i class="fas fa-caret-right fa-fw"></i>외국드라마</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '예능'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('TV','예능','');"><i class="fas fa-caret-right fa-fw"></i>예능</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
@@ -146,65 +146,65 @@
 					            <!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="<c:if test="${category == 'MOVIE'}">color: #333;</c:if>" data-toggle="collapse" href="#dropdown-movie1" <c:if test="${category == 'MOVIE'}">aria-expanded="true"</c:if>>
-					                    <i class="fas fa-video"></i> 영화 <span class="caret"></span>
+					                    <i class="fas fa-video fa-fw"></i> 영화 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-movie1" class="panel-collapse collapse <c:if test="${category == 'MOVIE'}">in</c:if>" <c:if test="${category == 'TV'}">aria-expanded="true"</c:if>>
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${category == 'MOVIE' && genre == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','','');"><i class="fas fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '액션ㆍ전쟁'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','액션ㆍ전쟁','');"><i class="fas fa-caret-right"></i>액션ㆍ전쟁</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '스릴러ㆍ범죄'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','스릴러ㆍ범죄','');"><i class="fas fa-caret-right"></i>스릴러ㆍ범죄</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '로멘스ㆍ멜로'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','로멘스ㆍ멜로','');"><i class="fas fa-caret-right"></i>로멘스ㆍ멜로</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '드라마ㆍ가족'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','드라마ㆍ가족','');"><i class="fas fa-caret-right"></i>드라마ㆍ가족</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == 'SFㆍ환타지'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','SFㆍ환타지','');"><i class="fas fa-caret-right"></i>SFㆍ환타지</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '공포ㆍ호러'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','공포ㆍ호러','');"><i class="fas fa-caret-right"></i>공포ㆍ호러</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '코미디'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','코미디','');"><i class="fas fa-caret-right"></i>코미디</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '애니'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','애니','');"><i class="fas fa-caret-right"></i>애니</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '뮤지컬ㆍ음악'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','뮤지컬ㆍ음악','');"><i class="fas fa-caret-right"></i>뮤지컬ㆍ음악</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '다큐멘터리'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','다큐멘터리','');"><i class="fas fa-caret-right"></i>다큐멘터리</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '스포츠'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','스포츠','');"><i class="fas fa-caret-right"></i>스포츠</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${category == 'MOVIE' && genre == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','','');"><i class="fas fa-caret-right fa-fw"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '액션ㆍ전쟁'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','액션ㆍ전쟁','');"><i class="fas fa-caret-right fa-fw"></i>액션ㆍ전쟁</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '스릴러ㆍ범죄'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','스릴러ㆍ범죄','');"><i class="fas fa-caret-right fa-fw"></i>스릴러ㆍ범죄</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '로멘스ㆍ멜로'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','로멘스ㆍ멜로','');"><i class="fas fa-caret-right fa-fw"></i>로멘스ㆍ멜로</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '드라마ㆍ가족'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','드라마ㆍ가족','');"><i class="fas fa-caret-right fa-fw"></i>드라마ㆍ가족</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == 'SFㆍ환타지'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','SFㆍ환타지','');"><i class="fas fa-caret-right fa-fw"></i>SFㆍ환타지</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '공포ㆍ호러'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','공포ㆍ호러','');"><i class="fas fa-caret-right fa-fw"></i>공포ㆍ호러</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '코미디'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','코미디','');"><i class="fas fa-caret-right fa-fw"></i>코미디</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '애니'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','애니','');"><i class="fas fa-caret-right fa-fw"></i>애니</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '뮤지컬ㆍ음악'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','뮤지컬ㆍ음악','');"><i class="fas fa-caret-right fa-fw"></i>뮤지컬ㆍ음악</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '다큐멘터리'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','다큐멘터리','');"><i class="fas fa-caret-right fa-fw"></i>다큐멘터리</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '스포츠'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MOVIE','스포츠','');"><i class="fas fa-caret-right fa-fw"></i>스포츠</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
-					            <li class=""><a style="<c:if test="${category == 'ANIMATION'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('ANIMATION','','');"><i class="fab fa-leanpub"></i> 애니</a></li>
-					            <li class=""><a style="<c:if test="${category == 'MUSIC'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MUSIC','','');"><i class="fas fa-music"></i> 노래</a></li>
+					            <li class=""><a style="<c:if test="${category == 'ANIMATION'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('ANIMATION','','');"><i class="fab fa-leanpub fa-fw"></i> 애니</a></li>
+					            <li class=""><a style="<c:if test="${category == 'MUSIC'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('MUSIC','','');"><i class="fas fa-music fa-fw"></i> 노래</a></li>
 					            <!-- Dropdown-->
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="<c:if test="${category == 'UTILITY'}">color: #333;</c:if>" data-toggle="collapse" href="#dropdown-utility1" <c:if test="${category == 'UTILITY'}">aria-expanded="true"</c:if>>
-					                    <i class="fas fa-database"></i> 유틸리티 <span class="caret"></span>
+					                    <i class="fas fa-database fa-fw"></i> 유틸리티 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-utility1" class="panel-collapse collapse <c:if test="${category == 'UTILITY'}">in</c:if>" <c:if test="${category == 'UTILITY'}">aria-expanded="true"</c:if>>
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${category == 'UTILITY' && genre == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','','');"><i class="fas fa-caret-right"></i>전체</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '소프트웨어'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','소프트웨어','');"><i class="fas fa-caret-right"></i>소프트웨어</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '보안ㆍ백신'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','보안ㆍ백신','');"><i class="fas fa-caret-right"></i>보안ㆍ백신</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '기타설치'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','기타설치','');"><i class="fas fa-caret-right"></i>기타설치</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${category == 'UTILITY' && genre == ''}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','','');"><i class="fas fa-caret-right fa-fw"></i>전체</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '소프트웨어'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','소프트웨어','');"><i class="fas fa-caret-right fa-fw"></i>소프트웨어</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '보안ㆍ백신'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','보안ㆍ백신','');"><i class="fas fa-caret-right fa-fw"></i>보안ㆍ백신</a></li>
+	                                            <li style="padding-left:30px;"><a style="<c:if test="${genre == '기타설치'}">font-weight: 600; color: #333;</c:if>" href="javascript:fileSearch('UTILITY','기타설치','');"><i class="fas fa-caret-right fa-fw"></i>기타설치</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
 					            <li class="panel panel-default" id="dropdown">
 					                <a style="" data-toggle="collapse" href="#dropdown-board1">
-					                    <i class="fas fa-list-alt"></i> 자유게시판 <span class="caret"></span>
+					                    <i class="fas fa-list-alt fa-fw"></i> 자유게시판 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
 					                <div id="dropdown-board1" class="panel-collapse collapse">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('level');"><i class="fas fa-caret-right"></i>등업게시판</a></li>
-	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('request');"><i class="fas fa-caret-right"></i>자료요청게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('level');"><i class="fas fa-caret-right fa-fw"></i>등업게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('request');"><i class="fas fa-caret-right fa-fw"></i>자료요청게시판</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
-					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload"></i> 파일등록</a></li>
+					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload fa-fw"></i> 파일등록</a></li>
 							</ul>
 			            </div>
 		            </nav>
@@ -251,12 +251,12 @@
 				                    </td>
 				                    <td class="view-message inbox-small-cells">
 				                    	<a href="javascript:;" onclick="fileDownload('${broadcastList.file_url}','${broadcastList.filename}');">
-				                    		다운 <i class="fas fa-download"></i>
+				                    		다운 <i class="fas fa-download fa-fw"></i>
 				                    	</a>
 				                    	<c:if test="${broadcastList.sub_url != ''}">
 				                    	&nbsp;
 				                    	<a href="javascript:;" onclick="fileDownload('${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.sub_url}.smi','${broadcastList.sub_url}.smi');">
-				                    		자막 <i class="fas fa-closed-captioning"></i>
+				                    		자막 <i class="fas fa-closed-captioning fa-fw"></i>
 				                    	</a>
 				                    	</c:if>
 				                    </td>
@@ -274,14 +274,14 @@
                 <ul class="pager">
                 	<c:if test="${prev != 0 }">
 	                    <li class="previous">
-	                        <a href="javascript:paging('${searchWord}','1','${category}','${genre}','${foldername}','${country}');"><i class="fas fa-angle-double-left"></i> 처음</a>
-	                        <a href="javascript:paging('${searchWord}','${prev}','${category}','${genre}','${foldername}','${country}');"><i class="fas fa-angle-left"></i> 이전</a>
+	                        <a href="javascript:paging('${searchWord}','1','${category}','${genre}','${foldername}','${country}');"><i class="fas fa-angle-double-left fa-fw"></i> 처음</a>
+	                        <a href="javascript:paging('${searchWord}','${prev}','${category}','${genre}','${foldername}','${country}');"><i class="fas fa-angle-left fa-fw"></i> 이전</a>
 	                    </li>
                     </c:if>
                     <c:if test="${next != 0 }">
 	                    <li class="next">
-	                        <a href="javascript:paging('${searchWord}','${nextEnd}','${category}','${genre}','${foldername}','${country}');">마지막 <i class="fas fa-angle-double-right"></i></a>
-	                        <a href="javascript:paging('${searchWord}','${next}','${category}','${genre}','${foldername}','${country}');">다음 <i class="fas fa-angle-right"></i></a>
+	                        <a href="javascript:paging('${searchWord}','${nextEnd}','${category}','${genre}','${foldername}','${country}');">마지막 <i class="fas fa-angle-double-right fa-fw"></i></a>
+	                        <a href="javascript:paging('${searchWord}','${next}','${category}','${genre}','${foldername}','${country}');">다음 <i class="fas fa-angle-right fa-fw"></i></a>
 	                    </li>
 	                </c:if>
                 </ul>

@@ -15,6 +15,7 @@
 		font-size: 18px;
 		font-weight: 500;
 		line-height: 1.2;
+		word-spacing: 3px;
 	}
 	.login_btn{
 	    background: no-repeat;
@@ -113,32 +114,32 @@
         	<img src="${path_root}/resources/bootstrap/images/logo.png" alt="">
         </a>
         <c:if test="${empty sessionScope.user}">
-        	<button class="modal-footer button login_btn" data-toggle="modal" data-target="#myModal" style="height:auto;"><i class="fas fa-lock"></i> Login</button>
+        	<button class="modal-footer button login_btn" data-toggle="modal" data-target="#myModal" style="height:auto;"><i class="fas fa-lock fa-fw"></i> Login</button>
         </c:if>
         <c:if test="${!empty sessionScope.user}">
-        	<a class="navbar-brand logout_btn" href="/defaults/logout.do"><i class="fas fa-lock-open"></i> Logout</a>
+        	<a class="navbar-brand logout_btn" href="/defaults/logout.do"><i class="fas fa-lock-open fa-fw"></i> Logout</a>
         </c:if>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
             <li class="<c:if test="${dropdown == 'sgCloud'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');"><i class="fas fa-tv"></i> VOD</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');"><i class="fas fa-tv fa-fw"></i> VOD</a>
             </li>
             <li class="<c:if test="${dropdown == 'level'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=level');"><i class="fas fa-clipboard-list"></i> 등업요청</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=level');"><i class="fas fa-clipboard-list fa-fw"></i> 등업요청</a>
             </li>
             <li class="<c:if test="${dropdown == 'request'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');"><i class="fas fa-clipboard-list"></i> 자료요청</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');"><i class="fas fa-clipboard-list fa-fw"></i> 자료요청</a>
             </li>
             <c:if test="${sessionScope.user.admin_yn == '1'}">
             <li class="<c:if test="${dropdown == 'file_add'}">active</c:if>">
-                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');"><i class="fas fa-upload"></i> 파일등록</a>
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');"><i class="fas fa-upload fa-fw"></i> 파일등록</a>
             </li>
             </c:if>
             <li style="padding: 8px;">
                 <input type="text" class="header-input" placeholder="파일 검색" id="headerSearchWord" onkeydown="javascript:headerEventSearchGo(event);">
-                <button class="header-btn" type="button" onClick="headerSearchGo();"><i class="fas fa-search"></i></button>
+                <button class="header-btn" type="button" onClick="headerSearchGo();"><i class="fas fa-search fa-fw"></i></button>
             </li>
             <!-- 
             <li class="dropdown">
@@ -182,7 +183,7 @@
                 </ul>
             </li>
             <li>
-				<a id="menu-toggle" href="#" class="point-hover btn-lg toggle"><i class="fas fa-bars"></i></a>
+				<a id="menu-toggle" href="#" class="point-hover btn-lg toggle"><i class="fas fa-bars fa-fw"></i></a>
 			</li>
 			 -->
         </ul>

@@ -139,7 +139,7 @@ video{
             <div class="col-lg-12">
                 <ol class="breadcrumb_sgcloud">
                     <li>
-                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home fa-fw"></i> Home</a>
                     </li>
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
@@ -159,15 +159,15 @@ video{
                 <h2 class="title">
                 	${broadcastDetail.title} (
                 	<a href="javascript:;" onclick="fileDownload('${broadcastDetail.file_url}','${broadcastDetail.filename}');">
-				      	<i class="fas fa-download"></i>다운
+				      	<i class="fas fa-download fa-fw"></i>다운
 					</a>
 				    <c:if test="${broadcastDetail.sub_url != ''}">
 				    	,&nbsp;
 				    	<a href="javascript:;" onclick="fileDownload('${broadcastDetail.category}/${broadcastDetail.genre}/${broadcastDetail.foldername}/${broadcastDetail.sub_url}.smi','${broadcastDetail.sub_url}.smi');">
-				        	 <i class="fas fa-closed-captioning"></i>자막
+				        	 <i class="fas fa-closed-captioning fa-fw"></i>자막
 				        </a>
 					</c:if>
-					)<span><i class="fas fa-clock"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
+					)<span><i class="fas fa-clock fa-fw"></i>&nbsp;<fmt:formatDate value="${dateString}" pattern="yyyy년 MM월 dd일(E)"/></span>
 				</h2>
                 <hr>
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
@@ -180,8 +180,8 @@ video{
 		      			</video>
 	      			</div>
 	      			<div class="" style="text-align:center; margin-left:90px;">
-	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}','${rnum}');" class="btn btn-default"><i class="fas fa-list-ul"></i> 파일목록</a>
-	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fas fa-expand"></i> 전체화면</a>
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}','${rnum}');" class="btn btn-default"><i class="fas fa-list-ul fa-fw"></i> 파일목록</a>
+	      				<a href="javascript:fullScreen();" class="btn btn-default" style="float:right;"><i class="fas fa-expand fa-fw"></i> 전체화면</a>
 	      				<br>
 	      			</div>
 	      			<div>
@@ -194,7 +194,7 @@ video{
       					<p>${broadcastDetail.explanation}</p>
       				</div>
       				<div class="" style="text-align:center;">
-	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}','${rnum}');" class="btn btn-default"><i class="fas fa-list-ul"></i> 파일목록</a>
+	      				<a href="javascript:folderSearch('${broadcastDetail.category}','${broadcastDetail.genre}','${broadcastDetail.foldername}','${rnum}');" class="btn btn-default"><i class="fas fa-list-ul fa-fw"></i> 파일목록</a>
 	      				<br>
 	      			</div>
       			</c:if>

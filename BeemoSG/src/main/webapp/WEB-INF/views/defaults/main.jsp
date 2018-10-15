@@ -55,7 +55,7 @@
 		</div>
 	</header>
 	<div class="container" style="background-color: #e6e6e7; box-shadow: 0px 0px 10px 0px #6f6f6f;">	
-		<h2 class="program-lists-title">최근 등록 VOD<a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');" class="program-lists-more">더보기 <i class="fas fa-plus-circle"></i></a></h2>
+		<h2 class="program-lists-title">최근 등록 VOD<a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');" class="program-lists-more">더보기 <i class="fas fa-plus-circle fa-fw"></i></a></h2>
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper1 swiper-container-vod">
 				<div class="swiper-wrapper">
@@ -82,7 +82,7 @@
 		    <div class="swiper-button-next next1"></div>
 		</div>
 		
-		<h2 class="program-lists-title">최근 등록 영상<a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');" class="program-lists-more">더보기 <i class="fas fa-plus-circle"></i></a></h2>
+		<h2 class="program-lists-title">최근 등록 영상<a href="javascript:goUrlHeader('/sgCloud/sgCloud_main.do');" class="program-lists-more">더보기 <i class="fas fa-plus-circle fa-fw"></i></a></h2>
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper6">
 				<div class="swiper-wrapper">
@@ -111,7 +111,7 @@
 		    <div class="swiper-button-next next6"></div>
 		</div>
 		
-		<h2 class="program-lists-title">추천 TV프로그램<a href="javascript:fileSearch('TV','','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 TV프로그램<a href="javascript:fileSearch('TV','','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle fa-fw"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper2">
 				<div class="swiper-wrapper">
@@ -140,7 +140,7 @@
 		    <div class="swiper-button-next next2"></div>
 		</div>
 
-		<h2 class="program-lists-title">추천 영화<a href="javascript:fileSearch('MOVIE','','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 영화<a href="javascript:fileSearch('MOVIE','','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle fa-fw"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper3">
 				<div class="swiper-wrapper">
@@ -167,7 +167,7 @@
 		    <div class="swiper-button-next next3"></div>
 		</div>
 
-		<h2 class="program-lists-title">추천 드라마<a href="javascript:fileSearch('TV','드라마','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 드라마<a href="javascript:fileSearch('TV','드라마','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle fa-fw"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper4">
 				<div class="swiper-wrapper">
@@ -194,7 +194,7 @@
 		    <div class="swiper-button-next next4"></div>
 		</div>
 		
-		<h2 class="program-lists-title">추천 예능<a href="javascript:fileSearch('TV','예능','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle"></i></a></h2>	
+		<h2 class="program-lists-title">추천 예능<a href="javascript:fileSearch('TV','예능','');" class="program-lists-more">더보기 <i class="fas fa-plus-circle fa-fw"></i></a></h2>	
 		<div class="prd_slide_t01_wrap">
 			<div class="swiper-container swiper5">
 				<div class="swiper-wrapper">

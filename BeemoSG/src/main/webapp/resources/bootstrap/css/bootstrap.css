@@ -4726,6 +4726,12 @@ fieldset[disabled] .navbar-default .btn-link:focus {
     color: #444;
     background-color: transparent;
   }
+  ul.nav li {	
+    border-bottom: 1px solid #565656;
+  }
+}
+.nav li:last-child{
+  border-bottom: 0px;
 }
 .navbar-inverse .navbar-link {
   color: #9d9d9d;

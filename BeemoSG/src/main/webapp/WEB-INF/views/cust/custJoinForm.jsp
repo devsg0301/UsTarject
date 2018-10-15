@@ -105,7 +105,7 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb_sgcloud">
                     <li>
-                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home fa-fw"></i> Home</a>
                     </li>                    
                     <li class="active">회원가입</li>
                 </ol>
@@ -162,10 +162,10 @@
 					<div class="form-group">
 						<div class="col-sm-12 text-center">
 							<button class="btn btn-primary" type="button" onclick="javascript:cust_join();">
-								회원가입<i class="fas fa-check spaceLeft"></i>
+								회원가입<i class="fas fa-check spaceLeft fa-fw"></i>
 							</button>
 							<button class="btn btn-danger" type="button" onclick="javascript:cancle();">
-								가입취소<i class="fas fa-times spaceLeft"></i>
+								가입취소<i class="fas fa-times spaceLeft fa-fw"></i>
 							</button>
 						</div>
 					</div>

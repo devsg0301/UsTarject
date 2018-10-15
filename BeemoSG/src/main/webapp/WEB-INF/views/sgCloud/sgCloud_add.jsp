@@ -277,7 +277,7 @@ $(document).ready(function () {
                 </h1>
                 <ol class="breadcrumb">
                     <li>
-                    	<a href="/defaults/main.do"><i class="fas fa-home"></i> Home</a>
+                    	<a href="/defaults/main.do"><i class="fas fa-home fa-fw"></i> Home</a>
                     </li>
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
@@ -308,7 +308,7 @@ $(document).ready(function () {
 						<label for="title" class="cols-sm-2 control-label">제목</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-edit" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-edit fa-fw" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" id="title" name="title" value="${broadcast.title}" placeholder="Enter your Title" required data-validation-required-message="Please enter title.">
 							</div>
 						</div>
@@ -317,7 +317,7 @@ $(document).ready(function () {
 						<label for="category" class="cols-sm-2 control-label">카테고리</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-list-ul fa-fw" aria-hidden="true"></i></span>
 								<select class="form-control" id="select_category">
 									<option <c:if test="${broadcast.category == 'TV'}">selected</c:if>>TV</option>
 									<option <c:if test="${broadcast.category == 'MOVIE'}">selected</c:if>>MOVIE</option>
@@ -349,7 +349,7 @@ $(document).ready(function () {
 						<label for="grade" class="cols-sm-2 control-label">등급</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-list-ul fa-fw" aria-hidden="true"></i></span>
 								<select class="form-control" id="select_grade">
 	                            	<option <c:if test="${broadcast.grade == '0'}">selected</c:if>>전체</option>
 									<option <c:if test="${broadcast.grade == '19'}">selected</c:if>>19</option>
@@ -365,7 +365,7 @@ $(document).ready(function () {
 						<label for="foldername" class="cols-sm-2 control-label">폴더명</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-edit" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-edit fa-fw" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" id="foldername" name="foldername" onfocus="foldername_onfocus();" value="${broadcast.foldername}" placeholder="Enter your FolderName" required data-validation-required-message="Please enter Foldername." />
 							</div>
 						</div>
@@ -374,7 +374,7 @@ $(document).ready(function () {
 						<label for="explanation" class="cols-sm-2 control-label">파일설명</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-edit" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-edit fa-fw" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" id="explanation" name="explanation" value="${broadcast.explanation}" placeholder="Enter your Explanation"/>
 							</div>
 						</div>
@@ -383,7 +383,7 @@ $(document).ready(function () {
 						<label for="albumname" class="cols-sm-2 control-label">앨범명</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-edit" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-edit fa-fw" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" id="albumname" name="albumname" value="${broadcast.albumname}" placeholder="Enter your AlbumName"/>
 							</div>
 						</div>
@@ -392,7 +392,7 @@ $(document).ready(function () {
 						<label for="play_date" class="cols-sm-2 control-label">개봉ㆍ방송일</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon1"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+								<span class="input-group-addon" id="basic-addon1"><i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i></span>
 								<input type="date" class="form-control" id="play_date" name="play_date" value="${broadcast.play_date}"/>
 							</div>
 						</div>
@@ -401,7 +401,7 @@ $(document).ready(function () {
 						<label for="priority" class="cols-sm-2 control-label">우선순위</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-edit" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-edit fa-fw" aria-hidden="true"></i></span>
 								<input type="number" class="form-control" id="priority" name="priority" value="${broadcast.priority}" placeholder="Enter your Priority" required data-validation-required-message="Please enter Priority"/>
 							</div>
 						</div>
@@ -468,11 +468,11 @@ $(document).ready(function () {
 						<label for="flie-upload" class="cols-sm-2 control-label">파일업로드</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fas fa-upload" aria-hidden="true"></i></span>
+								<span class="input-group-addon"><i class="fas fa-upload fa-fw" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" id="fake-file-input-name" disabled="disabled" placeholder="File not selected" />
 								<span class="input-group-btn">
 									<button id="fake-file-button-browse" type="button" class="btn btn-default">
-										<span><i class="fas fa-file-upload"></i></span>
+										<span><i class="fas fa-file-upload fa-fw"></i></span>
 									</button>
 								</span>
 								<input type="file" class="form-control" id="files-input-upload" name="files-input-upload" style="display:none"/>
