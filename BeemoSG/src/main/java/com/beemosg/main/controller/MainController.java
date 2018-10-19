@@ -146,8 +146,13 @@ public class MainController {
 	            if(forwardUrl.equals("")){
 	            	mav.setViewName("redirect:/defaults/main.do");
 	            }else{
-	            	mav.setViewName("redirect:" + forwardUrl + "?category=" + URLEncoder.encode(category, "UTF-8") + "&genre=" + URLEncoder.encode(genre, "UTF-8") 
+	            	if(forwardUrl.indexOf("?") > 0 ) {
+	            		mav.setViewName("redirect:" + forwardUrl + "&category=" + URLEncoder.encode(category, "UTF-8") + "&genre=" + URLEncoder.encode(genre, "UTF-8") 
+						+ "&foldername=" + URLEncoder.encode(foldername, "UTF-8") + "&searchWord=" + URLEncoder.encode(searchWord, "UTF-8") + isMobile);
+	            	}else {
+	            		mav.setViewName("redirect:" + forwardUrl + "?category=" + URLEncoder.encode(category, "UTF-8") + "&genre=" + URLEncoder.encode(genre, "UTF-8") 
 	            								+ "&foldername=" + URLEncoder.encode(foldername, "UTF-8") + "&searchWord=" + URLEncoder.encode(searchWord, "UTF-8") + isMobile);
+	            	}
 	            }
 	        }else{
 	        	logger.info("login fail!");

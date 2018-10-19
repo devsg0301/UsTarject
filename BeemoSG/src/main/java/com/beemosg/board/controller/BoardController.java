@@ -1,6 +1,7 @@
 package com.beemosg.board.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -9,7 +10,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.beemosg.board.service.BoardService;
@@ -44,8 +47,7 @@ import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tbroadcast_comment;
 import com.beemosg.model.Tcustomer;
-
-import javafx.animation.Interpolator;
+import com.beemosg.model.Tlogin_history;
 
 @Controller
 public class BoardController {
@@ -830,6 +832,105 @@ public class BoardController {
 			logger.error("sgCloud/"+ idx +".do ERROR, " + e.getMessage());
 		}
         return "redirect:/sgCloud/sgCloud_board.do?gubun=level";
+    }
+ 	
+ 	//사용자분석
+ 	@RequestMapping(value = "/sgCloud/cust_analysis.do")
+ 	public String displayCustAnalysis(@RequestParam(value="rnum", defaultValue="1") int rnum,
+ 			HttpSession session, Model model) throws Exception {
+ 		logger.info("Cust Analysis");
+ 		Tcustomer customer = null;
+ 		int totalLoginHistory = 0;
+ 		int prev = 0;
+ 		int next = 0;
+ 		try{
+ 			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
+ 				logger.info("You don't login.");
+ 				model.addAttribute("forwardUrl", "/sgCloud/cust_analysis.do");
+ 				return "defaults/login";
+ 			}
+ 			
+ 			customer = (Tcustomer)session.getAttribute(Const.USER_KEY);
+ 			logger.info("CUST_ID:" + customer.getCust_id() + ", CUST_NAME:" + customer.getCust_name());
+ 			
+ 			List<Tlogin_history> loginHistoryList = this.boardService.selectLoginHistoryList((rnum * 10) - 9);
+ 			totalLoginHistory = loginHistoryList.get(0).getTotal_count();
+ 			
+ 			if(rnum > 1){
+ 				prev = rnum - 1;
+ 			}
+ 			if(rnum < totalLoginHistory / 10 ){
+ 				next = rnum + 1;
+ 			}else if(rnum == totalLoginHistory / 10){
+ 				if(totalLoginHistory % 10 > 0){
+ 					next = rnum + 1;
+ 				}
+ 			}
+ 			logger.info("prev : " + prev + ", next : " + next);
+ 			
+ 			List loginHistoryListBar = this.boardService.getLoginHistoryList();
+ 			
+ 			model.addAttribute("totalLoginHistory", totalLoginHistory);
+ 			model.addAttribute("loginHistoryList", loginHistoryList);
+ 			model.addAttribute("rnum", rnum);
+ 			model.addAttribute("prev", prev);
+ 			model.addAttribute("next", next);
+ 			model.addAttribute("dropdown", "custAnalysis");
+ 			model.addAttribute("loginHistoryListJson", getJsonArrayFromList(loginHistoryListBar));
+ 		}
+ 		catch(Exception e){
+ 			logger.error("sgCloud/sgCloud_board.do ERROR, " + e.getMessage());
+ 		}
+ 		return "sgCloud/cust_analysis";
+ 	}
+ 	
+ 	//사용자분석 Ajax
+	@RequestMapping(value = "/sgCloud/ajax_custAnalysis.do")
+ 	public void AjaxIdCheck(HttpServletResponse response, ModelAndView modelAndView) throws Exception{
+ 		logger.info("ajax custAnalysis");
+ 		List loginHistoryList = null;
+ 		
+ 	    try {
+ 	    	loginHistoryList = this.boardService.getLoginHistoryList();
+ 	    	 	    	
+ 	        response.getWriter().print(getJsonArrayFromList(loginHistoryList));
+ 	    } catch (IOException e) {
+ 	        e.printStackTrace();
+ 	    }   
+ 	}
+ 	
+ 	/**
+     * Map을 json으로 변환한다.
+     *
+     * @param map Map<String, Object>.
+     * @return JSONObject.
+     */
+    public static JSONObject getJsonStringFromMap( Map<String, Object> map )
+    {
+        JSONObject jsonObject = new JSONObject();
+        for( Map.Entry<String, Object> entry : map.entrySet() ) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+            jsonObject.put(key, value);
+        }
+        
+        return jsonObject;
+    }
+ 	
+ 	/**
+     * List<Map>을 jsonArray로 변환한다.
+     *
+     * @param list List<Map<String, Object>>.
+     * @return JSONArray.
+     */
+    public static JSONArray getJsonArrayFromList( List<Map<String, Object>> list )
+    {
+        JSONArray jsonArray = new JSONArray();
+        for( Map<String, Object> map : list ) {
+            jsonArray.add( getJsonStringFromMap( map ) );
+        }
+        
+        return jsonArray;
     }
 
     

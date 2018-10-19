@@ -77,6 +77,18 @@
         <result javaType="java.lang.String" column="genre" 		property="genre"/>
         <result javaType="java.lang.String" column="foldername"	property="foldername"/>
 	</resultMap> 
+	
+	<resultMap id="loginHistoryMap" 	type="com.beemosg.model.Tlogin_history">
+        <id     property="seq"    		column="seq" />
+        <result property="cust_no"		column="cust_no" />
+        <result property="cust_id"		column="cust_id" />
+        <result property="insert_date"	column="insert_date" typeHandler="org.apache.ibatis.type.DateTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="loginHistoryListMap" type="java.util.HashMap">
+        <result javaType="java.lang.String" 	column="login_date" property="login_date"/>
+        <result javaType="java.lang.Integer" 	column="count" 		property="count"/>
+	</resultMap> 
     
     <update id="updateHitCount">
          UPDATE TBROADCAST SET
@@ -394,4 +406,44 @@
 		   AND seq_re &gt;= #{param3}
 		   and gap &gt; #{param4} 
 	</delete>
+	
+	<select id="selectLoginHistoryList" resultMap="loginHistoryMap">
+		SELECT STEP_TWO.*                                                             
+		  FROM( SELECT STEP_ONE.*                                                           
+				  FROM( SELECT @ROWNUM:=@ROWNUM+1 AS RNUM,
+				  			   XAA.*
+				  	      FROM( SELECT @ROWNUM1:=@ROWNUM1+1 AS RNUM1,
+							           XA.*
+							      FROM( SELECT (SELECT COUNT(*) FROM (SELECT CUST_NO, DATE_FORMAT(INSERT_DATE, '%Y/%m/%d') FROM TLOGINHISTORY GROUP BY CUST_NO, DATE_FORMAT(INSERT_DATE, '%Y/%m/%d')) CNT) AS TOTAL_COUNT,
+							      			   A.CUST_ID,
+											   B.CUST_NAME,
+											   DATE_FORMAT(MAX(A.INSERT_DATE), '%Y/%m/%d %h:%i:%s') AS INSERT_DATE
+										  FROM TLOGINHISTORY A,
+										  	   TCUSTOMER B
+										 WHERE 1=1
+										   AND A.CUST_NO = B.CUST_NO
+									  GROUP BY A.CUST_NO, B.CUST_NAME, DATE_FORMAT(A.INSERT_DATE, '%Y/%m/%d')
+								      ORDER BY DATE_FORMAT(A.INSERT_DATE, '%Y/%m/%d')
+						              ) XA,
+						              (SELECT @ROWNUM1:=0) TMP
+						         WHERE 1=1
+				       		   ) XAA,
+				               (SELECT @ROWNUM:=0) TMP
+				         WHERE 1=1
+				      ORDER BY RNUM1 DESC
+	       			) STEP_ONE
+				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 9
+			   ) STEP_TWO
+		 WHERE STEP_TWO.RNUM &gt;= #{param1}
+	</select>
+
+	<select id="getLoginHistoryList" resultMap="loginHistoryListMap">
+		SELECT DATE_FORMAT(INSERT_DATE, '%Y-%m-%d') AS LOGIN_DATE,
+			   COUNT(*) AS COUNT
+		  FROM TLOGINHISTORY
+		 WHERE 1=1
+	  GROUP BY DATE_FORMAT(INSERT_DATE, '%Y/%m/%d')
+      ORDER BY DATE_FORMAT(INSERT_DATE, '%Y/%m/%d')
+	</select>
+	
 </mapper>

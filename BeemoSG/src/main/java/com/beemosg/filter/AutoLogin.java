@@ -56,6 +56,7 @@ public class AutoLogin implements Filter {
 				logger.info("autoID : " + autoID + ", autoPW : " + autoPW);
 				if(!"".equals(autoID) && !"".equals(autoPW)){
 					//ForwardURL Setting
+					logger.info("RequestURI : " + req.getRequestURI() + ", QueryString : " + req.getQueryString());
 					if(Const.AUTOLOGIN_LOCAL_YN){
 						if(null != req.getQueryString()){
 							forwardPath = req.getRequestURI() + "?" + req.getQueryString().replaceAll("&", "%26");
@@ -64,6 +65,7 @@ public class AutoLogin implements Filter {
 						}
 					}else{
 						if(null != req.getQueryString()){
+							
 							forwardPath = req.getRequestURI().replace(req.getContextPath(), "") + "?" + req.getQueryString().replaceAll("&", "%26");
 						}else{
 							forwardPath = req.getRequestURI().replace(req.getContextPath(), "");

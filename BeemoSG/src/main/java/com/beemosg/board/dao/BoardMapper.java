@@ -8,6 +8,7 @@ import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tbroadcast_comment;
+import com.beemosg.model.Tlogin_history;
 
 @Repository(value = "boardMapper")
 public interface BoardMapper {
@@ -33,6 +34,8 @@ public interface BoardMapper {
 	Tboard selectOne(int idx) throws Exception;
 	void insertBoard(Tboard tboard) throws Exception;
 	void updateCustomer(int idx) throws Exception;
+	List<Tlogin_history> selectLoginHistoryList(int rnum) throws Exception;
+	List getLoginHistoryList() throws Exception;
 	
 	/* ********************************************************************* */
 	

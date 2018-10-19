@@ -204,7 +204,11 @@
 					                    </div>
 					                </div>
 					            </li>
+					            <c:if test="${customer.admin_yn == '1'}">
+					            <li class=""><a href="/sgCloud/cust_analysis.do"><i class="fas fa-chart-line fa-fw"></i> 사용자분석</a></li>
 					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload fa-fw"></i> 파일등록</a></li>
+					            </c:if>
+					            
 							</ul>
 			            </div>
 		            </nav>

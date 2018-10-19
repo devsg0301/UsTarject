@@ -10,6 +10,7 @@ import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tbroadcast_comment;
+import com.beemosg.model.Tlogin_history;
 
 @Service(value = "boardDao")
 public class BoardDao {
@@ -100,6 +101,13 @@ public class BoardDao {
     	this.boardMapper.updateCustomer(idx);
     }
     
+    public List<Tlogin_history> selectLoginHistoryList(int rnum) throws Exception{
+    	return this.boardMapper.selectLoginHistoryList(rnum);
+    }
+    
+    public List getLoginHistoryList() throws Exception{
+    	return this.boardMapper.getLoginHistoryList();
+    }
     /* ********************************************************************* */
 
     public void updateBoard(Tboard tboard) throws Exception{

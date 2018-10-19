@@ -6,6 +6,7 @@ import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tbroadcast_comment;
+import com.beemosg.model.Tlogin_history;
 
 public interface BoardService {
 	
@@ -51,6 +52,9 @@ public interface BoardService {
 	
 	public void updateCustomer(int idx) throws Exception;
 
+	public List<Tlogin_history> selectLoginHistoryList(int rnum) throws Exception;
+	
+	public List getLoginHistoryList() throws Exception;
 	/* *************************************************************** */
 
 	public void updateBoard(Tboard tboard) throws Exception;

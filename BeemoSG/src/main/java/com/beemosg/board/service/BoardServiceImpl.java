@@ -11,6 +11,7 @@ import com.beemosg.model.Tboard;
 import com.beemosg.model.Tboard_comment;
 import com.beemosg.model.Tbroadcast;
 import com.beemosg.model.Tbroadcast_comment;
+import com.beemosg.model.Tlogin_history;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -101,6 +102,13 @@ public class BoardServiceImpl implements BoardService{
 		boardDao.updateCustomer(idx);
 	}
 
+	public List<Tlogin_history> selectLoginHistoryList(int rnum) throws Exception{
+		return boardDao.selectLoginHistoryList(rnum);
+	}
+	
+	public List getLoginHistoryList() throws Exception{
+		return boardDao.getLoginHistoryList();
+	}
 	/* ******************************************************************** */
 
 	public void updateBoard(Tboard tboard) throws Exception{
