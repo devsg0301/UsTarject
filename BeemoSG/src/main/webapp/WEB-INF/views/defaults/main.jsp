@@ -32,6 +32,11 @@
 					</a>
 				</div>
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','뷰티 인사이드','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_beautyinside.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','미스터 션샤인','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner_mistersunshine.jpg">
 					</a>
