@@ -231,7 +231,7 @@
 		                    	<td class="view-message">${loginHistoryList.rnum1}</td>
 			                    <td class="view-message">${loginHistoryList.cust_id}</td>
 			                    <td class="view-message">${loginHistoryList.cust_name}</td>
-			                    <td class="view-message"><fmt:formatDate value="${loginHistoryList.insert_date}" pattern="yyyy.MM.dd(E) hh:mm:ss"/></td>
+			                    <td class="view-message"><fmt:formatDate value="${loginHistoryList.insert_date}" pattern="yyyy.MM.dd(E) HH:mm:ss"/></td>
 							</tr>
 							</c:forEach>
 						</tbody>

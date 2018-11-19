@@ -417,7 +417,7 @@
 							      FROM( SELECT (SELECT COUNT(*) FROM (SELECT CUST_NO, DATE_FORMAT(INSERT_DATE, '%Y/%m/%d') FROM TLOGINHISTORY GROUP BY CUST_NO, DATE_FORMAT(INSERT_DATE, '%Y/%m/%d')) CNT) AS TOTAL_COUNT,
 							      			   A.CUST_ID,
 											   B.CUST_NAME,
-											   DATE_FORMAT(MAX(A.INSERT_DATE), '%Y/%m/%d %h:%i:%s') AS INSERT_DATE
+											   DATE_FORMAT(MAX(A.INSERT_DATE), '%Y/%m/%d %T') AS INSERT_DATE
 										  FROM TLOGINHISTORY A,
 										  	   TCUSTOMER B
 										 WHERE 1=1
@@ -430,7 +430,7 @@
 				       		   ) XAA,
 				               (SELECT @ROWNUM:=0) TMP
 				         WHERE 1=1
-				      ORDER BY RNUM1 DESC
+				      ORDER BY INSERT_DATE DESC
 	       			) STEP_ONE
 				 WHERE STEP_ONE.RNUM &lt;= #{param1} + 9
 			   ) STEP_TWO
@@ -442,6 +442,7 @@
 			   COUNT(*) AS COUNT
 		  FROM TLOGINHISTORY
 		 WHERE 1=1
+		   AND INSERT_DATE > date_add(now(), interval - 11 day)
 	  GROUP BY DATE_FORMAT(INSERT_DATE, '%Y/%m/%d')
       ORDER BY DATE_FORMAT(INSERT_DATE, '%Y/%m/%d')
 	</select>
