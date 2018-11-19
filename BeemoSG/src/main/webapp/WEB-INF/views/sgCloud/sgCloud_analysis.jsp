@@ -8,7 +8,11 @@
 <html lang="ko">
 
 <head>
-	<c:import url="../common/includecommon.jsp" />
+<c:import url="../common/includecommon.jsp" />
+
+   <!-- google charts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 <style type="text/css">
 
 </style>
@@ -22,15 +26,15 @@
 			return;
 		}
 	});
-
-	function paging(rnum, gubun){
+	
+	function paging(rnum){
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){		
-			location.href = "/sgCloud/sgCloud_board.do?rnum=" + rnum + "&gubun=" + gubun;
+			location.href = "/sgCloud/sgCloud_analysis.do?rnum=" + rnum;
 		}else{
-			location.href = "/sgCloud/sgCloud_board.do?rnum=" + rnum + "&gubun=" + gubun + "#view_position";
+			location.href = "/sgCloud/sgCloud_analysis.do?rnum=" + rnum + "#view_position";
 		}
 	}
-	
+
 	function goUrl(gubun){
 		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
 			location.href = "/sgCloud/sgCloud_board.do?gubun=" + gubun;
@@ -39,22 +43,35 @@
 		}
 	}
 	
-	function board_write(gubun){
-		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/sgCloud/sgCloud_boardwrite.do?gubun=" + gubun;
-		}else{
-			location.href = "/sgCloud/sgCloud_boardwrite.do?gubun=" + gubun + "#view_position";
-		}
-	}
-	
-	function goCustInfo(cust_id){
-		if (!(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0 || tmpUser.indexOf("Android ") > 0 )){
-			location.href = "/cust/custInfo.do?cust_id=" + cust_id;
-		}else{
-			location.href = "/cust/custInfo.do?cust_id=" + cust_id + "#view_position";
-		}
-	}
+	google.charts.load('current', {'packages' : [ 'bar' ]});
+	google.charts.setOnLoadCallback(drawChart);
 
+	function drawChart() {
+		
+		var arrData = [['일자', '수']];
+		var resJson = JSON.parse('${loginHistoryListJson}');
+		for (var i = 0; i < resJson.length; i++) {
+			arrData = arrData.concat([[resJson[i].login_date, resJson[i].count]]);			
+		}
+
+		var data = google.visualization.arrayToDataTable(arrData);
+
+		var options = {
+			legend: { position: 'none' },
+			axes: {
+				x: {
+					0: { side: 'bottom', label: ''}
+				}
+			}
+		};
+
+		var chart = new google.charts.Bar(document.getElementById('barChartArea'));
+
+		window.addEventListener('resize', function() {
+			chart.draw(data, google.charts.Bar.convertOptions(options));
+		}, false); //화면 크기에 따라 그래프 크기 변경
+		chart.draw(data, google.charts.Bar.convertOptions(options));
+	}
 </script>
 </head>
 
@@ -78,7 +95,7 @@
                     <li>
                     	<a href="/sgCloud/sgCloud_main.do">sgCloud</a>
                     </li>
-                    <li class="active">자유게시판</li>
+                    <li class="active">사용자분석</li>
                 </ol>
             </div>
         </div>
@@ -168,25 +185,23 @@
 					            </li>
 
 					            <li class="panel panel-default" id="dropdown">
-					                <a style="color: #333;" data-toggle="collapse" href="#dropdown-board1" aria-expanded="true">
+					                <a style="" data-toggle="collapse" href="#dropdown-board1" aria-expanded="true">
 					                    <i class="fas fa-list-alt fa-fw"></i> 자유게시판 <span class="caret"></span>
 					                </a>
 					
 					                <!-- Dropdown level 1 -->
-					                <div id="dropdown-board1" class="panel-collapse collapse in">
+					                <div id="dropdown-board1" class="panel-collapse collapse">
 					                    <div class="panel-body">
 					                        <ul class="nav navbar-nav">
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'level'}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrl('level');"><i class="fas fa-caret-right fa-fw"></i>등업게시판</a></li>
-	                                            <li style="padding-left:30px;"><a style="<c:if test="${gubun == 'request'}">font-weight: 600; color: #333;</c:if>" href="javascript:goUrl('request');"><i class="fas fa-caret-right fa-fw"></i>자료요청게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('level');"><i class="fas fa-caret-right fa-fw"></i>등업게시판</a></li>
+	                                            <li style="padding-left:30px;"><a href="javascript:goUrl('request');"><i class="fas fa-caret-right fa-fw"></i>자료요청게시판</a></li>
 					                        </ul>
 					                    </div>
 					                </div>
 					            </li>
 					            <!-- Dropdown-->
-					            <c:if test="${customer.admin_yn == '1'}">
-					            <li class=""><a href="javascript:goUrlHeader('/sgCloud/cust_analysis.do')"><i class="fas fa-chart-line fa-fw"></i> 사용자분석</a></li>
+					            <li class=""><a href="javascript:goUrlHeader('/sgCloud/sgCloud_analysis.do')" style="font-weight: 600; color: #333;"><i class="fas fa-chart-line fa-fw"></i> 사용자분석</a></li>
 					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload fa-fw"></i> 파일등록</a></li>
-					            </c:if>
 							</ul>
 			            </div>
 		            </nav>
@@ -196,82 +211,45 @@
             <div class="col-md-9">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
-					<div class="panel-heading">
-						<h3 style="margin-top: 10px; font-family: 'Noto Sans KR'; font-size: 20px;">
-							<c:if test="${gubun == 'level'}">
-								등업게시판
-							</c:if>
-							<c:if test="${gubun == 'request'}">
-								자료요청게시판
-							</c:if>
-							<span style="float: right;"><a href="javascript:board_write('${gubun}');" class="btn btn-default">글쓰기</a></span>
-						</h3>
+					<div id=bar_controls_chart>
+						<!-- 라인 차트 생성할 영역 -->
+						<div id="barChartArea"></div>
+						<!-- 컨트롤바를 생성할 영역--> 
 					</div>
+				</div>
+				<div id="tableArea">
 					<table class="table">
 						<tbody>
 							<tr>
 								<th>번호</th>
-								<c:if test="${gubun == 'request'}">
-			                    <th>카테고리</th>
-			                    </c:if>
-			                    <th>제목</th>
-			                    <th>작성자</th>
-			                    <c:if test="${gubun == 'level'}">
-			                    <th>요청일</th>
-			                    <th>상태</th>
-			                    </c:if>
+								<th>아이디</th>
+			                    <th>이름</th>
+			                    <th>접속일</th>					                    					                    
 							</tr>
-							<c:forEach var="boardList" items="${boardList}">
+							<c:forEach var="loginHistoryList" items="${loginHistoryList}">
 							<tr>
-		                    	<td class="view-message">${boardList.rnum1}</td>
-								<c:if test="${gubun == 'request'}">
-			                    	<td class="view-message" style="white-space: nowrap;">${boardList.category}</td>
-			                    </c:if>
-			                    <td class="view-message">${boardList.title}</td>
-			                    <td class="view-message">
-			                    	<c:set var="insert_id" value="${boardList.insert_id}"/>
-			                    	<c:if test="${sessionScope.user.admin_yn == '1'}">
-			                    	<a href="javascript:goCustInfo('${boardList.insert_id}');">${fn:substring(insert_id,0,3)}**</a>
-			                    	</c:if>
-			                    	<c:if test="${sessionScope.user.admin_yn != '1'}">
-			                    	${fn:substring(insert_id,0,3)}**
-			                    	</c:if>
-			                    </td>
-			                    <c:if test="${gubun == 'level'}">
-			                    <td class="view-message" style="font-size: 10px;"><fmt:formatDate value="${boardList.insert_date}" pattern="MM.dd(E)"/></td>
-				                    <c:if test="${sessionScope.user.admin_yn == '1'}">
-				                   		<c:if test="${boardList.cust_gb == '10'}">
-				                    		<td class="view-message"><a href="/sgCloud/levelup/${boardList.idx}.do">등업</a></td>
-				                    	</c:if>			                    	
-				                    </c:if>
-				                    <c:if test="${sessionScope.user.admin_yn != '1'}">
-					                    <c:if test="${boardList.cust_gb == '10'}">
-				                    		<td class="view-message">대기</td>
-				                    	</c:if>
-			                    	</c:if>
-			                    	<c:if test="${boardList.cust_gb == '20'}">
-			                    		<td class="view-message">완료</td>
-			                    	</c:if>			                 
-		                    	</c:if>   	
+		                    	<td class="view-message">${loginHistoryList.rnum1}</td>
+			                    <td class="view-message">${loginHistoryList.cust_id}</td>
+			                    <td class="view-message">${loginHistoryList.cust_name}</td>
+			                    <td class="view-message"><fmt:formatDate value="${loginHistoryList.insert_date}" pattern="yyyy.MM.dd(E) hh:mm:ss"/></td>
 							</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-                <!-- Pager -->
+				<!-- Pager -->
                 <ul class="pager">
                 	<c:if test="${prev != 0 }">
 	                    <li class="previous">
-	                        <a href="javascript:paging('${prev}','${gubun}');">&larr; Prev</a>
+	                        <a href="javascript:paging('${prev}');">&larr; Prev</a>
 	                    </li>
                     </c:if>
                     <c:if test="${next != 0 }">
 	                    <li class="next">
-	                        <a href="javascript:paging('${next}','${gubun}');">Next &rarr;</a>
+	                        <a href="javascript:paging('${next}');">Next &rarr;</a>
 	                    </li>
 	                </c:if>
                 </ul>
-
             </div>
         </div>
         <!-- /.row -->
@@ -280,8 +258,7 @@
         <footer>
             <c:import url="../common/footer.jsp" />
         </footer>
-
-    </div>
+	</div>
     <!-- /.container -->
 
     <!-- jQuery -->

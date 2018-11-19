@@ -205,10 +205,13 @@
 					                </div>
 					            </li>
 					            <c:if test="${customer.admin_yn == '1'}">
-					            <li class=""><a href="/sgCloud/cust_analysis.do"><i class="fas fa-chart-line fa-fw"></i> 사용자분석</a></li>
-					            <li class="" id="view_position"><a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload fa-fw"></i> 파일등록</a></li>
+					            <li class=""><a href="javascript:goUrlHeader('/sgCloud/sgCloud_analysis.do');"><i class="fas fa-chart-line fa-fw"></i> 사용자분석</a></li>
 					            </c:if>
-					            
+					            <li class="" id="view_position">
+					            <c:if test="${customer.admin_yn == '1'}">
+					            	<a href="/sgCloud/sgCloud_add.do"><i class="fas fa-upload fa-fw"></i> 파일등록</a>
+					           	</c:if>
+					           	</li>
 							</ul>
 			            </div>
 		            </nav>
@@ -237,30 +240,33 @@
 						<tbody>
 							<tr>
 			                	<th>장르</th>
-			                    <th>제목</th>
+			                    <th>제목
+				                    <c:if test="${customer.admin_yn == '1'}">
+					                	<a href="javascript:deleteAction('${searchWord}','${rnum}','${category}','${genre}','${foldername}','${country}');" style="float:right;">[삭제]</a>
+				                    </c:if>
+			                    </th>
 			                    <th>파일</th>
 			                    <c:if test="${customer.admin_yn == '1'}">
-			                    <th>
-			                    	<a href="javascript:deleteAction('${searchWord}','${rnum}','${category}','${genre}','${foldername}','${country}');">삭제</a>
+			                    <th>			                    	
 			                    	<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/>
 			                    </th>
 			                    </c:if>
 							</tr>
 							<c:forEach var="broadcastList" items="${broadcastList}">
 								<tr>
-				                	<td class="view-message dont-show">${broadcastList.genre}</td>
+				                	<td class="view-message dont-show" style="white-space: nowrap;">${broadcastList.genre}</td>
 				                    <td class="view-message">
 				                    	<fmt:parseDate var="dateString" value="${broadcastList.play_date}" pattern="yyyy-MM-dd" />										
 				                    	<a href="/sgCloud/${broadcastList.idx}.do?rnum=${rnum}">${broadcastList.title} <span style="font-size: 10px;"><fmt:formatDate value="${dateString}" pattern="yyyy.MM.dd(E)"/></span></a>
 				                    </td>
 				                    <td class="view-message inbox-small-cells">
-				                    	<a href="javascript:;" onclick="fileDownload('${broadcastList.file_url}','${broadcastList.filename}');">
-				                    		다운 <i class="fas fa-download fa-fw"></i>
+				                    	<a href="javascript:;" style="white-space: nowrap;" onclick="fileDownload('${broadcastList.file_url}','${broadcastList.filename}');">
+				                    		다운<i class="fas fa-download fa-fw"></i>
 				                    	</a>
 				                    	<c:if test="${broadcastList.sub_url != ''}">
 				                    	&nbsp;
-				                    	<a href="javascript:;" onclick="fileDownload('${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.sub_url}.smi','${broadcastList.sub_url}.smi');">
-				                    		자막 <i class="fas fa-closed-captioning fa-fw"></i>
+				                    	<a href="javascript:;" style="white-space: nowrap;" onclick="fileDownload('${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.sub_url}.smi','${broadcastList.sub_url}.smi');">
+				                    		자막<i class="fas fa-closed-captioning fa-fw"></i>
 				                    	</a>
 				                    	</c:if>
 				                    </td>

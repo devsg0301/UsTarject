@@ -835,7 +835,7 @@ public class BoardController {
     }
  	
  	//사용자분석
- 	@RequestMapping(value = "/sgCloud/cust_analysis.do")
+ 	@RequestMapping(value = "/sgCloud/sgCloud_analysis.do")
  	public String displayCustAnalysis(@RequestParam(value="rnum", defaultValue="1") int rnum,
  			HttpSession session, Model model) throws Exception {
  		logger.info("Cust Analysis");
@@ -846,7 +846,7 @@ public class BoardController {
  		try{
  			if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
  				logger.info("You don't login.");
- 				model.addAttribute("forwardUrl", "/sgCloud/cust_analysis.do");
+ 				model.addAttribute("forwardUrl", "/sgCloud/sgCloud_analysis.do");
  				return "defaults/login";
  			}
  			
@@ -881,7 +881,7 @@ public class BoardController {
  		catch(Exception e){
  			logger.error("sgCloud/sgCloud_board.do ERROR, " + e.getMessage());
  		}
- 		return "sgCloud/cust_analysis";
+ 		return "sgCloud/sgCloud_analysis";
  	}
  	
  	//사용자분석 Ajax

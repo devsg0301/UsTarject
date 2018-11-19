@@ -133,6 +133,11 @@
                 <a href="javascript:goUrlHeader('/sgCloud/sgCloud_board.do?gubun=request');"><i class="fas fa-clipboard-list fa-fw"></i> 자료요청</a>
             </li>
             <c:if test="${sessionScope.user.admin_yn == '1'}">
+            <li class="<c:if test="${dropdown == 'custAnalysis'}">active</c:if>">
+                <a href="javascript:goUrlHeader('/sgCloud/sgCloud_analysis.do');"><i class="fas fa-chart-line fa-fw"></i> 사용자분석</a>
+            </li>
+            </c:if>
+            <c:if test="${sessionScope.user.admin_yn == '1'}">
             <li class="<c:if test="${dropdown == 'file_add'}">active</c:if>">
                 <a href="javascript:goUrlHeader('/sgCloud/sgCloud_add.do');"><i class="fas fa-upload fa-fw"></i> 파일등록</a>
             </li>
