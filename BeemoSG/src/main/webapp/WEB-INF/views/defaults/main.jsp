@@ -27,6 +27,11 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','예능','신서유기6','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_sinseoyugi6.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','예능','신서유기5','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner_sinseoyugi.jpg">
 					</a>
@@ -46,11 +51,6 @@
 						<img src="${path_root}/resources/bootstrap/images/main_banner11.jpg">
 					</a>
 				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','김비서가 왜 그럴까','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner12.jpg">
-					</a>
-				</div>				
 			</div>
 			<!-- Add Pagination -->
 			<div class="swiper-pagination swiper-pagination-white"></div>
@@ -68,7 +68,7 @@
 						<div class="swiper-slide swiper-slide-vod">
 							<%-- <a class="dBanner" href="javascript:folderSearch('${broadcastList.category}','${broadcastList.genre}','${broadcastList.foldername}');" > --%>
 							<a class="dBanner" href="/sgCloud/${broadcastList.idx}.do" >
-								<img class="vodImg" src="http://beemosg.gq:8081/LocalUser/data/${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.title}_thum.jpg" alt="${broadcastList.title}"/>
+								<img class="vodImg" src="http://beemosg.tk:8081/LocalUser/data/${broadcastList.category}/${broadcastList.genre}/${broadcastList.foldername}/${broadcastList.title}_thum.jpg" alt="${broadcastList.title}"/>
 								<span class="vod-info-box" aria-hidden="true">
 									<span class="vod-title">${broadcastList.title}</span>
 									<fmt:parseDate var="dateString" value="${broadcastList.play_date}" pattern="yyyy-MM-dd" />
@@ -94,7 +94,7 @@
 					<c:forEach var="recentFolderList" items="${recentFolderList}" end="14">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${recentFolderList.category}','${recentFolderList.genre}','${recentFolderList.foldername}','${recentFolderList.country}');" >
-								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${recentFolderList.category}/${recentFolderList.genre}/${recentFolderList.foldername}/${recentFolderList.foldername}.jpg" alt="${recentFolderList.foldername}"/>
+								<img class="broadcastImg" src="http://beemosg.tk:8081/LocalUser/data/${recentFolderList.category}/${recentFolderList.genre}/${recentFolderList.foldername}/${recentFolderList.foldername}.jpg" alt="${recentFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true">
 									<span class="broadcast-title">${recentFolderList.foldername}</span>
 								</span>
@@ -123,7 +123,7 @@
 					<c:forEach var="tvFolderList" items="${tvFolderList}" end="19">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${tvFolderList.category}','${tvFolderList.genre}','${tvFolderList.foldername}','${tvFolderList.country}');" >
-								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${tvFolderList.category}/${tvFolderList.genre}/${tvFolderList.foldername}/${tvFolderList.foldername}.jpg" alt="${tvFolderList.foldername}"/>
+								<img class="broadcastImg" src="http://beemosg.tk:8081/LocalUser/data/${tvFolderList.category}/${tvFolderList.genre}/${tvFolderList.foldername}/${tvFolderList.foldername}.jpg" alt="${tvFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true">
 									<span class="broadcast-title">${tvFolderList.foldername}</span>
 								</span>
@@ -152,7 +152,7 @@
 					<c:forEach var="movieFolderList" items="${movieFolderList}" end="14">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${movieFolderList.category}','${movieFolderList.genre}','${movieFolderList.foldername}','${movieFolderList.country}');" >
-								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${movieFolderList.category}/${movieFolderList.genre}/${movieFolderList.foldername}/${movieFolderList.foldername}.jpg" alt="${movieFolderList.foldername}"/>
+								<img class="broadcastImg" src="http://beemosg.tk:8081/LocalUser/data/${movieFolderList.category}/${movieFolderList.genre}/${movieFolderList.foldername}/${movieFolderList.foldername}.jpg" alt="${movieFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${movieFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
 									<span class="ico-grade ico-grade-${movieFolderList.grade}"></span>
@@ -179,7 +179,7 @@
 					<c:forEach var="dreamFolderList" items="${dreamFolderList}" end="14">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${dreamFolderList.category}','${dreamFolderList.genre}','${dreamFolderList.foldername}','${dreamFolderList.country}');" >
-								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${dreamFolderList.category}/${dreamFolderList.genre}/${dreamFolderList.foldername}/${dreamFolderList.foldername}.jpg" alt="${dreamFolderList.foldername}"/>
+								<img class="broadcastImg" src="http://beemosg.tk:8081/LocalUser/data/${dreamFolderList.category}/${dreamFolderList.genre}/${dreamFolderList.foldername}/${dreamFolderList.foldername}.jpg" alt="${dreamFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${dreamFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
 									<span class="ico-grade ico-grade-${dreamFolderList.grade}"></span>
@@ -206,7 +206,7 @@
 					<c:forEach var="entertainmentFolderList" items="${entertainmentFolderList}" end="9">
 						<div class="swiper-slide">
 							<a class="dBanner" href="javascript:folderSearch('${entertainmentFolderList.category}','${entertainmentFolderList.genre}','${entertainmentFolderList.foldername}','${entertainmentFolderList.country}');" >
-								<img class="broadcastImg" src="http://beemosg.gq:8081/LocalUser/data/${entertainmentFolderList.category}/${entertainmentFolderList.genre}/${entertainmentFolderList.foldername}/${entertainmentFolderList.foldername}.jpg" alt="${entertainmentFolderList.foldername}"/>
+								<img class="broadcastImg" src="http://beemosg.tk:8081/LocalUser/data/${entertainmentFolderList.category}/${entertainmentFolderList.genre}/${entertainmentFolderList.foldername}/${entertainmentFolderList.foldername}.jpg" alt="${entertainmentFolderList.foldername}"/>
 								<span class="broadcast-info-box" aria-hidden="true"><span class="broadcast-title">${entertainmentFolderList.foldername}</span></span>
 								<span class="icons" aria-hidden="true">
 									<span class="ico-grade ico-grade-${entertainmentFolderList.grade}"></span>
