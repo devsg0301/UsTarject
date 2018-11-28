@@ -582,7 +582,7 @@ public class BoardController {
 	        is = conn.getInputStream();
 	        
 	        int file_size = conn.getContentLength();
-	        
+	        logger.info("file_size : " + file_size + ", fileUrl : " + fileUrl);
 	        switch (getBrowser(userAgent)) {
 	            case Chrome:
 	            case Opear:
