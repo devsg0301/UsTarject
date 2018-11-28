@@ -15,15 +15,15 @@
 	var tmpUser = navigator.userAgent;
 
 	function fileDownload(fileUrl, fileName){
-		//var eFileUrl = encodeURIComponent(fileUrl);
-		//var eFileName = encodeURIComponent(fileName);
+		var eFileUrl = encodeURIComponent(fileUrl);
+		var eFileName = encodeURIComponent(fileName);
 		//alert(eFileUrl);
 		if(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0){
 			temp = prompt("iOS의 경우 주소를 복사하여 nPlayer(앱)의 브라우저탭에 주소를 넣으면 다운이 가능합니다.", "http://beemosg.tk:8081/LocalUser/data/" + fileUrl);
 			return;
 		}
 		
-		location.href = "/sgCloud/fileDownload.do?fileName="+fileName+"&fileUrl="+fileUrl;
+		location.href = "/sgCloud/fileDownload.do?fileName="+eFileName+"&fileUrl="+eFileUrl;
 	}
 	
 	function paging(searchWord, rnum, category, genre, foldername, country){
