@@ -27,8 +27,18 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','남자친구','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_boyfriend.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','예능','신서유기6','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner_sinseoyugi6.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','드라마','황후의 품격','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_hwanghu.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
@@ -39,16 +49,6 @@
 				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','뷰티 인사이드','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner_beautyinside.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','미스터 션샤인','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner_mistersunshine.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','슈츠','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner11.jpg">
 					</a>
 				</div>
 			</div>
