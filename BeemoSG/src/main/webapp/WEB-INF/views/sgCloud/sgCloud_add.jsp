@@ -16,6 +16,7 @@
 
 <script type="text/javascript">
 
+var check_num = "n";
 $(document).ready(function () {
 	if("${broadcast}" == "" || "${broadcast}" == null){
 		$("#category").val("TV");
@@ -139,6 +140,25 @@ $(document).ready(function () {
 	$("#select_grade").change(function(){
 	    $("#grade").val($(this).val());
 	});
+
+	$("#select_title").change(function(){
+	    $("#title").val($(this).val());
+	    $("#foldername").val($(this).val());
+	    check_num = "n";
+	});
+	
+	$("#select_num").change(function(){
+		if(check_num == "n"){
+		    $("#title").val($("#title").val() + " " + $(this).val());
+		    check_num = "y";
+		}
+	});
+	
+	$("#title_cofirm_btn").click(function() {
+		$("#title").val($("#select_title").val() + " " + $("#select_num").val());
+		$("#foldername").val($("#select_title").val());
+		check_num = "y";
+	});
 	
 	// Fake file upload
 	$("#fake-file-button-browse").click(function() {
@@ -159,7 +179,7 @@ $(document).ready(function () {
 		var title = $("#title").val();
 		var foldername = $("#foldername").val();
 		
-		if(title != "" && foldername == ""){
+		if(title != ""){
 			if(title.lastIndexOf(' ') > 0){
 				title = title.substring(0, title.lastIndexOf(' '));
 			}
@@ -310,6 +330,31 @@ $(document).ready(function () {
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fas fa-edit fa-fw" aria-hidden="true"></i></span>
 								<input type="text" class="form-control" id="title" name="title" value="${broadcast.title}" placeholder="Enter your Title" required data-validation-required-message="Please enter title.">
+								<span class="input-group-btn">
+									<button id="title_cofirm_btn" type="button" class="btn btn-default">
+										<span><i class="fas fa-check-square fa-fw"></i></span>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="category" class="cols-sm-2 control-label">제목ㆍ화</label>
+						<div class="cols-sm-10">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="fas fa-list-ul fa-fw" aria-hidden="true"></i></span>
+								<select class="form-control" id="select_title">
+									<c:forEach var="tvFolderList" items="${tvFolderList}">
+										<option>${tvFolderList.foldername}</option>
+									</c:forEach>
+								</select>
+								<span class="input-group-btn" style="width: 22%">
+									<select class="form-control" id="select_num">
+										<c:forEach var="i" begin="1" end="30" step="1">
+											<option>${i}화</option>
+										</c:forEach>
+									</select>
+								</span>
 							</div>
 						</div>
 					</div>

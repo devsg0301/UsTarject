@@ -26,6 +26,8 @@ public interface BoardService {
 	
 	public Tbroadcast broadcastDetail(int idx) throws Exception;
 	
+	public List getTvFolderList() throws Exception;
+	
 	public Tbroadcast getSelectBroadcast(int idx) throws Exception;
 
 	public void insertBroadcast(Tbroadcast tbroadcast) throws Exception;

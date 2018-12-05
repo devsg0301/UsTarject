@@ -49,6 +49,10 @@ public class BoardDao {
     	return this.boardMapper.broadcastDetail(idx);
     }
     
+    public List getTvFolderList() throws Exception{
+		return this.boardMapper.getTvFolderList();
+	}
+    
     public Tbroadcast getSelectBroadcast(int idx) throws Exception{
     	return this.boardMapper.getSelectBroadcast(idx);
     }

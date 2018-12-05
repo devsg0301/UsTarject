@@ -255,6 +255,7 @@ public class BoardController {
     public String displayBroadcastAdd(@RequestParam(value="idx", defaultValue="0") int idx, Model model, HttpSession session, HttpServletRequest request) throws Exception {
         logger.info("display view Board add");
         Tcustomer customer = null;
+        List tvFolderList  = null;
         try{
 	        if(session.getAttribute(Const.USER_KEY) == null || "".equals(session.getAttribute(Const.USER_KEY))){
 				logger.info("You don't login.");
@@ -268,7 +269,7 @@ public class BoardController {
 					return "redirect:/sgCloud/sgCloud_main.do";
 				}
 			}
-	        
+	        tvFolderList = this.boardService.getTvFolderList(); 
 	        if (idx > 0) { // 수정하기를 눌렀을 경우
 	        	logger.info("display view Board modify");
 	        	Tbroadcast tbroadcast = this.boardService.getSelectBroadcast(idx);
@@ -281,6 +282,7 @@ public class BoardController {
 	        	tbroadcast.setExtension(tbroadcast.getFilename().substring(nFileIndex, lastIndex));
 	            model.addAttribute("broadcast", tbroadcast);
 	        }
+	        model.addAttribute("tvFolderList", tvFolderList);
 	        model.addAttribute("dropdown", "file_add");
         }
         catch(Exception e){

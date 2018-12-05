@@ -188,6 +188,15 @@
           FROM TBROADCAST 
          WHERE idx = #{idx}
     </select>
+    
+    <select id="getTvFolderList" resultMap="folderListMap">
+    	SELECT CATEGORY, GENRE, FOLDERNAME
+    	  FROM TBROADCAST
+    	 WHERE 1=1
+    	   AND CATEGORY = 'TV'    	   
+      GROUP BY CATEGORY, GENRE, FOLDERNAME
+      ORDER BY MAX(INSERT_DATE) DESC, MAX(PLAY_DATE) DESC
+    </select>
 
     <select id="getSelectBroadcast" resultMap="broadcastMap">
         SELECT IDX, CATEGORY, GENRE, TITLE, GRADE, FOLDERNAME, ALBUMNAME, FILENAME, EXPLANATION, FILE_URL, SUB_URL, COUNTRY,

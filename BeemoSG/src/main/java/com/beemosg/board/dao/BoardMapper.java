@@ -21,6 +21,7 @@ public interface BoardMapper {
 	List getGenerList(String category) throws Exception;
 	List getFolderList(String category, String genre, String foldername, String searchWord, String country) throws Exception;
 	Tbroadcast broadcastDetail(int idx) throws Exception;
+	List getTvFolderList() throws Exception;
 	Tbroadcast getSelectBroadcast(int idx) throws Exception;
 	void insertBroadcast(Tbroadcast tbroadcast) throws Exception;
 	void updateBroadcast(Tbroadcast tbroadcast) throws Exception;

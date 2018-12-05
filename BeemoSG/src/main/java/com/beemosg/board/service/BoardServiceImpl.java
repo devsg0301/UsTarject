@@ -51,6 +51,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDao.broadcastDetail(idx);
 	}
 	
+	public List getTvFolderList() throws Exception{
+		return boardDao.getTvFolderList();
+	}
+	
 	public Tbroadcast getSelectBroadcast(int idx) throws Exception {
 		return boardDao.getSelectBroadcast(idx);
 	}
