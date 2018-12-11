@@ -3,8 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 <%@ page import="java.util.*, java.text.*"  %>
 <%
- java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
- String today = formatter.format(new java.util.Date());
+	Calendar c1 = new GregorianCalendar();
+	c1.add(Calendar.DATE, -1);
+	java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy-MM-dd");
+	String today = formatter.format(c1.getTime());
 %>
 <c:set var="path_root"  value="${pageContext.request.contextPath}" scope="application"/>
 <c:set var="nowdate" value='<%=today%>' />
@@ -21,7 +23,7 @@ $(document).ready(function () {
 	if("${broadcast}" == "" || "${broadcast}" == null){
 		$("#category").val("TV");
 		$("#genre").val("드라마");
-		$("#grade").val("전체");
+		$("#grade").val("15");
 		$("#play_date").val("${nowdate}");
 		$("#priority").val("99");
 	}else{
@@ -398,7 +400,7 @@ $(document).ready(function () {
 								<select class="form-control" id="select_grade">
 	                            	<option <c:if test="${broadcast.grade == '0'}">selected</c:if>>전체</option>
 									<option <c:if test="${broadcast.grade == '19'}">selected</c:if>>19</option>
-									<option <c:if test="${broadcast.grade == '15'}">selected</c:if>>15</option>
+									<option <c:if test="${broadcast.grade == '15'}">selected</c:if><c:if test="${broadcast.grade == '' || broadcast == null}">selected</c:if>>15</option>
 									<option <c:if test="${broadcast.grade == '12'}">selected</c:if>>12</option>
 									<option <c:if test="${broadcast.grade == '7'}">selected</c:if>>7</option>
 								</select>
