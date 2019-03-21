@@ -61,9 +61,9 @@ video{
         var IE=(document.all)?true:false;
         if (IE) {
             if(confirm("복사하시겠습니까?"))
-                window.clipboardData.setData("Text", "http://beemosg.tk:8081/LocalUser/data/" + trb);
+                window.clipboardData.setData("Text", "http://beemosg.gq:8081/LocalUser/data/" + trb);
         } else {
-            temp = prompt("주소를 복사하세요", "http://beemosg.tk:8081/LocalUser/data/" + trb);
+            temp = prompt("주소를 복사하세요", "http://beemosg.gq:8081/LocalUser/data/" + trb);
         }
     }
 	
@@ -83,7 +83,7 @@ video{
 		var eFileName = encodeURIComponent(fileName);
 		//alert(eFileUrl);
 		if(tmpUser.indexOf("iPhone") > 0 || tmpUser.indexOf("iPod") > 0){
-			temp = prompt("iOS의 경우 아래주소를 복사하여 nPlayer(앱)의 브라우저탭에 주소를 넣고 이동하면 다운이 가능합니다.", "http://beemosg.tk:8081/LocalUser/data/" + fileUrl);
+			temp = prompt("iOS의 경우 아래주소를 복사하여 nPlayer(앱)의 브라우저탭에 주소를 넣고 이동하면 다운이 가능합니다.", "http://beemosg.gq:8081/LocalUser/data/" + fileUrl);
 			return;
 		}
 		
@@ -173,7 +173,7 @@ video{
                 <c:if test="${broadcastDetail.category != 'UTILITY'}">
 	                <div class="col-video">
 		      			<video id="my-video" controls autoplay>
-		      				<source src="http://beemosg.tk:8081/LocalUser/data/${broadcastDetail.file_url}" type='video/mp4'>
+		      				<source src="http://beemosg.gq:8081/LocalUser/data/${broadcastDetail.file_url}" type='video/mp4'>
 		      				<c:if test="${broadcastDetail.sub_url != ''}">
 				   				<track kind="subtitles" src="${path_root}/resources/subtitles/${broadcastDetail.sub_url}.vtt" srclang="ko" label="Korean" default/>
 				   			</c:if>
