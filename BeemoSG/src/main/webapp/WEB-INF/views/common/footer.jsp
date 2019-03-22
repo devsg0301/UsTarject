@@ -22,6 +22,11 @@
 	    color: #fff;
 	    background: #3276B1;
 	}
+	.modal-footer-pw {
+	    height: 30px;
+	    margin: 0;
+        text-align: center;
+	}
 </style>
 
 <div class="row">
@@ -68,13 +73,11 @@
 					<a href="/cust/custJoin.do">
 						<button class="form-control btn btn-primary" style="width: 47%;">회원가입</button>
 					</a>
-					<!-- 
-					<div class="progress">
-						<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
-							<span class="sr-only">progress</span>
-						</div>
-					</div> 
-					-->
+				</div> <!-- /.modal-footer -->
+				<div class="modal-footer-pw">
+					<a href="javascript;" onclick="javascript:idPwFind();return false;" style="text-decoration: none;">
+						아이디/비밀번호 찾기
+					</a>
 				</div> <!-- /.modal-footer -->
 			</div> <!-- /.modal-body -->
 		</div><!-- /.modal-content -->
@@ -194,6 +197,10 @@ function login(){
 			return false;
 		}
 	});
+}
+
+function idPwFind(){
+	alert("관리자에게 문의해 주세요.");
 }
 
 </script>

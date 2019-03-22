@@ -505,7 +505,7 @@ $(document).ready(function () {
 					<div class="form-group">
 						<div class="checkbox">
 							<label style="padding-left:0px;">
-								<input type="checkbox" id="insertdate_check" name="insertdate_check" style="display:none;"/>
+								<input type="checkbox" id="insertdate_check" name="insertdate_check" style="display:none;" <c:if test="${!empty broadcast}"> checked </c:if>/>
 								<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
 								저장날짜수정여부
 							</label>
