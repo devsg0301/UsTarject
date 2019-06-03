@@ -27,6 +27,11 @@
 		<div class="swiper-container swiper0">
 			<div class="swiper-wrapper">
 				<div class="swiper-slide">
+					<a href="javascript:folderSearch('TV','예능','강식당2','KO');" >
+						<img src="${path_root}/resources/bootstrap/images/main_banner_kang_kitchen2.jpg">
+					</a>
+				</div>
+				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','닥터 프리즈너','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner_doctor_prisoner.jpg">
 					</a>
@@ -34,11 +39,6 @@
 				<div class="swiper-slide">
 					<a href="javascript:folderSearch('TV','드라마','로맨스는 별책부록','KO');" >
 						<img src="${path_root}/resources/bootstrap/images/main_banner_romance.jpg">
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="javascript:folderSearch('TV','드라마','진심이 닿다','KO');" >
-						<img src="${path_root}/resources/bootstrap/images/main_banner_heart.jpg">
 					</a>
 				</div>
 				<div class="swiper-slide">
